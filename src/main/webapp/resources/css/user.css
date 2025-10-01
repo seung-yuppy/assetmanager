@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+/* 1. 애니메이션 키프레임 정의 */
+@keyframes slideInLeft {
+	from {
+		transform: translateX(-50px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translateX(50px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInBottom {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+/* 2. 전체 페이지 레이아웃 */
+
+
+.split-wrapper {
+	display: flex;
+	width: 100%;
+	height: 650px;
+	max-width: 1200px;
+	border-radius: var(--border-radius);
+	box-shadow: var(--card-shadow);
+	overflow: hidden;
+}
+
+/* 3. 스플래시 패널 스타일 */
+.splash-panel {
+	flex: 1;
+	background-color: var(--primary-color);
+	color: #fff;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: left;
+	
+	/* 로그인, 회원가입 페이지 전환 시 일관된 애니메이션 */
+/* 	opacity: 0;
+	animation: slideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; */
+}
+
+.splash-panel h2 {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+	border-bottom: 3px solid #ffcc00;
+	padding-bottom: 10px;
+}
+
+.splash-panel p {
+	font-size: 1rem;
+	line-height: 1.6;
+	margin-bottom: 15px;
+	color: #e0e7ff;
+}
+
+.splash-panel ul {
+	list-style: none;
+	padding-left: 0;
+}
+.splash-panel ul li {
+	margin-bottom: 10px;
+	font-size: 0.95rem;
+	display: flex;
+	align-items: center;
+}
+.splash-panel ul li::before {
+	content: '✓';
+	color: #ffcc00;
+	font-weight: bold;
+	margin-right: 8px;
+}
+
+/* 4. 로그인 컨테이너 스타일 */
+.login-container {
+	flex: 1;
+	background-color: #fff;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+
+.login-header {
+	margin-bottom: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-header h1 {
+	font-size: 1.8rem;
+	color: #333;
+	font-weight: 700;
+	margin-left: 10px;
+}
+
+.icon-box {
+	width: 30px;
+	height: 30px;
+	background-color: var(--primary-color);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.icon-item {
+	width: 18px;
+	height: 18px;
+	filter: invert(90%);
+}
+
+.form-group {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: #555;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 1rem;
+	box-sizing: border-box;
+	transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+	border-color: var(--primary-color);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(28, 69, 135, 0.2);
+}
+
+.extra-links {
+	margin-top: 25px;
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.extra-links a {
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.extra-links a:hover {
+	text-decoration: underline;
+}
+
+.divider {
+	color: #aaa;
+	margin: 0 10px;
+}
+
+/* 5. 모바일 반응형 처리 */
+@media (max-width: 768px) {
+	body {
+		min-height: auto;
+	}
+	
+	.split-wrapper {
+		flex-direction: column;
+		height: auto;
+		box-shadow: none;
+	}
+	
+	.splash-panel {
+		display: none;
+		animation: none;
+	}
+	
+	.login-container {
+		border-radius: var(--border-radius);
+		box-shadow: var(--card-shadow);
+		max-width: 400px;
+		margin: 0 auto;
+		padding: 30px 20px;
+		animation: fadeInBottom 0.5s ease-out forwards;
+	}
+}

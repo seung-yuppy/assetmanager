@@ -2,7 +2,6 @@
         .dashboard-container h1 {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 30px;
         }
 
         .section-card h2 {
@@ -13,7 +12,10 @@
 
         /* 대시보드 레이아웃 */
         .dashboard-container {
-            max-width: 1200px;
+        	display: flex;
+        	flex-direction: column;
+        	gap: 20px;
+            width: 1200px;
             margin: 0 auto;
         }
 
@@ -23,7 +25,7 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
-            margin-bottom: 25px;
+            /* margin-bottom: 25px; */
         }
 
         /* 테이블 스타일 */
@@ -52,8 +54,8 @@
         /* 요청 관리 섹션 (2열 레이아웃) */
         .request-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1.5fr 1.5fr;
+            gap: 15px;
         }
         
         /* 상태 뱃지 스타일 (필요한 부분만 유지) */

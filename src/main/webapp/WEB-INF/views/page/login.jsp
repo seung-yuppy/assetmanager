@@ -28,7 +28,7 @@
             <!-- 헤더 및 로고 -->
             <div class="login-header">
                 <div class="icon-box">
-					<img class="icon-item" src="resources/image/icon_money.svg" />
+					<img class="icon-item" src="resources/image/icon_main.svg" />
                 </div>
                 <h1>AMS 로그인</h1>
             </div>

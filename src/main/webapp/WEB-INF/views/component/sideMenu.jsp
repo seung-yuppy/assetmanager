@@ -14,6 +14,10 @@
         		<img class="menu-head-item" src="resources/image/icon_main.svg" />
         		<h2>AMS</h2>
         	</div>
+        	
+        	<div class="menu-profile">
+        		
+        	</div>
 	
 			<div class="menu-list-separator"></div>
 			

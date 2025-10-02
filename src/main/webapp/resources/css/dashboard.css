@@ -1,4 +1,14 @@
 @charset "UTF-8";
+        .home-head {
+        	display: flex;
+        	justify-content:space-between;
+        	align-items: center;
+        }
+        
+        .home-head span {
+        	font-size: 20px;
+        }
+        
         .dashboard-container h1 {
             font-size: 2rem;
             font-weight: 700;
@@ -24,7 +34,6 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
-            /* margin-bottom: 25px; */
         }
 
         /* 테이블 스타일 */

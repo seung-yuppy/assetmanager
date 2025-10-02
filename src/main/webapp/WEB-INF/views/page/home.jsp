@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>직원 대시보드</title>
+    <title>사원 대시보드</title>
     <link href="resources/css/common.css" rel="stylesheet">
 	<link href="resources/css/dashboard.css" rel="stylesheet">
 </head>
@@ -11,9 +11,11 @@
 <div class="app-layout">
 	<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 	<div class="main-content">
-	<div class="dashboard-container">
-	        <h1>직원 대시보드</h1>
-	
+		<div class="dashboard-container">
+			<div class="home-head">
+				<h1>사원 대시보드</h1>
+				<span>IT 3팀, 배고파님</span>
+			</div>
 	        <!-- 1. 내 자산 섹션 (상태 컬럼 제거됨) -->
 	        <div class="section-card">
 	            <h2>내 자산</h2>
@@ -72,7 +74,6 @@
 	
 	        <!-- 2. 요청 관리 섹션 -->
 	        <div class="request-grid">
-	
 	            <!-- 2-1. 반출 요청 -->
 	            <div class="section-card">
 	                <h3>반출 요청</h3>
@@ -102,7 +103,6 @@
 	                        </tr>
 	                    </tbody>
 	                </table>
-	                <!-- <button class="main-button">새 반출 요청</button> -->
 	            </div>
 	
 	            <!-- 2-2. 구매 요청 (취소 버튼 추가됨) -->
@@ -134,7 +134,6 @@
 	                        </tr>
 	                    </tbody>
 	                </table>
-	                <!-- <button class="main-button">새 구매 요청</button> -->
 	            </div>
 	        </div>
 	    </div>

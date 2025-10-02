@@ -10,7 +10,7 @@ public class OrderController {
 	
 	@GetMapping("/user/list")
 	public String index () {
-		return "orderList";
+		return "/order/orderList";
 	}
 
 }

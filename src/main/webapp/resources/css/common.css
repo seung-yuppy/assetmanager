@@ -21,9 +21,6 @@
 /* 전체 body 스타일  */
 body {
 	background-color: var(--background-color);
-	display: flex;
-	align-items: center;
-	min-height: 100vh;
 	margin: 0;
 	padding: 20px;
 	box-sizing: border-box;
@@ -36,6 +33,7 @@ body {
 }
 
 .main-content {
+	width: 80vw;
 	flex-grow: 1;
 	padding: 40px; /* 메인 콘텐츠 패딩 */
 	padding-right: 0;

@@ -13,6 +13,10 @@
 	--green-color: green; 
     --gray-color: gray; 
     --gray-color-light: #f4f4f5;
+    --green-color: #10b981;
+    --yellow-color: #f59e0b;
+    --purple-color: #6366f1;
+    --blue-color: #3b82f6;
 	
 	--card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 	--border-radius: 12px;
@@ -22,23 +26,18 @@
 body {
 	background-color: var(--background-color);
 	margin: 0;
-	padding: 20px;
+	padding: 0;
 	box-sizing: border-box;
 }
 
 /* 홈 화면 레이아웃 */
 .app-layout {
 	display: flex;
-	gap: 25px;
 }
 
 .main-content {
-	width: 80vw;
-	flex-grow: 1;
+	width: 100vw;
 	padding: 40px; /* 메인 콘텐츠 패딩 */
-	padding-right: 0;
-	padding-bottom: 0;
-	padding: 0;
 }
 
 /* 버튼 컴포넌트 */

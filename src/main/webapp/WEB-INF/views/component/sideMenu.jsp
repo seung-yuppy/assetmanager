@@ -14,23 +14,13 @@
         		<img class="menu-head-item" src="/assetmanager/resources/image/icon_main.svg" />
         		<h2>AMS</h2>
         	</div>
-        	
-        	<div class="menu-profile">
-        		
-        	</div>
-	
-			<div class="menu-list-separator"></div>
-			
             <ul class="menu-list">
-                <!-- 대시보드 (활성 메뉴) -->
                 <li class="menu-item">
                     <a href="#">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dashboard.svg" />
                         <span>대시보드</span>
                     </a>
                 </li>
-                
-                <!-- 자산 관리 메뉴 그룹 -->
                 <li class="menu-item">
                     <a href="#">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />

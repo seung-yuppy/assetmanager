@@ -1,16 +1,12 @@
 @charset "UTF-8";
-        .home-head {
-        	display: flex;
-        	justify-content:space-between;
-        	align-items: center;
-        }
         
         .home-head span {
+        	color: var(--gray-color);
         	font-size: 20px;
         }
         
         .dashboard-container h1 {
-            font-size: 2rem;
+            font-size: 30px;
             font-weight: 700;
         }
 
@@ -30,11 +26,53 @@
 
         /* 공통 섹션 스타일 */
         .section-card {
-            background-color: var(--white-color); /* 흰색 카드 배경 */
+            background-color: var(--white-color);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
+            box-shadow: var(--card-shadow); 
         }
+        
+        /* 자산 현황 */
+        .metric-grid {
+        	display: flex;
+        	justify-content: space-around;
+        }
+        
+        .metric-card {
+        	background-color: var(--white-color);
+        	width: 180px;
+        	padding: 20px;
+        	border-radius: var(--border-radius);
+        	box-shadow: var(--card-shadow);
+       		border-top: 3px solid blue;
+        }
+        
+        .card-title {
+        	color: var(--gray-color);
+        }
+        
+        .card-value {
+        	text-align: center;
+        	font-weight: bold;
+        	font-size: 30px;
+        }
+        
+        .border-green {
+        	border-top: 3px solid var(--green-color);
+        }
+        
+        .border-yellow {
+        	border-top: 3px solid var(--yellow-color);
+        }
+        
+        .border-purple {
+        	border-top: 3px solid var(--purple-color);
+        }
+        
+        .border-blue {
+        	border-top: 3px solid var(--blue-color);
+        }
+        
 
         /* 테이블 스타일 */
         .data-table {
@@ -72,21 +110,16 @@
             align-items: center;
             padding: 4px 10px;
             border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #ffffff;
-            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 15px;
+            color: var(--white-color);
         }
 
         /* 상태별 색상 */
         .status-approved { background-color: var(--green-color); }
         .status-waited  { background-color: var(--gray-color); }
         .status-rejected {background-color: var(--red-color);}
-
-        .action-cell {
-            padding: 8px 10px !important; /* 버튼이 들어갈 셀 패딩 조정 */
-            width: 1%; /* 너비 최소화 */
-        }
+        .status-used {background-color: var(--blue-color);}
 
         /* 모바일 반응형 디자인 */
         @media (max-width: 768px) {

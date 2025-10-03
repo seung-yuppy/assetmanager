@@ -36,13 +36,18 @@
             <!-- 회원가입 폼 -->
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="username">사용자 이름</label>
-                    <input type="text" id="username" name="username" placeholder="성함 또는 닉네임" required>
+                    <label for="username">사번</label>
+                    <input type="text" id="username" name="username" placeholder="사번" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
                     <input type="password" id="password" name="password" placeholder="비밀번호 설정" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="username">사용자 이름</label>
+                    <input type="text" id="username" name="username" placeholder="성함 " required>
                 </div>
 
                 <div class="form-group">

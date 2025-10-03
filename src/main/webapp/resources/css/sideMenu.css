@@ -1,25 +1,27 @@
 @charset "UTF-8";
 		.sidebar {
-            width: 250px;
-            background-color: var(--white-color);
-            box-shadow: var(--card-shadow);
-            flex-shrink: 0;
-            border-radius: var(--border-radius);
+            width: 300px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
         }
         
         .menu-head {
         	display: flex;
         	align-items: center;
+        	gap: 5px;
         	padding-left: 5px;
         }
         
         .menu-head h2 {
-			  color: var(--primary-color);
+			/* color: var(--primary-color); */
+			font-size: 2rem;
+    		font-weight: 700;
         }
         
         .menu-head-item {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
+            filter: invert(100%);
         }
         
         .menu-profile {
@@ -29,6 +31,7 @@
         .sidebar-logo-item {
             width: 25px;
             height: 25px;
+            filter: invert(100%);
         }
 
         .menu-list {

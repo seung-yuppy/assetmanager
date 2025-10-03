@@ -13,12 +13,40 @@
 	<div class="main-content">
 		<div class="dashboard-container">
 			<div class="home-head">
-				<h1>사원 대시보드</h1>
-				<span>IT 3팀, 배고파님</span>
+				<span>개발팀</span>
+				<h1>배고파 사원님, 안녕하세요!</h1>
 			</div>
+			
+			<div class="metric-grid">
+                <div class="metric-card border-green">
+                    <div class="card-header">
+                        <p class="card-title">총 자산 수</p>
+                    </div>
+                    <p class="card-value">5</p>
+                </div>
+                <div class="metric-card border-yellow">
+                    <div class="card-header">
+                        <p class="card-title">사용 중인 자산</p>      
+                    </div>
+                    <p class="card-value">4</p>
+                </div>
+                <div class="metric-card border-purple">
+                    <div class="card-header">
+                        <p class="card-title">반출 요청</p>
+					</div>
+                    <p class="card-value">2</p>
+                </div>
+                <div class="metric-card border-blue">
+                    <div class="card-header">
+                        <p class="card-title">새 구매 요청</p>
+                    </div>
+                    <p class="card-value">4</p>
+                </div>
+            </div>
+            
 	        <!-- 1. 내 자산 섹션 (상태 컬럼 제거됨) -->
 	        <div class="section-card">
-	            <h2>내 자산</h2>
+	            <h2>내 자산</h2> 
 	            <table class="data-table">
 	                <thead>
 	                    <tr>
@@ -35,7 +63,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-01-15</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-waited">사용중</span></td>
+	                        <td><span class="status-badge status-used">사용중</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -43,7 +71,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-03-22</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-waited">사용중</span></td>
+	                        <td><span class="status-badge status-used">사용중</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -51,7 +79,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-04-10</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-waited">사용중</span></td>
+	                        <td><span class="status-badge status-used">사용중</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -66,7 +94,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-05-01</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-waited">사용중</span></td>
+	                        <td><span class="status-badge status-waited">수리중</span></td>
 	                    </tr>
 	                </tbody>
 	            </table>

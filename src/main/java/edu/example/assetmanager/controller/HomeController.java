@@ -8,12 +8,12 @@ public class HomeController {
 	
 	@GetMapping("/login")
 	public String s1 () {
-		return "login";
+		return "user/login";
 	}
 	
 	@GetMapping("/join")
 	public String s2() {
-		return "join";
+		return "user/join";
 	}
 	
 	@GetMapping("/home")

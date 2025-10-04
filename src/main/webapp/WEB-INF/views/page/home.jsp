@@ -19,28 +19,58 @@
 			
 			<div class="metric-grid">
                 <div class="metric-card border-green">
-                    <div class="card-header">
-                        <p class="card-title">총 자산 수</p>
-                    </div>
+                	<div class="card-header">
+                		<p class="card-title">총 자산 수</p>
+                		<div class="card-logo-box back-green">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
+                		</div>
+                	</div>
                     <p class="card-value">5</p>
                 </div>
                 <div class="metric-card border-yellow">
-                    <div class="card-header">
-                        <p class="card-title">사용 중인 자산</p>      
-                    </div>
-                    <p class="card-value">4</p>
+					<div class="card-header">
+                		<p class="card-title">사용 중</p>   
+                		<div class="card-logo-box back-yellow">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+                		</div>
+                	</div>                    
+                    <p class="card-value">3</p>
+                </div>
+                <div class="metric-card border-gray">
+					<div class="card-header">
+                		<p class="card-title">수리 중</p>  
+                		<div class="card-logo-box back-gray">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
+                		</div>
+                	</div>    
+                    <p class="card-value">1</p>
+                </div>
+				<div class="metric-card border-red">
+					<div class="card-header">
+                		<p class="card-title">반납 / 불용</p>
+                		<div class="card-logo-box back-red">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
+                		</div>
+                	</div>
+                    <p class="card-value">1</p>
                 </div>
                 <div class="metric-card border-purple">
-                    <div class="card-header">
-                        <p class="card-title">반출 요청</p>
-					</div>
-                    <p class="card-value">2</p>
+					<div class="card-header">
+						<p class="card-title">반출 요청</p>
+                		<div class="card-logo-box back-purple">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
+                		</div>
+                	</div>   
+                    <p class="card-value">3</p>
                 </div>
                 <div class="metric-card border-blue">
-                    <div class="card-header">
-                        <p class="card-title">새 구매 요청</p>
-                    </div>
-                    <p class="card-value">4</p>
+					<div class="card-header">
+                		<p class="card-title">구매 요청</p> 
+                		<div class="card-logo-box back-blue">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
+                		</div>
+                	</div>                    
+                    <p class="card-value">3</p>
                 </div>
             </div>
             

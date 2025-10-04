@@ -35,26 +35,78 @@
         /* 자산 현황 */
         .metric-grid {
         	display: flex;
-        	justify-content: space-around;
+        	justify-content: space-between;
         }
         
         .metric-card {
         	background-color: var(--white-color);
-        	width: 180px;
+        	width: 150px;
         	padding: 20px;
         	border-radius: var(--border-radius);
         	box-shadow: var(--card-shadow);
-       		border-top: 3px solid blue;
+        	transition: scale 0.3s;
+        	
+        	&:hover {
+        		scale: 1.05;
+        	}
+        }
+        
+        .card-header {
+        	display: flex;
+        	justify-content: space-between;
+        	align-items: center;
         }
         
         .card-title {
         	color: var(--gray-color);
+        	margin: 0;
+    		text-align: center;
+        }
+        
+        .card-logo-box {
+        	display: flex;
+        	align-items: center;
+        	justify-content: center;
+        	width: 40px;
+        	height: 40px;
+        	border-radius: 50%;
+        }
+        
+        .card-logo {
+        	width: 25px;
+        	height: 25px;
+        	filter: invert(100%);
         }
         
         .card-value {
         	text-align: center;
         	font-weight: bold;
+        	margin: 0;
         	font-size: 30px;
+        }
+        
+        .back-green {
+        	background-color: var(--green-color);
+        }
+        
+        .back-gray {
+        	background-color: var(--gray-color);
+        }
+        
+        .back-blue {
+        	background-color: var(--blue-color);
+        }
+        
+        .back-purple {
+        	background-color: var(--purple-color);
+        }
+        
+        .back-yellow {
+        	background-color: var(--yellow-color);
+        }
+        
+        .back-red {
+        	background-color: var(--red-color);
         }
         
         .border-green {
@@ -71,6 +123,14 @@
         
         .border-blue {
         	border-top: 3px solid var(--blue-color);
+        }
+        
+        .border-red {
+        	border-top: 3px solid var(--red-color);
+        }
+        
+        .border-gray {
+        	border-top: 3px solid var(--gray-color);
         }
         
 

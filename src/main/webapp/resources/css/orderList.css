@@ -78,3 +78,161 @@
             padding: 8px 10px !important; /* 버튼이 들어갈 셀 패딩 조정 */
             width: 1%; /* 너비 최소화 */
         }
+        
+        /* 페이징 */
+		.pagination-container {
+		    display: flex;
+		    justify-content: center; /* 가운데 정렬 */
+		    padding: 20px 0;
+		    font-family: Arial, sans-serif; /* 폰트 설정 */
+		    margin-top: 20px;
+		}
+		
+		.pagination-list {
+		    display: flex;
+		    list-style: none; /* 목록 기호 제거 */
+		    padding: 0;
+		    margin: 0;
+		}
+		
+		.page-item {
+		    margin: 0 5px; /* 항목 간 간격 */
+		}
+		
+		.page-link {
+		    display: block;
+		    min-width: 25px; /* 버튼 최소 너비 */
+		    height: 40px; /* 버튼 높이 */
+		    line-height: 40px; /* 텍스트 수직 중앙 정렬 */
+		    text-align: center;
+		    text-decoration: none;
+		    color: #6c757d; /* 기본 텍스트 색상 */
+		    border-radius: 8px; /* 둥근 모서리 */
+		    background-color: transparent;
+		    transition: all 0.2s ease-in-out;
+		    cursor: pointer;
+		    border: none; /* 기본 테두리 제거 */
+		    padding: 0 10px;
+		}
+		
+		/* 이전/다음 버튼 스타일 */
+		.page-item.prev .page-link,
+		.page-item.next .page-link {
+		    color: #6c757d; /* 텍스트 색상 */
+		    min-width: unset; /* 너비 설정 해제 */
+		    padding: 0 10px;
+		}
+		
+		.page-item.prev .page-link, .page-item.next .page-link {
+		    font-size: 16px;
+		    font-weight: normal;
+		}
+		
+		
+		/* 활성화된 페이지 스타일 (이미지 속 스타일) */
+		.page-item.active .page-link {
+		    background-color: var(--primary-color);
+		    color: #ffffff; /* 흰색 텍스트 */
+		    font-weight: bold;
+		    border-radius: 8px; /* 둥근 모서리 */
+		    box-shadow: 0 4px 8px rgba(111, 66, 193, 0.3); /* 그림자 효과 */
+		}
+		
+		/* 호버 효과 */
+		.page-item:not(.active) .page-link:hover {
+		    background-color: #f8f9fa; /* 마우스 오버 시 연한 회색 배경 */
+		    color: #495057;
+		}
+		
+		/* 비활성화된 이전/다음 버튼 (선택 사항: 필요에 따라 추가) */
+		/* .page-item.disabled .page-link {
+		    color: #adb5bd;
+		    pointer-events: none; 
+		} */
+		
+		
+		
+		/* 검색 및 필터 컨테이너 스타일 */
+		
+		.header-controls {
+		    display: flex;
+		    justify-content: space-between; /* H2는 왼쪽, 필터는 오른쪽으로 밀어냅니다. */
+		    align-items: center; /* 수직 중앙 정렬 */
+		    margin-bottom: 20px; /* 테이블과의 간격 */
+		    padding-bottom: 10px;
+		    border-bottom: 1px solid #eee; /* 구분선 (선택 사항) */
+		}
+		
+		/* H2 태그에 특별한 스타일링이 없다면 기본 스타일 사용 */
+		.header-controls h2 {
+		    margin: 0; /* H2의 기본 마진 제거 */
+		    font-size: 1.5rem;
+		    font-weight: 600;
+		}
+		
+		.filter-controls {
+		    display: flex;
+		    justify-content: flex-end; /* 오른쪽으로 정렬 */
+		    align-items: center;
+		    gap: 15px; /* 요소 간 간격 */
+		    margin-bottom: 20px; /* 테이블과의 간격 */
+		    padding: 10px 0;
+		}
+		
+		/* 검색 박스 스타일 */
+		.search-box {
+		    display: flex;
+		    border: 1px solid #ced4da;
+		    border-radius: 6px;
+		    overflow: hidden; /* input과 button의 모서리 처리를 위해 */
+		    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+		}
+		
+		.search-box input[type="text"] {
+		    padding: 8px 12px;
+		    border: none;
+		    flex-grow: 1;
+		    font-size: 14px;
+		    outline: none; /* 포커스 시 기본 테두리 제거 */
+		}
+		
+		.search-box button {
+		    background-color: #f8f9fa;
+		    border: none;
+		    padding: 8px 12px;
+		    cursor: pointer;
+		    font-size: 16px;
+		    transition: background-color 0.2s;
+		}
+		
+		.search-box button:hover {
+		    background-color: #e9ecef;
+		}
+		
+		/* 상태 필터 드롭다운 스타일 */
+		.status-filter {
+		    display: flex;
+		    align-items: center;
+		    gap: 8px;
+		    font-size: 14px;
+		    color: #495057;
+		}
+		
+		.status-filter label {
+		    font-weight: 600;
+		}
+		
+		.status-filter select {
+		    padding: 8px 12px;
+		    border: 1px solid #ced4da;
+		    border-radius: 6px;
+		    background-color: white;
+		    font-size: 14px;
+		    cursor: pointer;
+		    /* 기본 드롭다운 화살표 제거 및 커스텀 (선택 사항) */
+		    /* appearance: none;
+		    -webkit-appearance: none;
+		    -moz-appearance: none; */ 
+		}
+		
+		

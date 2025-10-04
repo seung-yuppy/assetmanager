@@ -1,0 +1,160 @@
+@charset "UTF-8";
+/* 폼 컨테이너 및 기본 스타일 */
+.purchase-form-container {
+	max-width : 900px;
+    margin: 30px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Arial', sans-serif;
+}
+
+/* 필수 표시 */
+.required {
+    color: #dc3545; /* 빨간색 */
+    font-weight: bold;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px; /* 필드 간 간격 */
+    margin-bottom: 20px; /* 행 간 간격 */
+}
+
+.first-row{
+	display: flex;
+}
+
+/* 2. 제품 선택 (가장 넓은 공간 차지) */
+.product-select-group {
+	max-width: 400px;
+    flex-grow: 2; 
+    min-width: 200px;
+}
+
+/* 3. 제품 직접 입력 필드 (보일 때만 공간 차지, 좁게 유지) */
+.product-input-group {
+	max-width: 400px;
+    flex-grow: 2; 
+    min-width: 150px;
+    display: flex;             
+    flex-direction: column;
+}
+
+/* 2. 두 번째 행: 가격과 수량만 배치, 나머지는 비워둠 */
+.second-row .form-group {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+/* 불필요한 공간을 차지하는 요소 (가격/수량만 좁게 배치하고 싶다면 사용) */
+.empty-filler {
+    flex-grow: 2; /* 남은 공간을 이 요소가 모두 차지하여 가격/수량을 왼쪽에 묶어둡니다. */
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #343a40;
+}
+.form-group textarea{
+	resize:none;
+	width: 90%;
+}
+
+/* 입력 필드 (text, number, select, textarea 공통) */
+input[type="text"], 
+input[type="number"], 
+select, 
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #1c4587;
+    box-shadow: 0 0 0 3px rgba(28, 69, 135, 0.2);
+    outline: none;
+}
+
+/* 수정 불가 가격 필드 스타일 */
+.price-lock {
+    background-color: #e9ecef; /* 회색 배경 */
+    color: #495057;
+    cursor: not-allowed;
+    font-weight: bold;
+}
+.price-group{
+	max-width: 150px;
+}
+
+.quantity-group{
+	max-width: 100px;
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #f8f9fa;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+.checkbox-group .description {
+    font-size: 13px;
+    color: #6c757d;
+    margin: 0;
+    padding-left: 10px;
+}
+
+
+/* 액션 버튼 */
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+}
+
+.primary-action {
+    background-color: #1c4587;
+    color: white;
+}
+.secondary-action {
+    background-color: #e9ecef;
+    color: #495057;
+}
+.primary-action:hover {
+    opacity: 0.9;
+}
+
+/* 글자수 표시 영역 스타일 */
+.char-count-display {
+    font-size: 13px; /* 라벨보다 작게 */
+    color: #6c757d;  /* 연한 회색 */
+    font-weight: normal; /* 라벨의 bold 속성을 상속받지 않도록 */
+    margin-left: 10px; /* 라벨 텍스트와 약간의 간격 */
+    text-align: right;
+    margin-right: 90px;
+}

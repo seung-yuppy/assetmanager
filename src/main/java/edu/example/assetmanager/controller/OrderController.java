@@ -12,5 +12,10 @@ public class OrderController {
 	public String index () {
 		return "/order/orderList";
 	}
+	
+	@GetMapping("/form")
+	public String form() {
+		return "/order/orderForm";
+	}
 
 }

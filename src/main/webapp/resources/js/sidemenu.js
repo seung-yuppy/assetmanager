@@ -3,11 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
-            // 하위 메뉴 링크 클릭 시 상위 메뉴 토글 방지
-            if (e.target.tagName === 'A' && this.contains(e.target.parentNode)) {
-                return;
-            }
-            
             e.preventDefault(); // 기본 링크 동작 방지 (페이지 이동)
             
             // 현재 클릭된 메뉴가 이미 활성화되어 있는지 확인

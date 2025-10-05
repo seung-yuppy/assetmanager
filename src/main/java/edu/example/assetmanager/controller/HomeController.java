@@ -16,8 +16,13 @@ public class HomeController {
 		return "user/join";
 	}
 	
-	@GetMapping("/home")
+	@GetMapping("/home/user")
 	public String s3() {
-		return "home";
+		return "dashboard/userDashBoard";
+	}
+	
+	@GetMapping("/home/admin")
+	public String s4() {
+		return "dashboard/adminDashBoard";
 	}
 }

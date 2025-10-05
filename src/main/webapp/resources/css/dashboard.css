@@ -180,6 +180,29 @@
         .status-waited  { background-color: var(--gray-color); }
         .status-rejected {background-color: var(--red-color);}
         .status-used {background-color: var(--blue-color);}
+        
+        /* 5. 차트 범례 및 버튼 스타일 */
+        .chart-legend-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #374151;
+            margin-top: 0.5rem;
+        }
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
 
         /* 모바일 반응형 디자인 */
         @media (max-width: 768px) {

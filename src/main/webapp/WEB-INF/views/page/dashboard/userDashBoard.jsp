@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
     <title>사원 대시보드</title>
-    <link href="resources/css/common.css" rel="stylesheet">
-	<link href="resources/css/dashboard.css" rel="stylesheet">
+    <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
 <div class="app-layout">
@@ -195,7 +195,7 @@
 	            </div>
 	        </div>
 	    </div>
-	    </div>
 	</div>
+</div>
 </body>
 </html>

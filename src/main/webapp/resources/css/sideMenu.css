@@ -42,16 +42,35 @@
             margin: 10px 0;
             border-top: 1px solid var(--gray-color-light);
         }
+        
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 20px;
+            color: var(--white-color);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .menu-link:hover {
+            background-color: var(--gray-color-light);
+            color: var(--dark-color);        
+        }
+        	
+		.menu-link:hover .sidebar-logo-item {
+		    filter: invert(0%);
+		}
 
         .menu-item a {
             display: flex;
             gap: 7px;
             align-items: center;
             padding: 12px 20px;
-            color: var(--color-sidebar-text);
+            color: var(--white-color);
             text-decoration: none;
             font-weight: 500;
-            transition: background-color 0.2s, color 0.2s;
         }
 
         .menu-item a:hover {

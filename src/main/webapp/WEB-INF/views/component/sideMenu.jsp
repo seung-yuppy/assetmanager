@@ -28,20 +28,20 @@
                     </a>
                 </li>
                 <li class="menu-item menu-sub">
-                    <a href="#">
+	                <div class="menu-link">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-                        <span>구입</span>                    
-                    </a>
+	                    <span>구입</span>            
+	                </div>
 	                <ul class="sub-menu-list">
 		            	<li><a href="#">구입 요청</a></li>
 		            	<li><a href="#">구입 상세</a></li>
 		            </ul>                        
                 </li>
                 <li class="menu-item menu-sub">
-                    <a href="#">
+                    <div class="menu-link">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
                         <span>반출</span>
-                    </a>
+                    </div>
 	                <ul class="sub-menu-list">
 	                    <li><a href="#">반출 요청</a></li>
 	                    <li><a href="#">반출 상세</a></li>

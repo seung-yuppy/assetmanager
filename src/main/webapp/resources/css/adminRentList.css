@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.app-layout {
+    min-height: 100vh;
+}
+
+.main-content {
+    width: auto !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+}
+
+/* 공통 */
+.dashboard-container { width: 100%; }
+.dashboard-container h1 { font-size: 1.8rem; font-weight: 700; margin: 0 0 5px 0; }
+.dashboard-container span { font-size: 1rem; color: var(--gray-color); }
+.section-card { background-color: var(--white-color); padding: 24px; border-radius: 12px; box-shadow: var(--card-shadow); margin-top: 25px; }
+
+/* 데이터 테이블 및 체크박스 */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 14px 15px; text-align: left; border-bottom: 1px solid var(--border-white); font-size: 0.95rem; }
+.data-table thead { background-color: var(--gray-color-light); }
+.data-table th { font-weight: 600; color: #374151; }
+.data-table td:first-child, .data-table th:first-child { text-align: center; }
+.data-table input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+
+/* 체크박스로 행 선택 시 배경색 변경 */
+.data-table tbody tr.selected {
+    background-color: #eff6ff; /* light blue */
+}
+/* --- 페이지네이션 --- */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.pagination-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 8px;
+}
+
+.page-item .page-link {
+    display: block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--dark-color);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: var(--gray-color-light);
+}
+
+/* 액션 버튼 */
+.action-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+.btn { padding: 8px 20px; 
+	   border-radius: 6px; 
+	   border: none; 
+	   font-size: 0.9rem; 
+	   font-weight: 600; 
+	   cursor: pointer; 
+	   transition: background-color 0.2s; } 
+
+.btn-approve { background-color: var(--primary-color); color: var(--white-color); }
+.btn-approve:hover { background-color: var(--primary-hover); }
+
+.btn-reject { background-color: #f3f4f6; border: 1px solid var(--border-white); color: #374151; }
+.btn-reject:hover { background-color: #e5e7eb; }
+
+/* 비활성화된 버튼 스타일 */
+.btn:disabled { background-color: #d1d5db; color: #9ca3af; cursor: not-allowed; border-color: #d1d5db; }
+.btn-approve:disabled:hover { background-color: #d1d5db; }
+.btn-reject:disabled:hover { background-color: #d1d5db; }
+
+/* --- 상태 배지 --- */
+.status-badge {
+    display: inline-block; /* span을 블록 요소처럼 다루기 위함 */
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff !important;
+}
+
+/* 상태별 배경색 */
+.status-badge.status-pending { background-color: var(--gray-color); }
+.status-badge.status-approved { background-color: var(--green-color); }
+.status-badge.status-rejected { background-color: var(--red-color); }

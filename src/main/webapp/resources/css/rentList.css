@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+/* --- common.css 오버라이드(Override) 섹션 --- */
+.app-layout {
+    min-height: 100vh;
+}
+
+.main-content {
+    width: auto !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+}
+
+/* --- 페이지 공통 스타일 --- */
+.dashboard-container {
+    width: 100%;
+}
+
+.dashboard-container h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.dashboard-container span {
+    font-size: 1rem;
+    color: var(--gray-color);
+}
+
+.section-card {
+    background-color: var(--white-color);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin-top: 25px;
+}
+
+/* --- 헤더 및 컨트롤 --- */
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-controls h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-white);
+    border-radius: 6px;
+}
+
+.search-field {
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.search-box button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-box button:hover {
+    background-color: var(--gray-color-light);
+}
+
+.search-box button img {
+    width: 16px;
+    height: 16px;
+}
+
+.status-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-filter label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.status-filter select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-white);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* --- 데이터 테이블 --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 14px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-white);
+    font-size: 0.95rem;
+}
+
+.data-table thead {
+    background-color: var(--gray-color-light);
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #374151;
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--gray-color-light);
+}
+
+/* --- 상태 배지 (우선순위 강화) --- */
+.main-content .status-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff !important; /* 흰색 글자를 강제로 최우선 적용 */
+}
+.main-content .status-badge.status-pending { background-color: var(--gray-color); }
+.main-content .status-badge.status-approved { background-color: var(--green-color); }
+.main-content .status-badge.status-rejected { background-color: var(--red-color); }
+
+/* --- 페이지네이션 --- */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.pagination-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 8px;
+}
+
+.page-item .page-link {
+    display: block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--dark-color);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: var(--gray-color-light);
+}

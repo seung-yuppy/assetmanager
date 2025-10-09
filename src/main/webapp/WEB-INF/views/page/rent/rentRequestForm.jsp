@@ -43,14 +43,14 @@
 							</div>
 							<div class="form-group col-span-full">
 								<label for="address">주소</label>
-								<textarea id="address" rows="3" class="form-input">서울특별시 강남구 테헤란로 123</textarea>
+								<input id="address" value="서울특별시 강남구 테헤란로 123" rows="3" class="form-input">
 							</div>
 						</div>
 					</div>
 
 					<div class="form-section">
 						<h2 class="form-section-title">제품 정보</h2>
-						<div class="form-grid grid-cols-2">
+						<div class="form-grid grid-cols-3">
 							<div class="form-group">
 								<label for="category">제품 카테고리</label> <select
 									id="category" class="form-input">
@@ -66,6 +66,18 @@
 									type="text" id="product-name" placeholder="초고속 무선 충전기"
 									class="form-input">
 							</div>
+							
+							<div class="form-group">
+								<label for="serial-number">일련번호 목록</label> <select
+									id="serial-number" class="form-input">
+									<option>카테고리 선택</option>
+									<option>ABC-123456-XYZ</option>
+									<option>ABC-234567-XYZ</option>
+									<option>ABC-357902-XYZ</option>
+									<option>ABC-864297-XYZ</option>
+								</select>
+							</div>
+							
 						</div>
 					</div>
 

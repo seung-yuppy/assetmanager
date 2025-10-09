@@ -7,15 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const cancelBtn = document.getElementById('cancelBtn');
         const modalProductName = document.getElementById('modalProductName');
         const modalUserName = document.getElementById('modalUserName');
+        const modalSerialNumber = document.getElementById('modalSerialNumber');
         const modalDepartment = document.getElementById('modalDepartment');
         const modalPosition = document.getElementById('modalPosition');
+        const modalReturnDate = document.getElementById('modalReturnDate');
         
         // 정보 불러오기
         function openRegisterModal(userInfo) {
             modalProductName.value = userInfo.productName || "";
             modalUserName.value = userInfo.userName || "";
+            modalSerialNumber.value = userInfo.modalSerialNumber || "";
             modalDepartment.value = userInfo.department || "";
             modalPosition.value = userInfo.position || "";
+            modalReturnDate.value = userInfo.modalReturnDate || "";
             registerModal.style.display = 'flex';
         }
         
@@ -51,8 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const tempUserInfo = {
                 productName: clickedRow.querySelector('td:nth-child(2)').textContent,
                 userName: clickedRow.querySelector('td:nth-child(3)').textContent,
+                modalSerialNumber: "ABC-123456-XYZ",
                 department: "개발팀",
-                position: "선임 연구원"
+                position: "선임 연구원",
+                modalReturnDate:"2025-12-31"
             };
             openRegisterModal(tempUserInfo);
 

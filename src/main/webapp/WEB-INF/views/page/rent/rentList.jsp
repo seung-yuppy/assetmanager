@@ -46,7 +46,7 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>요청 ID</th>
+								<th>요청 ID(사번)</th>
 								<th>품목명</th>
 								<th>요청자 이름</th>
 								<th>요청 사유</th>
@@ -118,7 +118,7 @@
 				</div>
 				<div class="form-group">
 					<label for="modalSerialNumber">일련번호</label>
-					<input type="text" id="modalSerialNumber" class="form-input" placeholder="일련번호를 입력하세요">
+					<input type="text" id="modalSerialNumber" class="form-input" readonly>
 				</div>
 				<div class="form-group">
 					<label for="modalUserName">사용자명</label>
@@ -131,6 +131,10 @@
 				<div class="form-group">
 					<label for="modalPosition">직위</label>
 					<input id="modalPosition" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalReturnDate">반납 예정일</label>
+					<input id="modalReturnDate" class="form-input" readonly>
 				</div>
 			</div>
 			<div class="modal-footer">

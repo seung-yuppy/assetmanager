@@ -8,6 +8,8 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/orderList.css" rel="stylesheet">
+<%-- 반출 자산 등록 모달 --%>
+<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 </head>
 <body>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,7 +18,7 @@
 
 		<div class="main-content">
 			<div class="dashboard-container">
-				<h1>직원 구매요청 목록</h1>
+				<h1>구매 요청 목록</h1>
 				<span>현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
 
 				<div class="section-card">
@@ -71,7 +73,7 @@
 								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">반려</span></td>
+								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">요청 반려</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
@@ -132,7 +134,19 @@
 	            <button class="modal-close-btn">&times;</button> 
 	        </div>
 	        <div class="modal-body">
-	            </div>
+     			<div class="form-group">
+					<label for="modalProductName">제품명</label>
+					<input type="text" id="modalProductName" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalRequestDate">요청 일자</label>
+					<input type="text" id="modalRequestDate" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalSerialNumber">일련번호</label>
+					<input type="text" id="modalSerialNumber" class="form-input" placeholder="일련번호를 입력하세요">
+				</div>
+	        </div>
 	        <div class="modal-footer">
 	            <button class="secondary-action">취소</button>
 	            <button class="primary-action" onclick="registerSerial()">등록하기</button>
@@ -143,11 +157,23 @@
 	<div id="rejectDetailModal" class="custom-modal-backdrop">
 	    <div class="custom-modal-content">
 	        <div class="modal-header">
-	            <h3>반려 사유</h3>
+	            <h2>반려 상세</h2>
 	            <button class="modal-close-btn">&times;</button> 
 	        </div>
 	        <div class="modal-body">
-	            </div>
+        		<div class="form-group">
+					<label for="modalProductName">제품명</label>
+					<input type="text" id="modalProductName" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalRequestDate">요청 일자</label>
+					<input type="text" id="modalRequestDate" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalRejectReason">반려 사유</label>
+					<input type="text" id="modalRejectReason" class="form-input" value="해당 부서 예산 부족" readonly>
+				</div>
+	        </div>
 	        <div class="modal-footer">
 	            <button class="secondary-action">닫기</button>
 	        </div>

@@ -16,7 +16,7 @@
         	</div>
             <ul class="menu-list">
                 <li class="menu-item">
-                    <a href="#">
+                    <a href="/assetmanager/home/user">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dashboard.svg" />
                         <span>대시보드</span>
                     </a>
@@ -33,8 +33,8 @@
 	                    <span>구입</span>            
 	                </div>
 	                <ul class="sub-menu-list">
-		            	<li><a href="#">구입 요청</a></li>
-		            	<li><a href="#">구입 상세</a></li>
+		            	<li><a href="/assetmanager/order/form">구입 요청</a></li>
+		            	<li><a href="/assetmanager/order/user/list">구입 상세</a></li>
 		            </ul>                        
                 </li>
                 <li class="menu-item menu-sub">

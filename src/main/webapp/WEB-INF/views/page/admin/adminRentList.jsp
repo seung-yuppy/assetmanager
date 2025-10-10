@@ -41,7 +41,7 @@
 								<td>둘리</td>
 								<!-- <td>사업상 새 개발용 노트북</td> -->
 								<td>2024-07-20</td>
-								<td><span class="status-badge status-pending">대기 중</span></td>
+								<td><span class="status-badge status-waited">대기 중</span></td>
 							</tr>
 							<tr data-id="REQ002">
 								<td><input type="checkbox" class="row-checkbox"></td>
@@ -50,7 +50,7 @@
 								<td>또치</td>
 								<!-- <td>잘못된 모델이 배송되어, 교환 요청.</td> -->
 								<td>2024-07-19</td>
-								<td><span class="status-badge status-pending">대기 중</span></td>
+								<td><span class="status-badge status-waited">대기 중</span></td>
 							</tr>
 							<tr data-id="REQ003">
 								<td><input type="checkbox" class="row-checkbox"></td>
@@ -59,7 +59,7 @@
 								<td>도우너</td>
 								<!-- <td>더블 클릭 문제, 스크롤 휠 작동 불량.</td> -->
 								<td>2024-07-18</td>
-								<td><span class="status-badge status-pending">대기 중</span></td>
+								<td><span class="status-badge status-waited">대기 중</span></td>
 							</tr>
 							<tr class="processed" data-id="REQ003">
 								<td><input type="checkbox" class="row-checkbox" disabled></td>

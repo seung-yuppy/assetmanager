@@ -4,18 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/order")
+@RequestMapping("/admin")
 @Controller
-public class OrderController {
-	
-	@GetMapping("/list")
-	public String index () {
-		return "/order/orderList";
+public class AdminOrderController {
+	@GetMapping("/order/list")
+	public String index() {
+		return "/admin/adminOrderList";
 	}
-	
-	@GetMapping("/form")
-	public String form() {
-		return "/order/orderForm";
-	}
-
 }

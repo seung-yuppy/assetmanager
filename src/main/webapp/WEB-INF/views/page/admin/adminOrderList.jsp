@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>직원 구매요청 목록</title>
+<title>관리자 구매요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/orderList.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 <%-- 반출 자산 등록 모달 --%>
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 </head>
@@ -19,12 +19,10 @@
 		<div class="main-content">
 			<div class="dashboard-container">
 				<h1>구매 요청 목록</h1>
-				<span>현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
+				<span style="font-size: 1rem; color: var(--gray-color);">현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
 
 				<div class="section-card">
-					<div class="header-controls">
-				        <h2>최근 구매 요청</h2>
-				
+					<div class="header-controls" style="margin-bottom:20px;">
 				        <div class="filter-controls">
 				            <div class="status-filter">
 				                <label for="statusFilter">상태:</label>
@@ -46,62 +44,43 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>자산명</th>
+								<th></th>
+								<th>요청자</th>
+								<th>사번</th>
+								<th>요청 내용</th>
 								<th>요청 사유</th>
-								<th>단가</th>
-								<th>수량</th>
 								<th>요청일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
-								<td>2023-01-15</td>
+								<td><input type="checkbox" class="row-checkbox"></td>
+								<td>김성배</td>
+								<td>20250127</td>
+								<td>Latitude 7420 노트북 외 3개</td>
+								<td>신입 사원 노트북 배정 </td>
+								<td>2023-01-27</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>
 							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">승인 대기</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
-								<td>2023-01-15</td>
+								<td><input type="checkbox" class="row-checkbox"></td>
+								<td>강예나</td>
+								<td>20250127</td>
+								<td>LG Gram 노트북 외 3개</td>
+								<td>신입 사원 노트북 배정 </td>
+								<td>2023-01-27</td>
 								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">요청 반려</span></td>
 							</tr>
+
 							<tr>
+								<td><input type="checkbox" class="row-checkbox"></td>
+								<td>임꺽정</td>
+								<td>20250127</td>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">등록 완료</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>1</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">등록 완료</span></td>
 							</tr>
 						</tbody>
 					</table>
@@ -129,6 +108,10 @@
 							</a></li>
 						</ul>
 					</nav>
+					<div class="action-buttons">
+						<button id="rejectBtn" class="btn btn-reject" disabled>거부</button>
+						<button id="approveBtn" class="btn btn-approve" disabled>승인</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -223,6 +206,7 @@
 	
 	 -->
 <script src="/assetmanager/resources/js/modal.js"></script>
+<script src="/assetmanager/resources/js/adminList.js"></script>
 <script>
 	function setBoardParam(key, value) {
 		  const url = new URL(window.location.href);

@@ -159,9 +159,7 @@
     display: flex;
     justify-content: space-between; /* H2는 왼쪽, 필터는 오른쪽으로 밀어냅니다. */
     align-items: center; /* 수직 중앙 정렬 */
-    margin-bottom: 20px; /* 테이블과의 간격 */
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee; /* 구분선 (선택 사항) */
 }
 
 /* H2 태그에 특별한 스타일링이 없다면 기본 스타일 사용 */

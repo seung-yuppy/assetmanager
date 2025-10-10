@@ -164,22 +164,6 @@
             gap: 15px;
         }
         
-        /* 상태 뱃지 스타일 (필요한 부분만 유지) */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-weight: bold;
-            font-size: 15px;
-            color: var(--white-color);
-        }
-
-        /* 상태별 색상 */
-        .status-approved { background-color: var(--green-color); }
-        .status-waited  { background-color: var(--gray-color); }
-        .status-rejected {background-color: var(--red-color);}
-        .status-used {background-color: var(--blue-color);}
         
         /* 5. 차트 범례 및 버튼 스타일 */
         .chart-legend-wrapper {

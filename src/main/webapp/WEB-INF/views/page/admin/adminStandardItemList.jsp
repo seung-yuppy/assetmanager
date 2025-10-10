@@ -7,7 +7,7 @@
 	<title>권장 제품 목록</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/adminRentList.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 </head>
 <body>

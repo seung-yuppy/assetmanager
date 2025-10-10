@@ -23,8 +23,6 @@
 
 				<div class="section-card">
 					<div class="header-controls">
-				        <h2>최근 구매 요청</h2>
-				
 				        <div class="filter-controls">
 				            <div class="status-filter">
 				                <label for="statusFilter">상태:</label>

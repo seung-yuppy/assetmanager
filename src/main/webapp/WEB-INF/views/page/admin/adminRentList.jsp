@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>반출 승인 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/adminRentList.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet"> <%-- 모달 스타일을 위해 추가 --%>
 </head>
 <body>
@@ -141,6 +141,6 @@
             </div>
         </div>
     </div> 
-	<script src="/assetmanager/resources/js/adminRent.js"></script>
+	<script src="/assetmanager/resources/js/adminList.js"></script>
 </body>
 </html>

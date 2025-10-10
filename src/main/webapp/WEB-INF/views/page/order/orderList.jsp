@@ -47,8 +47,9 @@
 						<thead>
 							<tr>
 								<th>자산명</th>
-								<th>가격</th>
 								<th>요청 사유</th>
+								<th>단가</th>
+								<th>수량</th>
 								<th>요청일</th>
 								<th>상태</th>
 							</tr>
@@ -56,43 +57,49 @@
 						<tbody>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">요청 반려</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-waited">등록 완료</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
-								<td>100,0000</td>
 								<td>신입 사원 노트북 배정</td>
+								<td>100,0000</td>
+								<td>1</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-waited">등록 완료</span></td>
 							</tr>

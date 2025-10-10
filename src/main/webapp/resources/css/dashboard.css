@@ -203,6 +203,18 @@
             margin-right: 0.75rem;
             flex-shrink: 0;
         }
+        
+        .search-card {
+        	display: flex;
+        	justify-content: space-between;
+        	margin-bottom: 20px;
+        }
+        
+        .button-container {
+        	display: flex;
+        	justify-content: flex-end;
+        	align-items: center;
+        }    
 
         /* 모바일 반응형 디자인 */
         @media (max-width: 768px) {

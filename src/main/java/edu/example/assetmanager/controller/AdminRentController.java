@@ -13,4 +13,18 @@ public class AdminRentController {
 		return "/admin/adminRentList";
 	}
 	
+	@GetMapping("/asset/list")
+	public String assetList() {
+		return "/admin/adminAssetList";
+	}
+	
+	@GetMapping("/asset/detail")
+	public String assetDetail() {
+		return "/admin/adminAssetDetail";
+	}
+	
+	@GetMapping("/item/list")
+	public String itemList() {
+		return "/admin/adminStandardItemList";
+	}
 }

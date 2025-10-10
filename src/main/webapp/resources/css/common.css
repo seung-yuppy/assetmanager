@@ -56,7 +56,6 @@ body {
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 0.3s;
-	margin-top: 10px;
 	
 	&:hover {
 		background-color: var(--primary-hover);
@@ -64,6 +63,7 @@ body {
 }
 
 .cancel-button {
+	width: 70px;
 	background-color: var(--red-color); /* 빨강 */
 	color: var(--white-color);
 	border: none;
@@ -73,9 +73,22 @@ body {
 	font-weight: 500;
 	cursor: pointer;
 	transition: background-color 0.3s;
- 	white-space: nowrap; 
- 	
+ 	 
  	&:hover {
  		background-color: var(--red-hover);
  	}
+}
+
+.detail-button {
+	padding: 7px 14px;
+	background-color: var(--primary-color);
+	color: #fff;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s;
+	
+	&:hover {
+		background-color: var(--primary-hover);
+	}
 }

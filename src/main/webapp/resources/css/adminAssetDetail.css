@@ -1,0 +1,29 @@
+@charset "UTF-8";
+		/* 5. 정보 목록 스타일 */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #f3f4f6;
+            font-size: 0.95rem;
+        }
+        .info-label {
+            color: var(--color-gray);
+            font-weight: 500;
+            flex-shrink: 0; /* 라벨이 줄어들지 않도록 */
+        }
+        .info-value {
+            color: var(--color-text-dark);
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .detail-header {
+        	display: flex;
+        	justify-content: space-between;
+        }

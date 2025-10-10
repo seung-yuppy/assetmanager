@@ -16,8 +16,7 @@
 
 		<div class="main-content">
 			<div class="dashboard-container">
-				<div class="section-card">
-					<div class="purchase-form-container">
+				<div class="content-wrapper">
 						<h1 class="content-title">구매 신청서</h1>
 						<p class="content-description">구매 요청을 위해서 아래 양식을 작성하세요. 모든 필수
 							필드를 정확하게 기입해야 합니다.</p>
@@ -134,7 +133,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 	<script src="/assetmanager/resources/js/modal.js"></script>
 	<script src="/assetmanager/resources/js/orderForm.js"></script>

@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RentController {
 	
-	@GetMapping("/request")
+	@GetMapping("/form")
 	public String requestForm() {
 		return "/rent/rentRequestForm";
 	}
 	
-	@GetMapping("/request/list")
+	@GetMapping("/list")
 	public String list () {
 		return "/rent/rentList";
 	}
 	
-	@GetMapping("request/list/detail")
+	@GetMapping("/list/detail")
 	public String listDetail () {
 		return "/rent/assetEntryDetail";
 	}

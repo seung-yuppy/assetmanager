@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="currentDate" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +28,7 @@
 
 				<div class="section-card">
 					<div class="header-controls">
-						<h2>최근 반출 요청</h2>
+<!-- 						<h2>최근 반출 요청</h2> -->
 						<div class="filter-controls">
 							<div class="status-filter">
 								<label for="statusFilter">상태:</label>
@@ -46,45 +49,45 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>요청 ID(사번)</th>
-								<th>품목명</th>
-								<th>요청자 이름</th>
+								<th>품목명</th>								
 								<th>요청 사유</th>
+								<th>수량</th>
 								<th>요청일</th>
+								<th>반납 예정일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr data-id="REQ001">
-								<td>REQ001</td>
 								<td>LG 그램 노트북</td>
-								<td>둘리</td>
 								<td>사업상 새 개발용 노트북</td>
+								<td>1</td>
 								<td>2024-07-20</td>
+								<td>2025-12-31</td>
 								<td><span class="status-badge status-pending">대기 중</span></td>
 							</tr>
-							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9" data-user="또치">
-								<td>REQ002</td>
+							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9">
 								<td>삼성 갤럭시 탭 S9</td>
-								<td>또치</td>
 								<td>잘못된 모델이 배송되어, 교환 요청.</td>
+								<td>1</td>
 								<td>2024-07-19</td>
+								<td>2025-12-31</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
-							<tr data-id="REQ006" data-product="애플 워치 시리즈 9" data-user="도우너">
-								<td>REQ006</td>
+							<tr data-id="REQ006" data-product="애플 워치 시리즈 9">
 								<td>애플 워치 시리즈 9</td>
-								<td>도우너</td>
 								<td>배터리 수명 기대 이하, 교환 요청.</td>
+								<td>1</td>
 								<td>2024-07-15</td>
+								<td>2025-12-31</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 							<tr data-id="REQ009">
-								<td>REQ009</td>
 								<td>크롬캐스트 with Google TV</td>
-								<td>고길동</td>
 								<td>회의실 디스플레이용</td>
+								<td>1</td>
 								<td>2024-07-12</td>
+								<td>2025-12-31</td>
 								<td><span class="status-badge status-rejected">거부됨</span></td>
 							</tr>
 						</tbody>
@@ -117,25 +120,19 @@
 					<input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label>
-					<input type="text" id="modalSerialNumber" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalUserName">사용자명</label>
-					<input type="text" id="modalUserName" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalDepartment">부서명</label>
-					<input id="modalDepartment" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalPosition">직위</label>
-					<input id="modalPosition" class="form-input" readonly>
-				</div>
+					<label for="application-date">등록일</label>
+					<input type="date" id="application-date" value="${currentDate}" class="form-input" readonly>
+				</div> 
 				<div class="form-group">
 					<label for="modalReturnDate">반납 예정일</label>
 					<input id="modalReturnDate" class="form-input" readonly>
 				</div>
+				<div class="form-group">
+					<label for="modalSerialNumber">일련번호</label>
+					<input type="text" id="modalSerialNumber" class="form-input" >
+				</div>
+				
+				
 			</div>
 			<div class="modal-footer">
 				<button id="cancelBtn" class="btn-secondary">취소</button>

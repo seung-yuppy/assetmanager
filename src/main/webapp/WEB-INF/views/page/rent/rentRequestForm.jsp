@@ -62,22 +62,13 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="product-name">제품명</label> <input
-									type="text" id="product-name" placeholder="초고속 무선 충전기"
-									class="form-input">
-							</div>
-							
+								<label for="product-name">제품명</label> 
+								<input type="text" id="product-name" placeholder="초고속 무선 충전기" class="form-input">
+							</div>	
 							<div class="form-group">
-								<label for="serial-number">일련번호 목록</label> <select
-									id="serial-number" class="form-input">
-									<option>카테고리 선택</option>
-									<option>ABC-123456-XYZ</option>
-									<option>ABC-234567-XYZ</option>
-									<option>ABC-357902-XYZ</option>
-									<option>ABC-864297-XYZ</option>
-								</select>
+								<label for="count">수량</label>
+								<input type="number" id="count" placeholder="1" class="form-input">
 							</div>
-							
 						</div>
 					</div>
 
@@ -86,7 +77,7 @@
 						<div class="form-grid grid-cols-2">
 							<div class="form-group col-span-full">
 								<label for="reason">반출 사유</label>
-								<textarea id="reason" rows="4" class="form-input">프로젝트를 위한 임시 사용</textarea>
+								<input type="text" id="reason" placeholder="프로젝트를 위한 임시 사용" class="form-input">
 							</div>
 							<div class="form-group">
                                 <label for="application-date">반출 신청일</label>

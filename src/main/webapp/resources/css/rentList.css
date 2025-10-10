@@ -5,12 +5,6 @@
     min-height: 100vh;
 }
 
-.main-content {
-    width: auto !important;
-    flex: 1 !important;
-    overflow-y: auto !important;
-}
-
 /* --- 페이지 공통 스타일 --- */
 .dashboard-container {
     width: 100%;

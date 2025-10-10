@@ -3,23 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // 반출 등록 모달
     const registerModal = document.getElementById('registerModal');
     if (registerModal) {
-        const closeModalBtn = registerModal.querySelector('.modal-close-btn');
-        const cancelBtn = document.getElementById('cancelBtn');
+        const closeModalBtn = registerModal.querySelector('.modal-close-btn');      
         const modalProductName = document.getElementById('modalProductName');
-        const modalUserName = document.getElementById('modalUserName');
-        const modalSerialNumber = document.getElementById('modalSerialNumber');
-        const modalDepartment = document.getElementById('modalDepartment');
-        const modalPosition = document.getElementById('modalPosition');
+        //const modalEntryDate = document.getElementById('modalEntryDate');
         const modalReturnDate = document.getElementById('modalReturnDate');
+        const modalSerialNumber = document.getElementById('modalSerialNumber');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
         
         // 정보 불러오기
         function openRegisterModal(userInfo) {
             modalProductName.value = userInfo.productName || "";
-            modalUserName.value = userInfo.userName || "";
-            modalSerialNumber.value = userInfo.modalSerialNumber || "";
-            modalDepartment.value = userInfo.department || "";
-            modalPosition.value = userInfo.position || "";
+            //modalEntryDate.value = userInfo.modalEntryDate || "";
             modalReturnDate.value = userInfo.modalReturnDate || "";
+            modalSerialNumber.value = userInfo.modalSerialNumber || "";
             registerModal.style.display = 'flex';
         }
         
@@ -53,12 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`서버에 ${requestId}의 사용자 정보를 요청합니다.`);
             // 예시 데이터
             const tempUserInfo = {
-                productName: clickedRow.querySelector('td:nth-child(2)').textContent,
-                userName: clickedRow.querySelector('td:nth-child(3)').textContent,
-                modalSerialNumber: "ABC-123456-XYZ",
-                department: "개발팀",
-                position: "선임 연구원",
-                modalReturnDate:"2025-12-31"
+                productName: clickedRow.querySelector('td:nth-child(1)').textContent,
+                //modalEntryDate:"2025-10-10",
+                modalReturnDate:"2025-12-31",
+                modalSerialNumber: "ABC-123456-XYZ"      
             };
             openRegisterModal(tempUserInfo);
 

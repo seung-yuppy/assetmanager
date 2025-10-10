@@ -18,4 +18,9 @@ public class RentController {
 		return "/rent/rentList";
 	}
 	
+	@GetMapping("request/list/detail")
+	public String listDetail () {
+		return "/rent/assetEntryDetail";
+	}
+	
 }

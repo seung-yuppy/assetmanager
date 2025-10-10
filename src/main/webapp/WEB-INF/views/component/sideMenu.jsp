@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a href="/assetmanager/asset/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
                         <span>자산</span>
                     </a>

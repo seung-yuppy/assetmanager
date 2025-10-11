@@ -35,7 +35,7 @@
 				                </select>
 				            </div>
 				            <div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="자산명 검색..." class="search-field">
+				                <input type="text" id="assetSearch" placeholder="요청자 검색" class="search-field">
 				                <button onclick="applySearch()"><img src="/assetmanager/resources/image/icon_search.svg"></button>
 				            </div>
 				        </div>
@@ -58,7 +58,7 @@
 								<td><input type="checkbox" class="row-checkbox"></td>
 								<td>김성배</td>
 								<td>20250127</td>
-								<td>Latitude 7420 노트북 외 3개</td>
+								<td><a href="/assetmanager/admin/order/detail">Latitude 7420 노트북 등 2개</a></td>
 								<td>신입 사원 노트북 배정 </td>
 								<td>2023-01-27</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>

@@ -11,4 +11,9 @@ public class AdminOrderController {
 	public String index() {
 		return "/admin/adminOrderList";
 	}
+	
+	@GetMapping("/order/detail")
+	public String detail() {
+		return "/admin/adminOrderDetail";
+	}
 }

@@ -53,7 +53,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>Latitude 7420 노트북 외 3개</td>
+								<td><a href="/assetmanager/order/detail">Latitude 7420 노트북 등 2개</a></td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
@@ -79,7 +79,7 @@
 								<td>100,0000</td>
 								<td>2023-01-15</td>
 <!-- 							<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td> -->
-								<td><span class="status-badge status-approved" onclick="location.href='/assetmanager/order/detail'" style="cursor:pointer;">승인 완료</span></td>
+								<td><span class="status-badge status-approved" onclick="location.href='/assetmanager/order/regist'" style="cursor:pointer;">승인 완료</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>

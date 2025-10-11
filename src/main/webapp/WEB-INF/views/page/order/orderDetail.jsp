@@ -75,10 +75,6 @@
 							</a></li>
 						</ul>
 					</nav>
-					<div class="action-buttons">
-						<button id="rejectBtn" class="btn btn-reject" >거부</button>
-						<button id="approveBtn" class="btn btn-approve" >승인</button>
-					</div>
 				</div>
 			</div>
 		</div>

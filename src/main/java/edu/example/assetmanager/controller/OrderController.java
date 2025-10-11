@@ -18,9 +18,14 @@ public class OrderController {
 		return "/order/orderForm";
 	}
 	
+	@GetMapping("/regist")
+	public String regist() {
+		return "/order/orderRegist";
+	}
+	
 	@GetMapping("/detail")
-	public String requestDetail() {
-		return "/order/orderRequestDetail";
+	public String detail() {
+		return "/order/orderDetail";
 	}
 
 }

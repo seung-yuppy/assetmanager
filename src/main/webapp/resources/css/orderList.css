@@ -54,6 +54,10 @@
     border-bottom: none;
 }
 
+.data-table tbody tr:hover {
+    background-color: var(--gray-color-light);
+}
+
 /* 요청 관리 섹션 (2열 레이아웃) */
 .request-grid {
     display: grid;
@@ -156,10 +160,7 @@
 /* 검색 및 필터 컨테이너 스타일 */
 
 .header-controls {
-    display: flex;
-    justify-content: space-between; /* H2는 왼쪽, 필터는 오른쪽으로 밀어냅니다. */
-    align-items: center; /* 수직 중앙 정렬 */
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 /* H2 태그에 특별한 스타일링이 없다면 기본 스타일 사용 */
@@ -171,10 +172,9 @@
 
 .filter-controls {
     display: flex;
-    justify-content: flex-end; /* 오른쪽으로 정렬 */
+    justify-content: space-between;
     align-items: center;
     gap: 15px; /* 요소 간 간격 */
-    margin-bottom: 20px; /* 테이블과의 간격 */
     padding: 10px 0;
 }
 

@@ -25,30 +25,30 @@
 								<h2 class="form-section-title">신청자 정보</h2>
 								<div class="form-grid grid-cols-3">
 									<div class="form-group">
-										<label for="name">이름</label> <input type="text" id="name"
-											value="홍길동" class="form-input">
+										<label for="name">이름</label> <input type="text" id="name" value="홍길동" class="form-input" readonly>
 									</div>
 									<div class="form-group">
-										<label for="department">부서명</label> <input type="text"
-											id="department" value="마케팅팀" class="form-input">
+										<label for="department">부서명</label> <input type="text" id="department" value="마케팅팀" class="form-input" readonly>
 									</div>
 									<div class="form-group">
-										<label for="position">직위</label> <input type="text"
-											id="position" value="팀장" class="form-input">
+										<label for="position">직위</label> <input type="text" id="position" value="팀장" class="form-input" readonly>
 									</div>
 									<div class="form-group col-span-full">
-										<label for="address">주소</label> <input id="address"
-											value="서울특별시 강남구 테헤란로 123" rows="3" class="form-input">
+										<label for="address">주소</label> <input id="address" value="서울특별시 강남구 테헤란로 123" rows="3" class="form-input" readonly>
 									</div>
 								</div>
 							</div>
 							<h2 class="form-section-title">요청 세부 정보</h2>
 							<div class="form-row" style="margin-bottom:20px;">
-								<div class="form-group input-method-group">
-									<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')">
-									<label for="inputMethodForm">폼 직접 입력 </label>
-									<input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> 
-									<label for="inputMethodExcel">엑셀 파일 업로드</label>
+								<div class="form-group radio-input-group">
+									<div class="radio-input">
+										<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')">
+										<label for="inputMethodForm">폼 직접 입력 </label>
+									</div>
+									<div class="radio-input">
+										<input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> 
+										<label for="inputMethodExcel">엑셀 파일 업로드</label>
+									</div>
 								</div>
 							</div>
 

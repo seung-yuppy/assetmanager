@@ -72,7 +72,7 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">부서</span></td>
+		                        <td><span class="status-badge status-used">부서</span></td>
 								<td><span class="status-badge status-rejected">반납</span></td>
 							</tr>
 							<tr>
@@ -81,7 +81,7 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">부서</span></td>
+		                        <td><span class="status-badge status-used">부서</span></td>
 								<td><span class="status-badge status-rejected">반납</span></td>
 							</tr>
 							<tr>
@@ -90,7 +90,7 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">부서</span></td>
+		                        <td><span class="status-badge status-used">부서</span></td>
 								<td><span class="status-badge status-rejected">반납</span></td>
 							</tr>
 							<tr>
@@ -99,7 +99,7 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">부서</span></td>
+		                        <td><span class="status-badge status-used">부서</span></td>
 								<td><span class="status-badge status-rejected">반납</span></td>
 							</tr>
 						</tbody>

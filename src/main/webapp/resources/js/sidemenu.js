@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuItems = document.querySelectorAll('.menu-item.menu-sub');
 
     menuItems.forEach(item => {
-        const menuLink = item.querySelector('.menu-link'); // 상위 메뉴 링크 (구입, 반출)
+        const menuLink = item.querySelector('.menu-arrow'); // 상위 메뉴 링크 (구입, 반출)
         const subMenuLinks = item.querySelectorAll('.sub-menu-list a'); // 하위 메뉴 링크 (구입 요청, 구입 상세)
 
         // 상위 메뉴 클릭 시 하위 메뉴 토글

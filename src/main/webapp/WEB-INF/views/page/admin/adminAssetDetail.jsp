@@ -6,7 +6,7 @@
 	<title>자산 상세</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/adminRentList.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
 </head>
@@ -15,12 +15,11 @@
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
 			<div class="dashboard-container">
+				<h1>LG그램 노트북 상세</h1>
 				<div class="detail-header">
-					<h1>LG그램 노트북 상세</h1>
-					<a href="/assetmanager/admin/asset/list">목록으로</a>
+					<span>LG그램 노트북의 상세 정보를 확인하고 관리 합니다.</span>
+					<a href="/assetmanager/admin/asset/list" class="detail-button">목록으로</a>
 				</div>
-				<span>LG그램 노트북의 상세 정보를 확인하고 관리 합니다.</span>
-				
 				<!-- 자산 & 사용자 상세 정보 시작 -->
 				<div class="request-grid">
 					<!-- 자산 상세 정보 -->

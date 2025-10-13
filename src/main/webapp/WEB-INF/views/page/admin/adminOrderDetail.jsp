@@ -59,8 +59,6 @@
 			</div>
 		</div>
 	</div>
-	
-	 -->
 <script src="/assetmanager/resources/js/modal.js"></script>
 
 </body>

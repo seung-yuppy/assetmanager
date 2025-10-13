@@ -47,7 +47,7 @@
 								<th>제품명</th>
 								<th>카테고리</th>
 								<th>가격</th>
-								<th>판매자</th>						
+								<th>제조사</th>						
 							</tr>
 						</thead>
 						<tbody>

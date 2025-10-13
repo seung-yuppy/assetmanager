@@ -195,7 +195,7 @@
         .button-container {
         	display: flex;
         	justify-content: flex-end;
-        	align-items: center;
+        	margin-bottom: 10px;
         }    
 
         /* 모바일 반응형 디자인 */

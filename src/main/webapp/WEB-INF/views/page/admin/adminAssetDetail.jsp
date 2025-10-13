@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="app-layout">
-		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
+		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 		<div class="main-content">
 			<div class="dashboard-container">
 				<h1>LG그램 노트북 상세</h1>

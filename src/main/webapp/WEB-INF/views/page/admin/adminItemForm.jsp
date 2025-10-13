@@ -35,7 +35,7 @@
 							</div>
 
 							<div id="formInputArea">
-								<div class="form-row">
+								<div class="form-row " style="margin-bottom: 30px;">
 									<div class="form-group category-group fixed-width-sm">
 										<label for="category">카테고리 <span class="required">*</span></label>
 										<select id="category" name="category" required onchange="updateProductOptions()" class="order-input">
@@ -48,23 +48,19 @@
 									</div>
 
 									<div class="form-group product-input-group flex-grow-lg" id="productInputGroup" >
-										<label for="productNameInput">제품명</label> 
+										<label for="productNameInput">제품명<span class="required">*</span></label> 
 										<input type="text" id="productNameInput" class="order-input" name="productNameInput" placeholder="제품명을 입력하세요">
-									</div>
-									<div class="form-group" style="flex-grow:0;">
-										<label for="itemPrice"> 단가 <span class="required">*</span></label>
-										<input type="number" id="itemPrice" name="itemPrice" value="" class="order-input" required>
 									</div>
 								</div>
 								
 								<div class="form-row">
+									<div class="form-group fixed-width-sm">
+										<label for="itemPrice"> 단가 <span class="required">*</span></label>
+										<input type="number" id="itemPrice" name="itemPrice" value="" class="order-input" required>
+									</div>
 									<div class="form-group">
 										<label for="seller">거래처<span class="required">*</span></label>
 										<input type="text" id="seller" name="seller" value="" class="order-input" required>
-									</div>
-									<div class="form-group">
-										<label for="serialNum">일련번호 <span class="required">*</span></label>
-										<input type="text" id="serialNum" name="serialNum" value="" class="order-input" required>
 									</div>
 								</div>
 							</div>

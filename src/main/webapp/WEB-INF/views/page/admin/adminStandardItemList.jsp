@@ -20,7 +20,7 @@
 				
 				<div class="section-card">
 					<div class="button-container">
-						<button class="add-button">+ 제품 추가</button>
+						<button class="add-button" onclick="location.href='/assetmanager/admin/item/form'">+ 제품 추가</button>
 					</div>
 				
 					<div class="search-card">

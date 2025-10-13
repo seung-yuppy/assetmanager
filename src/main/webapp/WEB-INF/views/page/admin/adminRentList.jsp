@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>반출 승인 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet"> <%-- 모달 스타일을 위해 추가 --%>
+<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
+<%-- 모달 스타일을 위해 추가 --%>
 </head>
 <body>
 	<div class="app-layout">
-		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
+		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 
 		<div class="main-content">
 			<div class="dashboard-container">
@@ -19,7 +20,28 @@
 				<span>현재 처리 중인 모든 반출 요청의 목록을 확인하고 관리합니다.</span>
 
 				<div class="section-card">
-					<h2>최근 반출 요청</h2>
+					<div class="search-card">
+						<div class="header-controls">
+							<div class="filter-controls">
+								<div class="status-filter">
+									<label for="statusFilter">상태:</label> <select id="statusFilter">
+										<option value="all">전체</option>
+										<option value="pending">대기 중</option>
+										<option value="approved">승인됨</option>
+										<option value="rejected">거부됨</option>
+									</select>
+								</div>
+								<div class="search-box">
+									<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
+									<button>
+										<img src="/assetmanager/resources/image/icon_search.svg" alt="검색">
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
 					<table class="data-table">
 						<thead>
 							<tr>
@@ -33,7 +55,7 @@
 							</tr>
 						</thead>
 						<tbody>
-                            <%-- 모든 tr 태그에 data-id="요청ID" 를 추가합니다 --%>
+							<%-- 모든 tr 태그에 data-id="요청ID" 를 추가합니다 --%>
 							<tr data-id="REQ001">
 								<td><input type="checkbox" class="row-checkbox"></td>
 								<td>REQ001</td>
@@ -66,7 +88,7 @@
 								<td>REQ003</td>
 								<td>애플 워치 시리즈 9</td>
 								<td>도우너</td>
-							<!-- 	<td>배터리 수명 기대 이하, 교환 요청.</td> -->
+								<!-- 	<td>배터리 수명 기대 이하, 교환 요청.</td> -->
 								<td>2025-07-15</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
@@ -98,49 +120,42 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<%-- 상세 정보 모달 --%>
 	<div id="detailModal" class="modal-backdrop" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>반출 요청 상세 정보</h2>
-                <button class="modal-close-btn">&times;</button>
-            </div>
-            <div class="modal-body" id="detailModalBody">
-                <div class="form-group">
-                    <label for="modalProductName">제품명</label>
-                    <input type="text" id="modalProductName" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalSerialNumber">일련번호</label>
-                    <input type="text" id="modalSerialNumber" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalUserName">사용자명</label>
-                    <input type="text" id="modalUserName" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalDepartment">부서명</label>
-                    <input type="text" id="modalDepartment" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalPosition">직위</label>
-                    <input type="text" id="modalPosition" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalReason">요청 사유</label>
-                    <input type="text" id="modalReason" class="form-input" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalReturnDate">반납 예정일</label>
-                    <input type="text" id="modalReturnDate" class="form-input" readonly>
-                </div>        
-            </div>
-            <div class="modal-footer">
-                <button class="btn-primary">확인</button>
-            </div>
-        </div>
-    </div> 
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>반출 요청 상세 정보</h2>
+				<button class="modal-close-btn">&times;</button>
+			</div>
+			<div class="modal-body" id="detailModalBody">
+				<div class="form-group">
+					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalUserName">사용자명</label> <input type="text" id="modalUserName" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalDepartment">부서명</label> <input type="text" id="modalDepartment" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalPosition">직위</label> <input type="text" id="modalPosition" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalReason">요청 사유</label> <input type="text" id="modalReason" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalReturnDate">반납 예정일</label> <input type="text" id="modalReturnDate" class="form-input" readonly>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn-primary">확인</button>
+			</div>
+		</div>
+	</div>
 	<script src="/assetmanager/resources/js/adminList.js"></script>
 </body>
 </html>

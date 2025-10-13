@@ -12,7 +12,7 @@
 
 /* 필수 표시 */
 .required {
-    color: #dc3545;
+    color: var(--red-color);
     font-weight: bold;
 }
 
@@ -58,7 +58,6 @@
     display: block;
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 5px;
     color: #343a40;
 }
 
@@ -165,6 +164,10 @@ input:focus, select:focus, textarea:focus {
     color: #111827;
     transition: border-color 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
+}
+
+.order-input {
+	margin-top: 5px;
 }
 
 .content-title {

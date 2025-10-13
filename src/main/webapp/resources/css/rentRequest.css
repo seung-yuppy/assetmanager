@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
-.app-layout {
-    min-height: 100vh;
+.required {
+    color: var(--red-color);
+    font-weight: bold;
 }
 
 .content-wrapper {
-    max-width: 900px;
+    max-width: 750px;
     margin: 0 auto;
     background-color: #ffffff;
     padding: 2.5rem;
@@ -23,11 +24,7 @@
     color: #667085;
     margin-bottom: 2.5rem;
 }
-.form-section {
-    margin-bottom: 2.5rem;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 2rem;
-}
+
 .form-section:first-child {
     border-top: none;
     padding-top: 0;
@@ -37,7 +34,18 @@
     font-weight: 500;
     color: #333;
     margin-bottom: 1.5rem;
+    margin-top: 3rem;
 }
+
+.radio-input-group{
+	display: flex;
+	gap: 10px;
+}
+
+.radio-input{
+	display: flex;
+}
+
 .form-grid {
     display: grid;
     gap: 1.5rem;
@@ -48,15 +56,11 @@
 
 .col-span-full { grid-column: 1 / -1; }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
 .form-group label {
-    font-size: 0.875rem;
-    font-weight: 500;
+	display: block;
+    font-size: 14px;
+    font-weight: 600;
     color: #374151;
-    margin-bottom: 5px;
 }
 .form-input {
     width: 100%;
@@ -72,9 +76,23 @@
     color: #9ca3af;
 }
 
+.rent-input {
+	margin-top: 5px;
+}
+
 .radio-group {
 	display:flex;
 	gap:10px;
+}
+
+textarea {
+    width: 100%; /* 모든 필드 너비 100% 통일 */
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 /* 클릭(포커스) 시 스타일 */
@@ -92,7 +110,6 @@ select.form-input:focus {
     gap: 1rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #e5e7eb;
 }
 .btn {
     padding: 0.75rem 1.5rem;
@@ -116,4 +133,37 @@ select.form-input:focus {
 }
 .btn-secondary:hover {
     background-color: #dadddf;
+}
+
+/* 버튼 템플릿 */
+.btn-template-download {
+	width:150px;
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 15px;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: #1c4587; /* 체크 색상 브랜드 색상으로 변경 */
+}
+.checkbox-group .description {
+    font-size: 13px;
+    color: #6c757d;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.char-count-display {
+    font-size: 13px;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 5px; /* textarea와 간격 확보 */
+    /* margin-right: 90px; 는 제거하여 100% 너비에 맞게 정렬 */
 }

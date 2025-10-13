@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>직원 구매요청 목록</title>
+<title>직원 구매 요청</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/orderForm.css" rel="stylesheet">
@@ -25,16 +25,16 @@
 								<h2 class="form-section-title">신청자 정보</h2>
 								<div class="form-grid grid-cols-3">
 									<div class="form-group">
-										<label for="name">이름</label> <input type="text" id="name" value="홍길동" class="form-input" readonly>
+										<label for="name">이름</label> <input type="text" id="name" value="홍길동" class="form-input order-input" readonly>
 									</div>
 									<div class="form-group">
-										<label for="department">부서명</label> <input type="text" id="department" value="마케팅팀" class="form-input" readonly>
+										<label for="department">부서명</label> <input type="text" id="department" value="마케팅팀" class="form-input order-input" readonly>
 									</div>
 									<div class="form-group">
-										<label for="position">직위</label> <input type="text" id="position" value="팀장" class="form-input" readonly>
+										<label for="position">직위</label> <input type="text" id="position" value="팀장" class="form-input order-input" readonly>
 									</div>
 									<div class="form-group col-span-full">
-										<label for="address">주소</label> <input id="address" value="서울특별시 강남구 테헤란로 123" rows="3" class="form-input" readonly>
+										<label for="address">주소</label> <input id="address" value="서울특별시 강남구 테헤란로 123" class="form-input order-input" readonly>
 									</div>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 								<div class="form-row first-row">
 									<div class="form-group category-group fixed-width-sm">
 										<label for="category">카테고리 <span class="required">*</span></label>
-										<select id="category" name="category" required onchange="updateProductOptions()">
+										<select id="category" name="category" required onchange="updateProductOptions()" class="order-input">
 											<option value="" disabled selected>선택하세요</option>
 											<option value="notebook">노트북</option>
 											<option value="monitor">모니터</option>
@@ -69,7 +69,8 @@
 										<label for="productNameSelect">제품명 <span
 											class="required">*</span></label> <select id="productNameSelect"
 											name="productNameSelect" required
-											onchange="handleProductChange(this.value)">
+											onchange="handleProductChange(this.value)"
+											class="order-input">
 											<option value="" disabled selected>카테고리를 먼저 선택하세요</option>
 											<option value="product1">상품1</option>
 											<option value="product2">상품2</option>
@@ -88,24 +89,24 @@
 									<div class="form-group price-group fixed-width-sm">
 										<label for="price">단가 (원) <span class="required">*</span></label>
 										<input type="number" id="price" name="price" value="0"
-											class="price-lock" required readonly>
+											class="price-lock order-input" required readonly>
 									</div>
 
 									<div class="form-group quantity-group fixed-width-sm">
 										<label for="quantity">수량 <span class="required">*</span></label>
 										<input type="number" id="quantity" name="quantity" min="1"
-											value="1" required>
+											value="1" class="order-input" required>
 									</div>
 
 									<div class="form-group price-group fixed-width-sm">
 										<label for="totalPrice">총액 (원)</label> <input type="text"
 											id="totalPrice" name="totalPrice" value="0"
-											class="price-lock" readonly>
+											class="price-lock order-input" readonly>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="reason">구매 요청 사유 <span class="required">*</span></label>
-									<textarea id="reason" name="reason" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+									<textarea id="reason" name="reason" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)" class="order-input"></textarea>
 									<div class="char-count-display text-align-right">
 										(<span id="currentLength">0</span> / 200)
 									</div>
@@ -115,7 +116,6 @@
 										name="isDepartmentUse"> <label for="isDepartmentUse">부서 공동 사용 자산입니다.</label>
 									<p class="description">체크 시, 해당 자산은 특정 개인 소유가 아닌 부서 공동 자산으로 등록됩니다.</p>
 								</div>
-								<div class="form-group empty-filler-second-row flex-fill"></div>
 							</div>
 
 							<div id="excelUploadArea" style="display: none;">

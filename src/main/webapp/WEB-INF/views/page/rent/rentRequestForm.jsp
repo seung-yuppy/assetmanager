@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>직원 반출 요청</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/sideMenu.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/rentRequest.css" rel="stylesheet">
 </head>
 <body>
@@ -28,36 +27,40 @@
 						<h2 class="form-section-title">신청자 정보</h2>
 						<div class="form-grid grid-cols-3">
 							<div class="form-group">
-								<label for="name">이름</label> <input type="text" id="name" value="홍길동" class="form-input">
+								<label for="name">이름</label> <input type="text" id="name" value="홍길동" class="form-input rent-input">
 							</div>
 							<div class="form-group">
-								<label for="department">부서명</label> <input type="text" id="department" value="마케팅팀" class="form-input">
+								<label for="department">부서명</label> <input type="text" id="department" value="마케팅팀" class="form-input rent-input">
 							</div>
 							<div class="form-group">
-								<label for="position">직위</label> <input type="text" id="position" value="팀장" class="form-input">
+								<label for="position">직위</label> <input type="text" id="position" value="팀장" class="form-input rent-input">
 							</div>
 							<div class="form-group col-span-full">
-								<label for="address">주소</label> <input id="address" value="서울특별시 강남구 테헤란로 123" rows="3" class="form-input">
+								<label for="address">주소</label> <input id="address" value="서울특별시 강남구 테헤란로 123" class="form-input rent-input">
 							</div>
 						</div>
 					</div>
 
-
-
-					<div class="form-row" style="margin-bottom: 20px;">
-						<div class="radio-group input-method-group">
-							<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')"> <label for="inputMethodForm">폼 직접 입력 </label> <input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> <label for="inputMethodExcel">엑셀 파일 업로드</label>
+					<h2 class="form-section-title">요청 세부 정보</h2>
+					<div class="form-row" style="margin-bottom:20px;">
+						<div class="form-group radio-input-group">
+							<div class="radio-input">
+								<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')">
+								<label for="inputMethodForm">폼 직접 입력 </label>
+							</div>
+							<div class="radio-input">
+								<input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> 
+								<label for="inputMethodExcel">엑셀 파일 업로드</label>
+							</div>
 						</div>
 					</div>
-
-
 
 					<div id="formInputArea">
 						<div class="form-section">
 							<h2 class="form-section-title">제품 정보</h2>
 							<div class="form-grid grid-cols-3">
 								<div class="form-group">
-									<label for="category">제품 카테고리</label> <select id="category" class="form-input">
+									<label for="category">제품 카테고리</label> <select id="category" class="form-input rent-input">
 										<option>카테고리 선택</option>
 										<option>노트북</option>
 										<option>모니터</option>
@@ -66,10 +69,10 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="product-name">제품명</label> <input type="text" id="product-name" placeholder="초고속 무선 충전기" class="form-input">
+									<label for="product-name">제품명</label> <input type="text" id="product-name" placeholder="초고속 무선 충전기" class="form-input rent-input">
 								</div>
 								<div class="form-group">
-									<label for="count">수량</label> <input type="number" id="count" placeholder="1" class="form-input">
+									<label for="count">수량</label> <input type="number" id="count" placeholder="1" class="form-input rent-input">
 								</div>
 							</div>
 						</div>
@@ -77,24 +80,33 @@
 						<div class="form-section">
 							<h2 class="form-section-title">반출 신청 세부 정보</h2>
 							<div class="form-grid grid-cols-2">
+								<div class="form-group">
+									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+								</div>
+								<div class="form-group">
+									<label for="return-date">반납 예정일</label> <input type="date" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
+								</div>
 								<div class="form-group col-span-full">
-									<label for="reason">반출 사유</label> <input type="text" id="reason" placeholder="프로젝트를 위한 임시 사용" class="form-input">
-								</div>
-								<div class="form-group">
-									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input" readonly>
-								</div>
-								<div class="form-group">
-									<label for="return-date">반납 예정일</label> <input type="date" id="return-date" placeholder="반납 예정일 선택" class="form-input">
+									<label for="reason">반출 요청 사유 <span class="required">*</span></label>
+									<textarea id="reason" name="reason" rows="4" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)" class="rent-input"></textarea>
+									<div class="char-count-display text-align-right">
+										(<span id="currentLength">0</span> / 200)
+									</div>
 								</div>
 							</div>
 						</div>
+						
+						<div class="form-group checkbox-group">
+							<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse"> 
+							<label for="isDepartmentUse">부서 공동 사용 자산입니다.</label>
+							<p class="description">체크 시, 해당 자산은 특정 개인 소유가 아닌 부서 공동 자산으로 등록됩니다.</p>
+						</div>
 					</div>
-
 
 					<div id="excelUploadArea" style="display: none;">
 						<div class="form-group file-upload-group">
 							<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
-							<button type="button" class="btn-template-download" style="margin-bottom: 20px;" onclick="downloadExcelTemplate()">⬇️ 템플릿 다운로드</button>
+							<button type="button" style="margin-bottom: 20px;" onclick="downloadExcelTemplate()">⬇️ 템플릿 다운로드</button>
 							<label for="excelFile">엑셀 파일 선택 <span class="required">*</span></label> <input type="file" id="excelFile" name="excelFile" accept=".xlsx, .xls">
 						</div>
 					</div>

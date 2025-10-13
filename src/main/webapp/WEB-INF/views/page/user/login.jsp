@@ -34,7 +34,7 @@
             </div>
 
             <!-- 로그인 폼 -->
-            <form action="" method="post">
+            <form action="" method="post" class="join-form">
                 <div class="form-group">
                     <label for="username">사용자 ID</label>
                     <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>

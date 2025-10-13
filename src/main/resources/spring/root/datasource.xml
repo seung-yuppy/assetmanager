@@ -11,8 +11,8 @@
 			<!-- 로그를 찍기위해 로거 설정 -->
 			<property name="driverClassName" value = "net.sf.log4jdbc.DriverSpy"></property>		
 			<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
-			<property name="username" value="bughunters"></property>
-			<property name="password" value="bughunters"></property>
+			<property name="username" value="assetmanager"></property>
+			<property name="password" value="assetmanager"></property>
 
 			<property name="initialSize" value="2"></property>	
 			<property name="maxTotal" value="4"></property>	

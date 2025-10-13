@@ -121,7 +121,6 @@
 }
 
 .login-header {
-	margin-bottom: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -148,9 +147,10 @@
 	height: 50px;
 }
 
-.form-group {
-	margin-bottom: 20px;
-	text-align: left;
+.join-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .form-group label {
@@ -196,6 +196,26 @@
 .divider {
 	color: #aaa;
 	margin: 0 10px;
+}
+
+.dept-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.form-select {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.form-select select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 /* 5. 모바일 반응형 처리 */

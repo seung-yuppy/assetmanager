@@ -34,30 +34,54 @@
             </div>
 
             <!-- 회원가입 폼 -->
-            <form action="" method="post">
+            <form action="/assetmanager/join" method="post" class="join-form">
                 <div class="form-group">
-                    <label for="username">사번</label>
-                    <input type="text" id="username" name="username" placeholder="사번" required>
+                    <label for="empno">사번</label>
+                    <input type="text" name="empno" placeholder="사번" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호 설정" required>
+                    <input type="password" name="password" placeholder="비밀번호" required>
                 </div>
             
                 <div class="form-group">
                     <label for="username">사용자 이름</label>
-                    <input type="text" id="username" name="username" placeholder="성함 " required>
+                    <input type="text" name="username" placeholder="성함 " required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="user@example.com" required>
+                    <input type="email" name="email" placeholder="user@example.com" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">전화번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required>
+                    <input type="tel" name="phone" placeholder="010-1234-5678" required>
+                </div>
+
+                <div class="dept-container">
+	                <div class="form-select">
+	                	<label for="department">부서</label>
+				    	<select name="department" required>
+				    		<option value="">부서를 선택하세요</option>
+				    		<option value="management">경영부</option>
+				    		<option value="development">개발부</option>
+				    		<option value="security">보안부</option>
+				    		<option value="hr">인사부</option>
+				    		<option value="marketing">마케팅부</option>
+				    	</select>
+	                </div>
+	                
+	                <div class="form-select">
+	                	<label for="role">직책</label>
+				    	<select name="role" required>
+				    		<option value="">직책을 선택하세요</option>
+				    		<option value="admin">관리자</option>
+				    		<option value="manager">부장</option>
+				    		<option value="employee">사원</option>
+				    	</select>
+	                </div>                
                 </div>
 
                 <button type="submit" class="main-button">가입 완료</button>

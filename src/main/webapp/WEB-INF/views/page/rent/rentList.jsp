@@ -106,35 +106,6 @@
 		</div>
 	</div>
 
-	<%-- 자산 등록 모달창 --%>
-	<div id="registerModal" class="modal-backdrop" style="display: none;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2>물품 반출 등록</h2>
-				<button id="closeModalBtn" class="modal-close-btn">&times;</button>
-			</div>
-			<div class="modal-body">
-				<div class="form-group">
-					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="application-date">등록일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input">
-				</div>
-
-
-			</div>
-			<div class="modal-footer">
-				<button id="cancelBtn" class="btn-secondary">취소</button>
-				<button class="btn-primary">반출 등록</button>
-			</div>
-		</div>
-	</div>
 	<script src="/assetmanager/resources/js/rent.js"></script>
 </body>
 </html>

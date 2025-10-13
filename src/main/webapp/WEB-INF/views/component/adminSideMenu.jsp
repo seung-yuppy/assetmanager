@@ -27,6 +27,12 @@
                         <span>자산</span>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="/assetmanager/admin/item/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_item.svg" />
+                        <span>제품</span>
+                    </a>
+                </li>
 				<li class="menu-item">
 	            	<a href="/assetmanager/admin/order/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />

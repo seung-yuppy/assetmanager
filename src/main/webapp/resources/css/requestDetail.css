@@ -27,7 +27,7 @@
     border-collapse: separate;
     border-spacing: 0;
     border-top: 2px solid var(--border-white); /* 밝은 경계선 */
-    margin-top: 15px;
+    margin: 15px 0px;
 }
 
 .data-table th, .data-table td {

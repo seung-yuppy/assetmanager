@@ -12,7 +12,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-
 		<div class="main-content">
 			<div class="dashboard-container">
 				<div class="content-wrapper">
@@ -51,37 +50,13 @@
 							</tr>
 						</tbody>
 					</table>
-					<nav class="pagination-container">
-						<ul class="pagination-list">
-							<li class="page-item prev">
-								<a class="page-link" onclick="setBoardParam('page', '이전_페이지_번호')" style="cursor: pointer;"> <span style="font-size: 14px;">&lt;</span>이전</a>
-							</li>
-				
-							<li class="page-item active"><a class="page-link"
-								onclick="setBoardParam('page', 1)" style="cursor: pointer;"> 1
-							</a></li>
-				
-							<li class="page-item">
-								<a class="page-link" onclick="setBoardParam('page', 2)" style="cursor: pointer;"> 2</a>
-							</li>
-				
-							<li class="page-item"><a class="page-link"
-								onclick="setBoardParam('page', 3)" style="cursor: pointer;"> 3
-							</a></li>
-				
-							<li class="page-item next"><a class="page-link"
-								onclick="setBoardParam('page', '다음_페이지_번호')"
-								style="cursor: pointer;"> 다음 <span style="font-size: 14px;">&gt;</span>
-							</a></li>
-						</ul>
-					</nav>
+					<div class="action-buttons">
+						<button class="add-button">자산 등록</button>
+						<button class="cancel-button">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	 -->
-<script src="/assetmanager/resources/js/modal.js"></script>
-
 </body>
 </html>

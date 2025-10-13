@@ -11,4 +11,9 @@ public class AdminItemController {
 	public String itemList() {
 		return "/admin/adminStandardItemList";
 	}
+	
+	@GetMapping("/item/form")
+	public String form() {
+		return "/admin/adminAssetForm";
+	}
 }

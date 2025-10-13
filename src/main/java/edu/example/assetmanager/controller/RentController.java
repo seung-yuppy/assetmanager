@@ -18,9 +18,14 @@ public class RentController {
 		return "/rent/rentList";
 	}
 	
-	@GetMapping("/list/detail")
-	public String listDetail () {
+	@GetMapping("/list/entry")
+	public String listEntry () {
 		return "/rent/assetEntryDetail";
+	}
+	
+	@GetMapping("/detail")
+	public String rentList() {
+		return "/rent/rentDetail";
 	}
 	
 }

@@ -5,7 +5,7 @@
 }
 
 .content-wrapper {
-    max-width: 900px;
+    max-width: 750px;
     margin: 0 auto;
     background-color: #ffffff;
     padding: 2.5rem;
@@ -116,4 +116,9 @@ select.form-input:focus {
 }
 .btn-secondary:hover {
     background-color: #dadddf;
+}
+
+/* 버튼 템플릿 */
+.btn-template-download {
+	width:150px;
 }

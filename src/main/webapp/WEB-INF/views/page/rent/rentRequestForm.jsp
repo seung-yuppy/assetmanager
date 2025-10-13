@@ -46,7 +46,10 @@
 
 					<div class="form-row" style="margin-bottom: 20px;">
 						<div class="radio-group input-method-group">
-							<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')"> <label for="inputMethodForm">폼 직접 입력 </label> <input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> <label for="inputMethodExcel">엑셀 파일 업로드</label>
+							<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')"> 
+							<label for="inputMethodForm">폼 직접 입력 </label> 
+							<input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> 
+							<label for="inputMethodExcel">엑셀 파일 업로드</label>
 						</div>
 					</div>
 
@@ -90,13 +93,13 @@
 						</div>
 					</div>
 
-
 					<div id="excelUploadArea" style="display: none;">
-						<div class="form-group file-upload-group">
-							<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
-							<button type="button" class="btn-template-download" style="margin-bottom: 20px;" onclick="downloadExcelTemplate()">⬇️ 템플릿 다운로드</button>
-							<label for="excelFile">엑셀 파일 선택 <span class="required">*</span></label> <input type="file" id="excelFile" name="excelFile" accept=".xlsx, .xls">
-						</div>
+			
+							<div class="form-group file-upload-group">
+								<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
+								<button type="button" style="margin-bottom: 20px;" onclick="downloadExcelTemplate()">⬇️ 템플릿 다운로드</button>
+								<label for="excelFile">엑셀 파일 선택 <span class="required">*</span></label> <input type="file" id="excelFile" name="excelFile" accept=".xlsx, .xls">
+							</div>
 					</div>
 
 

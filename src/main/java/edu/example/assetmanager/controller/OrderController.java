@@ -27,5 +27,11 @@ public class OrderController {
 	public String detail() {
 		return "/order/orderDetail";
 	}
+	
+	@GetMapping("/form2")
+	public String form2() {
+		return "/order/orderForm2";
+	}
+	
 
 }

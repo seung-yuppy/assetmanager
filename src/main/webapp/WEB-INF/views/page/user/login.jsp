@@ -13,13 +13,12 @@
         <div class="splash-panel">
             <h2>자산 관리 시스템 (AMS)</h2>
             <p>
-		                귀사의 모든 자산을 효율적으로 등록, 추적, 관리할 수 있는 통합 솔루션입니다. 
+            	귀사의 모든 자산을 효율적으로 등록, 추적, 관리할 수 있는 통합 솔루션입니다.
             </p>
             <ul>
                 <li>실시간 자산 현황 모니터링</li>
-                <li>자동 감가상각 및 보고서 생성</li>
-                <li>위치 및 담당자 추적</li>
-                <li>유지보수 일정 관리</li>
+                <li>자산 위치 및 담당자 추적</li>
+                <li>자산 요청 및 등록 관리</li>
             </ul>
         </div>
         
@@ -34,15 +33,15 @@
             </div>
 
             <!-- 로그인 폼 -->
-            <form action="" method="post" class="join-form">
+            <form action="/assetmanager/login" method="post" class="join-form">
                 <div class="form-group">
                     <label for="username">사용자 ID</label>
-                    <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+                    <input type="text" name="empNo" placeholder="사번을 입력하세요" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                    <input type="password" name="password" placeholder="비밀번호를 입력하세요" required>
                 </div>
 
                 <button type="submit" class="main-button">로그인</button>

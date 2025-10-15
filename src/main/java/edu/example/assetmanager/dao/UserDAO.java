@@ -10,4 +10,7 @@ public interface UserDAO {
 
 	// 회원가입
 	public boolean userJoin(@Param("user") UserDTO dto);
+	
+	// 로그인
+	public UserDTO userLogin(@Param("empNo") String empNo);
 }

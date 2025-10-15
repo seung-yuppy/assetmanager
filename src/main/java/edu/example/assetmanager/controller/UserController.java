@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.UserDTO;
+import edu.example.assetmanager.service.UserService;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	UserDAO dao;
+	UserService service;
 
 	@GetMapping("/login")
 	public String s1 () {
@@ -32,9 +32,17 @@ public class UserController {
 	
 	@PostMapping("/join")
 	public String userJoin(@ModelAttribute UserDTO dto) { 
-		if (dao.userJoin(dto))
+		if (service.join(dto))
 			return "redirect:/login";
 		else 
 			return "redirect:/join";
+	}
+	
+	@PostMapping("/login")
+	public String userJoin(String empNo, String password) {
+		if (service.login(empNo, password))
+			return "redirect:/home";
+		else
+			return "redirect:/login";
 	}
 }

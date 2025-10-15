@@ -3,15 +3,21 @@
 <mapper namespace="edu.example.assetmanager.dao.UserDAO">
 	<insert id="userJoin">
 		INSERT INTO "User"
-		(department_id, emp_no, password, username, email, phone, role)
+			(department_id, emp_no, password, username, email, phone, role)
 		VALUES (
-		#{user.departmentId},
-		#{user.empNo},
-		#{user.password},
-		#{user.username},
-		#{user.email},
-		#{user.phone},
-		#{user.role}
+			#{user.departmentId},
+			#{user.empNo},
+			#{user.password},
+			#{user.username},
+			#{user.email},
+			#{user.phone},
+			#{user.role}
 		)
 	</insert>
+	<select id="userLogin">
+		SELECT *
+		FROM "User"
+		WHERE emp_no = #{empNo}
+	</select>
+	
 </mapper>

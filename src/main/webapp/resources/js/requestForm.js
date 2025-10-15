@@ -3,14 +3,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	const priceInput = document.getElementById('price');
 	const quantityInput = document.getElementById('quantity');
 	
-	// 'input' 이벤트: 사용자가 값을 입력할 때마다 즉시 실행
-	priceInput.addEventListener('input', calculateTotalPrice);
-	quantityInput.addEventListener('input', calculateTotalPrice);
-	
 	// radio 버튼 : form 입력 방식으로 초기화
 	showInputForm('form'); 
-	// 페이지 로드 시 초기 계산 한 번 실행
-	calculateTotalPrice();
+	
+	// 총액 자동 계산을 위한 초기화
+	const inputArea = document.getElementById('formInputArea');
+	inputArea.addEventListener('change',function(e){
+		if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number'){
+			calculateTotalPrice(e.target);
+		}
+	})
 	
 	// 업로드 엑셀파일 업로드 시 이벤트 처리
 	document.getElementById('excelFile').addEventListener('change', handleFileSelect, false);
@@ -25,34 +27,17 @@ function updateProductOptions() {
     
     // 이전 입력 필드 및 가격 초기화
     document.getElementById('price').value = 0;
-
 }
 
-//단가와 수량을 계산하여 총액 필드에 값을 업데이트하는 함수
-function calculateTotalPrice() {
-    // 1. 필요한 HTML 요소 가져오기
-    const priceInput = document.getElementById('price');
-    const quantityInput = document.getElementById('quantity');
-    const totalInput = document.getElementById('totalPrice');
 
-    // 2. 입력 값 추출 및 유효성 검사
-    // Number()를 사용하여 문자열 값을 숫자로 변환합니다.
-    const price = Number(priceInput.value.replace(/,/g, '')); // 쉼표 제거 후 숫자로 변환
-    const quantity = Number(quantityInput.value);
-
-    // 값이 유효한 숫자인지, 수량이 0보다 큰지 확인
-    if (isNaN(price) || isNaN(quantity) || quantity < 1 || price < 0) {
-        totalInput.value = 0;
-        return;
-    }
-
-    // 3. 총액 계산 (단가 * 수량)
-    const totalPrice = price * quantity;
-
-    // 4. 총액 필드에 계산 결과 적용
-    // 천 단위 구분 기호를 추가하여 가독성을 높입니다.
-    totalInput.value = totalPrice.toLocaleString('ko-KR'); // 총액 필드가 text 타입이 아닐 경우 (Number)
-    totalInput.value = totalPrice; // 총액 필드가 number 타입이므로 단순 값만 할당
+function calculateTotalPrice(el){
+	console.log("calcul");
+	const row = el.closest('.form-row');
+	const price = row.querySelector('input[name^="price"]').value;
+	const quantity = row.querySelector('input[name^="quantity"]').value;
+	const targetEl = row.querySelector('input[name^="totalPrice"]');
+	
+	targetEl.value = price * quantity;
 }
 
 /**
@@ -154,7 +139,7 @@ function addProduct(){
 									    <option value="직접 입력">
 									</datalist>
 								</div>
-								<div class="form-group fixed-width-sm">
+								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>
 									<input type="number" id="price" name="price-${currentIndex}" value="0" min="0" required>
 								</div>
@@ -163,10 +148,10 @@ function addProduct(){
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<input type="number" id="quantity" name="quantity-${currentIndex}" min="1" value="1" required>
 								</div>
-								<div class="form-group fixed-width-sm">
+								<div class="form-group fixed-width-med">
 									<label for="totalPrice">총액 (원)</label>
 									<div class="last-input-group">
-										<input type="text" id="totalPrice" name="totalPrice-${currentIndex}" value="0" class="price-lock" readonly>
+										<input type="text" id="totalPrice" name="totalPrice-${currentIndex}" value="0" class="locked-input" readonly>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>

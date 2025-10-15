@@ -42,8 +42,7 @@
 								<div class="approver-item">
 		
 									<div class="approver-info">
-										<div class="name-title">
-											강예나 <span class="title">사원</span>
+										<div class="name-title"> 강예나 <span class="title">사원</span>
 										</div>
 										<div class="team">(개발팀)</div>
 									</div>
@@ -131,9 +130,7 @@
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
 									<label for="isDepartmentUse">부서 자산</label>
-									<div>
-										<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse"> 
-									</div>
+									<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse"> 
 								</div>
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
@@ -154,19 +151,18 @@
 									    <option value="직접 입력">
 									</datalist>
 								</div>
-								<div class="form-group fixed-width-sm">
+								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>
 									<input type="number" id="price" name="price" value="0" min="0" required>
 								</div>
-
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<input type="number" id="quantity" name="quantity" min="1" value="1" required>
 								</div>
-								<div class="form-group fixed-width-sm">
+								<div class="form-group fixed-width-med">
 									<label for="totalPrice">총액 (원)</label>
 									<div class="last-input-group">
-										<input type="text" id="totalPrice" name="totalPrice-${currentIndex}" value="0" class="price-lock" readonly>
+										<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>
 								</div>

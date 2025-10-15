@@ -101,8 +101,8 @@ input:focus, select:focus, textarea:focus {
     outline: none;
 }
 
-/* 수정 불가 가격 필드 스타일 */
-.price-lock {
+/* 수정 불가 필드 스타일 */
+.locked-input {
     background-color: #f8f9fa; /* 밝은 회색으로 변경 */
     color: #495057;
     cursor: not-allowed;
@@ -157,6 +157,15 @@ input:focus, select:focus, textarea:focus {
     background-color: #1a3c6e; /* 호버 시 색상 진하게 */
 }
 
+.cancel-action{
+    background-color: var(--red-color);
+    color: white;  
+}
+
+.cancel-action:hover {
+    background-color: var(--red-hover); /* 호버 시 색상 진하게 */
+}
+
 .form-section {
     margin-bottom: 2.5rem;
 }
@@ -209,7 +218,9 @@ input:focus, select:focus, textarea:focus {
 }
 
 #add-product-section{
-	text-align: center;
+	text-align: start;
+	margin-bottom : 10px;
+	
 }
 .form-icon{
 	width : 1.5rem;
@@ -221,7 +232,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .add-product-button {
-    width: 95%;
+    width: 97%;
     padding: 1px 20px;
     margin-top: 0px;
     margin-bottom: 20px;

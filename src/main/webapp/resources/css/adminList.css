@@ -14,7 +14,6 @@
 .data-table th, .data-table td { padding: 14px 15px; text-align: left; border-bottom: 1px solid var(--border-white); font-size: 0.95rem; }
 .data-table thead { background-color: var(--gray-color-light); }
 .data-table th { font-weight: 600; color: #374151; }
-.data-table td:first-child, .data-table th:first-child { text-align: center; }
 .data-table input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
 
 /* 체크박스로 행 선택 시 배경색 변경 */

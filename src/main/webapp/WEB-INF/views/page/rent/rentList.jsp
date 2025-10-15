@@ -50,8 +50,6 @@
 						<thead>
 							<tr>
 								<th>품목명</th>
-								<th>요청 사유</th>
-								<th>수량</th>
 								<th>요청일</th>
 								<th>반납 예정일</th>
 								<th>상태</th>
@@ -60,32 +58,24 @@
 						<tbody>
 							<tr data-id="REQ001">
 								<td>LG 그램 노트북</td>
-								<td>사업상 새 개발용 노트북</td>
-								<td>1</td>
 								<td>2024-07-20</td>
 								<td>2025-12-31</td>
 								<td><span class="status-badge status-pending">대기 중</span></td>
 							</tr>
 							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9">
 								<td><a href="/assetmanager/rent/detail">삼성 갤럭시 탭 S9 외 2개</a></td>
-								<td>잘못된 모델이 배송되어, 교환 요청.</td>
-								<td>1</td>
 								<td>2024-07-19</td>
 								<td>2025-12-31</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 							<tr data-id="REQ006" data-product="애플 워치 시리즈 9">
 								<td>애플 워치 시리즈 9</td>
-								<td>배터리 수명 기대 이하, 교환 요청.</td>
-								<td>1</td>
 								<td>2024-07-15</td>
 								<td>2025-12-31</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
-							<tr data-id="REQ009">
+							<tr data-id="REQ009"> 
 								<td>크롬캐스트 with Google TV</td>
-								<td>회의실 디스플레이용</td>
-								<td>1</td>
 								<td>2024-07-12</td>
 								<td>2025-12-31</td>
 								<td><span class="status-badge status-rejected">거부됨</span></td>

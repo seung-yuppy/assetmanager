@@ -29,16 +29,19 @@
 					<div id="approval-line-container">
 
 						<!-- 첫 번째 : 신청자 -->
-						<div class="approver-item">
-							<div class="approval-type-box">요청자</div>
-							<div class="approver-image-container">
-								<img class="approver-image" src="https://placehold.co/100x100/f6d5de/31343C?text=KYN" alt="강예나">
-								<div class="approval-badge">
-									<div class="approval-badge-icon">
-										<i class="fas fa-check"></i>
-									</div>
+						<fieldset class="approver-container">
+						<legend class="approver-title" align="center">요청자</legend>
+						<div class="approver-image-container">
+							<img class="approver-image" src="https://placehold.co/100x100/f6d5de/31343C?text=KYN" alt="강예나">
+							<div class="approval-badge">
+								<div class="approval-badge-icon">
+									<i class="fas fa-check"></i>
 								</div>
 							</div>
+						</div>
+
+						<div class="approver-item">
+
 							<div class="approver-info">
 								<div class="name-title">
 									강예나 <span class="title">사원</span>
@@ -46,6 +49,7 @@
 								<div class="team">(개발팀)</div>
 							</div>
 						</div>
+						</fieldset>
 
 						<!-- 화살표 -->
 						<div class="arrow-separator">
@@ -53,29 +57,31 @@
 						</div>
 
 						<!-- 중간 결재자(협의) -->
-						<div class="approver-item">
-							<div class="approval-type-box">일반결재</div>
-							<div class="approver-image-container">
-								<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
-								<div class="approval-badge">
-									<div class="approval-badge-icon">
-										<i class="fas fa-check"></i>
-									</div>
+						<fieldset class="approver-container select-info">
+						<legend class="approver-title" align="center">일반결재</legend>
+						<div class="approver-image-container">
+							<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
+							<div class="approval-badge">
+								<div class="approval-badge-icon">
+									<i class="fas fa-check"></i>
 								</div>
 							</div>
+						</div>
+						<div class="approver-item">
 							<div class="approver-info">
-								<div class="name-title">														
-									<select id="category" class="form-input rent-input">									
+								<div class="name-title">
+									<select id="category" class="form-input rent-input">
 										<option>이영호 팀장</option>
 										<option>송승엽 과장</option>
 										<option>김성배 과장</option>
 										<option>홍길동 대리</option>
 										<option>김둘리 대리</option>
-									</select>									
+									</select>
 								</div>
 								<div class="team">(경영팀)</div>
 							</div>
 						</div>
+						</fieldset>
 
 						<!-- 화살표 -->
 						<div class="arrow-separator">
@@ -83,8 +89,8 @@
 						</div>
 
 						<!-- 최종 결재자 -->
-						<div class="approver-item">
-							<div class="approval-type-box">최종결재</div>
+						<fieldset class="approver-container select-info">
+							<legend class="approver-title" align="center">최종결재</legend>
 							<div class="approver-image-container">
 								<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">
 								<div class="approval-badge">
@@ -93,20 +99,21 @@
 									</div>
 								</div>
 							</div>
-							<div class="approver-info">
-								<div class="name-title">						
-									<select id="category" class="form-input rent-input">									
-										<option>신아영 부장</option>
-										<option>송승엽 과장</option>
-										<option>김성배 과장</option>
-										<option>홍길동 대리</option>
-										<option>김둘리 대리</option>
-									</select>								
+							<div class="approver-item">
+								<div class="approver-info">
+									<div class="name-title">
+										<select id="category" class="form-input rent-input">
+											<option>신아영 부장</option>
+											<option>송승엽 과장</option>
+											<option>김성배 과장</option>
+											<option>홍길동 대리</option>
+											<option>김둘리 대리</option>
+										</select>
+									</div>
+									<div class="team">(사업본부)</div>
 								</div>
-								<div class="team">(사업본부)</div>
 							</div>
-						</div>
-
+						</fieldset>
 					</div>
 
 

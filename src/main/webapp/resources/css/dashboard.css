@@ -5,6 +5,10 @@
         	font-size: 20px;
         }
         
+        .dashboard-content {
+        	padding-top: 40px;
+        }
+        
         .dashboard-container h1 {
             font-size: 30px;
             font-weight: 700;
@@ -188,12 +192,6 @@
             flex-shrink: 0;
         }
         
-        .button-container {
-        	display: flex;
-        	justify-content: flex-end;
-        	margin-bottom: 10px;
-        }    
-
         /* 모바일 반응형 디자인 */
         @media (max-width: 768px) {
             body {

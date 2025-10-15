@@ -25,8 +25,13 @@ public class UserController {
 		return "user/join";
 	}
 	
+	@GetMapping("/mypage")
+	public String s4() {
+		return "user/myPage";
+	}
+	
 	@PostMapping("/join")
-	public String s3(@ModelAttribute UserDTO dto) { 
+	public String userJoin(@ModelAttribute UserDTO dto) { 
 		if (dao.userJoin(dto))
 			return "redirect:/login";
 		else 

@@ -6,7 +6,11 @@
 
 /* 공통 */
 .dashboard-container { width: 100%; }
-.dashboard-container h1 { font-size: 1.8rem; font-weight: 700; margin: 0 0 5px 0; }
+.dashboard-container h1 {     
+	font-size: 30px;
+    font-weight: 700; 
+    margin: 0 0 5px 0;
+}
 .section-card { background-color: var(--white-color); padding: 24px; border-radius: 12px; box-shadow: var(--card-shadow); margin-top: 25px; }
 
 /* 데이터 테이블 및 체크박스 */

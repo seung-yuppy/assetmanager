@@ -213,6 +213,58 @@
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.user-info {
+	display: flex;
+	justify-content: space-around;
+}
+
+.image-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.image-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.info-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 100px;
+}
+
+.my-profile-image {
+	width: 200px;
+	border-radius: 10px;
+}
+
+.info-list {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.list-title {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.list-content {
+	margin: 0;
+	padding: 0;
+	color: var(--gray-color);
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
 /* 5. 모바일 반응형 처리 */
 @media (max-width: 768px) {
 	body {

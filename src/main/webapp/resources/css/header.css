@@ -3,14 +3,13 @@
 .header {
 	display: flex;
 	justify-content: flex-end;
-	padding: 10px 0; 
 	background-color: transparent;
 }
 
 .header-list {
 	display: flex;
 	align-items: center;
-	gap: 15px;
+	gap: 23px;
 }
 
 .header-profile-image {

@@ -44,7 +44,8 @@ body {
 
 .main-content {
 	width: 100vw;
-	padding: 0 40px; /* 메인 콘텐츠 패딩 */
+	padding-inline: 40px; /* 메인 콘텐츠 패딩 */
+	padding-bottom: 40px;
 }
 
 /* 버튼 컴포넌트 */

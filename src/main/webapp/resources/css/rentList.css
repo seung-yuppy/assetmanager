@@ -11,9 +11,9 @@
 }
 
 .dashboard-container h1 {
-    font-size: 1.8rem;
+    font-size: 30px;
     font-weight: 700;
-    /* margin: 0 0 5px 0; */
+    margin: 0 0 5px 0;
 }
 
 .dashboard-container span {
@@ -173,3 +173,9 @@
 .search-card {
 	margin-bottom: 20px;
 }
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}    

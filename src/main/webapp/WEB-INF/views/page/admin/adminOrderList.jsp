@@ -45,7 +45,6 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th></th>
 								<th>요청자</th>
 								<th>사번</th>
 								<th>요청 내용</th>
@@ -56,7 +55,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input type="checkbox" class="row-checkbox"></td>
 								<td>김성배</td>
 								<td>20250127</td>
 								<td><a href="/assetmanager/admin/order/detail">Latitude 7420 노트북 등 2개</a></td>
@@ -65,7 +63,6 @@
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>
 							<tr>
-								<td><input type="checkbox" class="row-checkbox"></td>
 								<td>강예나</td>
 								<td>20250127</td>
 								<td>LG Gram 노트북 외 3개</td>
@@ -75,7 +72,6 @@
 							</tr>
 
 							<tr>
-								<td><input type="checkbox" class="row-checkbox"></td>
 								<td>임꺽정</td>
 								<td>20250127</td>
 								<td>Latitude 7420 노트북</td>
@@ -109,10 +105,6 @@
 							</a></li>
 						</ul>
 					</nav>
-					<div class="action-buttons">
-						<button id="rejectBtn" class="btn btn-reject" disabled>거부</button>
-						<button id="approveBtn" class="btn btn-approve" disabled>승인</button>
-					</div>
 				</div>
 			</div>
 		</div>

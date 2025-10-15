@@ -22,22 +22,19 @@
 
 				<div class="section-card">
 					<div class="search-card">
-						<div class="header-controls">
-							<div class="filter-controls">
-								<div class="status-filter">
-									<label for="statusFilter">상태:</label> <select id="statusFilter">
-										<option value="all">전체</option>
-										<option value="pending">대기 중</option>
-										<option value="approved">승인됨</option>
-										<option value="rejected">거부됨</option>
-									</select>
-								</div>
-								<div class="search-box">
-									<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
-									<button>
-										<img src="/assetmanager/resources/image/icon_search.svg" alt="검색">
-									</button>
-								</div>
+						<div class="filter-controls">
+							<div class="status-filter">
+								<label for="statusFilter">카테고리:</label>
+								<select id="statusFilter">
+									<option value="all">전체</option>
+									<option value="laptop">노트북</option>
+									<option value="monitor">모니터</option>
+									<option value="keyboard">키보드</option>
+								</select>
+							</div>
+							<div class="search-box">
+								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
+								<button><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
 							</div>
 						</div>
 					</div>
@@ -113,10 +110,10 @@
 							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
 						</ul>
 					</nav>
-					<div class="action-buttons">
+<!-- 					<div class="action-buttons">
 						<button id="rejectBtn" class="btn btn-reject" disabled>거부</button>
 						<button id="approveBtn" class="btn btn-approve" disabled>승인</button>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -10,7 +10,7 @@
 <body>
 <div class="app-layout">
 	<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-	<div class="main-content">
+	<div class="main-content dashboard-content">
 		<div class="dashboard-container">
 			<div class="home-head">
 				<span>개발팀</span>
@@ -38,7 +38,7 @@
                 </div>
 				<div class="metric-card border-red">
 					<div class="card-header">
-                		<p class="card-title">반납 / 불용</p>
+                		<p class="card-title">불용</p>
                 		<div class="card-logo-box back-red">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
                 		</div>

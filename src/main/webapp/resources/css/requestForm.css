@@ -6,6 +6,13 @@
     margin: 0 0 5px 0;
 }
 
+.form-section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
 .section-card {
     background-color: var(--white-color);
     padding: 24px;
@@ -32,18 +39,26 @@
     flex-grow: 1; /* 기본적으로 공간 균등 분배 */
 }
 
-/* --- 커스텀 크기 클래스 정의 --- */
-
-/* 좁은 고정 너비 필드 (카테고리, 가격, 수량) */
-.fixed-width-sm {
-    flex-basis: 150px; /* 고정 크기 */
-    flex-grow: 0; /* 확장 금지 */
-    flex-shrink: 0; /* 축소 금지 */
+/* --- input 크기--- */
+.inputArea {
+    margin-left: 1.5rem;
+    width: 65rem;
 }
 
-/* 넓게 확장되는 필드 (제품명) */
-.flex-grow-lg {
-    flex-grow: 2; /* 남은 공간을 더 많이 차지하도록 설정 */
+#excelUploadArea{
+	display: none;
+}
+
+.fixed-width-sm {
+	flex : 1;
+}
+
+.fixed-width-med {
+    flex : 2;
+}
+
+.fixed-width-lg {
+    flex : 3;
 }
 
 /* 제품 직접 입력 필드 (보일 때) */
@@ -55,10 +70,10 @@
 /* 폼 그룹 레이블 */
 .form-group label {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: #343a40;
-    margin-bottom:3px;
+    margin-bottom:4px;
 }
 
 /* 입력 필드 (text, number, select, textarea 공통) */
@@ -76,6 +91,10 @@ textarea {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.section-card textarea{
+	resize: none;
+}
+
 input:focus, select:focus, textarea:focus {
     border-color: #1c4587;
     box-shadow: 0 0 0 3px rgba(28, 69, 135, 0.2);
@@ -91,20 +110,15 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* 체크박스 그룹 */
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-top: 15px;
-}
-.checkbox-group input[type="checkbox"] {
+.form-group input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    margin: 0;
+    margin: 0.5rem 0 0 1.5rem;
     accent-color: #1c4587; /* 체크 색상 브랜드 색상으로 변경 */
+    transform: scale(1.2);
 }
 .checkbox-group .description {
-    font-size: 13px;
+    font-size: 14px;
     color: #6c757d;
     margin: 0;
     padding-left: 10px;
@@ -184,12 +198,6 @@ input:focus, select:focus, textarea:focus {
     margin-bottom: 2.5rem;
 }
 
-.form-section-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 1rem;
-}
 
 .radio-input-group{
 	display: flex;
@@ -199,4 +207,175 @@ input:focus, select:focus, textarea:focus {
 
 .radio-input{
 	display: flex;
+}
+
+#add-product-section{
+	text-align: center;
+}
+.form-icon{
+	width : 1.5rem;
+}
+
+.last-input-group{
+	display: flex; 
+	gap: 1rem;
+}
+
+.add-product-button {
+    width: 95%;
+    padding: 1px 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    color: #444444;
+    font-size: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* 마우스 오버(hover) 시 효과 */
+.add-product-button:hover {
+    background-color: #eeeeee; /* 배경을 살짝 더 어둡게 */
+    border-color: #aaaaaa;     /* 테두리를 살짝 더 진하게 */
+}
+
+/* 버튼을 클릭했을 때의 효과 */
+.add-product-button:active {
+    background-color: #dddddd; /* 더 어둡게 눌리는 느낌 */
+    transform: translateY(1px); /* 살짝 눌리는 애니메이션 */
+}
+
+/* 결재라인 */
+.approver-container{
+	display:flex;
+	align-items: center;
+	padding: 30px;
+	border-radius:6px;
+	border: 0;
+	background-color: var(--gray-color-light);
+	box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.15);
+}
+
+.approver-title {
+	background-color: var(--primary-color); /* bg-slate-600 */
+	color: #ffffff;
+	font-size: 16px; /* text-sm */
+	font-weight: 600; /* font-semibold */
+	padding: 6px 20px; /* py-1.5 px-5 */
+	border-radius: 6px; /* rounded-md */
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
+}
+
+#approval-line-container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 24px; /* space-x-6 */
+	padding: 32px; /* p-8 */
+	
+}
+
+.approver-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center; 
+	width: 144px; /* w-36 */
+}
+
+.approver-image-container {
+	position: relative;
+	width: 96px; /* w-24 */
+	height: 96px; /* h-24 */
+	margin-bottom: 12px; /* mb-3 */
+}
+
+.approver-image {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%; /* rounded-full */
+	border: 2px solid #d1d5db; /* border-2 border-gray-300 */
+	object-fit: cover;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px
+		rgba(0, 0, 0, 0.06); /* shadow-md */
+}
+
+.approval-badge {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(25%, -25%);
+}
+
+.approval-badge-icon {
+	width: 28px; /* w-7 */
+	height: 28px; /* h-7 */
+	background-color: #3b82f6; /* bg-blue-500 */
+	border-radius: 50%; /* rounded-full */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #ffffff;
+	color: #ffffff;
+	font-size: 14px; /* text-sm */
+}
+
+.approver-info {
+	min-height: 60px;
+}
+
+.select-info {
+	gap:10px;
+}
+
+.approver-info .name-title {
+	font-size:18px;
+	color: #1f2937; /* text-gray-800 */
+}
+
+.approver-info .title {
+	font-weight: 400; /* font-normal */
+	color: #4b5563; /* text-gray-600 */
+}
+
+.approver-info .team {
+	font-size: 15px; /* text-xs */
+	color: #6b7280; /* text-gray-500 */
+}
+
+.arrow-separator {
+	align-self: center;
+	color: #d1d5db; /* text-gray-300 */
+	font-size: 24px; /* text-2xl */
+}
+
+/* 데이터 표시 영역 내의 테이블 스타일 */
+.excel-data-preview {
+    width: 100%;
+    border-collapse: collapse; /* 테두리 병합 */
+    margin-top: 10px;
+}
+
+/* 테이블 헤더 스타일 */
+.excel-data-preview th {
+    background-color: #f2f2f2;
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* 테이블 데이터 셀 스타일 */
+.excel-data-preview td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* 짝수 행 배경색 변경 (가독성 향상) */
+.excel-data-preview tr:first-child {
+    background-color: #f9f9f9;
 }

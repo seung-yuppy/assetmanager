@@ -30,7 +30,7 @@ public class OrderController {
 	
 	@GetMapping("/form2")
 	public String form2() {
-		return "/order/orderForm2";
+		return "/order/requestForm";
 	}
 	
 

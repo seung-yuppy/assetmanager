@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/order")
 @Controller
 public class OrderController {
-	
 	@GetMapping("/list")
 	public String index () {
 		return "/order/orderList";
@@ -27,11 +26,4 @@ public class OrderController {
 	public String detail() {
 		return "/order/orderDetail";
 	}
-	
-	@GetMapping("/form2")
-	public String form2() {
-		return "/order/requestForm";
-	}
-	
-
 }

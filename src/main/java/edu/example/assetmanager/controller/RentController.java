@@ -28,4 +28,9 @@ public class RentController {
 		return "/rent/rentDetail";
 	}
 	
+	@GetMapping("/form2")
+	public String requestForm2() {
+		return "/rent/rentForm2";
+	}
+	
 }

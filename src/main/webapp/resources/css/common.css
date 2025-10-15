@@ -10,7 +10,6 @@
 	--red-hover: #dc2626;
 	--border-white: #e5e7eb;
 	--dark-color: #18181b;
-	--green-color: green; 
     --gray-color: gray; 
     --gray-color-light: #f4f4f5;
     --green-color: #10b981;
@@ -24,6 +23,10 @@
 
 a {
 	text-decoration: none;
+}
+
+li {
+	list-style-type: none;
 }
 
 /* 전체 body 스타일  */
@@ -41,7 +44,7 @@ body {
 
 .main-content {
 	width: 100vw;
-	padding: 40px; /* 메인 콘텐츠 패딩 */
+	padding: 0 40px; /* 메인 콘텐츠 패딩 */
 }
 
 /* 버튼 컴포넌트 */

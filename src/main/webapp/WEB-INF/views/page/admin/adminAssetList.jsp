@@ -13,6 +13,7 @@
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1>자산 전체  목록</h1>
 				<span>모든 자산의 목록을 확인하고 관리합니다.</span>
@@ -43,19 +44,17 @@
 								<th>일련번호</th>
 								<th>등록일자</th>
 								<th>분류</th>
-								<th>상태</th>
-								<th>상세정보</th>							
+								<th>상태</th>						
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>LG 그램 노트북</td>
+								<td><a href="/assetmanager/admin/asset/detail">LG 그램 노트북</a></td>
 								<td>노트북</td>
 		                        <td>SRV987654321</td>
 		                        <td>2022-11-01</td>
 		                        <td><span class="status-badge status-approved">개인</span></td>
 								<td><span class="status-badge status-used">사용중</span></td>
-								<td><a href="/assetmanager/admin/asset/detail" class="detail-button">상세</a></td>
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -64,7 +63,6 @@
 	                            <td>2022-11-01</td>
 	                            <td><span class="status-badge status-approved">부서</span></td>
 								<td><span class="status-badge status-waited">대기중</span></td>
-								<td><a href="/assetmanager/admin/asset/detail" class="detail-button">상세</a></td>
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -73,7 +71,6 @@
 	                            <td>2022-11-01</td>
 	                            <td><span class="status-badge status-approved">개인</span></td>
 								<td><span class="status-badge status-rejected">불용</span></td>
-								<td><a href="/assetmanager/admin/asset/detail" class="detail-button">상세</a></td>
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -82,7 +79,6 @@
 	                            <td>2022-11-01</td>
 	                            <td><span class="status-badge status-approved">부서</span></td>
 								<td><span class="status-badge status-used">사용중</span></td>
-								<td><a href="/assetmanager/admin/asset/detail" class="detail-button">상세</a></td>
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -91,7 +87,6 @@
 	                            <td>2022-11-01</td>
 	                            <td><span class="status-badge status-approved">개인</span></td>
 								<td><span class="status-badge status-used">사용중</span></td>
-								<td><a href="/assetmanager/admin/asset/detail" class="detail-button">상세</a></td>
 							</tr>
 						</tbody>
 					</table>

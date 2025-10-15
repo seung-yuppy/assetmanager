@@ -14,6 +14,7 @@
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1>LG그램 노트북 상세</h1>
 				<div class="detail-header">
@@ -122,7 +123,7 @@
 		        </div>
 		        <!-- 자산 히스토리 끝 -->		
 		        
-		        				<div class="button-container">
+		        <div class="button-container">
 					<button class="cancel-button">불용</button>
 				</div>		
 			</div>

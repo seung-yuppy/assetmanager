@@ -188,10 +188,6 @@
             flex-shrink: 0;
         }
         
-        .search-card {
-        	margin-bottom: 20px;
-        }
-        
         .button-container {
         	display: flex;
         	justify-content: flex-end;

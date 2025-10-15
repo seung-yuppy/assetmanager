@@ -18,6 +18,7 @@
 
 		<!-- 반출 요청 폼 -->
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="content-wrapper">
 				<h1 class="content-title">반출 신청</h1>
 				<p class="content-description">새로운 반출 요청을 생성하려면 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</p>

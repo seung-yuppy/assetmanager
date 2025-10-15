@@ -15,6 +15,7 @@
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<div class="content-wrapper">
 						<h1 class="content-title">구매 신청서</h1>

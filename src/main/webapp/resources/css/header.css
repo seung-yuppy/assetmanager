@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.header {
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px 0; 
+	background-color: transparent;
+}
+
+.header-list {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.header-profile-image {
+    width: 35px;
+    height: 35px;
+	border-radius: 50%;
+}
+
+.header-bell {
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+}
+
+.header-item-profile {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}

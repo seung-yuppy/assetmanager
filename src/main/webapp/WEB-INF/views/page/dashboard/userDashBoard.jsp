@@ -36,15 +36,6 @@
                 	</div>                    
                     <p class="card-value">3</p>
                 </div>
-                <div class="metric-card border-gray">
-					<div class="card-header">
-                		<p class="card-title">수리 중</p>  
-                		<div class="card-logo-box back-gray">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
-                		</div>
-                	</div>    
-                    <p class="card-value">1</p>
-                </div>
 				<div class="metric-card border-red">
 					<div class="card-header">
                 		<p class="card-title">반납 / 불용</p>
@@ -124,7 +115,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-05-01</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-waited">수리중</span></td>
+	                        <td><span class="status-badge status-rejected">반납됨</span></td>
 	                    </tr>
 	                </tbody>
 	            </table>

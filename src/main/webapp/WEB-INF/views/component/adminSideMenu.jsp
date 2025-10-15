@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Admin Side Menu</title>
+	<title>관리자 Side Menu</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/sideMenu.css" rel="stylesheet"> 	
 </head>
@@ -19,6 +19,12 @@
                     <a href="/assetmanager/admin/home">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dashboard.svg" />
                         <span>대시보드</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/assetmanager/admin/user/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_user.svg" />
+                        <span>사용자</span>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -45,20 +51,6 @@
                         <span>반출</span>
 		            </a>          
 	            </li>
-                <li class="menu-list-separator"></li>
-                <li class="menu-item">
-                    <a href="#">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_setting.svg" />
-                        <span>설정</span>
-                    </a>
-                </li>
-				<li class="menu-item">
-                    <a href="/assetmanager/login">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_logout.svg" />
-                        <span>로그아웃</span>
-                    </a>
-                </li>
-
             </ul>
         </nav>
 </body>

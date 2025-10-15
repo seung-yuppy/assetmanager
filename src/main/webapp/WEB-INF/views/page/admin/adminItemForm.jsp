@@ -15,6 +15,7 @@
 		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<div class="content-wrapper">
 						<h1 class="content-title">권장 제품 추가</h1>

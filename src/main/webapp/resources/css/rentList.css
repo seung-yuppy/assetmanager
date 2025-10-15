@@ -17,7 +17,7 @@
 }
 
 .dashboard-container span {
-    font-size: 1rem;
+    /* font-size: 1rem; */
     color: var(--gray-color);
 }
 
@@ -168,4 +168,8 @@
 
 .page-item:not(.active) .page-link:hover {
     background-color: var(--gray-color-light);
+}
+
+.search-card {
+	margin-bottom: 20px;
 }

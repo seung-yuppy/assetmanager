@@ -13,6 +13,7 @@
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1>내 자산 전체  목록</h1>
 				<span>나의 모든 자산 목록을 확인하고 관리합니다.</span>

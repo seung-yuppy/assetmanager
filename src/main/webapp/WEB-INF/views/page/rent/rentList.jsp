@@ -21,6 +21,7 @@
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1>반출 요청 목록</h1>
 				<span>현재 처리 중인 모든 반출 요청의 목록을 확인하고 관리합니다.</span>

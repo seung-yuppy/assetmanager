@@ -18,6 +18,7 @@
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 
 		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="content-wrapper">
 				<h1 class="content-title">자산 등록</h1>
 				<p class="content-description">자산 등록을 위한 세부 내용을 등록합니다.</p>

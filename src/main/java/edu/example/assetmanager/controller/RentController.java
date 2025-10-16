@@ -10,7 +10,7 @@ public class RentController {
 	
 	@GetMapping("/form")
 	public String requestForm() {
-		return "/rent/rentRequestForm";
+		return "/rent/rentForm"; 
 	}
 	
 	@GetMapping("/list")
@@ -25,7 +25,7 @@ public class RentController {
 	
 	@GetMapping("/detail")
 	public String rentList() {
-		return "/rent/rentDetail";
+		return "/rent/rentListDetail";
 	}
 	
 	@GetMapping("/form2")

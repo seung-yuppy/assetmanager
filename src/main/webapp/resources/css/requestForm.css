@@ -34,9 +34,22 @@
     margin-bottom: 20px;
 }
 
+.form-footer {
+	display:flex;
+	justify-content: space-between;
+}
+
+
 /* 필드 그룹 공통 */
 .form-group {
     flex-grow: 1; /* 기본적으로 공간 균등 분배 */
+}
+
+.form-date {
+	display:flex;
+	width:300px;
+	flex-direction: column;
+    gap: 10px;
 }
 
 /* --- input 크기--- */
@@ -69,6 +82,22 @@
 
 /* 폼 그룹 레이블 */
 .form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom:4px;
+}
+
+.form-reason label {
+	display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom:4px;
+}
+
+.form-date label {
     display: block;
     font-size: 16px;
     font-weight: 600;

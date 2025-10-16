@@ -116,8 +116,20 @@
 }
 
 .status-banner {
-            background-color: #FEE2E2;
+			background-color: var(--red-light);
+			color: var(--red-color);
             border-left: 4px solid var(--red-color);
+            padding: 16px; /* p-4 */
+            margin-bottom: 32px; /* mb-8 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            display: flex;
+            align-items: center;
+}
+.status-banner-approved {
+			background-color: var(--green-light);
+			color: var(--green-color);
+            border-left: 4px solid var(--green-color);
             padding: 16px; /* p-4 */
             margin-bottom: 32px; /* mb-8 */
             border-radius: 8px; /* rounded-lg */
@@ -133,10 +145,16 @@
     margin-right: 12px; /* mr-3 */
 }
 
-.status-banner p {
+.status-banner-approved svg {
+    height: 24px;
+    width: 24px;
+    color: var(--green-color);
+    margin-right: 12px; /* mr-3 */
+}
+
+.status-banner p, .status-banner-approved p  {
     font-weight: bold;
     font-size: 1.125rem; /* text-lg */
-    color: var(--red-color);
 }
 
 /* ----------------------------------- */
@@ -158,6 +176,7 @@
     display: flex;
     align-items: center;
 }
+
 .rejection-box-header svg {
     width: 24px; height: 24px;
     margin-right: 8px;

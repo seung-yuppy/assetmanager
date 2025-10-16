@@ -70,7 +70,7 @@
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" id="quantity" name="quantity" min="1" value="1" required>
+										<input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>
 								</div>

@@ -58,7 +58,7 @@ function addProduct(){
 
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
-									<input type="number" id="quantity" name="quantity-${currentIndex}" min="1" value="1" required>
+									<input type="number" id="quantity" name="quantity-${currentIndex}" min="1" max="10" value="1" required>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="totalPrice">총액 (원)</label>

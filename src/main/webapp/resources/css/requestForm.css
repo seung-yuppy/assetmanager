@@ -74,6 +74,10 @@
     flex : 3;
 }
 
+.fixed-width-xl {
+	flex: 4;
+}
+
 /* 제품 직접 입력 필드 (보일 때) */
 .product-input-group {
     display: flex;

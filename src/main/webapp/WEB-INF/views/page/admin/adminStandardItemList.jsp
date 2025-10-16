@@ -45,34 +45,60 @@
 							<tr>
 								<th>제품명</th>
 								<th>카테고리</th>
+								<th>스펙</th>
 								<th>가격</th>
-								<th>제조사</th>						
+								<th>제조사</th>
+								<th>거래처</th>					
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>LG 그램</td>
 								<td>노트북</td>
+								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
 	                            <td>₩ 900,000</td>
 	                            <td>LG</td>
+	                            <td>업체명1</td>
 							</tr>
 							<tr>
 								<td>삼성 갤럭시북</td>
 								<td>노트북</td>
+								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
 	                            <td>₩ 1,000,000</td>
 	                            <td>삼성</td>
+	                            <td>업체명2</td>
 							</tr>
 							<tr>
 								<td>LG 그램</td>
 								<td>노트북</td>
+								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
 	                            <td>₩ 900,000</td>
 	                            <td>LG</td>
+	                            <td>업체명1</td>
 							</tr>
 							<tr>
 								<td>삼성 갤럭시북</td>
 								<td>노트북</td>
+								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
 	                            <td>₩ 1,000,000</td>
 	                            <td>삼성</td>
+	                            <td>업체명2</td>
+							</tr>
+							<tr>
+								<td>LG 그램</td>
+								<td>노트북</td>
+								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
+	                            <td>₩ 900,000</td>
+	                            <td>LG</td>
+	                            <td>업체명1</td>
+							</tr>
+							<tr>
+								<td>삼성 갤럭시북</td>
+								<td>노트북</td>
+								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
+	                            <td>₩ 1,000,000</td>
+	                            <td>삼성</td>
+	                            <td>업체명2</td>
 							</tr>
 						</tbody>
 					</table>

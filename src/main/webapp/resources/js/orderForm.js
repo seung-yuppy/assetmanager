@@ -15,6 +15,7 @@ function calculateTotalPrice(el){
 	targetEl.value = price * quantity;
 }
 
+let productRowIndex  = 0;
 //구매 요청할 제품 추가하는 함수 
 function addProduct(){
 	if (!checkProductCnt()){

@@ -25,7 +25,7 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 24px; /* space-x-6 */
-	padding: 32px; /* p-8 */
+	padding: 20px; /* p-8 */
 	
 }
 
@@ -73,6 +73,18 @@
 	color: #ffffff;
 	font-size: 14px; /* text-sm */
 }
+.reject-badge-icon {
+	width: 28px; /* w-7 */
+	height: 28px; /* h-7 */
+	background-color: var(--red-color);
+	border-radius: 50%; /* rounded-full */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #ffffff;
+	color: #ffffff;
+	font-size: 14px; /* text-sm */
+}
 
 .approver-info {
 	min-height: 60px;
@@ -102,3 +114,82 @@
 	color: #d1d5db; /* text-gray-300 */
 	font-size: 24px; /* text-2xl */
 }
+
+.status-banner {
+            background-color: #FEE2E2;
+            border-left: 4px solid var(--red-color);
+            padding: 16px; /* p-4 */
+            margin-bottom: 32px; /* mb-8 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            display: flex;
+            align-items: center;
+}
+
+.status-banner svg {
+    height: 24px;
+    width: 24px;
+    color: var(--red-color);
+    margin-right: 12px; /* mr-3 */
+}
+
+.status-banner p {
+    font-weight: bold;
+    font-size: 1.125rem; /* text-lg */
+    color: var(--red-color);
+}
+
+/* ----------------------------------- */
+/* 5. 상세 반려 사유 영역 */
+/* ----------------------------------- */
+.rejection-box-area {
+    margin-top: 0px;
+    max-width: 1024px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rejection-box-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--red-color);
+    margin-bottom: 12px;
+    maring-top: 0px;
+    display: flex;
+    align-items: center;
+}
+.rejection-box-header svg {
+    width: 24px; height: 24px;
+    margin-right: 8px;
+}
+
+.rejection-box-content {
+    padding: 16px; /* p-4 */
+    background-color: #FEE2E2;
+    border-left: 4px solid var(--red-color);
+    border-radius: 0 8px 8px 0; /* rounded-r-lg */
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.rejection-box-content .meta {
+    color: var(--gray-800);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.rejection-detail {
+    background-color: #FEE2E2;
+    padding: 12px;
+}
+
+.rejection-detail p {
+    color: var(--dark-color);
+    line-height: 1.625; /* leading-relaxed */
+}
+
+.rejection-date-info {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--gray-color);
+    margin-top: 12px;
+}
+

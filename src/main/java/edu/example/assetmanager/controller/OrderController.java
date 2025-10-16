@@ -23,7 +23,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail() {
+	public String detail(String status) {
 		return "/order/orderDetail";
 	}
 }

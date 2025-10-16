@@ -13,10 +13,10 @@
 	<h2 class="form-section-title">결재 정보</h2>
 	<!-- 결재라인 전체 컨테이너 -->
 	<div id="approval-line-container">
-
+		        <!-- 전체 결재 상태 표시 -->
 		<!-- 첫 번째 : 신청자 -->
 		<fieldset class="approver-container">
-			<legend class="approver-title" align="center">요청자</legend>
+			<legend class="approver-title" align="center">요청</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/f6d5de/31343C?text=KYN" alt="강예나">
 				<div class="approval-badge">
@@ -27,7 +27,6 @@
 			</div>
 
 			<div class="approver-item">
-
 				<div class="approver-info">
 					<div class="name-title">
 						강예나 <span class="title">사원</span>
@@ -44,7 +43,7 @@
 
 		<!-- 중간 결재자(협의) -->
 		<fieldset class="approver-container select-info">
-			<legend class="approver-title" align="center">일반결재</legend>
+			<legend class="approver-title" align="center">결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
 				<div class="approval-badge">
@@ -55,15 +54,7 @@
 			</div>
 			<div class="approver-item">
 				<div class="approver-info">
-					<div class="name-title">
-						<select id="category" class="form-input rent-input">
-							<option>이영호 팀장</option>
-							<option>송승엽 과장</option>
-							<option>김성배 과장</option>
-							<option>홍길동 대리</option>
-							<option>김둘리 대리</option>
-						</select>
-					</div>
+					<div class="name-title"> 이영호 <span class="title">팀장</span></div>
 					<div class="team">(경영팀)</div>
 				</div>
 			</div>
@@ -76,26 +67,18 @@
 
 		<!-- 최종 결재자 -->
 		<fieldset class="approver-container select-info">
-			<legend class="approver-title" align="center">최종결재</legend>
+			<legend class="approver-title" align="center">결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">
 				<div class="approval-badge">
-					<div class="approval-badge-icon">
-						<i class="fas fa-check"></i>
+					<div class="reject-badge-icon">
+						<i class="fas fa-times"></i>
 					</div>
 				</div>
 			</div>
 			<div class="approver-item">
 				<div class="approver-info">
-					<div class="name-title">
-						<select id="category" class="form-input rent-input">
-							<option>신아영 부장</option>
-							<option>송승엽 과장</option>
-							<option>김성배 과장</option>
-							<option>홍길동 대리</option>
-							<option>김둘리 대리</option>
-						</select>
-					</div>
+					<div class="name-title"> 신아영 <span class="title">부장</span></div>
 					<div class="team">(사업본부)</div>
 				</div>
 			</div>

@@ -24,10 +24,25 @@ public class UserService {
 	
 	// 회원가입 처리
 	public boolean join(UserDTO dto) {
+		if (!dto.getPassword().equals(dto.getPasswordCheck()))
+            return false;
+		
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
 		
-		if (dao.userJoin(dto))
+		if (dao.userJoin(dto)) {
+			if (dao.checkEmpno(dto.getEmpNo()) == 0)
+				return true;
+			else
+				return false;
+		} else {
+			return false;
+		}
+	}
+	
+	// 사번 중복 체크
+	public boolean isDupEmpno(String empNo) {
+		if (dao.checkEmpno(empNo) == 0)
 			return true;
 		else
 			return false;

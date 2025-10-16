@@ -36,14 +36,22 @@
             <form action="/assetmanager/join" method="post" class="join-form">
                 <div class="form-group">
                     <label for="empno">사번</label>
-                    <input type="text" name="empNo" placeholder="사번" required>
+                    <div class="form-empno">
+                    	<input type="text" name="empNo" placeholder="사번" required>
+                    	<button type="button" class="dupcheck-button disabled" id="dupcheck-button" disabled>사번 중복확인</button>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
                     <input type="password" name="password" placeholder="비밀번호" required>
                 </div>
-
+                
+                <div class="form-group">
+                    <label for="password">비밀번호 확인</label>
+                    <input type="password" name="passwordCheck" placeholder="비밀번호 확인" required>
+                </div>
+                
                 <div class="form-group">
                     <label for="email">이메일</label>
                     <input type="email" name="email" placeholder="user@example.com" required>
@@ -89,6 +97,8 @@
             </div>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="resources/js/user.js"></script>
 </body>
 </html>

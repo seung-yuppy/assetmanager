@@ -19,5 +19,9 @@
 		FROM "User"
 		WHERE emp_no = #{empNo}
 	</select>
-	
+	<select id="checkEmpno">
+		SELECT COUNT(*)
+		FROM "User"
+		WHERE emp_no = #{empNo}
+	</select>
 </mapper>

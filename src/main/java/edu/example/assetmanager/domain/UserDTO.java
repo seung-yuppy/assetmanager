@@ -14,6 +14,7 @@ public class UserDTO {
 	private int departmentId;
 	private String empNo;
 	private String password;
+	private String passwordCheck;
 	private String username;
 	private String email;
 	private String phone; 

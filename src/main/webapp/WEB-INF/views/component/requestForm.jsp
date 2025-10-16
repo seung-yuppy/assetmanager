@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>직원 구매요청 목록</title>
+<title>요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
@@ -18,8 +18,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1 class="content-title">구매 신청서</h1>
-				<span>구매 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
+				<h1 class="content-title">요청 신청서</h1>
+				<span>요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
 					<form action="#" method="post">
 						<div class="form-section">
@@ -69,7 +69,10 @@
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
-									<input type="number" id="quantity" name="quantity" min="1" value="1" required>
+									<div class="last-input-group">
+										<input type="number" id="quantity" name="quantity" min="1" value="1" required>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
+									</div>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="totalPrice">총액 (원)</label>
@@ -84,7 +87,7 @@
 							</div>
 							
 							<div class="form-group">
-								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
+								<label for="reason">요청 사유 <span class="required">*</span></label>
 								<textarea id="reason" name="reason" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
 								<div class="char-count-display text-align-right">
 									(<span id="currentLength">0</span> / 200)
@@ -111,6 +114,5 @@
 	</div>
 	<script src="/assetmanager/resources/js/modal.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
-	<script src="/assetmanager/resources/js/orderForm.js"></script>
 </body>
 </html>

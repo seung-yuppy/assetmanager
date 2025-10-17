@@ -49,8 +49,6 @@
 
             <!-- 추가 링크 (비밀번호 찾기, 회원가입 등) -->
             <div class="extra-links">
-                <a href="#">비밀번호 찾기</a>
-                <span class="divider">|</span>
                 <a href="/assetmanager/join" onclick="transitionPage(event, this)">계정 생성</a>
             </div>
         </div>

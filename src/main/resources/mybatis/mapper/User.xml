@@ -3,7 +3,7 @@
 <mapper namespace="edu.example.assetmanager.dao.UserDAO">
 	<insert id="userJoin">
 		INSERT INTO "User"
-			(department_id, emp_no, password, username, email, phone, role)
+			(department_id, emp_no, password, username, email, phone, role, profile_image)
 		VALUES (
 			#{user.departmentId},
 			#{user.empNo},
@@ -11,7 +11,8 @@
 			#{user.username},
 			#{user.email},
 			#{user.phone},
-			#{user.role}
+			#{user.role},
+			#{user.profileImage}
 		)
 	</insert>
 	<select id="userLogin">
@@ -23,5 +24,16 @@
 		SELECT COUNT(*)
 		FROM "User"
 		WHERE emp_no = #{empNo}
+	</select>
+	<select id="getUserInfo">
+		SELECT *
+		FROM "User"
+		INNER JOIN Department ON Department.id = "User".department_id
+		WHERE "User".id = #{userId}
+	</select>
+	<select id="getAdminInfo">
+		SELECT *
+		FROM "User"
+		WHERE id = #{userId}
 	</select>
 </mapper>

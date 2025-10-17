@@ -9,15 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class AdminInfoDTO {
 	private int id;
-	private int departmentId;
 	private String empNo;
 	private String password;
-	private String passwordCheck;
 	private String username;
 	private String email;
 	private String phone; 
 	private String role;
 	private byte[] profileImage;
+	private String base64ProfileImage;
 }

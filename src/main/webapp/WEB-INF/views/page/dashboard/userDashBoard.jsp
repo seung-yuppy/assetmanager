@@ -13,8 +13,8 @@
 	<div class="main-content dashboard-content">
 		<div class="dashboard-container">
 			<div class="home-head">
-				<span>개발팀</span>
-				<h1>배고파 사원님, 안녕하세요!</h1>
+				<span>${userInfo.deptName}</span>
+				<h1>${userInfo.username} ${userInfo.role}님, 안녕하세요!</h1>
 			</div>
 			
 			<div class="metric-grid">

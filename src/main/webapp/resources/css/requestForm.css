@@ -108,13 +108,19 @@
     color: #343a40;
     margin-bottom:4px;
 }
+.form-date label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom:4px;
+}
 
 /* 입력 필드 (text, number, select, textarea 공통) */
 input[type="text"],
 input[type="number"],
 input[type="date"],
 input[list="productOptions"],
-input[type="date"],
 select,
 textarea {
     width: 100%; /* 모든 필드 너비 100% 통일 */

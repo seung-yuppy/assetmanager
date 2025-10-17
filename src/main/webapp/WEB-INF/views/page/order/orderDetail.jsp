@@ -26,8 +26,15 @@
 							<!-- 결재라인 전체 컨테이너 -->
 							<%@ include file="/WEB-INF/views/component/approverReadonly.jsp" %>
 						</div>
-						<h2 class="form-section-title">요청 내용</h2>
+						<h2 class="form-section-title">요청 정보</h2>
 						<div id="formInputArea" class ="inputArea">
+							
+							<div class="form-date" style="margin-bottom: 20px;">
+								<div class="form-application-date">
+									<label for="application-date">구매 요청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+								</div>
+							</div>
+							
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
 									<label for="isDepartmentUse">부서 자산</label>

@@ -96,7 +96,7 @@
 
 
 	<%-- 다건 자산 등록 모달 --%>
-	<div id="rejectDetailModal" class="custom-modal-backdrop">
+	<%-- <div id="rejectDetailModal" class="custom-modal-backdrop">
 		<div class="custom-modal-content">
 			<div class="modal-header">
 				<h2>물품 반출 등록(${currentDate})</h2>
@@ -122,7 +122,7 @@
 				<button class="btn-primary">반출 등록</button>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<script src="/assetmanager/resources/js/modal.js"></script>
 
 </body>

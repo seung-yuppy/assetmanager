@@ -2,7 +2,6 @@
 
 /* 모달 뒷배경 */
 .modal-backdrop {
-    visibility: hidden; /* 화면에서 보이지 않지만 공간은 차지하지 않음 */
     position: fixed;
     top: 0;
     left: 0;
@@ -72,6 +71,7 @@
 	flex-direction: column;
 	gap: 10px;
     padding: 24px;
+    width: 325px;
 }
 
 .modal-grid {
@@ -80,11 +80,6 @@
 	row-gap: 20px;
     column-gap: 50px;
     padding:30px;
-}
-
-.modal-body .form-group {
-    display: flex;
-    gap:10px;
 }
 
 .modal-body .form-group label {

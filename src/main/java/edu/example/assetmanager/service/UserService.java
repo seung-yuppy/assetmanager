@@ -3,6 +3,7 @@ package edu.example.assetmanager.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Base64;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -113,6 +114,15 @@ public class UserService {
 				dto.setRole("관리자");
 				break;
 			}
+			
+			byte[] profileImageBytes = dto.getProfileImage();
+	        if (profileImageBytes != null && profileImageBytes.length > 0) {
+	            String base64Image = Base64.getEncoder().encodeToString(profileImageBytes);
+	            dto.setBase64ProfileImage(base64Image);
+	        } else {
+	            // 프로필 이미지가 없는 경우 (null 또는 빈 배열)
+	            dto.setBase64ProfileImage(null); 
+	        }
 		}
 		
 		return dto;

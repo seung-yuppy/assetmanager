@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 	
-	dupBtn.addEventListener("click", async (event) => {
+	dupBtn.addEventListener("click", async () => {
 		const empNo = empNoInput.value.trim();
 		const res = await fetch("/assetmanager/check/empno", {
 			method: "POST",

@@ -10,7 +10,8 @@
 <body>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
-		<div class="main-content dashboard-content">
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<!-- 0. 페이지 & 사용자 설명 -->
 				<div class="home-head">

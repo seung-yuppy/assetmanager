@@ -2,7 +2,7 @@
         
         .home-head span {
         	color: var(--gray-color);
-        	font-size: 20px;
+        	font-size: 18px;
         }
         
         .dashboard-content {
@@ -10,8 +10,9 @@
         }
         
         .dashboard-container h1 {
-            font-size: 30px;
+            font-size: 26px;
             font-weight: 700;
+            margin-top: 10px
         }
 
         .section-card h2 {

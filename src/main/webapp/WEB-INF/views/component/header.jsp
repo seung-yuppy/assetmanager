@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,20 +12,24 @@
 	<!-- 헤더 -->
 	<header class="header">
 		<ul class="header-list">
-			<li class="header-item-profile">
-				<a href="/assetmanager/mypage">
-					<img src="/assetmanager/resources/image/img_profile.png" class="header-profile-image">
-				</a>
-			</li>
+			<c:if test="${userInfo.role == '사원' || userInfo.role == '부장'}">
+				<li class="header-item-profile">
+					<a href="/assetmanager/mypage">
+						<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="header-profile-image">
+					</a>
+				</li>			
+			</c:if>
 
 			<li class="header-item-profile">
-				<img src="/assetmanager/resources/image/icon_header1.png" class="header-bell">
+				<img src="/assetmanager/resources/image/icon_header1.png" class="header-bell header-alarm">
 			</li>
 			
 			<li class="header-item-profile">
-				<a href="/assetmanager/login">
-					<img src="/assetmanager/resources/image/icon_header2.png" class="header-bell">
-				</a>
+				<form method="POST" action="/assetmanager/logout" class="logout-form">
+					<button type="submit" class="logout-button">
+						<img src="/assetmanager/resources/image/icon_header2.png" class="header-bell">
+					</button>
+				</form>
 			</li>
 		</ul>	
 	</header>

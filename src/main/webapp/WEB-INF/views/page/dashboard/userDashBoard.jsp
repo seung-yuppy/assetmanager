@@ -10,7 +10,8 @@
 <body>
 <div class="app-layout">
 	<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-	<div class="main-content dashboard-content">
+	<div class="main-content">
+		<%@ include file="/WEB-INF/views/component/header.jsp" %>
 		<div class="dashboard-container">
 			<div class="home-head">
 				<span>${userInfo.deptName}</span>

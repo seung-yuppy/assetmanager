@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminRentController {
 	
 	@GetMapping("/rent/list")
-	public String requestForm() {
+	public String list() {
 		return "/admin/adminRentList";
+	}
+	
+	@GetMapping("/rent/list/detail")
+	public String listDetail() {
+		return "/admin/adminRentListDetail"; 
 	}
 }

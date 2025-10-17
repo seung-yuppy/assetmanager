@@ -34,7 +34,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage")
-	public String s4() {
+	public String s4(HttpSession session) {
+		int userId = (int) session.getAttribute("userId");
+		UserInfoDTO dto = service.getUser(userId);
+		session.setAttribute("userInfo", dto);
+		
 		return "user/myPage";
 	}
 	
@@ -78,6 +82,13 @@ public class UserController {
 		} else {
 			return "redirect:/login";
 		}
-			
+	}
+	
+	// 로그아웃
+	@PostMapping("/logout")
+	public String logOut(HttpSession session) {
+		session.removeAttribute("userId");
+		session.invalidate();
+		return "redirect:/login";
 	}
 }

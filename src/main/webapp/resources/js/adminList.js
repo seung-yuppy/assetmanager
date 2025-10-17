@@ -1,5 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 체크박스 선택 및 버튼 활성화
+	const tableBody = document.querySelector('.data-table tbody');
+	
+	if (tableBody) {
+        tableBody.addEventListener('click', function(event) { 
+        	console.log("1234");
+        	window.location.href="/assetmanager/admin/rent/list/detail"
+        	
+        	
+        	
+        	
+        	
+        });
+	}
+});
+
+
+/*    // 체크박스 선택 및 버튼 활성화
     const selectAllCheckbox = document.getElementById('selectAllCheckbox');
     const rowCheckboxes = document.querySelectorAll('.row-checkbox:not(:disabled)');
     const approveBtn = document.getElementById('approveBtn');
@@ -40,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (selectedIds.length > 0) {
                 alert('다음 항목들을 승인합니다: ' + selectedIds.join(', '));
 
-                /* 승인 처리 ajax 요청 */
+                 승인 처리 ajax 요청 
             }
         });
     }
@@ -55,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (selectedIds.length > 0) {
                 alert('다음 항목들을 거부합니다: ' + selectedIds.join(', '));
                 
-                /* 거부 처리 ajax 요청 */            
+                 거부 처리 ajax 요청             
             }
         });
     }
@@ -113,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 console.log(`${requestId}의 상세 정보를 요청합니다.`);
                 
-                /* 상세 정보 조회 ajax 요청 */
+                 상세 정보 조회 ajax 요청 
                
                 // 임시 코드입니다 
                 const tempData = {
@@ -128,5 +144,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 openDetailModal(tempData);  
             });
         }
-    }
-});
+    }*/

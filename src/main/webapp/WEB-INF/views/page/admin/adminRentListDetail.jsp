@@ -10,7 +10,7 @@
 <title>반출 요청 상세</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
-
+<link href="/assetmanager/resources/css/adminDetail.css" rel="stylesheet"> 
 <link href="/assetmanager/resources/css/approver.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -19,21 +19,42 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 	<div class="app-layout">
-		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
+		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
 				<h1 class="content-title">반출 요청 상세</h1>
 				<span>반출 요청의 상세 내역을 확인하고 관리하세요.</span>
 				<div class="section-card">
-
+				
+					<h2 class="form-section-title">신청자 정보</h2>
+					<div class="registerInfo-container">
+						<div class="registerInfo-item">
+							<label for="name">요청ID(사번)</label> 
+							<span>ams1001</span>
+						</div>
+						<div class="registerInfo-item">
+							<label for="name">신청자 이름</label> 
+							<span>홍길동</span>
+						</div>
+						<div class="registerInfo-item">
+							<label for="department">부서명</label> 
+							<span>영업팀</span>
+						</div>
+						<div class="registerInfo-item">
+							<label for="role">직책</label> 
+							<span>팀장</span>
+						</div>
+						<div class="registerInfo-item">
+							<label for="address">주소</label> 
+							<span>서울 종로구 대명길 28 대학로</span>
+						</div>
+					</div>
+				
 					<div class="form-section">
 						<!-- 결재라인 불러오기 -->
 						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
 					</div>
-
-
-
 
 					<h2 class="form-section-title">요청 내용</h2>
 					<div id="formInputArea" class="inputArea">
@@ -51,7 +72,6 @@
 								<label for="spec">스펙</label>
 								<div class="last-input-group">
 									<input type="text" id="spec" value="cpu~~~~~" class="locked-input" readonly>
-									<button type="button" class="regist-button" data-target="registerModal">등록</button>
 								</div>
 							</div>
 						</div>
@@ -70,15 +90,13 @@
 								<label for="spec">스펙</label>
 								<div class="last-input-group">
 									<input type="text" id="spec" value="cpu~~~~~" class="locked-input" readonly>
-									<button type="button" class="regist-button" data-target="registerModal">등록</button>
 								</div>
 							</div>
 						</div>
 
-
 						<div class="form-footer">
 							<div class="form-reason">
-								<label for="reason">반출 요청 사유</label>
+								<label for="reason">반출 요청 사유 </label>
 								<textarea id="reason" name="reason" rows="6" required placeholder="프로젝트 시작하여 새로운 기기 필요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)" readonly></textarea>
 								<div class="char-count-display text-align-right"></div>
 							</div>
@@ -92,6 +110,11 @@
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div class="form-actions">
+						<button type="submit" class="primary-action">승인</button>
+						<button type="button" class="cancel-action">반려</button>
 					</div>
 
 				</div>
@@ -108,20 +131,16 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="modalProductName">제품명</label> 
-					<input type="text" id="modalProductName" class="form-input" readonly>
+					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="application-date">등록일</label> 
-					<input id="application-date" value="${currentDate}" class="form-input" readonly>
+					<label for="application-date">등록일</label> <input id="application-date" value="${currentDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> 
-					<input id="modalReturnDate" value="2025-12-31" class="form-input" readonly>
+					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" value="2025-12-31" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label> 
-					<input type="text" id="modalSerialNumber" class="form-input">
+					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input">
 				</div>
 
 
@@ -132,7 +151,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>

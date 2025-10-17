@@ -56,7 +56,7 @@
 							<%-- 모든 tr 태그에 data-id="요청ID" 를 추가합니다 --%>
 							<tr data-id="REQ001">
 								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
-								<td>LG 그램 노트북</td>
+								<td>LG 그램 노트북 외 2개</td>
 								<td>REQ001</td>
 								<td>둘리</td>								
 								<!-- <td>사업상 새 개발용 노트북</td> -->

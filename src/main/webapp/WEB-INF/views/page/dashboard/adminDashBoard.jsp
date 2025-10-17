@@ -14,8 +14,8 @@
 			<div class="dashboard-container">
 				<!-- 0. 페이지 & 사용자 설명 -->
 				<div class="home-head">
-					<span>경영 지원팀</span>
-					<h1>관리자님, 안녕하세요!</h1>
+					<span>경영팀</span>
+					<h1>${adminInfo.username}님, 안녕하세요!</h1>
 				</div>
 			
 			

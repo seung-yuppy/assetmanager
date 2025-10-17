@@ -3,6 +3,8 @@ package edu.example.assetmanager.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.UserDTO;
+import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.UserService;
 
 @Controller
@@ -38,7 +41,9 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/join")
 	public String userJoin(UserDTO dto) {
-		if (service.join(dto)) 
+		boolean isJoin = service.join(dto);
+		
+		if (isJoin)
 			return "redirect:/login";
 		else 
 			return "redirect:/join";
@@ -61,10 +66,18 @@ public class UserController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String userJoin(String empNo, String password) {
-		if (service.login(empNo, password))
-			return "redirect:/home";
-		else
+	public String userJoin(String empNo, String password, HttpSession session) {
+		if (service.login(empNo, password, session)) {
+			int userId = (int) session.getAttribute("userId");
+			UserInfoDTO dto = service.getUser(userId);
+			String role = dto.getRole();
+			if (role.equals("관리자")) 
+				return "redirect:/admin/home";
+			else 
+				return "redirect:/home";
+		} else {
 			return "redirect:/login";
+		}
+			
 	}
 }

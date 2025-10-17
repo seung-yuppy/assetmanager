@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "확인",
             });
 		} else {
-			isEmpNoChecked = false; 
+			isEmpNoChecked = false;
             Swal.fire({
-                title: "거부됨",
+                title: "중복됨",
                 text: data.isDup,
                 icon: "error",
                 confirmButtonColor: "#d33",

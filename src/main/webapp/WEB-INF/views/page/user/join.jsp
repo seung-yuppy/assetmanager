@@ -85,7 +85,7 @@
 				    		<option value="manager">부장</option>
 				    		<option value="employee">사원</option>
 				    	</select>
-	                </div>                
+	                </div>
                 </div>
 
                 <button type="submit" class="main-button">가입 완료</button>

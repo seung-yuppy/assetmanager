@@ -398,5 +398,10 @@ input:focus, select:focus, textarea:focus {
     line-height: 1.6; /* leading-relaxed */
 }
 
-
-
+.regist-button {
+	width: 46px;
+    border: 0;
+    background-color: #1c4587;
+    border-radius: 6px;
+    color: white;
+}

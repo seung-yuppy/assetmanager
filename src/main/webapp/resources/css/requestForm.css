@@ -113,6 +113,7 @@
 input[type="text"],
 input[type="number"],
 input[list="productOptions"],
+input[type="date"],
 select,
 textarea {
     width: 100%; /* 모든 필드 너비 100% 통일 */

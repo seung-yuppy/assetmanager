@@ -10,4 +10,9 @@ public class AssetController {
 	public String assetList() {
 		return "/asset/userAssetList";
 	}
+	
+	@GetMapping("/asset/form")
+	public String assetForm() {
+		return "/asset/userAssetForm";
+	}
 }

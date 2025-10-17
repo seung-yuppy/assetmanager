@@ -43,7 +43,7 @@
 
 		<!-- 중간 결재자(협의) -->
 		<fieldset class="approver-container select-info">
-			<legend class="approver-title" align="center">결재</legend>
+			<legend class="approver-title" align="center">합의</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
 				<div class="approval-badge">

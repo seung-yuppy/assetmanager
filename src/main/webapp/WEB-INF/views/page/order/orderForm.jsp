@@ -37,7 +37,6 @@
 								<label for="inputMethodExcel">엑셀 파일 업로드</label>
 							</div>
 						</div>
-
 						<div id="formInputArea" class ="inputArea">
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
@@ -58,9 +57,8 @@
 									<label for="productNameSelect">제품명<span class="required">*</span></label>
 									<input list="productOptions" name="productNameSelect" id="productNameSelect" placeholder="선택  또는 직접 입력">
 									<datalist id="productOptions">
-									    <option value="LG그램">
+									    <option value="LG그램 : 15인치 풀 HD 화면, 인텔 6세대 코어(스카이레이크) 프로세서, 8GB 램, 256GB/512GB SSD">
 									    <option value="macbook 10">
-									    <option value="직접 입력">
 									</datalist>
 								</div>
 								<div class="form-group fixed-width-med">

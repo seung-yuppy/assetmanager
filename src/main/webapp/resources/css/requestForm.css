@@ -112,6 +112,7 @@
 /* 입력 필드 (text, number, select, textarea 공통) */
 input[type="text"],
 input[type="number"],
+input[type="date"],
 input[list="productOptions"],
 select,
 textarea {
@@ -318,3 +319,108 @@ input:focus, select:focus, textarea:focus {
 .excel-data-preview tr:first-child {
     background-color: #f9f9f9;
 }
+
+/* 요청 정보 표시 영역 */
+.info-list {
+  margin-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 440px;
+  padding: 12px;
+  font-family: sans-serif;
+}
+
+.info-list div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.info-list dt {
+	font-size: large;
+	font-weight: 500;
+	color: #333;
+}
+
+.info-list dd {
+  margin: 0;
+  color: #555;
+}
+
+/**/
+/* 요청 정보 Flex 레이아웃 (Grid에서 Flex로 변경됨) */
+.info-grid {
+    display: flex;
+    flex-direction: column; /* 모바일: 수직 배치 */
+    gap: 24px; /* 수직 간격 */
+}
+
+/* 정보 항목 */
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 데스크톱 레이아웃 */
+
+/* 데스크톱 레이아웃 */
+@media (min-width: 768px) {
+    .info-grid {
+        flex-direction: row; /* 데스크톱: 수평 배치 */
+        gap: 32px; /* 수평 간격 */
+        align-items: flex-start; /* 항목 상단 정렬 */
+    }
+
+    /* 요청 일자: 고정 너비 (짧은 정보) */
+    .info-item.date-item {
+        flex: 0 0 200px; /* 고정 너비 200px */
+    }
+
+    /* 요청 사유: 남은 공간 모두 차지 (긴 정보) */
+    .info-item.request-reason {
+        flex: 1;
+    }
+}
+
+/* 레이블 스타일 */
+.info-label {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: #6b7280; /* text-gray-500 */
+    margin-bottom: 4px; /* mb-1 */
+    display: flex;
+    align-items: center;
+}
+
+/* 아이콘 스타일 */
+.info-label svg {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 8px;
+    color: #6366f1; /* text-indigo-500 */
+    stroke-width: 2;
+}
+
+/* 값 스타일 */
+.info-value {
+    font-size: 1.125rem; /* text-lg */
+    padding: 12px; /* p-3 */
+    border-radius: 8px; /* rounded-lg */
+    border: 1px solid #e5e7eb; /* border border-gray-200 */
+    background-color: #f9fafb; /* bg-gray-50 */
+}
+
+.info-value.date {
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* text-gray-900 */
+}
+
+.info-value.reason {
+    color: #374151; /* text-gray-700 */
+    line-height: 1.6; /* leading-relaxed */
+}
+
+
+

@@ -405,3 +405,72 @@ input:focus, select:focus, textarea:focus {
     border-radius: 6px;
     color: white;
 }
+
+/* Select2 입력 요소 */
+/* Input/Selection box */
+.select2-container--default .select2-selection--single {
+    border-radius: 0.5rem; 
+    border-color: #ced4da !important;
+    height: 39px !important;
+    display: flex;
+    align-items: center;
+    outline: none; /* Add outline none here for better control */
+}
+
+/* Rendered selected text */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 39px !important;
+    padding-left: 1rem;
+    color: #1F2937; /* gray-800 */
+    padding-right: 20px; /* Space for arrow */
+}
+
+/* Arrow icon area height */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px !important;
+}
+
+/* Focus state styling */
+.select2-container--default.select2-container--focus .select2-selection--single {
+	height : 39px !important;
+    border-color: #2563EB; /* blue-600 */
+    box-shadow: 0 0 0 1px #2563EB;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__clear{
+	height : 40px !important;
+}
+
+/* Dropdown panel styling */
+.select2-dropdown {
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #E5E7EB; /* gray-200 */
+}
+
+/* Highlighted option */
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #eaf2ff !important;
+    color: #1D4ED8; /* blue-700 */
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field{
+	height : 35px !important;
+}
+
+
+/* 3. Custom Result Template Styles */
+.product-result {
+    display: block;
+    padding: 5px 0;
+}
+.product-name {
+    font-weight: 600;
+    color: #1F2937; /* gray-800 */
+}
+.product-desc {
+    display: block;
+    font-size: 0.75rem; /* text-xs */
+    color: #6B7280; /* gray-500 */
+    margin-top: 2px;
+}

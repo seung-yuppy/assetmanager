@@ -8,14 +8,13 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-    <!-- Load jQuery (required by Select2) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Load Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
@@ -58,12 +57,9 @@
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명<span class="required">*</span></label>
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" placeholder="선택  또는 직접 입력">
-									<datalist id="productOptions">
-									    <option value="LG그램 : 15인치 풀 HD 화면, 인텔 6세대 코어(스카이레이크) 프로세서, 8GB 램, 256GB/512GB SSD">
-									    <option value="macbook 10">
-									</datalist>
+									<label for="product-select">제품명<span class="required">*</span></label>
+							        <select id="product-select">
+							        </select>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>
@@ -84,7 +80,6 @@
 							<div id="add-product-section">
 								<button type="button" class="add-product-button" onclick="addProduct();">+</button>
 							</div>
-							
 							<div class="form-group">
 								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
 								<textarea id="reason" name="reason" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
@@ -93,7 +88,7 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<div id="excelUploadArea" class ="inputArea">
 							<div class="form-group file-upload-group">
 								<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>

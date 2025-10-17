@@ -24,7 +24,7 @@
                 <li class="menu-item">
                     <a href="/assetmanager/asset/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
-                        <span>자산</span>
+                        <span>내 자산</span>
                     </a>
                 </li>
                 <li class="menu-item menu-sub">
@@ -36,8 +36,8 @@
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
                 	</div>
 	                <ul class="sub-menu-list">
-		            	<li><a href="/assetmanager/order/form">구입 요청</a></li>
-		            	<li><a href="/assetmanager/order/list">구입 상세</a></li>
+		            	<li><a href="/assetmanager/order/form">구입 요청 신청서</a></li>
+		            	<li><a href="/assetmanager/order/list">구입 리스트</a></li>
 		            </ul>                        
                 </li>
                 <li class="menu-item menu-sub">
@@ -49,8 +49,8 @@
 	                    <img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />
 	                </div>
 	                <ul class="sub-menu-list">
-	                    <li><a href="/assetmanager/rent/form">반출 요청</a></li>
-	                    <li><a href="/assetmanager/rent/list">반출 상세</a></li>
+	                    <li><a href="/assetmanager/rent/form">반출 요청 신청서</a></li>
+	                    <li><a href="/assetmanager/rent/list">반출 리스트</a></li>
 	                </ul>                    
                 </li>
             </ul>

@@ -8,7 +8,6 @@
 	<link href="/assetmanager/resources/css/sideMenu.css" rel="stylesheet"> 	
 </head>
 <body>
-        <!-- 사이드바 -->
         <nav class="sidebar">
         	<div class="menu-head">
         		<img class="menu-head-item" src="/assetmanager/resources/image/icon_main_dark.svg" />
@@ -53,5 +52,6 @@
 	            </li>
             </ul>
         </nav>
+	<script src="/assetmanager/resources/js/sidemenu.js"></script>
 </body>
 </html>

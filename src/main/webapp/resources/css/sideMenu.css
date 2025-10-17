@@ -73,14 +73,14 @@
             font-weight: 500;
         }
 
-        .menu-item a:hover {
+/*         .menu-item a:hover {
             background-color: var(--gray-color-light);
             color: var(--dark-color);
 		}
 		
 		.menu-item a:hover .sidebar-logo-item {
 		    filter: invert(0%);
-		}
+		} */
         
         .menu-item.active a {
             background-color: var(--gray-color-light);
@@ -115,6 +115,13 @@
 		.sub-menu-list li a {
 		    padding-left: 50px; /* 들여쓰기 효과 */
 		    font-size: 0.9em;
+		}
+		
+		.sub-menu-list li a.active-sub-link {
+		    /* 하위 메뉴 자체의 배경색은 기본값(var(--primary-color))을 유지 */
+		    background-color: var(--gray-color-light) !important; /* 상위 스타일을 덮어쓰지 않도록 강제 (혹은 삭제) */
+		    color: var(--dark-color); /* 기본색 유지 혹은 원하는 강조색으로 변경 */
+		    font-weight: 700; /* 활성화된 하위 메뉴 텍스트를 강조 */
 		}
 		
 		.menu-sub.active .sidebar-arrow-item {

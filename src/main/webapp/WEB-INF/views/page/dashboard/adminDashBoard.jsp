@@ -18,8 +18,6 @@
 					<span>경영팀</span>
 					<h1>${adminInfo.username}님, 안녕하세요!</h1>
 				</div>
-			
-			
 				<!-- 1. 총 통계 section -->
 				<div class="metric-grid">
 	                <div class="metric-card border-green">
@@ -60,21 +58,12 @@
 	                </div>
 	                <div class="metric-card border-purple">
 						<div class="card-header">
-							<p class="card-title">반출 요청</p>
+							<p class="card-title">제품</p>
 	                		<div class="card-logo-box back-purple">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_alarm.svg">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
 	                		</div>
 	                	</div>   
-	                    <p class="card-value">13</p>
-	                </div>
-	                <div class="metric-card border-blue">
-						<div class="card-header">
-	                		<p class="card-title">구매 요청</p> 
-	                		<div class="card-logo-box back-blue">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_alarm.svg">
-	                		</div>
-	                	</div>                    
-	                    <p class="card-value">15</p>
+	                    <p class="card-value">50</p>
 	                </div>
 	            </div>
             

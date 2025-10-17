@@ -72,13 +72,17 @@ public class UserController {
 	@PostMapping("/login")
 	public String userJoin(String empNo, String password, HttpSession session) {
 		if (service.login(empNo, password, session)) {
-			int userId = (int) session.getAttribute("userId");
-			UserInfoDTO dto = service.getUser(userId);
-			String role = dto.getRole();
-			if (role.equals("관리자")) 
-				return "redirect:/admin/home";
-			else 
-				return "redirect:/home";
+			Integer userId = (Integer) session.getAttribute("userId");
+			if (userId != null) {
+				UserInfoDTO dto = service.getUser(userId);
+				String role = dto.getRole();
+				if (role.equals("관리자")) 
+					return "redirect:/admin/home";
+				else 
+					return "redirect:/home";
+			} else {
+				return "redirect:/login";
+			}
 		} else {
 			return "redirect:/login";
 		}

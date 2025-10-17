@@ -321,38 +321,9 @@ input:focus, select:focus, textarea:focus {
     background-color: #f9f9f9;
 }
 
-/* 요청 정보 표시 영역 */
-.info-list {
-  margin-left: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 440px;
-  padding: 12px;
-  font-family: sans-serif;
-}
-
-.info-list div {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.info-list dt {
-	font-size: large;
-	font-weight: 500;
-	color: #333;
-}
-
-.info-list dd {
-  margin: 0;
-  color: #555;
-}
-
-/**/
-/* 요청 정보 Flex 레이아웃 (Grid에서 Flex로 변경됨) */
-.info-grid {
+/* 요청 정보 Flex 레이아웃  */
+.user-info {
+	margin-left: 1.5rem;
     display: flex;
     flex-direction: column; /* 모바일: 수직 배치 */
     gap: 24px; /* 수직 간격 */
@@ -365,10 +336,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* 데스크톱 레이아웃 */
-
-/* 데스크톱 레이아웃 */
 @media (min-width: 768px) {
-    .info-grid {
+    .user-info {
         flex-direction: row; /* 데스크톱: 수평 배치 */
         gap: 32px; /* 수평 간격 */
         align-items: flex-start; /* 항목 상단 정렬 */

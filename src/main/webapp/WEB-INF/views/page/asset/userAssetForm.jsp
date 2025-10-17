@@ -22,8 +22,7 @@
 				<div class="section-card">
 					<div>
 						<h2 class="form-section-title">요청 정보</h2>
-						            <!-- 정보 항목 컨테이너 (Flex 레이아웃으로 변경) -->
-			            <div class="info-grid">
+			            <div class="user-info">
 			                <div class="info-item date-item">
 			                    <span class="info-label">
 			                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">

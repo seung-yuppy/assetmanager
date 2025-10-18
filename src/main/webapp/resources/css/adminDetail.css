@@ -1,16 +1,59 @@
 @charset "UTF-8";
 
-.registerInfo-container {
-	display:flex;
-	flex-direction:column;
-	width:50%;
-	font-size: 16px;
-	    
+/* 정보 섹션 전체를 감싸는 컨테이너 */
+.applicant-info-section {
+    margin-bottom: 2.5rem; /* 40px, 아래 결재 정보와의 간격 */
 }
 
-.registerInfo-item {
-	display:flex;
-	justify-content: space-between;
-	margin-bottom: 25px;
-	margin-left: 1.5rem;
-} 
+/* '신청자 정보' 제목 스타일 */
+.applicant-section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+/* dt, dd 목록 스타일 */
+.applicant-info-list {
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 1fr; /* 모바일 기본 1단 */
+    gap: 1rem 2rem; /* 세로 16px, 가로 32px */
+}
+
+/* 데스크탑 화면 (768px 이상) 에서 2단으로 변경 */
+@media (min-width: 768px) {
+    .applicant-info-list {
+        grid-template-columns: 140px 1fr; /* 레이블 140px 고정, 나머지는 값 */
+        gap: 20px;
+        column-gap: 100px;
+        margin-left: 10px;
+    }
+}
+
+.applicant-info-list dt {
+    font-weight: 600;
+    color: #64748b; /* slate-500 */
+}
+
+.applicant-info-list dd {
+    color: #334155; /* slate-700 */
+    margin: 0; /* dd 태그의 기본 마진 제거 */
+}
+
+/* SweetAlert input 너비 조절 */
+.custom-swal-input {
+    width: 80% !important;     /* 너비를 80%로 줄임 (원하는 값으로 조절) */
+    margin: 2em auto 0 !important; /* 상단 여백(1.5em), 좌우(auto), 하단(0) */
+}
+
+/* 커스텀 토스트 알림 크기 조절 */
+.custom-swal-toast {
+    width: 280px !important;
+    font-size: 0.9em !important;
+}
+
+.custom-swal-title-approved {
+    margin-top: -0.5em !important; 
+}

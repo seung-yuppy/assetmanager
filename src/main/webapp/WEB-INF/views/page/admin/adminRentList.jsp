@@ -7,8 +7,11 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/adminDetail.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
-<%-- 모달 스타일을 위해 추가 --%>
+
+<%-- SweetAlert2 라이브러리 추가 --%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<div class="app-layout">
@@ -155,5 +158,6 @@
 		</div>
 	</div>
 	<script src="/assetmanager/resources/js/adminList.js"></script>
+	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

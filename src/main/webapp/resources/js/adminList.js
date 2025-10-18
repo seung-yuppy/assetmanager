@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tableBody.addEventListener('click', function(event) { 
         	console.log("1234");
         	window.location.href="/assetmanager/admin/rent/list/detail"
-        	
-        	
-        	
-        	
-        	
         });
 	}
 });

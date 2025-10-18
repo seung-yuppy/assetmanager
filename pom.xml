@@ -6,7 +6,7 @@
 	<artifactId>assetmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>education</name>
+	<name>education</name> 
 	<description>assetmanager</description>
 	<properties>
 		<springframework-version>5.3.39</springframework-version>
@@ -16,7 +16,7 @@
 	<dependencies>
 		<!-- 서블릿 4.0 라이브러리 -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>javax.servlet</groupId> 
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version>
 			<scope>provided</scope>

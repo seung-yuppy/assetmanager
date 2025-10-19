@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "확인",
             });
         }
+        
         if (password !== passwordCheck) {
             event.preventDefault();
             Swal.fire({
@@ -115,5 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "확인",
             });
         }
+        
+        sessionStorage.setItem('showToastMessage', '회원가입이 완료되었습니다.');
     });    
 });

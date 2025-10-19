@@ -53,7 +53,10 @@
             </div>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="resources/js/user.js"></script>
+	<script src="resources/js/userNotice.js"></script>
 </body>
 </body>
 </html>

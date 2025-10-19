@@ -48,7 +48,7 @@ public class UserController {
 		boolean isJoin = service.join(dto);
 		
 		if (isJoin)
-			return "redirect:/login";
+			return "user/login";
 		else 
 			return "redirect:/join";
 	}

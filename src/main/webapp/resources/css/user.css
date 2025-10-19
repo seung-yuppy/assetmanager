@@ -286,6 +286,16 @@
 	cursor: not-allowed;
 }
 
+/* 커스텀 토스트 알림 크기 조절 */
+.custom-swal-toast {
+    width: 300px !important;
+    font-size: 0.9em !important;
+}
+
+.custom-swal-title-approved {
+    margin-top: -0.5em !important; 
+}
+
 /* 5. 모바일 반응형 처리 */
 @media (max-width: 768px) {
 	body {

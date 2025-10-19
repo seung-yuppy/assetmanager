@@ -61,8 +61,6 @@ public class UserService {
 		}
 
         boolean isUserJoin = dao.userJoin(dto);  
-        System.out.println("DAO userJoin 결과: " + isUserJoin);
-		
 		if (isUserJoin) {
 			if (dao.checkEmpno(dto.getEmpNo()) == 1) {
 				return true;

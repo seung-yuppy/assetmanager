@@ -15,7 +15,7 @@
 	<div id="approval-line-container">
 
 		<!-- 첫 번째 : 신청자 -->
-		<fieldset class="approver-container">
+		<fieldset class="approver-container pd-30">
 			<legend class="approver-title" align="center">요청자</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/f6d5de/31343C?text=KYN" alt="강예나">
@@ -43,7 +43,7 @@
 		</div>
 
 		<!-- 중간 결재자(협의) -->
-		<fieldset class="approver-container select-info">
+		<fieldset class="approver-container select-info pd-30">
 			<legend class="approver-title" align="center">일반결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
@@ -75,7 +75,7 @@
 		</div>
 
 		<!-- 최종 결재자 -->
-		<fieldset class="approver-container select-info">
+		<fieldset class="approver-container select-info pd-30">
 			<legend class="approver-title" align="center">최종결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">

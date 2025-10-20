@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>구매 요청 상세</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -50,12 +50,12 @@
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원)</label>
-									<input type="number" id="price" name="price" value="3000000" class="locked-input" readonly>
+									<div class="last-input-group">
+										<input type="number" id="price" name="price" value="3000000" class="locked-input" readonly>
+										<button type="button" class="regist-button" data-target="registerModal">등록</button>
+									</div>
 								</div>
-								<div class="form-group fixed-width-sm" style="display:none;">
-									<label for="quantity">수량</label>
-									<input type="number" id="quantity" name="quantity" value="1" class="locked-input" readonly>
-								</div>
+								
 							</div>
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
@@ -72,11 +72,10 @@
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원)</label>
-									<input type="number" id="price" name="price" value="1000000" class="locked-input" readonly>
-								</div>
-								<div class="form-group fixed-width-sm" style="display:none;">
-									<label for="quantity">수량</label>
-									<input type="number" id="quantity" name="quantity" value="1" class="locked-input" readonly>
+									<div class="last-input-group">
+										<input type="number" id="price" name="price" value="3000000" class="locked-input" readonly>
+										<button type="button" class="regist-button" data-target="registerModal">등록</button>
+									</div>
 								</div>
 							</div>
 							
@@ -96,7 +95,6 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
-							<button type="submit" class="primary-action">자산 등록</button>
 							<button type="button" class="cancel-action">요청 취소</button>
 						</div>
 					</form>
@@ -104,6 +102,38 @@
 			</div>
 		</div>
 	</div>
+	<!-- 모달 -->
+	<div id="registerModal" class="modal-backdrop" style="display: none;">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h3>일련번호 등록</h3>
+	            <button id="closeModalBtn" class="modal-close-btn">&times;</button> 
+	        </div>
+	        <div class="modal-body">
+     			<div class="form-group">
+					<label for="modalProductName">제품명</label>
+					<input type="text" id="modalProductName" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalRequestDate">요청 일자</label>
+					<input type="text" id="modalRequestDate" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="application-date">등록 일자</label> 
+					<input id="application-date" value="${currentDate}" class="form-input" readonly>
+				</div>
+				<div class="form-group">
+					<label for="modalSerialNumber">일련번호</label>
+					<input type="text" id="modalSerialNumber" class="form-input" placeholder="일련번호를 입력하세요">
+				</div>
+	        </div>
+	        <div class="modal-footer">
+	            <button id="cancelBtn" class="btn-secondary">취소</button>
+	            <button class="btn-primary" onclick="registerSerial()">등록하기</button>
+	        </div>
+	    </div>
+	</div>
+	
 	<script src="/assetmanager/resources/js/modal.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 </body>

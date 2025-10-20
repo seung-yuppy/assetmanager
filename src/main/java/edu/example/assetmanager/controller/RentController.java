@@ -25,12 +25,7 @@ public class RentController {
 	
 	@GetMapping("/detail")
 	public String rentList() {
-		return "/rent/rentListDetail";
-	}
-	
-	@GetMapping("/form2")
-	public String requestForm2() {
-		return "/rent/rentForm2";
+		return "/rent/rentDetail";
 	}
 	
 }

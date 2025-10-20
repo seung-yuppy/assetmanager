@@ -41,10 +41,4 @@ public class HomeController {
 			return "redirect:/login";
 		}
 	}
-	
-	// 관리자 반출 상세 리스트 
-	@GetMapping("/admin/rent/detail")
-	public String s5() {
-		return "admin/adminRentListDetail2";
-	}
 }

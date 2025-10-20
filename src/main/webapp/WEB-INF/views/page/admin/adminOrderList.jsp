@@ -6,10 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자 구매요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
-<%-- 반출 자산 등록 모달 --%>
-<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 </head>
 <body>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -155,68 +152,6 @@
 	    </div>
 	</div>
 	
-	<div id="rejectDetailModal" class="custom-modal-backdrop">
-	    <div class="custom-modal-content">
-	        <div class="modal-header">
-	            <h2>반려 상세</h2>
-	            <button class="modal-close-btn">&times;</button> 
-	        </div>
-	        <div class="modal-body">
-        		<div class="form-group">
-					<label for="modalProductName">제품명</label>
-					<input type="text" id="modalProductName" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalRequestDate">요청 일자</label>
-					<input type="text" id="modalRequestDate" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalRejectReason">반려 사유</label>
-					<input type="text" id="modalRejectReason" class="form-input" value="해당 부서 예산 부족" readonly>
-				</div>
-	        </div>
-	        <div class="modal-footer">
-	            <button class="secondary-action">닫기</button>
-	        </div>
-	    </div>
-	</div>
-
-	<!-- JSTL 적용
-	<c:if test="${response.totalPages > 0 }">
-		<nav aria-label="Page navigation example" class="pagination-container">
-			<ul class="pagination-list">
-				<c:if test="${response.hasPrev}">
-					<li class="page-item prev"><a class="page-link"
-						onclick="setBoardParam('page', ${response.start - response.blockSize})"
-						style="cursor: pointer;"> Previous </a></li>
-				</c:if>
-
-				<c:forEach var="num" begin="${response.start}" end="${response.end}">
-					<c:choose>
-						<c:when test="${num == response.page}">
-							<li class="page-item active"><a class="page-link"
-								onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
-									${num} </a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
-									${num} </a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<c:if test="${response.hasNext}">
-					<li class="page-item next"><a class="page-link"
-						onclick="setBoardParam('page', ${response.end + 1})"
-						style="cursor: pointer;"> Next </a></li>
-				</c:if>
-			</ul>
-		</nav>
-	</c:if>
-	
-	 -->
-<script src="/assetmanager/resources/js/modal.js"></script>
 <script src="/assetmanager/resources/js/adminList.js"></script>
 <script>
 	function setBoardParam(key, value) {

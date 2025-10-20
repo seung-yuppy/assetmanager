@@ -31,10 +31,10 @@
 							
 							<div class="form-date" style="margin-bottom: 20px;">
 								<div class="form-application-date">
-									<label for="application-date">구매 요청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+									<label for="application-date">구매 요청일</label> 
+									<input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 								</div>
 							</div>
-							
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
 									<label for="isDepartmentUse">부서 자산</label>
@@ -55,7 +55,6 @@
 										<button type="button" class="regist-button" data-target="registerModal">등록</button>
 									</div>
 								</div>
-								
 							</div>
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
@@ -78,13 +77,11 @@
 									</div>
 								</div>
 							</div>
-							
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>
 								<textarea id="reason" name="reason" rows="4" readonly>신입 사원 배정으로 인한 노트북 구매 요청</textarea>
 							</div>
 						</div>
-
 						<div id="excelUploadArea" class ="inputArea">
 							<div class="form-group file-upload-group">
 								<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
@@ -115,10 +112,6 @@
 					<input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalRequestDate">요청 일자</label>
-					<input type="text" id="modalRequestDate" class="form-input" readonly>
-				</div>
-				<div class="form-group">
 					<label for="application-date">등록 일자</label> 
 					<input id="application-date" value="${currentDate}" class="form-input" readonly>
 				</div>
@@ -133,8 +126,7 @@
 	        </div>
 	    </div>
 	</div>
-	
-	<script src="/assetmanager/resources/js/modal.js"></script>
+	<script src="/assetmanager/resources/js/orderDetail.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 </body>
 </html>

@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>구매 요청 상세</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -97,7 +96,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/assetmanager/resources/js/modal.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 </body>
 </html>

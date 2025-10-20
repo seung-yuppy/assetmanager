@@ -20,6 +20,7 @@
 				<div class="section-card">
 					<div class="button-container">
 						<button class="add-button" onclick="location.href='/assetmanager/admin/item/form'">+ 제품 추가</button>
+						<button class="negative-button">제품 삭제</button>
 					</div>
 				
 					<div class="search-card">
@@ -43,6 +44,7 @@
 					<table class="data-table">
 						<thead>
 							<tr>
+								<th><input type="checkbox" id="checkAll"></th>
 								<th>제품명</th>
 								<th>카테고리</th>
 								<th>스펙</th>
@@ -53,6 +55,7 @@
 						</thead>
 						<tbody>
 							<tr>
+								<td><input type="checkbox" class="rowCheck"></td>
 								<td>LG 그램</td>
 								<td>노트북</td>
 								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
@@ -61,6 +64,7 @@
 	                            <td>업체명1</td>
 							</tr>
 							<tr>
+								<td><input type="checkbox" class="rowCheck"></td>
 								<td>삼성 갤럭시북</td>
 								<td>노트북</td>
 								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
@@ -69,6 +73,7 @@
 	                            <td>업체명2</td>
 							</tr>
 							<tr>
+								<td><input type="checkbox" class="rowCheck"></td>
 								<td>LG 그램</td>
 								<td>노트북</td>
 								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
@@ -76,30 +81,7 @@
 	                            <td>LG</td>
 	                            <td>업체명1</td>
 							</tr>
-							<tr>
-								<td>삼성 갤럭시북</td>
-								<td>노트북</td>
-								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
-	                            <td>₩ 1,000,000</td>
-	                            <td>삼성</td>
-	                            <td>업체명2</td>
-							</tr>
-							<tr>
-								<td>LG 그램</td>
-								<td>노트북</td>
-								<td>CPU	Ultra 7 255H, 램	16GB, 화면크기	39.6cm(15.6인치), 해상도 1920x1080(FHD)</td> 
-	                            <td>₩ 900,000</td>
-	                            <td>LG</td>
-	                            <td>업체명1</td>
-							</tr>
-							<tr>
-								<td>삼성 갤럭시북</td>
-								<td>노트북</td>
-								<td>CPU	Ultra 5 226V, 램	16GB, 화면크기	35.6cm(14인치), 해상도	2880x1800(WQXGA)</td>
-	                            <td>₩ 1,000,000</td>
-	                            <td>삼성</td>
-	                            <td>업체명2</td>
-							</tr>
+
 						</tbody>
 					</table>
 					<nav class="pagination-container">
@@ -116,4 +98,21 @@
 		</div>
 	</div>
 </body>
+<script>
+	const checkAll = document.getElementById('checkAll');
+	const checkboxes = document.querySelectorAll('.rowCheck');
+	
+	// 전체 선택 클릭 시 → 모든 체크박스 변경
+	checkAll.addEventListener('change', () => {
+	  checkboxes.forEach(cb => cb.checked = checkAll.checked);
+	});
+	
+	// 개별 체크 상태가 바뀔 때 → 전체 선택 여부 갱신
+	checkboxes.forEach(cb => {
+	  cb.addEventListener('change', () => {
+	    const allChecked = Array.from(checkboxes).every(c => c.checked);
+	    checkAll.checked = allChecked;
+	  });
+	});
+</script>
 </html>

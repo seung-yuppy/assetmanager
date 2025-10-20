@@ -6,7 +6,7 @@
     margin: 0 0 5px 0;
 }
 
-.dashboard-container span {
+.page-description {
     color: var(--gray-color);
 }
 

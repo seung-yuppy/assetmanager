@@ -98,9 +98,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="action-buttons">
-						<button class="add-button" onclick="location.href='/assetmanager/order/form'">새 요청</button>
-					</div>
 					<nav class="pagination-container">
 						<ul class="pagination-list">
 							<li class="page-item prev">

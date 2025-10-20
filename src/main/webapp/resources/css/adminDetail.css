@@ -28,7 +28,7 @@
         grid-template-columns: 140px 1fr; /* 레이블 140px 고정, 나머지는 값 */
         gap: 20px;
         column-gap: 100px;
-        margin-left: 10px;
+        margin-left: 2.5rem;
     }
 }
 

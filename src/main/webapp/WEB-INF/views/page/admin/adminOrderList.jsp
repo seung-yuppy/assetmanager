@@ -79,6 +79,24 @@
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
 							</tr>
+							
+							<tr>
+								<td>임꺽정</td>
+								<td>20250127</td>
+								<td>Latitude 7420 노트북</td>
+								<td>신입 사원 노트북 배정</td>
+								<td>2023-01-15</td>
+								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
+							</tr>
+							
+							<tr>
+								<td>임꺽정</td>
+								<td>20250127</td>
+								<td>Latitude 7420 노트북</td>
+								<td>신입 사원 노트북 배정</td>
+								<td>2023-01-15</td>
+								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
+							</tr>
 						</tbody>
 					</table>
 					<nav class="pagination-container">

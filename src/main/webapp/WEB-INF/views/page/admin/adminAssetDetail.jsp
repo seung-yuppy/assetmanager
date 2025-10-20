@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>자산 상세</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
+<!-- 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet"> -->
 	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">

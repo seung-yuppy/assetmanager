@@ -17,7 +17,6 @@
 }
 
 .dashboard-container span {
-    /* font-size: 1rem; */
     color: var(--gray-color);
 }
 
@@ -177,5 +176,5 @@
 .button-container {
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 10px;
+	margin-block: 10px;
 }    

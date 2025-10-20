@@ -1,8 +1,12 @@
 @charset "UTF-8";
 .dashboard-container h1 {
-    font-size: 2rem;
-    font-weight: 700;
+	font-size: 30px;
+    font-weight: 700; 
     margin: 0 0 5px 0;
+}
+
+.dashboard-container span {
+    color: var(--gray-color);
 }
 
 .section-card h2 {

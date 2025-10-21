@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/order")
 @Controller
 public class OrderController {
+	
 	@GetMapping("/list")
 	public String index () {
 		return "/order/orderList";

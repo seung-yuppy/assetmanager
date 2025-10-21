@@ -8,6 +8,7 @@
 	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/adminUpdateAsset.css" rel="stylesheet">
 </head>
 <body>
 	<div class="app-layout">
@@ -123,7 +124,7 @@
 		        <!-- 자산 히스토리 끝 -->		
 		        
 		        <div class="button-container">
-		        	<button class="edit-button">수정</button>
+		        	<button id="edit-modal" class="edit-button">수정</button>
 					<button class="cancel-button">불용</button>
 				</div>		
 			</div>
@@ -132,5 +133,9 @@
 		
 		
 	</div>
+	
+	<!-- script 영역 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/assetmanager/resources/js/adminUpdateAsset.js"></script>
 </body>
 </html>

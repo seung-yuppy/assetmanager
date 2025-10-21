@@ -15,6 +15,6 @@ public class AdminRentController {
 	
 	@GetMapping("/rent/detail")
 	public String listDetail() {
-		return "/admin/adminRentListDetail"; 
+		return "/admin/adminRentDetail"; 
 	}
 }

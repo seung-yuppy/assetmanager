@@ -157,7 +157,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="/assetmanager/resources/js/adminList.js"></script>
+	<script src="/assetmanager/resources/js/toDetail.js"></script>
 	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

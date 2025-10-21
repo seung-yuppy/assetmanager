@@ -228,5 +228,6 @@
 		  window.location.href = url.toString(); // url로 이동
 	}
 </script>
+<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

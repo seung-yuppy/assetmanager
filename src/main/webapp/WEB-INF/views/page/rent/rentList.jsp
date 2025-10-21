@@ -96,7 +96,7 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="/assetmanager/resources/js/rent.js"></script>
+	<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

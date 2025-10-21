@@ -102,5 +102,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

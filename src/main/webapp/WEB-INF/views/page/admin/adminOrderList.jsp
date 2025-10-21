@@ -118,11 +118,10 @@
 			</div>
 		</div>
 	</div>
-	
-<script src="/assetmanager/resources/js/adminList.js"></script>
+<script src="/assetmanager/resources/js/toDetail.js"></script>
 <script>
 	function setBoardParam(key, value) {
-		  const url = new URL(window.location.href);
+		  const url = new URL(window.location.href); 
 		  url.searchParams.delete('page');
 		  if (value != null){
 			  url.searchParams.set(key, value);  // 기존 query 유지하면서 order만 세팅

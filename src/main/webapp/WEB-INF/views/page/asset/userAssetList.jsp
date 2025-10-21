@@ -14,8 +14,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>내 자산 전체  목록</h1>
-				<span>나의 모든 자산 목록을 확인하고 관리합니다.</span>
+				<h1>사용중인 내 자산 목록</h1>
+				<span>사용중인 나의 모든 자산 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
 					<div class="search-card">
 						<div class="filter-controls">
@@ -43,8 +43,8 @@
 								<th>일련번호</th>
 								<th>취득일</th>
 								<th>반납일</th>
-								<th>분류</th>
-								<th>상태</th>						
+								<th>분류</th>		
+								<th></th>			
 							</tr>
 						</thead>
 						<tbody>
@@ -54,8 +54,13 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-used">사용중</span></td>
+		                        <td>개인</td>
+		                        <td>
+		                        	<div class="table-button-container">
+		                       			<button class="delay-button">연장</button>
+		                       			<button class="return-button">반납</button>
+		                       		</div>
+		                        </td>
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -63,8 +68,21 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
+		                        <td>개인</td>
+		                        <td>
+		                        	<div class="table-button-container">
+		                       			<button class="delay-button">연장</button>
+		                       			<button class="return-button">반납</button>
+		                       		</div>
+		                        </td>
+							</tr>
+							<tr>
+								<td>LG 그램 노트북</td>
+								<td>노트북</td>
+		                        <td>SRV987654321</td>
+		                        <td>2024-11-01</td>
+		                        <td>N/A</td>
+		                        <td>부서</td>		                        
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -72,8 +90,26 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-used">부서</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
+		                        <td>개인</td>
+		                        <td>
+		                        	<div class="table-button-container">
+		                       			<button class="delay-button">연장</button>
+		                       			<button class="return-button">반납</button>
+		                       		</div>
+		                        </td>		                        
+							</tr>
+							<tr>
+								<td>LG 그램 노트북</td>
+								<td>노트북</td>
+		                        <td>SRV987654321</td>
+		                        <td>2024-11-01</td>
+		                        <td>N/A</td>
+		                        <td>개인</td>
+		                        <td>
+		                        	<div class="table-button-container">
+		                       			<button class="return-button">반납</button>
+		                       		</div>
+		                        </td>		                        
 							</tr>
 							<tr>
 								<td>LG 그램 노트북</td>
@@ -81,26 +117,7 @@
 		                        <td>SRV987654321</td>
 		                        <td>2024-11-01</td>
 		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-used">부서</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-used">부서</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td><span class="status-badge status-used">부서</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
+		                        <td>부서</td>	                        
 							</tr>
 						</tbody>
 					</table>

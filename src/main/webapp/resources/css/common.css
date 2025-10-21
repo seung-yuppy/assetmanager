@@ -18,6 +18,8 @@
     --blue-color: #3b82f6;
     --red-light: #FEE2E2;
     --green-light:#D1FAE5;
+    --slate-color: #3730a3;
+    --indigo-color: #475569;
 	
 	--card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 	--border-radius: 12px;
@@ -128,6 +130,36 @@ body {
 	
 	&:hover {
 		background-color: var(--primary-hover);
+	}	
+}
+
+.delay-button {
+	padding: 7px 14px;
+	background-color: var(--slate-color);
+	color: #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s;
+	border: 0;
+	
+	&:hover {
+		background-color: var(--slate-color);
+	}	
+}
+
+.return-button {
+	padding: 7px 14px;
+	background-color: var(--indigo-color);
+	color: #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s;
+	border: 0;
+	
+	&:hover {
+		background-color: var(--indigo-color);
 	}	
 }
 

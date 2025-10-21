@@ -60,7 +60,7 @@
 								<td>LG 그램 노트북</td>
 								<td>2024-07-20</td>
 								<td>2025-12-31</td>
-								<td><span class="status-badge status-pending">대기 중</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9">
 								<td>삼성 갤럭시 탭 S9 외 2개</td>

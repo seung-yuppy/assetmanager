@@ -60,7 +60,7 @@
 								<td>노트북</td>
 	                            <td>SRV987654321</td>
 	                            <td>2022-11-01</td>
-	                            <td><span class="status-badge status-approved">부서</span></td>
+	                            <td><span class="status-badge status-purple">부서</span></td>
 								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr>
@@ -76,7 +76,7 @@
 								<td>노트북</td>
 	                            <td>SRV987654321</td>
 	                            <td>2022-11-01</td>
-	                            <td><span class="status-badge status-approved">부서</span></td>
+	                            <td><span class="status-badge status-purple">부서</span></td>
 								<td><span class="status-badge status-used">사용중</span></td>
 							</tr>
 							<tr>

@@ -124,18 +124,6 @@
     background-color: var(--gray-color-light);
 }
 
-/* --- 상태 배지 (우선순위 강화) --- */
-.main-content .status-badge {
-    padding: 5px 12px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #ffffff !important; /* 흰색 글자를 강제로 최우선 적용 */
-}
-.main-content .status-badge.status-pending { background-color: var(--gray-color); }
-.main-content .status-badge.status-approved { background-color: var(--green-color); }
-.main-content .status-badge.status-rejected { background-color: var(--red-color); }
-
 /* --- 페이지네이션 --- */
 .pagination-container {
     display: flex;

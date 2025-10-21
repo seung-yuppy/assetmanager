@@ -29,10 +29,9 @@
 				                <label for="statusFilter">상태:</label>
 				                <select id="statusFilter" onchange="applyFilter()">
 				                    <option value="all">전체</option>
-				                    <option value="waited">승인 대기</option>
-				                    <option value="approved">승인 완료</option>
-				                    <option value="rejected">반려</option>
-				                    <option value="using">등록 완료</option>
+				                    <option value="waited">대기중</option>
+				                    <option value="approved">승인됨</option>
+				                    <option value="rejected">거절됨</option>
 				                </select>
 				            </div>
 				            <div class="search-box">
@@ -58,43 +57,42 @@
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">승인 대기</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">승인 대기</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal" style="cursor:pointer;">요청 반려</span></td>
+								<td><span class="status-badge status-rejected">거절됨</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-<!-- 							<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td> -->
-								<td><span class="status-badge status-approved" onclick="location.href='/assetmanager/order/regist'" style="cursor:pointer;">승인 완료</span></td>
+								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">등록 완료</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">등록 완료</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 						</tbody>
 					</table>

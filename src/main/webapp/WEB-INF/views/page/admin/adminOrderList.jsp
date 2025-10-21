@@ -55,14 +55,14 @@
 								<td>20250127</td>
 								<td>김성배</td>
 								<td>2023-01-27</td>
-								<td><span class="status-badge status-waited">승인 대기</span></td>
+								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
 							<tr>
 								<td>Latitude 7420 노트북 등 2개</td>
 								<td>20250127</td>
 								<td>강예나</td>
 								<td>2023-01-27</td>
-								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">요청 반려</span></td>
+								<td><span class="status-badge status-rejected">거부됨</span></td>
 							</tr>
 
 							<tr>
@@ -70,7 +70,7 @@
 								<td>20250127</td>
 								<td>강예나</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
+								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 							
 							<tr>
@@ -78,7 +78,7 @@
 								<td>20250127</td>
 								<td>강예나</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
+								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 							
 							<tr>
@@ -86,7 +86,7 @@
 								<td>20250127</td>
 								<td>강예나</td>
 								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
+								<td><span class="status-badge status-approved">승인됨</span></td>
 							</tr>
 						</tbody>
 					</table>

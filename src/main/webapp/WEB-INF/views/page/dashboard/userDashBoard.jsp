@@ -85,7 +85,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-01-15</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-used">개인</span></td>
+	                        <td><span class="status-badge status-approved">개인</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -93,7 +93,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-03-22</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-used">개인</span></td>
+	                        <td><span class="status-badge status-approved">개인</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -101,7 +101,7 @@
 	                        <td>전자기기</td>
 	                        <td>2023-04-10</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-used">개인</span></td>
+	                        <td><span class="status-badge status-approved">개인</span></td>
 	                    </tr>
 	                    <tr>
 	                    	
@@ -109,14 +109,14 @@
 	                        <td>전자기기</td>
 	                        <td>2023-01-01</td>
 	                        <td>2024-01-01</td>
-	                        <td><span class="status-badge status-approved">부서</span></td>
+	                        <td><span class="status-badge status-purple">부서</span></td>
 	                    </tr>
 	                    <tr>
 	                    	<td>노트북 충전기</td>
 	                        <td>전자기기</td>
 	                        <td>2023-05-01</td>
 	                        <td>N/A</td>
-	                        <td><span class="status-badge status-approved">부서</span></td>
+	                        <td><span class="status-badge status-purple">부서</span></td>
 	                    </tr>
 	                </tbody>
 	            </table>

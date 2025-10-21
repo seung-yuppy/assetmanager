@@ -195,14 +195,15 @@ body {
     border-radius: 9999px;
     font-weight: bold;
     font-size: 15px;
-    color: var(--white-color);
+    color: var(--white-color) !important;
 }
 
 /* 상태별 색상 */
 .status-approved { background-color: var(--green-color); }
 .status-waited  { background-color: var(--gray-color); }
 .status-rejected {background-color: var(--red-color);}
-.status-used {background-color: var(--blue-color);}
+.status-used { background-color: var(--blue-color); }
+.status-purple { background-color: var(--purple-color); }
 
 /* 목록으로 버튼을 위한 */
 .detail-header {

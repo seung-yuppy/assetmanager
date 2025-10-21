@@ -177,4 +177,5 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-block: 10px;
+	gap: 10px;
 }    

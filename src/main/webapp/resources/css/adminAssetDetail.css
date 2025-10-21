@@ -22,8 +22,3 @@
             font-weight: 600;
             text-align: right;
         }
-        
-        .detail-header {
-        	display: flex;
-        	justify-content: space-between;
-        }

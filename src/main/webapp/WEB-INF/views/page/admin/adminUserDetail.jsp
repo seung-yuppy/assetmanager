@@ -6,7 +6,6 @@
 	<meta charset="UTF-8">
 	<title>사용자 상세</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
 </head>
@@ -16,11 +15,11 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<div class="home-head">
+				<h1>배고파 사원님의 상세정보</h1>
+				<div class="detail-header">
 					<span>개발팀(진천)</span>
-					<h1>배고파 사원님의 상세정보</h1>
+					<a href="/assetmanager/admin/asset/list" class="detail-button">목록으로</a>
 				</div>
-				
 		        <!-- 자산 정보 시작 -->
 				<div class="section-card">
 	                <h2>사용자 자산 히스토리</h2>

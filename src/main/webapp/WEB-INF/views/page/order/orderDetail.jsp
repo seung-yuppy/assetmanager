@@ -19,7 +19,10 @@
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1 class="content-title">구매 요청 상세</h1>
-				<span class="page-description">구매 요청의 상세 내용을 확인하세요</span>
+				<div class="detail-header">
+					<span class="page-description">구매 요청의 상세 내용을 확인하세요</span>
+					<a href="javascript:history.back()" class="detail-button">목록으로</a>
+				</div>
 				<div class="section-card">
 					<form action="#" method="post">
 						<div class="form-section">

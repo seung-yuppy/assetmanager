@@ -7,6 +7,7 @@
 <title>구매 요청 상세</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/adminDetail.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -18,8 +19,36 @@
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1 class="content-title">구매 요청 상세</h1>
-				<span>구매 요청의 상세 내용을 확인하세요</span>
+				<div class="detail-header">
+					<span class="page-description">구매 요청의 상세 내용을 확인하세요</span>
+					<a href="javascript:history.back()" class="detail-button">목록으로</a>
+				</div>
 				<div class="section-card">
+					<!-- 신청자 정보 섹션 전체 컨테이너 -->
+					<div class="applicant-info-section">
+					    <!-- 제목 -->
+					    <h2 class="applicant-section-title">신청자 정보</h2>
+					    <!-- 내용 목록 (Key-Value) -->
+					    <dl class="applicant-info-list">
+					        <dt>요청ID(사번)</dt>
+					        <dd>ams1001</dd>
+					
+					        <dt>신청자 이름</dt>
+					        <dd>홍길동</dd>
+					
+					        <dt>부서명</dt>
+					        <dd>영업팀</dd>
+					
+					        <dt>직책</dt>
+					        <dd>팀장</dd>
+					        
+					        <dt>연락처</dt>
+					        <dd>010 - 1234 - 5678</dd>
+					
+					        <dt>주소</dt>
+					        <dd>서울 종로구 대명길 28 대학로</dd>
+					    </dl>
+					</div>
 					<form action="#" method="post">
 						<div class="form-section">
 							<!-- 결재라인 전체 컨테이너 -->

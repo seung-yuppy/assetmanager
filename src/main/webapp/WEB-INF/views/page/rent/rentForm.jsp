@@ -10,7 +10,7 @@
 <title>직원 반출 요청</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
-
+<link href="/assetmanager/resources/css/assetListModal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/approver.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -31,9 +31,6 @@
 							<%@ include file="/WEB-INF/views/component/approver.jsp"%>
 						</div>
 
-
-
-
 						<h2 class="form-section-title">요청 내용</h2>
 						<div class="radio-input-group">
 							<div class="radio-input">
@@ -43,7 +40,6 @@
 								<input type="radio" id="inputMethodExcel" name="inputMethod" value="excel" onclick="showInputForm('excel')"> <label for="inputMethodExcel">엑셀 파일 업로드</label>
 							</div>
 						</div>
-
 
 						<div id="formInputArea" class="inputArea">
 							<div class="form-row">
@@ -60,12 +56,9 @@
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명<span class="required">*</span></label> <input list="productOptions" name="productNameSelect" id="productNameSelect" placeholder="선택  또는 직접 입력">
-									<datalist id="productOptions">
-										<option value="LG그램">
-										<option value="macbook 10">
-										<option value="직접 입력">
-									</datalist>
+									<label>제품명<span class="required">*</span></label> 
+									<input list="productOptions" name="productNameSelect" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">
+								
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
@@ -118,7 +111,36 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 제품 검색 모달 -->
+    <div id="product-modal" class="modal-overlay hidden">
+        <div class="modal-content" id="modal-content-container">
+            <div class="modal-header">
+                <h3 class="modal-title">자산 리스트 검색</h3>
+                <button id="close-modal-btn" class="close-modal-btn">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="product-search-input" class="input-field" placeholder="제품명 또는 스펙으로 검색하세요...">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>제품명</th>
+                                <th>스펙</th>
+                            </tr>
+                        </thead>
+                        <tbody id="asset-list-body">
+                            <!-- 자산 데이터가 여기에 동적으로 추가됩니다 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
-	<script src="/assetmanager/resources/js/requestForm.js"></script> 
+	<script src="/assetmanager/resources/js/requestForm.js"></script> <!-- 엑셀 업로드 -->
+	<script src="/assetmanager/resources/js/assetListModal.js"></script>
 </body>
 </html>

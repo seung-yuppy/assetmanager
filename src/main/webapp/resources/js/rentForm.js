@@ -39,12 +39,8 @@ function addProduct(){
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명<span class="required">*</span></label> <input list="productOptions" name="productNameSelect" id="productNameSelect" placeholder="선택  또는 직접 입력">
-									<datalist id="productOptions">
-										<option value="LG그램">
-										<option value="macbook 10">
-										<option value="직접 입력">
-									</datalist>
+									<label>제품명<span class="required">*</span></label> 
+									<input list="productOptions" name="productNameSelect" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal">
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
@@ -53,10 +49,10 @@ function addProduct(){
 									</div>
 								</div>
 
-							</div>
+							</div>  
 	`
 		targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);
-}
+} 
 
 
 

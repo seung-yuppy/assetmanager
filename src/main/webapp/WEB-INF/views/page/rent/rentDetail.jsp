@@ -24,16 +24,17 @@
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
 				<h1 class="content-title">반출 요청 상세</h1>
-				<span>반출 요청의 상세 내역을 확인하고 관리하세요.</span>
+				<div class="detail-header">
+					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
+					<a href="javascript:history.back()" class="detail-button">목록으로</a>
+				</div>
+				
 				<div class="section-card">
 
 					<div class="form-section">
 						<!-- 결재라인 불러오기 -->
 						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
 					</div>
-
-
-
 
 					<h2 class="form-section-title">요청 내용</h2>
 					<div id="formInputArea" class="inputArea">
@@ -90,8 +91,13 @@
 								<div class="form-return-date">
 									<label for="return-date">반납 예정일</label> <input type="date" id="return-date" placeholder="반납 예정일 선택" class="locked-input" readonly>
 								</div>
+
 							</div>
+
 						</div>
+					</div>
+					<div class="form-actions">
+						<button type="button" class="cancel-action">요청 취소</button>
 					</div>
 
 				</div>
@@ -108,20 +114,16 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="modalProductName">제품명</label> 
-					<input type="text" id="modalProductName" class="form-input" readonly>
+					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="application-date">등록일</label> 
-					<input id="application-date" value="${currentDate}" class="form-input" readonly>
+					<label for="application-date">등록일</label> <input id="application-date" value="${currentDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> 
-					<input id="modalReturnDate" value="2025-12-31" class="form-input" readonly>
+					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" value="2025-12-31" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label> 
-					<input type="text" id="modalSerialNumber" class="form-input">
+					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input">
 				</div>
 
 

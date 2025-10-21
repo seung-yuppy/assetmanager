@@ -48,7 +48,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><a href="/assetmanager/admin/asset/detail">LG 그램 노트북</a></td>
+								<td>LG 그램 노트북</td>
 								<td>노트북</td>
 		                        <td>SRV987654321</td>
 		                        <td>2022-11-01</td>

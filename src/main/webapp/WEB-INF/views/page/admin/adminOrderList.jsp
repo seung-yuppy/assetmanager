@@ -53,7 +53,7 @@
 							<tr>
 								<td>김성배</td>
 								<td>20250127</td>
-								<td><a href="/assetmanager/admin/order/detail">Latitude 7420 노트북 등 2개</a></td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>2023-01-27</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>

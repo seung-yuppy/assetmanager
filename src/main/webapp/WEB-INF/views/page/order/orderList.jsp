@@ -54,7 +54,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><a href="/assetmanager/order/detail">Latitude 7420 노트북 등 2개</a></td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>신입 사원 노트북 배정</td>
 								<td>100,0000</td>
 								<td>2023-01-15</td>

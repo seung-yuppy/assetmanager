@@ -63,7 +63,7 @@
 								<td><span class="status-badge status-pending">대기 중</span></td>
 							</tr>
 							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9">
-								<td><a href="/assetmanager/rent/detail">삼성 갤럭시 탭 S9 외 2개</a></td>
+								<td>삼성 갤럭시 탭 S9 외 2개</td>
 								<td>2024-07-19</td>
 								<td>2025-12-31</td>
 								<td><span class="status-badge status-approved">승인됨</span></td>

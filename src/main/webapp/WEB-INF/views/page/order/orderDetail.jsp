@@ -28,7 +28,6 @@
 						</div>
 						<h2 class="form-section-title">요청 정보</h2>
 						<div id="formInputArea" class ="inputArea">
-							
 							<div class="form-date" style="margin-bottom: 20px;">
 								<div class="form-application-date">
 									<label for="application-date">구매 요청일</label> 

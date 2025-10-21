@@ -118,33 +118,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 모달 -->
-	<div id="serialRegisterModal" class="custom-modal-backdrop">
-	    <div class="custom-modal-content">
-	        <div class="modal-header">
-	            <h3>일련번호 등록</h3>
-	            <button class="modal-close-btn">&times;</button> 
-	        </div>
-	        <div class="modal-body">
-     			<div class="form-group">
-					<label for="modalProductName">제품명</label>
-					<input type="text" id="modalProductName" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalRequestDate">요청 일자</label>
-					<input type="text" id="modalRequestDate" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label>
-					<input type="text" id="modalSerialNumber" class="form-input" placeholder="일련번호를 입력하세요">
-				</div>
-	        </div>
-	        <div class="modal-footer">
-	            <button class="secondary-action">취소</button>
-	            <button class="primary-action" onclick="registerSerial()">등록하기</button>
-	        </div>
-	    </div>
-	</div>
 	
 <script src="/assetmanager/resources/js/adminList.js"></script>
 <script>

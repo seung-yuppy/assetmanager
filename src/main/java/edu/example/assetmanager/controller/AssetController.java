@@ -15,4 +15,10 @@ public class AssetController {
 	public String assetForm() {
 		return "/asset/userAssetForm";
 	}
+	
+	@GetMapping("/asset/extension/form")
+	public String extensionForm() {
+		return "/asset/extensionForm";
+	}
+	
 }

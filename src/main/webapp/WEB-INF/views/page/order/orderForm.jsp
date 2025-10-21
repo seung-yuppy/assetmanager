@@ -40,6 +40,13 @@
 							</div>
 						</div>
 						<div id="formInputArea" class ="inputArea">
+							<div class="form-content">
+								<div class="form-date">
+									<div class="form-application-date">
+										<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="2025-10-21" class="form-input rent-input" readonly="">
+									</div>
+								</div>
+							</div>
 							<div class="form-row">
 								<div class="form-group fixed-width-sm">
 									<label for="isDepartmentUse">부서 자산</label>

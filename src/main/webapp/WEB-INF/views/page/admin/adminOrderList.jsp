@@ -42,49 +42,49 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>요청자</th>
+								<th>품목명</th>
 								<th>사번</th>
-								<th>요청 내용</th>
+								<th>요청자</th>
 								<th>요청일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>김성배</td>
-								<td>20250127</td>
 								<td>Latitude 7420 노트북 등 2개</td>
+								<td>20250127</td>
+								<td>김성배</td>
 								<td>2023-01-27</td>
 								<td><span class="status-badge status-waited">승인 대기</span></td>
 							</tr>
 							<tr>
-								<td>강예나</td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>20250127</td>
-								<td>LG Gram 노트북 외 3개</td>
+								<td>강예나</td>
 								<td>2023-01-27</td>
 								<td><span class="status-badge status-rejected" data-toggle="modal" data-target="rejectDetailModal">요청 반려</span></td>
 							</tr>
 
 							<tr>
-								<td>임꺽정</td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>20250127</td>
-								<td>Latitude 7420 노트북</td>
+								<td>강예나</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
 							</tr>
 							
 							<tr>
-								<td>임꺽정</td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>20250127</td>
-								<td>Latitude 7420 노트북</td>
+								<td>강예나</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
 							</tr>
 							
 							<tr>
-								<td>임꺽정</td>
+								<td>Latitude 7420 노트북 등 2개</td>
 								<td>20250127</td>
-								<td>Latitude 7420 노트북</td>
+								<td>강예나</td>
 								<td>2023-01-15</td>
 								<td><span class="status-badge status-approved" data-toggle="modal" data-target="serialRegisterModal" >승인 완료</span></td>
 							</tr>

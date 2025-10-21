@@ -486,3 +486,10 @@ input:focus, select:focus, textarea:focus {
     color: #6B7280; /* gray-500 */
     margin-top: 2px;
 }
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-block: 10px;
+	gap: 10px;
+}   

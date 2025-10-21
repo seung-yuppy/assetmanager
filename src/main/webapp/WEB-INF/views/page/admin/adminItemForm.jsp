@@ -65,6 +65,9 @@
 								<button type="button" class="add-product-button admin-item" onclick="addProduct();">+</button>
 							</div>
 						</div>
+					<div class="button-container">
+						<button type="submit" class="edit-button">등록</button>
+					</div>
 					
 					</form>
 				</div>

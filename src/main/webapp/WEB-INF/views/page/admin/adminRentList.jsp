@@ -48,8 +48,8 @@
 							<tr>
 								<%--<th><input type="checkbox" id="selectAllCheckbox"></th>--%>
 								<th>품목명</th>	
-								<th>요청 ID(사번)</th>
-								<th>요청자 이름</th>						
+								<th>사번</th>
+								<th>요청자</th>						
 								<!-- <th>요청 사유</th> -->
 								<th>요청일</th>
 								<th>상태</th>

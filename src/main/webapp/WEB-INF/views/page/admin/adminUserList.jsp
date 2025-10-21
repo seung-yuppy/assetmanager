@@ -45,7 +45,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><a href="/assetmanager/admin/user/detail">AMS1001</a></td>
+								<td>AMS1001</td>
 								<td>배고파</td>
 		                        <td>개발팀</td>
 		                        <td>사원</td>
@@ -89,5 +89,6 @@
 			</div>
 		</div>	
 	</div>
+	<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

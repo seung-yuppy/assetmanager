@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<title>자산 상세</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<!-- 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet"> -->
 	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
@@ -55,7 +54,7 @@
 		                <div class="info-list">
 		                    <div class="info-item">
 		                        <span class="info-label">자산 상태</span>
-		                        <span class="info-value"><span class="status-badge status-used">사용 중</span></span>
+		                        <span class="info-value"><span class="status-badge status-used">사용중</span></span>
 		                    </div>
 		                    <div class="info-item">
 		                        <span class="info-label">사용자 이름</span>
@@ -124,6 +123,7 @@
 		        <!-- 자산 히스토리 끝 -->		
 		        
 		        <div class="button-container">
+		        	<button class="edit-button">수정</button>
 					<button class="cancel-button">불용</button>
 				</div>		
 			</div>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminItemController {
 	@GetMapping("/item/list")
 	public String itemList() {
-		return "/admin/adminStandardItemList";
+		return "/admin/adminItemList";
 	}
 	
 	@GetMapping("/item/form")

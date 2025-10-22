@@ -14,33 +14,67 @@
     margin-bottom: 1rem;
 }
 
-/* dt, dd 목록 스타일 */
 .applicant-info-list {
+	display: flex;
+    gap: 300px;
+}
+
+/* dt, dd 목록 스타일 */
+.applicant-info-f-list {
     font-size: 18px;
     display: grid;
-    grid-template-columns: 1fr; /* 모바일 기본 1단 */
-    gap: 1rem 2rem; /* 세로 16px, 가로 32px */
+    grid-template-columns: 1fr; 
+    gap: 1rem 2rem; 
 }
 
 /* 데스크탑 화면 (768px 이상) 에서 2단으로 변경 */
 @media (min-width: 768px) {
-    .applicant-info-list {
-        grid-template-columns: 140px 1fr; /* 레이블 140px 고정, 나머지는 값 */
+    .applicant-info-f-list {
+        grid-template-columns: 180px 1fr; 
         gap: 20px;
-        column-gap: 100px;
         margin-left: 2.5rem;
     }
 }
 
-.applicant-info-list dt {
+.applicant-info-f-list dt {
     font-weight: 600;
-    color: #64748b; /* slate-500 */
+    color: #64748b; 
 }
 
-.applicant-info-list dd {
-    color: #334155; /* slate-700 */
-    margin: 0; /* dd 태그의 기본 마진 제거 */
+.applicant-info-f-list dd {
+    color: #334155; 
+    margin: 0; 
 }
+
+/* dt, dd 목록 스타일 */
+.applicant-info-s-list {
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 2rem; 
+}
+
+/* 데스크탑 화면 (768px 이상) 에서 2단으로 변경 */
+@media (min-width: 768px) {
+    .applicant-info-s-list {
+        grid-template-columns: 180px 1fr;
+        gap: 20px;
+        margin-left: 2.5rem;
+    }
+}
+
+.applicant-info-s-list dt {
+    font-weight: 600;
+    color: #64748b; 
+}
+
+.applicant-info-s-list dd {
+    color: #334155; 
+    margin: 0;
+}
+
+
+
 
 /* SweetAlert input 너비 조절 */
 .custom-swal-input {

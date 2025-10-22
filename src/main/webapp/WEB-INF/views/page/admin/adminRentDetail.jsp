@@ -35,37 +35,39 @@
 					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
 				</div>
 				<div class="section-card">
+					<!-- 결재라인 불러오기 -->
+					<div class="form-section">
+						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
+					</div>
 
 					<!-- 신청자 정보 섹션 전체 컨테이너 -->
 					<div class="applicant-info-section">
-					    <!-- 제목 -->
-					    <h2 class="applicant-section-title">신청자 정보</h2>
-					    
-					    <!-- 내용 목록 (Key-Value) -->
-					    <dl class="applicant-info-list">
-					        <dt>요청ID(사번)</dt>
-					        <dd>ams1001</dd>
-					
-					        <dt>신청자 이름</dt>
-					        <dd>홍길동</dd>
-					
-					        <dt>부서명</dt>
-					        <dd>영업팀</dd>
-					
-					        <dt>직책</dt>
-					        <dd>팀장</dd>
-					        
-					        <dt>연락처</dt>
-					        <dd>010 - 1234 - 5678</dd>
-					
-					        <dt>주소</dt>
-					        <dd>서울 종로구 대명길 28 대학로</dd>
-					    </dl>
-					</div>
+						<!-- 제목 -->
+						<h2 class="applicant-section-title">신청자 정보</h2>
 
-					<div class="form-section">
-						<!-- 결재라인 불러오기 -->
-						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
+						<!-- 내용 목록  -->
+						<div class="applicant-info-list">
+							<dl class="applicant-info-f-list">
+								<dt>요청ID(사번)</dt>
+								<dd>ams1001</dd>
+
+								<dt>이름</dt>
+								<dd>홍길동</dd>
+
+								<dt>부서명</dt>
+								<dd>영업팀</dd>
+							</dl>
+							<dl class="applicant-info-s-list">
+								<dt>직책</dt>
+								<dd>팀장</dd>
+
+								<dt>연락처</dt>
+								<dd>010 - 1234 - 5678</dd>
+
+								<dt>주소</dt>
+								<dd>서울 종로구 대명길 28 대학로</dd>
+							</dl>
+						</div>
 					</div>
 
 					<h2 class="form-section-title">요청 내용</h2>

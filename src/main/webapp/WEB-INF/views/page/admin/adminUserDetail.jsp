@@ -18,7 +18,6 @@
 				<h1>배고파 사원님의 상세정보</h1>
 				<div class="detail-header">
 					<span>개발팀(진천)</span>
-					<a href="/assetmanager/admin/user/list" class="detail-button">목록으로</a>
 				</div>
 		        <!-- 자산 정보 시작 -->
 				<div class="section-card">

@@ -18,10 +18,10 @@
 				<span>모든 권장 제품의 목록을 확인하고 관리합니다.</span>
 				
 				<div class="section-card">
-					<div class="button-container">
-						<button class="add-button" onclick="location.href='/assetmanager/admin/item/form'">+ 제품 추가</button>
-						<button class="negative-button">- 제품 삭제</button>
-					</div>
+												<div class="button-container">
+							<button class="add-button" onclick="location.href='/assetmanager/admin/item/form'">추가</button>
+							<button class="negative-button">삭제</button>
+						</div>	
 				
 					<div class="search-card">
 						<div class="filter-controls">
@@ -84,6 +84,9 @@
 
 						</tbody>
 					</table>
+					
+
+					
 					<nav class="pagination-container">
 						<ul class="pagination-list">
 							<li class="page-item prev"><a class="page-link" href="#">&lt; 이전</a></li>
@@ -91,8 +94,10 @@
 							<li class="page-item"><a class="page-link" href="#">2</a></li>
 							<li class="page-item"><a class="page-link" href="#">3</a></li>
 							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
-						</ul>
-					</nav>									
+						</ul>	
+					</nav>
+					
+							
 				</div>
 			</div>
 		</div>

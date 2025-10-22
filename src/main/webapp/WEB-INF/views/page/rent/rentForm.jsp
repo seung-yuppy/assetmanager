@@ -43,9 +43,7 @@
 
 						<div id="formInputArea" class="inputArea">
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse">
-								</div>
+
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label> <select id="category" name="category" required onchange="updateProductOptions()">
 										<option value="" disabled selected>선택하세요</option>
@@ -65,6 +63,9 @@
 									<div class="last-input-group">
 										<input type="number" id="quantity" name="quantity" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
+								</div>
+								<div class="form-group fixed-width-sm">
+									<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse">
 								</div>
 
 							</div>

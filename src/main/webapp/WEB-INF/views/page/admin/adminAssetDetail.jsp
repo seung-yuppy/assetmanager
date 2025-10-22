@@ -19,7 +19,10 @@
 				<h1>LG그램 노트북 상세</h1>
 				<div class="detail-header">
 					<span>LG그램 노트북의 상세 정보를 확인하고 관리 합니다.</span>
-					<a href="/assetmanager/admin/asset/list" class="detail-button">목록으로</a>
+			        <div class="button-container">
+			        	<button id="edit-modal" class="edit-button">수정</button>
+						<button class="cancel-button">불용</button>
+					</div>	
 				</div>
 				<!-- 자산 & 사용자 상세 정보 시작 -->
 				<div class="request-grid">
@@ -77,9 +80,9 @@
 		            </div>
 				</div>
 				<!-- 자산 & 사용자 상세 정보 끝 -->
-				<!-- 자산 히스토리 시작 -->
+				<!-- 자산 내역 시작 -->
 				<div class="section-card">
-		            <h2>자산 히스토리</h2> 
+		            <h2>자산 내역</h2> 
 		            <table class="data-table">
 		                <thead>
 		                    <tr>
@@ -101,7 +104,6 @@
 		                        <td><span class="status-badge status-used">사용중</span></td>
 		                    </tr>
 		                    <tr>
-		                    	
 		                        <td>2023-03-22</td>
 		                        <td>2025-01-14</td>
 		                        <td>배고파</td>
@@ -110,7 +112,6 @@
 		                        <td><span class="status-badge status-rejected">반납</span></td>
 		                    </tr>
 		                    <tr>
-		                    	
 		                        <td>2023-01-21</td>
 		                        <td>2023-03-21</td>
 		                        <td>힘들어</td>
@@ -122,11 +123,7 @@
 		            </table>
 		        </div>
 		        <!-- 자산 히스토리 끝 -->		
-		        
-		        <div class="button-container">
-		        	<button id="edit-modal" class="edit-button">수정</button>
-					<button class="cancel-button">불용</button>
-				</div>		
+	
 			</div>
 			
 		</div>

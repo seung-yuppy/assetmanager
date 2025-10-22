@@ -33,7 +33,6 @@
 				<h1 class="content-title">반출 요청 상세</h1>
 				<div class="detail-header">
 					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
-					<a href="javascript:history.back()" class="detail-button">목록으로</a>
 				</div>
 				<div class="section-card">
 

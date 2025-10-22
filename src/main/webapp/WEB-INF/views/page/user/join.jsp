@@ -71,11 +71,14 @@
 	                <div class="form-group">
 				    	<select name="departmentId" required>
 				    		<option value="">부서를 선택하세요</option>
-				    		<option value="1">경영부</option>
-				    		<option value="2">개발부</option>
-				    		<option value="3">보안부</option>
-				    		<option value="4">인사부</option>
-				    		<option value="5">마케팅부</option>
+				    		<option value="1">경영지원팀</option>
+				    		<option value="2">공공사업1팀</option>
+				    		<option value="3">공공사업2팀</option>
+				    		<option value="4">공공사업3팀</option>
+				    		<option value="5">공공사업4팀</option>
+				    		<option value="6">전략사업1팀</option>
+				    		<option value="7">전략사업2팀</option>
+				    		<option value="8">영업팀</option>
 				    	</select>
 	                </div>
 	                

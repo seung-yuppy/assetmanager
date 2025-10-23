@@ -17,4 +17,9 @@ public class AdminAssetController {
 	public String assetDetail() {
 		return "/admin/adminAssetDetail";
 	}
+	
+	@GetMapping("/asset/disposal")
+	public String disposalList() {
+		return "/admin/adminDisposalList";
+	}
 }

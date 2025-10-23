@@ -48,7 +48,7 @@
 							<tr>
 								<%--<th><input type="checkbox" id="selectAllCheckbox"></th>--%>
 								<th>품목명</th>	
-								<th>사번</th>
+								<th>부서</th>
 								<th>요청자</th>						
 								<!-- <th>요청 사유</th> -->
 								<th>요청일</th>
@@ -60,7 +60,7 @@
 							<tr data-id="REQ001">
 								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
 								<td>LG 그램 노트북 외 2개</td>
-								<td>REQ001</td>
+								<td>공공사업1팀</td>
 								<td>둘리</td>								
 								<!-- <td>사업상 새 개발용 노트북</td> -->
 								<td>2024-07-20</td>
@@ -69,7 +69,7 @@
 							<tr data-id="REQ002">
 								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
 								<td>삼성 갤럭시 탭 S9</td>	
-								<td>REQ002</td>
+								<td>공공사업1팀</td>
 								<td>또치</td>										
 								<!-- <td>잘못된 모델이 배송되어, 교환 요청.</td> -->
 								<td>2024-07-19</td>
@@ -78,7 +78,7 @@
 							<tr data-id="REQ003">
 								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
 								<td>로지텍 MX 마스터 3S 마우스</td>
-								<td>REQ003</td>
+								<td>공공사업1팀</td>
 								<td>도우너</td>								
 								<!-- <td>더블 클릭 문제, 스크롤 휠 작동 불량.</td> -->
 								<td>2024-07-18</td>
@@ -87,7 +87,7 @@
 							<tr class="processed" data-id="REQ003">
 								<%--<td><input type="checkbox" class="row-checkbox" disabled></td>--%>
 								<td>애플 워치 시리즈 9</td>	
-								<td>REQ003</td>
+								<td>공공사업1팀</td>
 								<td>도우너</td>															
 								<!-- 	<td>배터리 수명 기대 이하, 교환 요청.</td> -->
 								<td>2025-07-15</td>
@@ -96,7 +96,7 @@
 							<tr class="processed" data-id="REQ005">
 								<%--<td><input type="checkbox" class="row-checkbox" disabled></td>--%>
 								<td>크롬캐스트 with Google TV</td>	
-								<td>REQ005</td>
+								<td>공공사업1팀</td>
 								<td>고길동</td>															
 								<!-- <td>회의실 디스플레이용</td> -->
 								<td>2025-10-12</td>

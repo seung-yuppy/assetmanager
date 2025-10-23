@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,11 +50,16 @@
 						<tbody>
 							<c:forEach var="asset" items="${list}">
 								<tr>
-									<td>${asset.assetName}</td>
-									<td>${asset.categoryId}</td>
+									<td><a href="/assetmanager/admin/asset/detail/${asset.id}">${asset.assetName}</a></td>
+									<td>${asset.category}</td>
 									<td>${asset.serialNumber}</td>
-									<td>${asset.registerDate}</td>
-									<td><span class="status-badge status-waited">대기중</span></td>
+									<td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
+									<c:if test="${asset.userId == 0}">
+										<td><span class="status-badge status-waited">대기중</span></td>
+									</c:if>
+									<c:if test="${asset.userId != 0}">
+										<td><span class="status-badge status-used">사용중</span></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -112,6 +118,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

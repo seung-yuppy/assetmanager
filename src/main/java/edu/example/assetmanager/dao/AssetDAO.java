@@ -15,4 +15,7 @@ public interface AssetDAO {
 	
 	// 자산 모든 리스트
 	public List<AssetDTO> listAll(@Param("start") int start, @Param("end") int end);
+	
+	// 자산 상세
+	public AssetDTO assetDetail(@Param("id") int id);
 }

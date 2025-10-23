@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +18,9 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>LG그램 노트북 상세</h1>
+				<h1>${asset.assetName} 상세</h1>
 				<div class="detail-header">
-					<span>LG그램 노트북의 상세 정보를 확인하고 관리 합니다.</span>
+					<span>${asset.assetName}의 상세 정보를 확인하고 관리 합니다.</span>
 			        <div class="button-container">
 			        	<button id="edit-modal" class="edit-button">수정</button>
 						<button class="cancel-button">불용</button>
@@ -32,23 +34,23 @@
 						<div class="info-list"> 
 		                    <div class="info-item">
 		                        <span class="info-label">자산명</span>
-		                        <span class="info-value">Latitude 7420 노트북</span>
+		                        <span class="info-value">${asset.assetName}</span>
 		                    </div>
 		                    <div class="info-item">
 		                        <span class="info-label">자산 카테고리</span>
-		                        <span class="info-value">노트북</span>
+		                        <span class="info-value">${asset.category}</span>
 		                    </div>
 		                    <div class="info-item">
 		                        <span class="info-label">일련번호</span>
-		                        <span class="info-value">L7420-SN-AB12345</span>
+		                        <span class="info-value">${asset.serialNumber}</span>
 		                    </div>
+		                    <div class="info-item">
+		                        <span class="info-label">스펙</span>
+		                        <span class="info-value">${asset.spec}</span>
+		                    </div> 
 		                    <div class="info-item">
 		                        <span class="info-label">등록일자</span>
-		                        <span class="info-value">2023-01-05</span>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">분류</span>
-		                        <span class="info-value">개인 할당</span>
+		                        <span class="info-value"><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></span>
 		                    </div>
 		                </div>
 					</div>
@@ -56,26 +58,50 @@
 					<div class="section-card">
 		                <h2>현재 사용자 정보</h2>
 		                <div class="info-list">
-		                    <div class="info-item">
-		                        <span class="info-label">자산 상태</span>
-		                        <span class="info-value"><span class="status-badge status-used">사용중</span></span>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">사용자 이름</span>
-		                        <span class="info-value">김지원 사원</span>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">부서명</span>
-		                        <span class="info-value">개발팀</span>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">부서 주소</span>
-		                        <span class="info-value">B동 5층 개발팀 사무실</span>
-		                    </div>
-		                    <div class="info-item">
-		                        <span class="info-label">할당일</span>
-		                        <span class="info-value">2023-01-15</span>
-		                    </div>
+		                    <c:if test="${asset.userId != 0}">
+								<div class="info-item">
+			                        <span class="info-label">자산 상태</span>
+			                        <span class="info-value"><span class="status-badge status-used">사용중</span></span>
+			                    </div>		                    
+			                    <div class="info-item">
+			                        <span class="info-label">사용자 이름</span>
+			                        <span class="info-value">김지원 사원</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서명</span>
+			                        <span class="info-value">개발팀</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서 주소</span>
+			                        <span class="info-value">B동 5층 개발팀 사무실</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">할당일</span>
+			                        <span class="info-value">2023-01-15</span>
+			                    </div>
+							</c:if>
+							<c:if test="${asset.userId == 0}">
+								<div class="info-item">
+			                        <span class="info-label">자산 상태</span>
+			                        <span class="info-value"><span class="status-badge status-waited">대기중</span></span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">사용자 이름</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서명</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서 주소</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">할당일</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+							</c:if>
 		                </div>
 		            </div>
 				</div>

@@ -18,5 +18,11 @@
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="assetDetail" resultType="AssetDTO">
+		SELECT *
+		FROM Asset
+		WHERE id = #{id}
+	</select>
 
 </mapper>

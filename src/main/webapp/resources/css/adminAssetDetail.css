@@ -1,16 +1,49 @@
 @charset "UTF-8";
 		/* 5. 정보 목록 스타일 */
+        .user-info-list {
+       	    display: flex;
+    		flex-direction: row;
+    		gap: 50px;
+        }
         .info-list {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
         }
+        .info-f-list {
+        	margin-left: 2.5rem; 
+        }
+        .info-s-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            margin-left: 2.5rem;
+        }       
+        .info-t-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            margin-left: 2.5rem;
+        }
+        .user-name {
+            display: flex;
+    		justify-content: center;
+    		font-weight: 600;
+        }        
         .info-item {
             display: flex;
             justify-content: space-between;
             padding-bottom: 0.5rem;
             border-bottom: 1px dashed #f3f4f6;
             font-size: 0.95rem;
+        }      
+        .user-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #f3f4f6;
+            font-size: 0.95rem;
+            gap: 250px;
         }
         .info-label {
             color: var(--color-gray);

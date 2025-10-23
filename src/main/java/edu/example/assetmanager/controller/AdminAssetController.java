@@ -1,14 +1,18 @@
 package edu.example.assetmanager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.service.AssetService;
@@ -46,12 +50,28 @@ public class AdminAssetController {
 		return "/admin/adminAssetList";
 	}
 	
+	//  자산 상세
 	@GetMapping("/asset/detail/{id}")
 	public String assetDetail(Model model, @PathVariable("id") int id) {
 		AssetDTO dto = service.getAsset(id);
 		model.addAttribute("asset", dto);
 		
 		return "/admin/adminAssetDetail";
+	}
+	
+	// 자산 수정 모달을 위한 자산 데이터
+	@ResponseBody
+	@GetMapping(value = "/asset/info/{id}", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> getAsset(@PathVariable("id") int id) {
+		AssetDTO dto = service.getAsset(id);
+		Map<String, Object> response = new HashMap<>();
+		
+		if (dto != null)
+			response.put("result", dto);
+		else
+			response.put("result", "데이터가 없습니다.");
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/asset/disposal")

@@ -22,7 +22,7 @@
 				<div class="detail-header">
 					<span>${asset.assetName}의 상세 정보를 확인하고 관리 합니다.</span>
 			        <div class="button-container">
-			        	<button id="edit-modal" class="edit-button">수정</button>
+			        	<button id="edit-modal" class="edit-button" data-asset-id="${asset.id}">수정</button>
 						<button class="cancel-button">불용</button>
 					</div>	
 				</div>

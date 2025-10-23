@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.example.assetmanager.dao.AssetDAO">
+
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*)
+		FROM Asset
+	</select>
+	
+	<select id="listAll" resultType="AssetDTO">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rnum, a.*
+			FROM (
+				SELECT *
+				FROM Asset
+			) a
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>

@@ -8,5 +8,6 @@
 	
 	<typeAliases>
 		<typeAlias alias="UserDTO" type="edu.example.assetmanager.domain.UserDTO"/>
+		<typeAlias alias="AssetDTO" type="edu.example.assetmanager.domain.AssetDTO"/>
 	</typeAliases>
 </configuration>

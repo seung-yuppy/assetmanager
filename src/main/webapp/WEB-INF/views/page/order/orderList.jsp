@@ -215,6 +215,8 @@
 	 -->
 <script src="/assetmanager/resources/js/modal.js"></script>
 <script>
+	console.log("로그인 유저 정보 : " + loginUser.username);
+	
 	function setBoardParam(key, value) {
 		  const url = new URL(window.location.href);
 		  url.searchParams.delete('page');
@@ -225,6 +227,8 @@
 		  }
 		  window.location.href = url.toString(); // url로 이동
 	}
+	
+	
 </script>
 <script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>

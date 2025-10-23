@@ -7,7 +7,6 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="UserDTO" type="edu.example.assetmanager.domain.UserDTO"/>
-		<typeAlias alias="AssetDTO" type="edu.example.assetmanager.domain.AssetDTO"/>
+		<package name="edu.example.assetmanager.domain"/>
 	</typeAliases>
 </configuration>

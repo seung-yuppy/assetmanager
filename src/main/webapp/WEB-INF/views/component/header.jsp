@@ -33,5 +33,15 @@
 			</li>
 		</ul>	
 	</header>
+	<script>
+		  const loginUser = {
+		    id: "${sessionScope.userInfo != null ? sessionScope.userInfo.id : ''}",
+		    username: "${sessionScope.userInfo != null ? sessionScope.userInfo.username : ''}",
+		    empNo: "${sessionScope.userInfo != null ? sessionScope.userInfo.empNo : ''}",
+		    deptName: "${sessionScope.userInfo != null ? sessionScope.userInfo.deptName : ''}",
+		    role: "${sessionScope.userInfo != null ? sessionScope.userInfo.role : ''}"
+		  };
+		  const isLoggedIn = ${sessionScope.loginUser != null ? "true" : "false"};
+	</script>
 </body>
 </html>

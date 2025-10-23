@@ -1,5 +1,7 @@
 package edu.example.assetmanager.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,18 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class OrderController {
 	
+	@GetMapping("/form")
+	public String form(HttpSession httpSession) {
+		return "/order/orderForm";
+	}
+	
 	@GetMapping("/list")
 	public String index () {
 		return "/order/orderList";
 	}
 	
-	@GetMapping("/form")
-	public String form() {
-		return "/order/orderForm";
-	}
 	
 	@GetMapping("/detail")
 	public String detail(String status) {
 		return "/order/orderDetail";
 	}
+	
 }

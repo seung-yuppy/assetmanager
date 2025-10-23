@@ -29,7 +29,7 @@
 					<!-- 자산 상세 정보 -->
 					<div class="section-card">
 						<h2>자산 상세정보</h2>
-						<div class="info-list">
+						<div class="info-list"> 
 		                    <div class="info-item">
 		                        <span class="info-label">자산명</span>
 		                        <span class="info-value">Latitude 7420 노트북</span>

@@ -47,7 +47,7 @@
 						<thead>
 							<tr>
 								<%--<th><input type="checkbox" id="selectAllCheckbox"></th>--%>
-								<th>품목명</th>	
+								<th>요청 내용</th>	
 								<th>부서</th>
 								<th>요청자</th>						
 								<!-- <th>요청 사유</th> -->
@@ -59,9 +59,9 @@
 							<%-- 모든 tr 태그에 data-id="요청ID" 를 추가합니다 --%>
 							<tr data-id="REQ001">
 								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
-								<td>LG 그램 노트북 외 2개</td>
+								<td><a href="detail">Latitude 7420 노트북 등 2개</a></td>
 								<td>공공사업1팀</td>
-								<td>둘리</td>								
+								<td><a href="/assetmanager/admin/user/detail">김성배</a></td>							
 								<!-- <td>사업상 새 개발용 노트북</td> -->
 								<td>2024-07-20</td>
 								<td><span class="status-badge status-waited">대기중</span></td>
@@ -157,7 +157,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/assetmanager/resources/js/toDetail.js"></script>
 	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

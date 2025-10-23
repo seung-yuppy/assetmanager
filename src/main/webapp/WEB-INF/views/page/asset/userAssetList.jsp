@@ -57,7 +57,7 @@
 		                        <td>개인</td>
 		                        <td>
 		                        	<div class="table-button-container">
-		                       			<button class="delay-button">연장</button>
+		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
 		                       			<button class="return-button">반납</button>
 		                       		</div>
 		                        </td>
@@ -71,7 +71,7 @@
 		                        <td>개인</td>
 		                        <td>
 		                        	<div class="table-button-container">
-		                       			<button class="delay-button">연장</button>
+		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
 		                       			<button class="return-button">반납</button>
 		                       		</div>
 		                        </td>
@@ -93,7 +93,7 @@
 		                        <td>개인</td>
 		                        <td>
 		                        	<div class="table-button-container">
-		                       			<button class="delay-button">연장</button>
+		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
 		                       			<button class="return-button">반납</button>
 		                       		</div>
 		                        </td>		                        

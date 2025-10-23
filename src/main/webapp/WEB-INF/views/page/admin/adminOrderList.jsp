@@ -42,7 +42,7 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>품목명</th>
+								<th>요청 내용</th>
 								<th>부서</th>
 								<th>요청자</th>
 								<th>요청일</th>
@@ -51,9 +51,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>Latitude 7420 노트북 등 2개</td>
+								<td><a href="detail">Latitude 7420 노트북 등 2개</a></td>
 								<td>공공사업1팀</td>
-								<td>김성배</td>
+								<td><a href="/assetmanager/admin/user/detail">김성배</a></td>
 								<td>2023-01-27</td>
 								<td><span class="status-badge status-waited">대기중</span></td>
 							</tr>
@@ -116,9 +116,8 @@
 					</nav>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
-<script src="/assetmanager/resources/js/toDetail.js"></script>
 <script>
 	function setBoardParam(key, value) {
 		  const url = new URL(window.location.href); 

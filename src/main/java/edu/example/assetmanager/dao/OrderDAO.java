@@ -1,0 +1,16 @@
+package edu.example.assetmanager.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import edu.example.assetmanager.domain.OrderDTO;
+import edu.example.assetmanager.domain.OrderParamDTO;
+
+@Mapper
+public interface OrderDAO {
+	// 페이징을 위한 모든 자산 개수
+	public int countAll(OrderParamDTO orderParamDTO);
+	public List<OrderDTO> listAll(OrderParamDTO orderParamDTO);
+
+}

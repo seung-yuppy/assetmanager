@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
+import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.OrderService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,10 @@ public class OrderController {
 	
 	@GetMapping("/list")
 	public String index (HttpSession httpSession, Model model, OrderParamDTO orderParamDTO) {
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+		if (userInfo != null) {
+			orderParamDTO.setUserId(userInfo.getId());
+		}
 		PageResponseDTO<OrderDTO> response = OrderService.listAll(orderParamDTO);
 		model.addAttribute("response", response);
 		return "/order/orderList";

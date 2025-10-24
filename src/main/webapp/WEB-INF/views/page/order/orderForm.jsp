@@ -48,10 +48,6 @@
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label>
-									<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse"> 
-								</div>
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
 									<select id="category" name="category" required onchange="updateProductOptions()">

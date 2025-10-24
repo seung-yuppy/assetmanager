@@ -27,12 +27,6 @@ function addProduct(){
 	const targetEl = document.querySelector('#add-product-section');
 	const newFormRowHTML = `
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse-${currentIndex}">부서 자산</label>
-									<div>
-										<input type="checkbox" id="isDepartmentUse-${currentIndex}" name="isDepartmentUse-${currentIndex}"> 
-									</div>
-								</div>
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
 									<select id="category" name="category-${currentIndex}" required onchange="updateProductOptions()">

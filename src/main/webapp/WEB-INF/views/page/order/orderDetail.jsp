@@ -37,10 +37,6 @@
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label>
-									<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse" checked onclick="return false"> 
-								</div>
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 </label>
 									<input id="category" name="category" type="text" value="기타" class="locked-input" readonly>
@@ -58,10 +54,6 @@
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label>
-									<input type="checkbox" id="isDepartmentUse" name="isDepartmentUse" onclick="return false"> 
-								</div>
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 </label>
 									<input id="category" name="category" type="text" value="노트북" class="locked-input" readonly>

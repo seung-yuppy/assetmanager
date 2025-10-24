@@ -28,7 +28,10 @@
 					<form action="#" method="post">
 						<div class="form-section">
 							<!-- 결재라인 불러오기 -->
-							<%@ include file="/WEB-INF/views/component/approver.jsp"%>
+							<jsp:include page="/WEB-INF/views/component/approver.jsp">
+								<jsp:param value="${admin}" name="admin"/>
+								<jsp:param value="${manager}" name="manager"/>
+							</jsp:include>
 						</div>
 
 						<h2 class="form-section-title">요청 내용</h2>

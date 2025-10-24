@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.example.assetmanager.dao.ItemDAO">
+
+	<select id="countAll">
+		SELECT COUNT(*)
+		FROM Standard_Item
+	</select>
+	
+	<select id="listAll">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rnum, a.*
+			FROM (
+				SELECT *
+				FROM Standard_Item
+			) a
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="addItem">
+		INSERT INTO Standard_Item (category_id, item_name, price, seller, maker, spec)
+		VALUES (#{item.categoryId}, #{item.itemName}, #{item.price}, #{item.seller}, #{item.maker}, #{item.spec})
+	</insert>
+	
+</mapper>

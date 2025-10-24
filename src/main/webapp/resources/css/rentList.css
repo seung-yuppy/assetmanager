@@ -167,3 +167,9 @@
 	margin-block: 10px;
 	gap: 10px;
 }    
+
+.icon-delete {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}

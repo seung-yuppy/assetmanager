@@ -18,4 +18,7 @@ public interface AssetDAO {
 	
 	// 자산 상세
 	public AssetDTO assetDetail(@Param("id") int id);
+	
+	// 자산 수정
+	public boolean modifyAsset(@Param("asset") AssetDTO dto);
 }

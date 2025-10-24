@@ -24,5 +24,15 @@
 		FROM Asset
 		WHERE id = #{id}
 	</select>
+	
+	<update id="modifyAsset">
+		UPDATE Asset
+		SET
+			asset_name = #{asset.assetName},
+			serial_number = #{asset.serialNumber},
+			spec = #{asset.spec}
+		WHERE
+			id = #{asset.id}
+	</update>
 
 </mapper>

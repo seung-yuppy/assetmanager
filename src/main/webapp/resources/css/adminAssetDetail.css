@@ -1,4 +1,8 @@
 @charset "UTF-8";
+
+.dashboard-container span {
+    color: var(--gray-color);
+}
 		/* 5. 정보 목록 스타일 */
         .user-info-list {
        	    display: flex;

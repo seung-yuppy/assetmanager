@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.example.assetmanager.dao.AssetDAO;
-import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.dao.ItemDAO;
+import edu.example.assetmanager.domain.ItemDTO;
 
 @Service
-public class AssetService {
+public class ItemService {
 
 	@Autowired
-	AssetDAO dao;
+	ItemDAO dao;
 	
 	// 카테고리 전처리
-	public void processCategory(AssetDTO dto) {
+	public void processCategory(ItemDTO dto) {
 		switch(dto.getCategoryId()) {
 			case 1:
 				dto.setCategory("노트북");
@@ -48,28 +48,20 @@ public class AssetService {
 	}
 	
 	// 목록 데이터 가공
-	public List<AssetDTO> refactorList(List<AssetDTO> list) {
+	public List<ItemDTO> refactorList(List<ItemDTO> list) {
 		if (list != null) {
-			for (AssetDTO dto : list) 
+			for (ItemDTO dto : list) 
 				processCategory(dto);
 		}
 		return list;
 	}
 	
-	// 단일 데이터 가공
-	public AssetDTO refactorDTO(AssetDTO dto) {
-		if(dto != null) {
-			processCategory(dto);
-		}
-		return dto;
-	}
-	
 	// 페이징 처리된 목록을 가져오는 메서드
-	public List<AssetDTO> getPagedList(int page) {
+	public List<ItemDTO> getPagedList(int page) {
 		int pageSize = 10;
 		int start = (page - 1) * pageSize + 1;
 		int end = start + pageSize - 1;
-		List<AssetDTO> list = dao.listAll(start, end);
+		List<ItemDTO> list = dao.listAll(start, end);
 		return refactorList(list);
 	}
 	
@@ -80,17 +72,14 @@ public class AssetService {
 		return (int)Math.ceil((double) totalItems / pageSize);
 	}
 	
-	// 자산 상세 가져오기
-	public AssetDTO getAsset(int id) {
-		AssetDTO dto = dao.assetDetail(id);
-		return refactorDTO(dto);
-	}
-	
-	// 자산 상세 수정하기 
-	public boolean changeAsset(AssetDTO dto) {
-		if (dao.modifyAsset(dto))
-			return true;
-		else 
+	// 상품 추가 메서드
+	public boolean addItem(List<ItemDTO> items) {
+		if (items == null || items.isEmpty())
 			return false;
+		
+		for (ItemDTO item : items)
+			dao.addItem(item);
+		
+		return true;
 	}
 }

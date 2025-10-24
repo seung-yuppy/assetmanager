@@ -18,45 +18,44 @@
 				<h1 class="content-title">권장 제품 추가</h1>
 				<span>권장 제품 추가를 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="#" method="post">
-
+					<form action="/assetmanager/admin/item/add" method="post">
 						<div id="formInputArea" class ="inputArea">
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
-									<select id="category" name="category" required onchange="updateProductOptions()">
+									<select name="items[0].categoryId" required>
 										<option value="" disabled selected>선택하세요</option>
-										<option value="notebook">노트북</option>
-										<option value="monitor">모니터</option>
-										<option value="software">소프트웨어</option>
-										<option value="other">기타</option>
+										<option value="1">노트북</option>
+										<option value="2">모니터</option>
+										<option value="3">태블릿</option>
+										<option value="4">스마트폰</option>
+										<option value="5">복합기</option>
+										<option value="6">데스크탑</option>
+										<option value="7">TV</option>
+										<option value="8">프로젝터</option>
+										<option value="9">기타</option>
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label for="productNameSelect">제품명<span class="required">*</span></label>
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" placeholder="선택  또는 직접 입력">
-									<datalist id="productOptions">
-									    <option value="LG그램">
-									    <option value="macbook 10">
-									    <option value="직접 입력">
-									</datalist>
+									<input type="text" name="items[0].itemName" placeholder="직접 입력">
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>
-									<input type="number" id="price" name="price" value="0" min="0" required>
+									<input type="number" name="items[0].price" value="0" min="0" required>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">제조사 <span class="required">*</span></label>
-									<input type="text" id="seller" name="seller" required>
+									<input type="text" name="items[0].seller" required>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">거래처 <span class="required">*</span></label>
-									<input type="text" id="maker" name="maker" required>
+									<input type="text" name="items[0].maker" required>
 								</div>
 								<div class="form-group fixed-width-xl">
 									<label for="price">스펙<span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="text" id="spec" name="spec" required>
+										<input type="text" name="items[0].spec" required>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>
 								</div>

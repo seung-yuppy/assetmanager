@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.AssetModifyDTO;
 import edu.example.assetmanager.service.AssetService;
 
 @RequestMapping("/admin")
@@ -70,6 +73,21 @@ public class AdminAssetController {
 			response.put("result", dto);
 		else
 			response.put("result", "데이터가 없습니다.");
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	// 자산 수정 모달을 위한 자산 데이터
+	@ResponseBody
+	@PostMapping(value = "/asset/change", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> a5(@RequestBody AssetModifyDTO requestBody) {
+		Map<String, Object> response = new HashMap<>();
+		AssetDTO dto = requestBody.getAsset();
+		
+		if (service.changeAsset(dto))
+			response.put("msg", "수정이 완료되었습니다.");
+		else 
+			response.put("msg", "수정에 실패하였습니다.");
 		
 		return ResponseEntity.ok(response);
 	}

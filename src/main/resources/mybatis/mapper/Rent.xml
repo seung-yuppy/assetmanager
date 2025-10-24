@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.example.assetmanager.dao.RentDAO">
+
+	<select id="findByAdminUser" resultType="UserDTO">
+		SELECT username, profile_image, dept_name, role
+		FROM "User" U 
+		JOIN Department D ON U.department_id = D.id
+		Where D.dept_name = '경영지원팀' 
+		AND U.role = 'admin'
+	</select>
+	
+	<select id="findByManagerUser" resultType="UserDTO">
+		SELECT username, profile_image, dept_name, role
+		FROM "User" U
+		JOIN Department D ON U.department_id = D.id
+		WHERE U.role = 'manager'
+	</select>
+
+</mapper>

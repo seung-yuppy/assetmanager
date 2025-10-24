@@ -57,11 +57,9 @@
 				<div class="approver-info">
 					<div class="name-title">
 						<select id="category" class="form-input rent-input">
-							<option>이영호 팀장</option>
-							<option>송승엽 과장</option>
-							<option>김성배 과장</option>
-							<option>홍길동 대리</option>
-							<option>김둘리 대리</option>
+						<c:forEach var="ad" items="${admin}">
+							<option>${ad.username}</option>
+						</c:forEach>
 						</select>
 					</div>
 					<div class="team">(경영팀)</div>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -94,7 +95,7 @@ public class UserService {
 		}
 		
 	}
-	
+
 	// 로그인 후 사용자 정보 불러오기
 	public UserInfoDTO getUser(int userId) {
 		UserInfoDTO dto = dao.getUserInfo(userId);
@@ -129,6 +130,55 @@ public class UserService {
 	// 로그인 후 관리자 정보 불러오기 
 	public AdminInfoDTO getAdmin(int userId) {
 		AdminInfoDTO dto = dao.getAdminInfo(userId);
+		
+		byte[] profileImageBytes = dto.getProfileImage();
+        if (profileImageBytes != null && profileImageBytes.length > 0) {
+            String base64Image = Base64.getEncoder().encodeToString(profileImageBytes);
+            dto.setBase64ProfileImage(base64Image);
+        } else {
+            dto.setBase64ProfileImage(null); 
+        }
+        
 		return dto;
+	}
+	
+	// 직급 전처리 
+	public void processRole(UserInfoDTO dto) {
+		switch(dto.getRole()) {
+			case "employee":
+				dto.setRole("사원");
+				break;
+			case "manager":
+				dto.setRole("부장");
+				break;
+			case "admin" :
+				dto.setRole("관리자");
+				break;
+		}
+	}
+	
+	// 목록 데이터 가공
+	public List<UserInfoDTO> refactorList(List<UserInfoDTO> list) {
+		if (list != null) {
+			for (UserInfoDTO dto : list)
+				processRole(dto);
+		}
+		return list;
+	}
+	
+	// 페이징 처리된 목록을 가져오는 메서드
+	public List<UserInfoDTO> getPagedList(int page) {
+		int pageSize = 10;
+		int start = (page - 1) * pageSize + 1;
+		int end = start + pageSize - 1;
+		List<UserInfoDTO> list = dao.listAll(start, end);
+		return refactorList(list);
+	}
+	
+	// 총 페이지 수를 계산하는 메서드
+	public int getTotalPages() {
+		int pageSize = 10;
+		int totalItems = dao.countAll();
+		return (int)Math.ceil((double) totalItems / pageSize);
 	}
 }

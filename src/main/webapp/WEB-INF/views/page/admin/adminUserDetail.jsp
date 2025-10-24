@@ -14,10 +14,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1>배고파 사원님의 상세정보</h1>
-				<div class="detail-header"> 
-					<span>개발팀(진천)</span>
-				</div>
+				<h1>${user.username}님의 상세정보</h1>
+				<span>사용자의 정보를 확인하고 관리합니다.</span>
 
 				<div class="dashboard-container">
 					<!-- 사용자 상세 정보 -->
@@ -25,31 +23,31 @@
 						<h2>현재 사용자 정보</h2>
 						<div class="user-info-list">
 							<div class="info-f-list">
-								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" >
+								<img src="data:image/png;base64,${user.base64ProfileImage}" class="my-profile-image" >
 								<div>
-								<span class="user-name">김지원</span>
+								<span class="user-name">${user.username}</span>
 								</div>
 							</div>
 							<div class="info-s-list">					
 								<div class="user-info-item">
-									<span class="info-label">사번</span> <span class="info-value">AMS1001</span>
+									<span class="info-label">사번</span> <span class="info-value">${user.empNo}</span>
 								</div>
 								<div class="user-info-item">
-									<span class="info-label">부서명</span> <span class="info-value">공공사업1팀</span>
+									<span class="info-label">부서명</span> <span class="info-value">${user.deptName}</span>
 								</div>
 								<div class="user-info-item">
-									<span class="info-label">직급</span> <span class="info-value">사원</span>
+									<span class="info-label">직급</span> <span class="info-value">${user.role}</span>
 								</div>
 							</div>
 							<div class="info-t-list">
 								<div class="user-info-item">
-									<span class="info-label">전화번호</span> <span class="info-value">010-1234-5678</span>
+									<span class="info-label">전화번호</span> <span class="info-value">${user.phone}</span>
 								</div>
 								<div class="user-info-item">
-									<span class="info-label">이메일</span> <span class="info-value">oti@exa.com</span>
+									<span class="info-label">이메일</span> <span class="info-value">${user.email}</span>
 								</div>
 								<div class="user-info-item">
-									<span class="info-label">부서 주소</span> <span class="info-value">충북 음성군 맹동면 장성4길 5</span>
+									<span class="info-label">부서 주소</span> <span class="info-value">${user.deptAddress}</span>
 								</div>
 							</div>
 						</div>

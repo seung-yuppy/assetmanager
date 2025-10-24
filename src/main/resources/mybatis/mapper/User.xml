@@ -15,25 +15,48 @@
 			#{user.profileImage}
 		)
 	</insert>
+	
 	<select id="userLogin">
 		SELECT *
 		FROM "User"
 		WHERE emp_no = #{empNo}
 	</select>
+	
 	<select id="checkEmpno">
 		SELECT COUNT(*)
 		FROM "User"
 		WHERE emp_no = #{empNo}
 	</select>
+	
 	<select id="getUserInfo">
 		SELECT *
 		FROM "User"
 		INNER JOIN Department ON Department.id = "User".department_id
 		WHERE "User".id = #{userId}
 	</select>
+	
 	<select id="getAdminInfo">
 		SELECT *
 		FROM "User"
 		WHERE id = #{userId}
+	</select>
+	
+	<select id="countAll">
+		SELECT COUNT(*)
+		FROM "User"
+	</select>
+	
+	<select id="listAll">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rnum, u.*
+			FROM (
+				SELECT *
+				FROM "User"
+				INNER JOIN Department ON Department.id = "User".department_id
+			) u
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+		AND role = 'employee'  OR role = 'manager'
 	</select>
 </mapper>

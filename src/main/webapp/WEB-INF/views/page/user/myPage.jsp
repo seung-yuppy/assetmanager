@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,12 @@
 </head>
 <body>
 	<div class="app-layout">
-		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
+		<c:if test="${userInfo.role == '사원' || userInfo.role == '부장'}">
+			<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
+		</c:if>
+		<c:if test="${userInfo.role == '관리자'}">
+			<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
+		</c:if>
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">

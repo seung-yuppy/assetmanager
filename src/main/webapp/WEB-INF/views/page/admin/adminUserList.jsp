@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,51 +45,69 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>AMS1001</td>
-								<td>배고파</td>
-		                        <td>개발팀</td>
-		                        <td>사원</td>
-							</tr>
-							<tr>
-								<td>AMS1002</td>
-								<td>힘들다</td>
-		                        <td>마케팅팀</td>
-		                        <td>사원</td>
-							</tr>
-							<tr>
-								<td>AMS1003</td>
-								<td>집가자</td>
-		                        <td>인사팀</td>
-		                        <td>사원</td>
-							</tr>
-							<tr>
-								<td>AMS1004</td>
-								<td>집가자</td>
-		                        <td>인사팀</td>
-		                        <td>사원</td>
-							</tr>
-							<tr>
-								<td>AMS1005</td>
-								<td>집가자</td>
-		                        <td>인사팀</td>
-		                        <td>사원</td>
-							</tr>
+							<c:forEach var="user" items="${list}">
+								<tr>
+									<td><a href="/assetmanager/admin/user/detail/${user.id}">${user.empNo}</a></td>
+									<td>${user.username}</td>
+									<td>${user.deptName}</td>
+									<td>${user.role}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<nav class="pagination-container">
 						<ul class="pagination-list">
-							<li class="page-item prev"><a class="page-link" href="#">&lt; 이전</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
+							<c:choose>
+					            <c:when test="${hasPrev}">
+					                <li class="page-item prev">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${startPage - 1}'/>">
+					                        &lt; 이전
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item prev disabled">
+					                    <span class="page-link">&lt; 이전</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
+					
+					        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+					            <c:choose>
+					                <c:when test="${i == currentPage}">
+					                    <li class="page-item active">
+					                        <span class="page-link">${i}</span>
+					                    </li>
+					                </c:when>
+					                <c:otherwise>
+					                    <li class="page-item">
+					                        <a class="page-link" href="<c:url value='/admin/asset/list?page=${i}'/>">
+					                            ${i}
+					                        </a>
+					                    </li>
+					                </c:otherwise>
+					            </c:choose>
+					        </c:forEach>
+					
+					        <c:choose>
+					            <c:when test="${hasNext}">
+					                <li class="page-item next">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${endPage + 1}'/>">
+					                        다음 &gt;
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item next disabled">
+					                    <span class="page-link">다음 &gt;</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
 						</ul>
 					</nav>			
 				</div>
 			</div>
 		</div>	
 	</div>
-	<script src="/assetmanager/resources/js/toDetail.js"></script>
 </body>
 </html>

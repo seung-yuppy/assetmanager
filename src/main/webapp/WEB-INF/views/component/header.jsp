@@ -19,6 +19,13 @@
 					</a>
 				</li>			
 			</c:if>
+			<c:if test="${adminInfo.role == 'admin'}">
+				<li class="header-item-profile">
+					<a href="/assetmanager/mypage">
+						<img src="data:image/png;base64,${adminInfo.base64ProfileImage}" class="header-profile-image">
+					</a>
+				</li>			
+			</c:if>
 
 			<li class="header-item-profile">
 				<img src="/assetmanager/resources/image/icon_header1.png" class="header-bell header-alarm">

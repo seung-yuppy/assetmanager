@@ -57,12 +57,12 @@
 				<div class="approver-info">
 					<div class="name-title">
 						<select id="category" class="form-input rent-input">
-						<c:forEach var="ad" items="${admin}">
-							<option>${ad.username}</option>
-						</c:forEach>
+							<c:forEach var="ad" items="${admin}">
+								<option value="${ad.username}">${ad.username}</option>
+							</c:forEach>
 						</select>
 					</div>
-					<div class="team">(경영팀)</div>
+					<div class="firstTeam"></div>
 				</div>
 			</div>
 		</fieldset>
@@ -99,5 +99,6 @@
 			</div>
 		</fieldset>
 	</div>
+	
 </body>
 </html>

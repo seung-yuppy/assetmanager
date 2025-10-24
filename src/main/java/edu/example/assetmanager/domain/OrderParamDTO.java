@@ -11,6 +11,7 @@ public class OrderParamDTO {
 	private int page = 1;
 	private int size = 10;
 	private int offset; // sql의 offset 값
+	private int userId;
 	private String status;
 	private String keyword;
 	private String order;

@@ -19,12 +19,11 @@ public class OrderService {
 	
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
 		int page = orderParamDTO.getPage();
-		int offset;
-		offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
 		orderParamDTO.setOffset(offset);
 		int totalCount = orderDAO.countAll(orderParamDTO);
 		List<OrderDTO> list = orderDAO.listAll(orderParamDTO);
-		int totalPages = (int) Math.ceil(((double) totalCount / PAGE_SIZE));
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
 		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
 		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
 		if (totalBlocks < 0)
@@ -33,8 +32,10 @@ public class OrderService {
 		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
 		boolean hasPrev = block > 1 ? true : false;
 		boolean hasNext = totalBlocks > block ? true : false;
+		
 		PageResponseDTO<OrderDTO> response = new PageResponseDTO<>(list, page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 		return response;
 	}
+	
 	
 }

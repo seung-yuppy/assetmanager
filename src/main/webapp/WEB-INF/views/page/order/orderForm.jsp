@@ -23,7 +23,10 @@
 				<h1 class="content-title">구매 신청서</h1>
 				<span class="page-description">구매 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="#" method="post">
+					<form action="#" method="post" onsubmit="setTitle()">
+						<div style="display:none;">
+							<input type="text" id="requestTitle" >
+						</div>
 						<div class="form-section">
 							<!-- 결재라인 전체 컨테이너 -->
 							<%@ include file="/WEB-INF/views/component/approver.jsp" %>
@@ -60,8 +63,7 @@
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label for="product-select">제품명<span class="required">*</span></label>
-							        <select id="product-select">
-							        </select>
+							        <select id="product-select"></select>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>

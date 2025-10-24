@@ -24,4 +24,9 @@
 		VALUES (#{item.categoryId}, #{item.itemName}, #{item.price}, #{item.seller}, #{item.maker}, #{item.spec})
 	</insert>
 	
+	<delete id="removeItem">
+	 	DELETE FROM Standard_Item
+	 	WHERE id = #{id}
+	</delete>
+	
 </mapper>

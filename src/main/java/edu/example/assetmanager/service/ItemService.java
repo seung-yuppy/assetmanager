@@ -72,7 +72,7 @@ public class ItemService {
 		return (int)Math.ceil((double) totalItems / pageSize);
 	}
 	
-	// 상품 추가 메서드
+	// 제품 추가 메서드
 	public boolean addItem(List<ItemDTO> items) {
 		if (items == null || items.isEmpty())
 			return false;
@@ -81,5 +81,13 @@ public class ItemService {
 			dao.addItem(item);
 		
 		return true;
+	}
+	
+	// 제품 삭제 메서드
+	public boolean removeItem(int id) {
+		if (dao.removeItem(id))
+			return true;
+		else
+			return false;
 	}
 }

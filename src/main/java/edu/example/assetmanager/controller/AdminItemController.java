@@ -58,4 +58,10 @@ public class AdminItemController {
 		else
 			return "redirect:/admin/item/form"; 
 	}
+	
+	@PostMapping("/item/remove")
+	public String i5(int id) {
+		service.removeItem(id);
+		return "redirect:/admin/item/list";
+	}
 }

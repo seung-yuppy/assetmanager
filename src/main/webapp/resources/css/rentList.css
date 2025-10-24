@@ -173,3 +173,8 @@
 	height: 20px;
 	cursor: pointer;
 }
+
+.btn-delete {
+	background-color: transparent;
+	border: none;
+}

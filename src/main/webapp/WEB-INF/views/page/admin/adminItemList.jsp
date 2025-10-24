@@ -58,7 +58,14 @@
 		                            <td>₩ ${item.price}</td>
 		                            <td>${item.maker}</td>
 		                            <td>${item.seller}</td>
-		                            <td><img src="/assetmanager/resources/image/icon_delete.svg" class="icon-delete"></td>
+		                            <td>
+		                            	<form action="/assetmanager/admin/item/remove" method="POST">
+		                            		<input type="hidden" name="id" value="${item.id}">
+		                            		<button type="submit" class="btn-delete">
+		                            			<img src="/assetmanager/resources/image/icon_delete.svg" class="icon-delete">
+		                            		</button>
+		                            	</form>
+		                            </td>
 								</tr>
 							</c:forEach>
 						</tbody>

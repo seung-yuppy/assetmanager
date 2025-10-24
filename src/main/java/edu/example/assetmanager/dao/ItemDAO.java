@@ -18,4 +18,7 @@ public interface ItemDAO {
 	
 	// 제품 추가
 	public boolean addItem(@Param("item") ItemDTO dto);
+	
+	// 제품 삭제
+	public boolean removeItem(@Param("id") int id);
 }

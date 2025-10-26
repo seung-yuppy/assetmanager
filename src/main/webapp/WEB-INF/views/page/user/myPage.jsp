@@ -20,9 +20,9 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1>${userInfo.username}님의 상세정보</h1>
+				<h1>${userInfo.username}님의 마이페이지</h1>
 				<div class="detail-header"> 
-					<span>${userInfo.deptName}</span>
+					<span>${userInfo.username}님의 정보를 확인하고 수정합니다.</span>
 				</div>
 
 				<div class="dashboard-container">
@@ -32,10 +32,15 @@
 						<div class="user-info-list">
 							<div class="info-f-list">
 								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" >
-								<div>
-								<span class="user-name">${userInfo.username}</span>
-								</div>
+								<form action="/assetmanager/change/myimage" method="POST" enctype="multipart/form-data" class="profile-edit-form">
+									<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input">
+									<label for="fileInput" class="edit-label">
+										<span class="btn-label">파일 선택</span>
+									</label>
+									<button type="submit" class="profile-edit-btn">이미지 수정</button>	
+								</form>
 							</div>
+							
 							<div class="info-s-list">					
 								<div class="user-info-item">
 									<span class="info-label">사번</span> <span class="info-value">${userInfo.empNo}</span>
@@ -54,8 +59,8 @@
 								<div class="user-info-item">
 									<span class="info-label">이메일</span> <span class="info-value">${userInfo.email}</span>
 								</div>
-								<div class="user-info-item">
-									<span class="info-label">부서 주소</span> <span class="info-value">${userInfo.deptAddress}</span>
+								<div class="info-dept-address">
+									<span class="info-label">주소</span> <span class="info-value">${userInfo.deptAddress}</span>
 								</div>
 							</div>
 						</div>

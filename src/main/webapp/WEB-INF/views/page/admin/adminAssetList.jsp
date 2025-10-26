@@ -51,7 +51,7 @@
 							<c:forEach var="asset" items="${list}">
 								<tr>
 									<td><a href="/assetmanager/admin/asset/detail/${asset.id}">${asset.assetName}</a></td>
-									<td>${asset.category}</td>
+									<td>${asset.categoryName}</td>
 									<td>${asset.serialNumber}</td>
 									<td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
 									<c:if test="${asset.userId == 0}">

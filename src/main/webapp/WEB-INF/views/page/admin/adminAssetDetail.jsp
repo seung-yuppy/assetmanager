@@ -22,7 +22,7 @@
 					<span>${asset.assetName}의 상세 정보를 확인하고 관리 합니다.</span>
 			        <div class="button-container">
 			        	<button id="edit-modal" class="edit-button" data-asset-id="${asset.id}">수정</button>
-						<button class="cancel-button">불용</button>
+						<button id="delete-modal" class="cancel-button" data-asset-id="${asset.id}">불용</button>
 					</div>	
 				</div>
 				<!-- 자산 & 사용자 상세 정보 시작 -->
@@ -37,7 +37,7 @@
 		                    </div>
 		                    <div class="info-item">
 		                        <span class="info-label">자산 카테고리</span>
-		                        <span class="info-value">${asset.category}</span>
+		                        <span class="info-value">${asset.categoryName}</span>
 		                    </div>
 		                    <div class="info-item">
 		                        <span class="info-label">일련번호</span>

@@ -35,12 +35,6 @@
 		WHERE "User".id = #{userId}
 	</select>
 	
-	<select id="getAdminInfo">
-		SELECT *
-		FROM "User"
-		WHERE id = #{userId}
-	</select>
-	
 	<select id="countAll">
 		SELECT COUNT(*)
 		FROM "User"
@@ -59,4 +53,13 @@
 		WHERE rnum BETWEEN #{start} AND #{end}
 		AND role = 'employee'  OR role = 'manager'
 	</select>
+	
+	<update id="changeImage">
+		UPDATE "User"
+		SET
+			profile_image = #{user.profileImage, jdbcType=BLOB}
+		WHERE 
+			id = #{user.id}
+	</update>
+	
 </mapper>

@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import edu.example.assetmanager.domain.AdminInfoDTO;
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 
@@ -24,12 +23,12 @@ public interface UserDAO {
 	// 로그인 정보 불러오기
 	public UserInfoDTO getUserInfo(@Param("userId") int userId);
 	
-	// 관리자 정보 불러오기 
-	public AdminInfoDTO getAdminInfo(@Param("userId") int userId);
-	
 	// 관리자 회원 정보 전체 개수
 	public int countAll();
 	
 	// 관리자 회원 목록
 	public List<UserInfoDTO> listAll(@Param("start") int start, @Param("end") int end);
+	
+	// 마이페이지에서 프로필 수정하기
+	public boolean changeImage(@Param("user") UserDTO user);
 }

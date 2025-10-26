@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import edu.example.assetmanager.domain.AdminInfoDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.UserService;
 
@@ -34,8 +33,8 @@ public class HomeController {
 	public String s4(HttpSession session) {
 		Integer userId = (Integer)session.getAttribute("userId");
 		if (userId != null) {
-			AdminInfoDTO dto = service.getAdmin(userId);
-			session.setAttribute("adminInfo", dto);
+			UserInfoDTO dto = service.getUser(userId);
+			session.setAttribute("userInfo", dto);
 			return "dashboard/adminDashBoard";	
 		} else {
 			return "redirect:/login";

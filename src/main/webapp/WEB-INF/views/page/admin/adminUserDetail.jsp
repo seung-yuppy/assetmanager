@@ -25,7 +25,7 @@
 							<div class="info-f-list">
 								<img src="data:image/png;base64,${user.base64ProfileImage}" class="my-profile-image" >
 								<div>
-								<span class="user-name">${user.username}</span>
+									<span class="user-name">${user.username}</span>
 								</div>
 							</div>
 							<div class="info-s-list">					
@@ -46,8 +46,9 @@
 								<div class="user-info-item">
 									<span class="info-label">이메일</span> <span class="info-value">${user.email}</span>
 								</div>
-								<div class="user-info-item">
-									<span class="info-label">부서 주소</span> <span class="info-value">${user.deptAddress}</span>
+								<div class="info-dept-address">
+									<span class="info-label">주소</span> 
+									<span class="info-value">${user.deptAddress}</span>
 								</div>
 							</div>
 						</div>

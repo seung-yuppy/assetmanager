@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>불용 처리 내역</title>
+	<title>불용 목록</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminRentList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
@@ -48,61 +50,67 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>사용 기간 5년 초과</td>
-		                        <td>송승엽 사원</td>
-		                        <td>2022-11-01</td>
-		                        <td>2025-11-10</td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-	                            <td>SRV987654321</td>
-		                        <td>사용 기간 5년 초과</td>
-                   				<td>송승엽 사원</td>
-	                            <td>2022-11-01</td>
-	                            <td>2025-11-10</td>
-		                        
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-	                            <td>SRV987654321</td>
-		                        <td>고장</td>
-		                        <td>송승엽 사원</td>
-	                            <td>2022-11-01</td>
-	                            <td>2025-11-10</td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-	                            <td>SRV987654321</td>
-		                        <td>사용 기간 5년 초과</td>
-		                        <td>송승엽 사원</td>
-	                            <td>2022-11-01</td>
-	                            <td>2025-11-10</td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-	                            <td>SRV987654321</td>
-		                        <td>사용 기간 5년 초과</td>
-		                        <td>송승엽 사원</td>
-	                            <td>2022-11-01</td>
-	                            <td>2025-11-10</td>
-							</tr>
+							<c:forEach var="asset" items="${list}">
+								<tr>
+									<td>${asset.assetName}</td>
+									<td>${asset.categoryName}</td>
+			                        <td>${asset.serialNumber}</td>
+			                        <td>${asset.disposalReason}</td>
+			                        <td>${asset.userName}</td>
+			                        <td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
+			                        <td><fmt:formatDate value="${asset.disposalDate}" pattern="yyyy-MM-dd"/></td>
+								</tr>							
+							</c:forEach>
 						</tbody>
 					</table>
 					<nav class="pagination-container">
 						<ul class="pagination-list">
-							<li class="page-item prev"><a class="page-link" href="#">&lt; 이전</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
+							<c:choose>
+					            <c:when test="${hasPrev}">
+					                <li class="page-item prev">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${startPage - 1}'/>">
+					                        &lt; 이전
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item prev disabled">
+					                    <span class="page-link">&lt; 이전</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
+					
+					        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+					            <c:choose>
+					                <c:when test="${i == currentPage}">
+					                    <li class="page-item active">
+					                        <span class="page-link">${i}</span>
+					                    </li>
+					                </c:when>
+					                <c:otherwise>
+					                    <li class="page-item">
+					                        <a class="page-link" href="<c:url value='/admin/asset/list?page=${i}'/>">
+					                            ${i}
+					                        </a>
+					                    </li>
+					                </c:otherwise>
+					            </c:choose>
+					        </c:forEach>
+					
+					        <c:choose>
+					            <c:when test="${hasNext}">
+					                <li class="page-item next">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${endPage + 1}'/>">
+					                        다음 &gt;
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item next disabled">
+					                    <span class="page-link">다음 &gt;</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
 						</ul>
 					</nav>
 				</div>

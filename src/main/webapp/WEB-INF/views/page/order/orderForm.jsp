@@ -28,11 +28,21 @@
 				<div class="section-card">
 					<form action="#" method="post" onsubmit="setTitle()">
 						<div style="display:none;">
-							<input type="text" id="requestTitle" >
+							<input name="title" type="text" id="requestTitle" value="테스트" >
 						</div>
 						<div class="form-section">
 							<!-- 결재라인 전체 컨테이너 -->
 							<%@ include file="/WEB-INF/views/component/approver.jsp" %>
+							<!-- 임시 결재 내용 -->
+							<div style="display:none;">
+								<select name="firstApprover">
+									<option value="김성배"></option>
+								</select>
+								<select name="secondApprover">
+									<option value="임꺽정"></option>
+								</select>
+								<input name="approvalId" value="1">
+							</div>
 						</div>
 						<h2 class="form-section-title">요청 내용</h2>
 						<div class="radio-input-group">
@@ -57,25 +67,24 @@
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
-									<select id="category" name="category" required onchange="updateProductOptions()">
+									<select id="category" name="products[0].category" required>
 										<option value="" disabled selected>선택하세요</option>
-										<option value="notebook">노트북</option>
-										<option value="monitor">모니터</option>
-										<option value="software">소프트웨어</option>
-										<option value="other">기타</option>
+										<c:forEach var="item" items="${categories}">
+											<option value="${item.id}">${item.categoryName}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label for="product-select">제품명<span class="required">*</span></label>
-							        <select id="product-select" required></select>
+							        <select id="product-select" name="products[0].itemName" required></select>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>
-									<input type="number" id="price" name="price" value="0" min="0" required>
+									<input type="number" id="price" name="products[0].price" value="0" min="0" required>
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
-									<input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+									<input type="number" id="quantity" name="products[0].count" min="1" max="10" value="1" required>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="totalPrice">총액 (원)</label>
@@ -90,7 +99,7 @@
 							</div>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
-								<textarea id="reason" name="reason" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+								<textarea id="reason" name="requestMsg" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
 								<div class="char-count-display text-align-right">
 									(<span id="currentLength">0</span> / 200)
 								</div>

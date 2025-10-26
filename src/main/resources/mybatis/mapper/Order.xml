@@ -50,4 +50,14 @@
 	    	</if>
 	    </where>
 	</select>
+
+    <insert id="insertOrder" parameterType="OrderFormDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO "Order" (user_id, approval_id, request_msg, title)
+        VALUES (#{userId}, #{approvalId}, #{requestMsg}, #{title})
+    </insert>
+
+    <insert id="insertOrderContent" parameterType="OrderContentDTO">
+        INSERT INTO Order_Content (order_id, item_name, quantity, price , count)
+        VALUES (#{orderId}, #{itemName}, #{quantity}, #{price})
+    </insert>
 </mapper>

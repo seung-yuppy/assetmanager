@@ -1,8 +1,41 @@
-// 총액 자동 계산을 위한 이벤트 부착
+window.addEventListener('DOMContentLoaded', () => {
+    getCategories(); // 페이지 시작 시 카테고리 목록 불러오기
+});
+
+//권장 제품 데이터
+let productData;
+let categoryOptionsHTML = ''; // 전역 변수 (나중에 동적 행 추가 시 재사용)
+
+function getCategories() {
+    fetch('/assetmanager/order/form/category')
+        .then(res => res.json())
+        .then(data => {
+            categoryOptionsHTML = `
+                <option value="" disabled selected>선택하세요</option>
+                ${data.map(item => `<option value="${item.id}">${item.categoryName}</option>`).join('')}
+            `;
+        })
+        .catch(err => console.error("카테고리 불러오기 실패:", err));
+}
+
+//이벤트 부착
 const inputArea = document.getElementById('formInputArea');
 inputArea.addEventListener('change',function(e){
+	console.log("change event occured");
+	// 총액 계산용
 	if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number'){
 		calculateTotalPrice(e.target);
+	// 권장 제품 로드
+	}else if(e.target && e.target.tagName === 'SELECT' && e.target.id.startsWith('category')){
+		const categoryId =  parseInt(e.target.value);
+		const parentRow = e.target.closest('.form-row');
+		fetch(`/assetmanager/order/form/standard?categoryId=${categoryId}`)
+			.then(res=> res.json())
+			.then(data => {
+				console.log("json data : " + JSON.stringify(data));
+				productData = data;
+				init_select2(parentRow, data);
+			});
 	}
 })
 
@@ -16,24 +49,25 @@ function calculateTotalPrice(el){
 }
 
 let productRowIndex  = 0;
-
 //구매 요청할 제품 추가하는 함수 
 function addProduct(){
 	if (!checkProductCnt()){
 		alert("요청 품목은 10개까지만 가능합니다.");
 		return;
 	}
+	
+    if (!categoryOptionsHTML) {
+        console.warn("카테고리 데이터가 아직 로드되지 않았습니다.");
+        return;
+    }
+	
 	const currentIndex = ++productRowIndex;
 	const targetEl = document.querySelector('#add-product-section');
 	const newFormRowHTML = `
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<select id="category-${currentIndex}" name="category" required onchange="updateProductOptions()">
-										<option value="" disabled selected>선택하세요</option>
-										<option value="notebook">노트북</option>
-										<option value="monitor">모니터</option>
-										<option value="software">소프트웨어</option>
-										<option value="other">기타</option>
+									<select id="category-${currentIndex}" name="category" required>
+										${categoryOptionsHTML}
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
@@ -55,8 +89,6 @@ function addProduct(){
 							</div>
 	`
 		targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);
-		const newRow =  targetEl.previousElementSibling;
-		init_select2(newRow);
 };
 
 function renderFormFromExcel(json) {
@@ -110,54 +142,21 @@ function renderFormFromExcel(json) {
 	    container.insertAdjacentHTML('beforeend', rowHtml);
 	  }
 	}
-
-// 1. 상품 데이터 목록 (ID, 이름, 설명 포함)
-const productData = [
-    { id: 'P101', text: '프리미엄 커피 머신', description: '자동 타이머 및 보온 기능이 있는 고급 드립 커피 머신.' },
-    { id: 'P102', text: '인체공학적 사무용 의자', description: '요추 지지대와 3D 팔걸이가 있는 인체공학적 의자.' },
-    { id: 'P103', text: '4K Ultra HD 모니터', description: '전문 작업 및 게이밍을 위한 고해상도 광시야각 모니터.' },
-    { id: 'P104', text: '무선 기계식 키보드', description: '반응 속도가 빠르고 타건감이 좋은 무선 기계식 키보드.' },
-    { id: 'P105', text: '노이즈 캔슬링 헤드폰', description: '뛰어난 소음 제거 기능과 긴 배터리 수명을 가진 헤드폰.' }
-];
-
-// 2. Select2 결과 템플릿 함수 (설명을 표시)
-function formatProductResult (product) {
-    // 로딩 상태, 선택된 값 (selection), 또는 직접 입력된 텍스트는 건너뜁니다.
-    if (!product.id) {
-        return product.text; 
-    }
-
-    // 직접 입력된 새 항목인 경우
-    if (product.element && product.element.dataset.new === 'true') {
-         // tags:true로 입력된 항목은 description이 없으므로, 사용자에게 표시할 텍스트를 조정합니다.
-        return $(
-            '<span class="product-name">새 상품 입력: ' + product.text + '</span>'
-        );
-    }
-    
-    // 데이터 목록에서 가져온 항목인 경우
-    return $(
-        '<span class="product-result">' +
-            '<span class="product-name">' + product.text + '</span>' +
-            '<span class="product-desc">' + (product.description || '설명 없음') + '</span>' +
-        '</span>'
-    );
-}
-
-$(document).ready(function() {
-	const row = $(document).find(".form-row");
-	init_select2(row);
-});
-
-function init_select2(parent){
+function init_select2(parent, data){
 	const $select = $(parent).find('[id^="product-select"]');
+	if($select.hasClass("select2-hidden-accessible")){
+		$select.empty();
+		$select.select2('destroy');
+	}
+	
     const emptyOption = new Option("", "", true, true); // value가 "" (비어 있음)
     $select.append(emptyOption);
     // 3. Select2 데이터를 HTML <option> 태그로 변환하여 삽입
     productData.forEach(item => {
-        const option = new Option(item.text, item.id, false, false);
+        const option = new Option(item.itemName, item.id, false, false);
         // description을 데이터 속성으로 저장하여 templateResult에서 사용 (Select2 내부 객체에 포함됨)
-        $(option).data('description', item.description); 
+        $(option).data('description', item.spec); 
+        $(option).data('price', item.price); 
         $select.append(option);
     });
     
@@ -166,7 +165,7 @@ function init_select2(parent){
         data: productData, // Select2가 내부적으로 사용할 데이터 목록
         placeholder: "제품명 선택",
         allowClear: true,
-        tags: true, // 직접 입력 허용 (datalist와 유사한 기능)
+        tags: true, // 직접 입력 허용
         
         // 검색 결과 목록에 적용할 템플릿
         templateResult: formatProductResult,
@@ -175,8 +174,10 @@ function init_select2(parent){
         createTag: function (params) {
             // 새 항목임을 표시하는 data 속성을 추가하여 선택 변경 이벤트에서 활용
             const tag = {
-                id: params.term, // 입력된 텍스트 자체를 값으로 사용
-                text: params.term,
+                id: params.term,
+                text: params.term, 
+                itemName: params.term,
+                price: undefined,
                 isNew: true // 새 항목임을 표시
             };
             return tag;
@@ -193,32 +194,62 @@ function init_select2(parent){
     });
     
     // 5. 선택 변경 이벤트 핸들러
-    $select.on('change', function() {
-        const $selectedOption = $(this).find('option:selected');
-        const selectedText = $selectedOption.text();
-        const selectedValue = $(this).val();
-        
-        let detail = `선택된 ID: <strong>${selectedValue}</strong>, 상품명: <strong>${selectedText}</strong>`;
-        
-        // 값이 선택되었는지 확인
-        if (selectedValue && selectedValue !== '') {
-             const isNewItem = $selectedOption.data('isNew');
-             
-             if (isNewItem) {
-                 // 직접 입력된 새 항목
-                 detail = `<strong style="color: #b91c1c;">[직접 입력된 새 항목]</strong> 상품명: <strong>${selectedText}</strong>`;
-             } else {
-                // 기존 상품인 경우 상세 설명을 가져옵니다.
-                const description = $selectedOption.data('description');
-                if (description) {
-                    detail += `<br>설명: <em>${description}</em>`;
-                }
-             }
-            $('#selected-value').html(detail);
+    $select.on('select2:select', function(e) {
+        const selectedData = e.params.data; // 선택된 Select2 내부 객체
+        const $priceInput = $(this).closest('.form-row').find('[id^="price"]');
+
+        // 가격 반영
+        if (selectedData.price !== undefined) {
+            $priceInput.val(selectedData.price);
+            calculateTotalPrice($priceInput[0]);
+            $priceInput.attr('disabled', true);
         } else {
-            $('#selected-value').html('선택된 상품: 없음');
+            $priceInput.val('');
+            $priceInput.removeAttr('disabled');
         }
+
+        // 화면에 선택 정보 표시
+        let detail = `선택된 ID: <strong>${selectedData.id}</strong>, 상품명: <strong>${selectedData.itemName}</strong>`;
+
+        if (selectedData.isNew) {
+            detail = `<strong style="color: #b91c1c;">[직접 입력된 새 항목]</strong> 상품명: <strong>${selectedData.itemName}</strong>`;
+        } else if (selectedData.spec) {
+            detail += `<br>설명: <em>${selectedData.spec}</em>`;
+        }
+
+        $('#selected-value').html(detail);
     });
+    
+    $select.on('select2:unselect', function(e) {
+        const $priceInput = $(this).closest('.form-row').find('[id^="price"]');
+        $priceInput.val('');// 단가 초기화
+        $priceInput.removeAttr('disabled');
+        calculateTotalPrice($priceInput[0]);
+    });
+}
+
+//Select2 결과 템플릿 함수 (설명을 표시)
+function formatProductResult (product) {
+    // 로딩 상태, 선택된 값 (selection), 또는 직접 입력된 텍스트는 건너뜁니다.
+    if (!product.id) {
+        return product.itemName; 
+    }
+
+    // 직접 입력된 새 항목인 경우
+    if (product.element && product.element.dataset.new === 'true') {
+         // tags:true로 입력된 항목은 description이 없으므로, 사용자에게 표시할 텍스트를 조정합니다.
+        return $(
+            '<span class="product-name">새 상품 입력: ' + product.text + '</span>'
+        );
+    }
+    
+    // 데이터 목록에서 가져온 항목인 경우
+    return $(
+        '<span class="product-result">' +
+            '<span class="product-name">' + product.itemName + '</span>' +
+            '<span class="product-desc">' + (product.spec || '설명 없음') + '</span>' +
+        '</span>'
+    );
 }
 
 function setTitle(){
@@ -237,5 +268,7 @@ function setTitle(){
 	}
 	document.getElementById('requestTitle').value = content;
 }
+
+
 
 

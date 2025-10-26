@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ItemDAO;
+import edu.example.assetmanager.domain.CategoryDTO;
 import edu.example.assetmanager.domain.ItemDTO;
 
 @Service
@@ -90,4 +91,10 @@ public class ItemService {
 		else
 			return false;
 	}
+	
+	public List<ItemDTO> getItemsByCategory(int id){
+		return dao.getItemsByCategory(id);
+	}
+	
+	
 }

@@ -21,4 +21,6 @@ public interface ItemDAO {
 	
 	// 제품 삭제
 	public boolean removeItem(@Param("id") int id);
+	
+	public List<ItemDTO> getItemsByCategory(int id);
 }

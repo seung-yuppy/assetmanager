@@ -29,4 +29,10 @@
 	 	WHERE id = #{id}
 	</delete>
 	
+	<select id="getItemsByCategory" parameterType="int" resultType="ItemDTO">
+		SELECT *
+		FROM Standard_Item
+		WHERE category_id = #{id}
+	</select>
+	
 </mapper>

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.OrderDAO;
+import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
+import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,14 @@ public class OrderService {
 		
 		PageResponseDTO<OrderDTO> response = new PageResponseDTO<>(list, page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 		return response;
+	}
+
+	public void save(OrderFormDTO orderFormDTO) {
+		orderDAO.insertOrder(orderFormDTO);
+		for (OrderContentDTO content : orderFormDTO.getProducts()) {
+	        content.setOrderId(orderFormDTO.getId());
+	        orderDAO.insertOrderContent(content);
+	    }
 	}
 	
 	

@@ -5,6 +5,7 @@
 	<select id="countAll" resultType="int">
 		SELECT COUNT(*)
 		FROM Asset
+		WHERE is_valid = 1
 	</select>
 	
 	<select id="listAll" resultType="AssetDTO">
@@ -14,6 +15,28 @@
 			FROM (
 				SELECT *
 				FROM Asset
+				INNER JOIN Category ON Asset.category_id = Category.id
+				WHERE is_valid = 1
+			) a
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="countDisposal">
+		SELECT COUNT(*)
+		FROM Asset_Disposal
+	</select>
+	
+	<select id="listDisposal">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rnum, a.*
+			FROM (
+				SELECT *
+				FROM Asset_Disposal
+				INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
+				INNER JOIN "User" ON Asset_Disposal.approver_id = "User".id
+				INNER JOIN Category ON Asset.category_id = Category.id
 			) a
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
@@ -22,7 +45,8 @@
 	<select id="assetDetail" resultType="AssetDTO">
 		SELECT *
 		FROM Asset
-		WHERE id = #{id}
+		INNER JOIN Category ON Asset.category_id = Category.id
+		WHERE Asset.id = #{id}
 	</select>
 	
 	<update id="modifyAsset">
@@ -34,5 +58,24 @@
 		WHERE
 			id = #{asset.id}
 	</update>
+	
+	<update id="deleteAsset">
+		UPDATE Asset
+		SET
+			is_valid = 0
+		WHERE
+			id = #{asset.assetId}
+	</update>
+	
+	<insert id="deleteAssetDisposal">
+		INSERT INTO Asset_Disposal
+			(asset_id, approver_id, disposal_date, disposal_reason)
+		VALUES (
+			#{asset.assetId},
+			#{asset.approverId},
+			SYSDATE,
+			#{asset.disposalReason}
+		)
+	</insert>
 
 </mapper>

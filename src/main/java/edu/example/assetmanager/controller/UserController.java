@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -35,10 +37,12 @@ public class UserController {
 	
 	@GetMapping("/mypage")
 	public String s4(HttpSession session) {
-		int userId = (int) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null) 
+			return "redirect:/login";
+
 		UserInfoDTO dto = service.getUser(userId);
 		session.setAttribute("userInfo", dto);
-		
 		return "user/myPage";
 	}
 	
@@ -94,5 +98,28 @@ public class UserController {
 		session.removeAttribute("userId");
 		session.invalidate();
 		return "redirect:/login";
+	}
+	
+	// 마이페이지 프로필 이미지 수정
+	@PostMapping("/change/myimage")
+	public String changeImage(HttpSession session, @RequestParam("profileImage") MultipartFile profileFile) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+	        return "redirect:/login";
+	    
+		try {
+	        UserDTO dto = new UserDTO();
+	        dto.setId(userId);
+	        dto.setProfileImage(profileFile.getBytes());
+
+	        if (service.changeImage(dto)) 
+	            return "redirect:/mypage";
+	        else 
+	            return "redirect:/login";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "redirect:/login";
+	    }
+
 	}
 }

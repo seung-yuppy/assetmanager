@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.UserDAO;
-import edu.example.assetmanager.domain.AdminInfoDTO;
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 
@@ -127,21 +126,6 @@ public class UserService {
 		return dto;
 	}
 	
-	// 로그인 후 관리자 정보 불러오기 
-	public AdminInfoDTO getAdmin(int userId) {
-		AdminInfoDTO dto = dao.getAdminInfo(userId);
-		
-		byte[] profileImageBytes = dto.getProfileImage();
-        if (profileImageBytes != null && profileImageBytes.length > 0) {
-            String base64Image = Base64.getEncoder().encodeToString(profileImageBytes);
-            dto.setBase64ProfileImage(base64Image);
-        } else {
-            dto.setBase64ProfileImage(null); 
-        }
-        
-		return dto;
-	}
-	
 	// 직급 전처리 
 	public void processRole(UserInfoDTO dto) {
 		switch(dto.getRole()) {
@@ -180,5 +164,13 @@ public class UserService {
 		int pageSize = 10;
 		int totalItems = dao.countAll();
 		return (int)Math.ceil((double) totalItems / pageSize);
+	}
+	
+	// 마이페이지에서 프로필 이미지 수정하는 메서드
+	public boolean changeImage(UserDTO dto) {
+		if (dao.changeImage(dto))
+			return true;
+		else
+			return false;
 	}
 }

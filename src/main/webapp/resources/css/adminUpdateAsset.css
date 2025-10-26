@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
-.modal-container {
-	margin-bottom: 10px;
+.modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .modal-input {

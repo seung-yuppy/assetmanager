@@ -28,7 +28,6 @@ function addProduct(){
 	const newFormRowHTML = `
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<label for="category-${currentIndex}">카테고리 <span class="required">*</span></label>
 									<select id="category-${currentIndex}" name="category" required onchange="updateProductOptions()">
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
@@ -38,20 +37,16 @@ function addProduct(){
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="product-select-${currentIndex}">제품명<span class="required">*</span></label>
 							        <select id="product-select-${currentIndex}"></select>
 								</div>
 								<div class="form-group fixed-width-med">
-									<label for="price-${currentIndex}">단가 (원) <span class="required">*</span></label>
 									<input type="number" id="price-${currentIndex}" name="price" value="0" min="0" required>
 								</div>
 
 								<div class="form-group fixed-width-sm">
-									<label for="quantity-${currentIndex}">수량 <span class="required">*</span></label>
 									<input type="number" id="quantity-${currentIndex}" name="quantity" min="1" max="10" value="1" required>
 								</div>
 								<div class="form-group fixed-width-med">
-									<label for="totalPrice-${currentIndex}">총액 (원)</label>
 									<div class="last-input-group">
 										<input type="text" id="totalPrice-${currentIndex}" name="totalPrice" value="0" class="locked-input" readonly>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
@@ -63,6 +58,58 @@ function addProduct(){
 		const newRow =  targetEl.previousElementSibling;
 		init_select2(newRow);
 };
+
+function renderFormFromExcel(json) {
+	  const container = document.getElementById('data-display-area');
+	  container.innerHTML = ""; // 기존 내용 초기화
+
+	  if (json.length === 0) return;
+	  // 1. 첫 번째 row: label 포함
+	  const firstRow = json[0];
+	  const headerHtml = `
+	  <div class="form-row">
+	    <div class="form-group category-group fixed-width-med">
+	      <label>카테고리</label>
+	      <input type="text" name="category" value="${firstRow.카테고리}" readonly>
+	    </div>
+	    <div class="form-group product-select-group fixed-width-lg">
+	      <label>제품명</label>
+	      <input type="text" name="product" value="${firstRow.제품명 || ''}" readonly>
+	    </div>
+	    <div class="form-group fixed-width-med">
+	      <label>단가 (원)</label>
+	      <input type="number" name="price" value="${firstRow.단가 || 0}" min="0" readonly>
+	    </div>
+	    <div class="form-group fixed-width-sm">
+	      <label>수량</label>
+	      <input type="number" name="quantity" value="${firstRow.수량 || 1}" min="1" max="10" readonly>
+	    </div>
+	  </div>
+	  `;
+	  container.insertAdjacentHTML('beforeend', headerHtml);
+
+	  // 2. 나머지 row: label 없이 input/select만
+	  for (let i = 1; i < json.length; i++) {
+	    const row = json[i];
+	    const rowHtml = `
+	    <div class="form-row">
+	      <div class="form-group category-group fixed-width-med">
+	        <input type="text" name="category" value="${row.카테고리 || ''}" readonly>
+	      </div>
+	      <div class="form-group product-select-group fixed-width-lg">
+	        <input type="text" name="product" value="${row.제품명 || ''}" readonly>
+	      </div>
+	      <div class="form-group fixed-width-med">
+	        <input type="number" name="price" value="${row.단가 || 0}" min="0" readonly>
+	      </div>
+	      <div class="form-group fixed-width-sm">
+	        <input type="number" name="quantity" value="${row.수량|| 1}" min="1" max="10" readonly>
+	      </div>
+	    </div>
+	    `;
+	    container.insertAdjacentHTML('beforeend', rowHtml);
+	  }
+	}
 
 // 1. 상품 데이터 목록 (ID, 이름, 설명 포함)
 const productData = [
@@ -100,75 +147,6 @@ function formatProductResult (product) {
 $(document).ready(function() {
 	const row = $(document).find(".form-row");
 	init_select2(row);
-/*    const $select = $('#product-select');
-    const emptyOption = new Option("", "", true, true); // value가 "" (비어 있음)
-    $select.append(emptyOption);
-    // 3. Select2 데이터를 HTML <option> 태그로 변환하여 삽입
-    productData.forEach(item => {
-        const option = new Option(item.text, item.id, false, false);
-        // description을 데이터 속성으로 저장하여 templateResult에서 사용 (Select2 내부 객체에 포함됨)
-        $(option).data('description', item.description); 
-        $select.append(option);
-    });
-    
-    // 4. Select2 초기화 및 Tags 옵션 활성화
-    $select.select2({
-        data: productData, // Select2가 내부적으로 사용할 데이터 목록
-        placeholder: "제품명 선택",
-        allowClear: true,
-        tags: true, // 직접 입력 허용 (datalist와 유사한 기능)
-        
-        // 검색 결과 목록에 적용할 템플릿
-        templateResult: formatProductResult,
-
-        // 검색된 항목이 없는 경우, 사용자가 입력한 텍스트를 옵션으로 표시
-        createTag: function (params) {
-            // 새 항목임을 표시하는 data 속성을 추가하여 선택 변경 이벤트에서 활용
-            const tag = {
-                id: params.term, // 입력된 텍스트 자체를 값으로 사용
-                text: params.term,
-                isNew: true // 새 항목임을 표시
-            };
-            return tag;
-        }
-    });
-    
-    // 드롭다운 내 검색 입력창에 플레이스홀더 설정
-    $select.on('select2:open', function() {
-        // 드롭다운이 열릴 때 동적으로 생성되는 검색 입력 필드를 찾아 placeholder 속성을 설정합니다.
-        $('.select2-search--dropdown .select2-search__field').attr(
-            'placeholder', 
-            '직접 입력'
-        );
-    });
-    
-    // 5. 선택 변경 이벤트 핸들러
-    $select.on('change', function() {
-        const $selectedOption = $(this).find('option:selected');
-        const selectedText = $selectedOption.text();
-        const selectedValue = $(this).val();
-        
-        let detail = `선택된 ID: <strong>${selectedValue}</strong>, 상품명: <strong>${selectedText}</strong>`;
-        
-        // 값이 선택되었는지 확인
-        if (selectedValue && selectedValue !== '') {
-             const isNewItem = $selectedOption.data('isNew');
-             
-             if (isNewItem) {
-                 // 직접 입력된 새 항목
-                 detail = `<strong style="color: #b91c1c;">[직접 입력된 새 항목]</strong> 상품명: <strong>${selectedText}</strong>`;
-             } else {
-                // 기존 상품인 경우 상세 설명을 가져옵니다.
-                const description = $selectedOption.data('description');
-                if (description) {
-                    detail += `<br>설명: <em>${description}</em>`;
-                }
-             }
-            $('#selected-value').html(detail);
-        } else {
-            $('#selected-value').html('선택된 상품: 없음');
-        }
-    });*/
 });
 
 function init_select2(parent){
@@ -259,3 +237,5 @@ function setTitle(){
 	}
 	document.getElementById('requestTitle').value = content;
 }
+
+

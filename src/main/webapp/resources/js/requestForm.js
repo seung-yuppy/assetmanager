@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	showInputForm('form'); 
 	
 	// 업로드 엑셀파일 업로드 시 이벤트 처리
-	document.getElementById('excelFile').addEventListener('change', handleFileSelect, false);
+	document.getElementById('excelFile').addEventListener('change', showExcelContent, false);
 });
 
 
@@ -85,7 +85,7 @@ function checkProductCnt(){
 }
 
 // 엑셀파일 미리보기 함수
-function handleFileSelect(event) {
+function showExcelContent(event) {
     const file = event.target.files[0];
     const displayArea = document.getElementById('data-display-area');
     
@@ -114,22 +114,8 @@ function handleFileSelect(event) {
             // 3. 해당 시트 선택
             const worksheet = workbook.Sheets[firstSheetName];
 
-            // 4. 시트 데이터를 HTML 테이블 문자열로 변환
-            // sheet_to_html을 사용하면 간단하게 테이블 태그를 얻을 수 있습니다.
-            const htmlTableString = XLSX.utils.sheet_to_html(worksheet, { id: 'excel-data-table'});
-            
-            // 5. HTML 영역에 삽입
-            displayArea.innerHTML = `
-            	<h3>업로드 내용</h3>
-            	${htmlTableString}
-            `;
-            
-            // 6. 생성된 테이블에 CSS 클래스 추가 (선택 사항)
-            const table = document.getElementById('excel-data-table');
-            if(table) {
-                 // 여기에 원하는 CSS 클래스를 추가하여 테이블을 스타일링할 수 있습니다.
-                 table.classList.add('excel-data-preview'); 
-            }
+            const json = XLSX.utils.sheet_to_json(worksheet);
+            renderFormFromExcel(json);
 
         } catch (error) {
             console.error("Excel 파일 파싱 오류:", error);

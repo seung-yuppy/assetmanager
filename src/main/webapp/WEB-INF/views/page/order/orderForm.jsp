@@ -12,9 +12,12 @@
 </head>
 <body>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
@@ -46,7 +49,8 @@
 							<div class="form-content">
 								<div class="form-date">
 									<div class="form-application-date">
-										<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="2025-10-21" class="form-input rent-input" readonly="">
+										<label for="application-date">반출 신청일</label> 
+										<input type="date" id="application-date" value="${today}" class="form-input rent-input" disabled>
 									</div>
 								</div>
 							</div>
@@ -63,7 +67,7 @@
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label for="product-select">제품명<span class="required">*</span></label>
-							        <select id="product-select"></select>
+							        <select id="product-select" required></select>
 								</div>
 								<div class="form-group fixed-width-med">
 									<label for="price">단가 (원) <span class="required">*</span></label>

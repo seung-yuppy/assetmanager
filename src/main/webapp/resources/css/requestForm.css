@@ -492,4 +492,8 @@ input:focus, select:focus, textarea:focus {
 	justify-content: flex-end;
 	margin-block: 10px;
 	gap: 10px;
-}   
+}
+
+.file-upload-group{
+	margin-bottom: 30px;
+}

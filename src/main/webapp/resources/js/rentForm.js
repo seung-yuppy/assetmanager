@@ -26,15 +26,18 @@ function addProduct(){
 	const targetEl = document.querySelector('#add-product-section'); 
 	const newFormRowHTML = `
 							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse">
-								</div>
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 <span class="required">*</span></label> <select id="category" name="category" required onchange="updateProductOptions()">
+									<label for="category">카테고리 <span class="required">*</span></label> 
+									<select id="category" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
-										<option value="software">소프트웨어</option>
+										<option value="tablet">태블릿</option>
+										<option value="smartphone">스마트폰</option>
+										<option value="multiprinter">복합기</option>
+										<option value="desktop">데스크탑</option>
+										<option value="tv">TV</option>
+										<option value="projector">프로젝터</option>
 										<option value="other">기타</option>
 									</select>
 								</div>

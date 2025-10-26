@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.example.assetmanager.dao.RentDAO">
-
-	<select id="findByAdminUser" resultType="UserDTO">
-		SELECT username, profile_image, dept_name, role
+	<select id="findByAdminUser" resultType="UserInfoDTO">
+		SELECT U.username
+			   ,U.profile_image
+			   ,D.dept_name
+			   ,U.role
 		FROM "User" U 
 		JOIN Department D ON U.department_id = D.id
-		Where D.dept_name = '경영지원팀' 
+		WHERE D.dept_name = '경영지원팀' 
 		AND U.role = 'admin'
 	</select>
 	
-	<select id="findByManagerUser" resultType="UserDTO">
-		SELECT username, profile_image, dept_name, role
+	<select id="findByManagerUser" resultType="UserInfoDTO">
+		SELECT U.username
+			   ,U.profile_image
+			   ,D.dept_name
+			   ,U.role
 		FROM "User" U
 		JOIN Department D ON U.department_id = D.id
 		WHERE U.role = 'manager'
+	</select>
+	
+	<select id="findByAsset" parameterType="int" resultType="edu.example.assetmanager.domain.AssetDTO">
+		SELECT id
+			  ,asset_name
+			  ,spec
+		FROM Asset
+		<where>
+        <if test="categoryId != 0">
+            AND category_id = #{categoryId}
+        </if>
+        	AND is_valid = 1;
+        </where>
 	</select>
 
 </mapper>

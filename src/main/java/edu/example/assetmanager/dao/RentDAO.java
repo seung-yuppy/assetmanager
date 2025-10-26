@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentDTO;
-import edu.example.assetmanager.domain.UserDTO;
+import edu.example.assetmanager.domain.UserInfoDTO;
 @Mapper
 public interface RentDAO {
 	// deptName로 userId 찾기
-	public List<UserDTO> findByAdminUser();
+	public List<UserInfoDTO> findByAdminUser();
 	
 	// role로 userId 찾기
-	public List<UserDTO> findByManagerUser();
+	public List<UserInfoDTO> findByManagerUser();
 	
 	// categoryId 값으로 제품 찾기  
 	public List<AssetDTO> findByAsset(@Param("categoryId") int categoryId);

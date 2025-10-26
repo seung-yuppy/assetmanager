@@ -23,7 +23,7 @@
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
 				<h1 class="content-title">반출 신청서</h1>
-				<span>새로운 반출 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
+				<span class="page-description">새로운 반출 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
 					<form action="#" method="post">
 						<div class="form-section">
@@ -48,18 +48,24 @@
 							<div class="form-row">
 
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 <span class="required">*</span></label> <select id="category" name="category" required onchange="updateProductOptions()">
+									<label for="category">카테고리 <span class="required">*</span></label> 
+									<select id="category" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
-										<option value="software">소프트웨어</option>
+										<option value="tablet">태블릿</option>
+										<option value="smartphone">스마트폰</option>
+										<option value="multiprinter">복합기</option>
+										<option value="desktop">데스크탑</option>
+										<option value="tv">TV</option>
+										<option value="projector">프로젝터</option>
 										<option value="other">기타</option>
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label>제품명<span class="required">*</span></label> 
 									<input list="productOptions" name="productNameSelect" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">
-								
+									<input type="hidden" name="assetId">
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
@@ -67,10 +73,6 @@
 										<input type="number" id="quantity" name="quantity" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
 								</div>
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse">
-								</div>
-
 							</div>
 							<div id="add-product-section">
 								<button type="button" class="add-product-button" onclick="addProduct();">+</button>
@@ -107,7 +109,7 @@
 						</div>
 
 						<div class="form-actions">
-							<button type="submit" class="primary-action">제출</button>
+							<button type="button" class="primary-action">제출</button>
 						</div>
 
 					</form>

@@ -1,87 +1,140 @@
-// 더미 데이터
-const assetData = [
-        { name: 'LG Gram 16"', spec: 'i7, 16GB RAM, 1TB SSD' },
-        { name: 'Samsung Galaxy Book Pro', spec: 'i5, 16GB RAM, 512GB SSD' },
-        { name: 'Dell Ultrasharp U2721DE', spec: '27-inch, QHD, IPS' },
-        { name: 'Logitech MX Keys', spec: 'Wireless, Backlit' },
-        { name: 'Sony A7M4', spec: '33MP, 4K 60p' },
-        { name: 'Canon EOS R6', spec: '20.1MP, 4K 60p' },
-        { name: 'Adobe Photoshop', spec: 'Creative Cloud - 1 Year' },
-        { name: 'Microsoft Office 365', spec: 'Business Standard - 1 Year' },
-        { name: 'Herman Miller Aeron', spec: 'Size B, Graphite' },
-        { name: 'Dell PowerEdge R740', spec: 'Intel Xeon, 128GB RAM' }
-    ];
-
-const productBtn = document.querySelectorAll('.productSelect');
-productBtn.forEach( input => {
-	input.addEventListener('click', (e)=> {
-		console.log(e.target);
-		ProductList();
-	})
-});
-
-
-function ProductList(){
+document.addEventListener("DOMContentLoaded", function() {
 	const productModal = document.querySelector('#product-modal');  
-	if(productModal){
-		const closeModalBtn = document.querySelector('.close-modal-btn');
-		const searchInput = document.getElementById('product-search-input');
-		const listBody = document.getElementById('asset-list-body');
-		const formInputArea = document.getElementById('formInputArea');
+	
+	// 모달이 이 페이지에 없으면, JS가 더 이상 실행되지 않도록 막음
+	if (!productModal) {
+        return; 
+    }
+	
+	const closeModalBtn = document.querySelector('.close-modal-btn');
+	const searchInput = document.getElementById('product-search-input');
+	const listBody = document.getElementById('asset-list-body');
+	const formInputArea = document.getElementById('formInputArea');
 		
+	let activeProductNameInput = null;
+	let currentFetchedAssets = [];
+	
+	const closeModal = () => {
+    	productModal.classList.add('hidden');
+    };
 		
-		const renderAssetList = (filter = '') => {
-			listBody.innerHTML = '';
-            const lowercasedFilter = filter.toLowerCase();
+	const renderAssetList = (filter = '') => {
+		listBody.innerHTML = '';
+        const lowercasedFilter = filter.toLowerCase();
+        
+        const filteredData = currentFetchedAssets.filter(asset =>
+        asset.assetName.toLowerCase().includes(lowercasedFilter) ||
+        (asset.spec && asset.spec.toLowerCase().includes(lowercasedFilter))
+    );
+
+        if (filteredData.length === 0) {
+        	listBody.innerHTML = '<tr><td colspan="2" style="text-align: center; padding: 1rem;">검색 결과가 없습니다.</td></tr>';
+            return;
+        }
+
+        filteredData.forEach(asset => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${asset.assetName}</td><td>${asset.spec || ''}</td>`;
             
-            const filteredData = assetData.filter(asset =>
-                asset.name.toLowerCase().includes(lowercasedFilter) ||
-                asset.spec.toLowerCase().includes(lowercasedFilter)
-            );
-
-            if (filteredData.length === 0) {
-            	listBody.innerHTML = '<tr><td colspan="2" style="text-align: center; padding: 1rem;">검색 결과가 없습니다.</td></tr>';
-                return;
-            }
-
-            filteredData.forEach(asset => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${asset.name}</td><td>${asset.spec}</td>`;
-                tr.addEventListener('click', () => {
-                    if (activeProductNameInput) {
-                        activeProductNameInput.value = asset.name;
+            tr.addEventListener('click', () => {
+            	const assetId = asset.id; 
+                const assetName = asset.assetName;
+            	
+                if (activeProductNameInput) {
+                    activeProductNameInput.value = assetName;
+                    
+                    // 숨겨진 assetId 값 찾기
+                    const parentRow = activeProductNameInput.closest('.form-row');
+                    if (parentRow) {
+                        const hiddenInput = parentRow.querySelector('input[name="assetId"]');
+                        if(hiddenInput) {                 
+                            hiddenInput.value = assetId;
+                        }
                     }
-                    closeModal();
-                });
-                listBody.appendChild(tr);
+                }
+                closeModal();
             });
-        };
+            listBody.appendChild(tr);
+        });
+	};
 
-        const openModal = (targetInput) => {
-            activeProductNameInput = targetInput;
-            productModal.classList.remove('hidden');
-            searchInput.value = '';
-            searchInput.focus();
-            renderAssetList();
-        };
-
-        const closeModal = () => {
-        	productModal.classList.add('hidden');
-        };
-		
-        if(formInputArea) {
+        if (formInputArea) {
             formInputArea.addEventListener('click', (e) => {
                 if (e.target.classList.contains('productSelect')) {
-                    openModal(e.target);
+                    
+                    // 클릭한 입력창 저장
+                    activeProductNameInput = e.target;
+
+                    // 현재 카테고리 값에서 가까운 부모
+                    const parentRow = e.target.closest('.form-row');
+                    
+                    // select 찾기
+                    const categorySelect = parentRow.querySelector('select[name="category"]');
+             
+    				if (!categorySelect) {
+    					return;
+    				}
+    				
+    				// 현재 category 값 찾기
+                    const selectedCategory = categorySelect.value;
+                    
+                    // 카테고리 값
+                    let categoryId = 0;
+                    switch (selectedCategory) {
+                        case "notebook":categoryId = 1; break;
+                        case "monitor":categoryId = 2; break; 
+                        case "tablet":categoryId = 3; break; 
+                        case "smartphone":categoryId = 4; break; 
+                        case "multiprinter":categoryId = 5; break; 
+                        case "desktop":categoryId = 6; break; 
+                        case "tv":categoryId = 7; break; 
+                        case "projector":categoryId = 8; break;                   
+                        case "": // 직접입력
+                            categoryId = 0; 
+                            break; 
+                        default: 
+                            categoryId = 0;
+                    }
+                    
+                    // 자산 데이터 요청
+                    fetch(`/assetmanager/rent/assets?categoryId=${categoryId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('서버 응답 오류');
+                            }
+                            return response.json(); 
+                        })
+                        .then(assets => {
+                            // 받아온 데이터 저장
+                            currentFetchedAssets = assets; 
+                            
+                         // 전체 불러오기
+                            renderAssetList(); 
+                            
+                            // 모달 열기
+                            productModal.classList.remove('hidden');
+                            searchInput.value = '';
+                            searchInput.focus();
+                        })
+                        .catch(error => {                      
+                            listBody.innerHTML = '<tr><td colspan="2">자산을 불러오는 데 실패했습니다.</td></tr>';
+                            productModal.classList.remove('hidden'); 
+                        });
                 }
             });
         }
 		
-        if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if(closeModalBtn) { 
+        	closeModalBtn.addEventListener('click', closeModal);
+        }
 		
-        if(searchInput) searchInput.addEventListener('input', (e) => renderAssetList(e.target.value));
+        if(searchInput) {
+        	searchInput.addEventListener('input', (e) => renderAssetList(e.target.value));
+        }
+        
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+            if (e.key === 'Escape' && !productModal.classList.contains('hidden')) {
+            	closeModal();
+            }
         });
-	}
-}
+});

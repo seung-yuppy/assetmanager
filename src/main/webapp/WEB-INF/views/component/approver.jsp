@@ -27,12 +27,11 @@
 			</div>
 
 			<div class="approver-item">
-
 				<div class="approver-info">
 					<div class="name-title">
-						강예나 <span class="title">사원</span>
+						${userInfo.username} <span class="title">${userInfo.role}</span>
 					</div>
-					<div class="team">(개발팀)</div>
+					<div class="team">(${userInfo.deptName})</div>
 				</div>
 			</div>
 		</fieldset>
@@ -56,13 +55,22 @@
 			<div class="approver-item">
 				<div class="approver-info">
 					<div class="name-title">
-						<select id="category" class="form-input rent-input">
+						<select class="approver-select form-input rent-input">
 							<c:forEach var="ad" items="${admin}">
-								<option value="${ad.username}">${ad.username}</option>
+								<option value="${ad.id}"
+										data-image-base64="${ad.base64ProfileImage}"
+										data-image-type="image/png"										
+										data-dept="(${ad.deptName})"
+										data-alt="${ad.username}">
+									${ad.username}
+									<c:choose>
+		                                <c:when test="${ad.role == 'admin'}">팀장</c:when>       		                               
+		                            </c:choose>											
+								</option>
 							</c:forEach>
 						</select>
 					</div>
-					<div class="firstTeam"></div>
+					<div class="approver-dept team"></div>
 				</div>
 			</div>
 		</fieldset>
@@ -86,19 +94,26 @@
 			<div class="approver-item">
 				<div class="approver-info">
 					<div class="name-title">
-						<select id="category" class="form-input rent-input">
-							<option>신아영 부장</option>
-							<option>송승엽 과장</option>
-							<option>김성배 과장</option>
-							<option>홍길동 대리</option>
-							<option>김둘리 대리</option>
+						<select class="approver-select form-input rent-input">
+							<c:forEach var="ma" items="${manager}">
+								<option value="${ma.id}"
+										data-image-base64="${ma.base64ProfileImage}"
+										data-image-type="image/png"										
+										data-dept="(${ma.deptName})"
+										data-alt="${ma.username}">
+									${ma.username}									
+									<c:choose>
+		                                <c:when test="${ma.role == 'manager'}">부장</c:when>       		                               
+		                            </c:choose>										
+								</option>
+							</c:forEach>
 						</select>
 					</div>
-					<div class="team">(사업본부)</div>
+					<div class="approver-dept team"></div>
 				</div>
 			</div>
 		</fieldset>
 	</div>
-	
+	<script src="/assetmanager/resources/js/approval.js"></script>
 </body>
 </html>

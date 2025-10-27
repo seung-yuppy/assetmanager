@@ -20,7 +20,7 @@
 					<div class="search-card">
 						<div class="filter-controls">
 							<div class="status-filter">
-								<label for="statusFilter">카테고리:</label>
+								<label for="statusFilter">부서</label>
 								<select id="statusFilter">
 									<option value="all">전체</option>
 									<option value="1">개발팀</option>

@@ -104,5 +104,28 @@
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="totalAsset">
+		SELECT COUNT(*)
+		FROM Asset
+	</select>
+	
+	<select id="usingAsset">
+		SELECT COUNT(*)
+		FROM Asset
+		WHERE user_id IS NOT NULL AND is_valid = 1
+	</select>
+	
+	<select id="pendingAsset">
+		SELECT COUNT(*)
+		FROM Asset
+		WHERE user_id IS NULL AND is_valid = 1
+	</select>
+	
+	<select id="invalidAsset">
+		SELECT COUNT(*)
+		FROM Asset
+		WHERE is_valid = 0
+	</select>
 
 </mapper>

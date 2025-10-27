@@ -38,6 +38,7 @@
 	<select id="countAll">
 		SELECT COUNT(*)
 		FROM "User"
+		WHERE role = 'employee' OR role = 'manager'
 	</select>
 	
 	<select id="listAll">
@@ -51,7 +52,8 @@
 			) u
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
-		AND role = 'employee'  OR role = 'manager'
+		AND role = 'employee' OR role = 'manager'
+		ORDER BY emp_no
 	</select>
 	
 	<update id="changeImage">

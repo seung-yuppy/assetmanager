@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ItemDAO;
-import edu.example.assetmanager.domain.CategoryDTO;
 import edu.example.assetmanager.domain.ItemDTO;
 
 @Service
@@ -96,5 +95,8 @@ public class ItemService {
 		return dao.getItemsByCategory(id);
 	}
 	
-	
+	// 관리자 대시보드 - 총 제품 수
+	public int getTotalItem() {
+		return dao.countAll();
+	}
 }

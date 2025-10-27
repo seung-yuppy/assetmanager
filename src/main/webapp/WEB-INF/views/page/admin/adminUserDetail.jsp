@@ -20,7 +20,7 @@
 				<div class="dashboard-container">
 					<!-- 사용자 상세 정보 -->
 					<div class="section-card">
-						<h2>현재 사용자 정보</h2>
+						<h2>사용자 정보</h2>
 						<div class="user-info-list">
 							<div class="info-f-list">
 								<img src="data:image/png;base64,${user.base64ProfileImage}" class="my-profile-image" >
@@ -57,7 +57,7 @@
 
 				<!-- 자산 정보 시작 -->
 				<div class="section-card">
-					<h2>사용자 자산 히스토리</h2>
+					<h2>자산 내역</h2>
 					<table class="data-table">
 						<thead>
 							<tr>

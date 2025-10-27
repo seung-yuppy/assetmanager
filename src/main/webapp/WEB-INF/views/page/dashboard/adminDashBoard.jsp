@@ -20,32 +20,32 @@
 				</div>
 				<!-- 1. 총 통계 section -->
 				<div class="metric-grid">
-	                <div class="metric-card border-green">
+	                <div class="metric-card border-yellow">
 	                	<div class="card-header">
 	                		<p class="card-title">총 자산 수</p>
-	                		<div class="card-logo-box back-green">
+	                		<div class="card-logo-box back-yellow">
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
 	                		</div>
 	                	</div>
-	                    <p class="card-value">1200</p>
+	                    <p class="card-value">${totalAsset}</p>
 	                </div>
-	                <div class="metric-card border-yellow">
+	                <div class="metric-card border-green">
 						<div class="card-header">
 	                		<p class="card-title">사용 중</p>   
-	                		<div class="card-logo-box back-yellow">
+	                		<div class="card-logo-box back-green">
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
 	                		</div>
 	                	</div>                    
-	                    <p class="card-value">1170</p>
+	                    <p class="card-value">${usingAsset}</p>
 	                </div>
 	                <div class="metric-card border-gray">
 						<div class="card-header">
-	                		<p class="card-title">창고 보관 중</p>  
+	                		<p class="card-title">창고 대기 중</p>  
 	                		<div class="card-logo-box back-gray">
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
 	                		</div>
 	                	</div>    
-	                    <p class="card-value">20</p>
+	                    <p class="card-value">${pendingAsset}</p>
 	                </div>
 					<div class="metric-card border-red">
 						<div class="card-header">
@@ -54,7 +54,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
 	                		</div>
 	                	</div>
-	                    <p class="card-value">10</p>
+	                    <p class="card-value">${invalidAsset}</p>
 	                </div>
 	                <div class="metric-card border-purple">
 						<div class="card-header">
@@ -63,7 +63,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
 	                		</div>
 	                	</div>   
-	                    <p class="card-value">50</p>
+	                    <p class="card-value">${totalItem}</p>
 	                </div>
 	            </div>
             

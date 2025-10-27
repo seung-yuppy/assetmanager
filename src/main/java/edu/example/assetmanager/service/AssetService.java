@@ -102,4 +102,25 @@ public class AssetService {
 		List<AssetHistoryDTO> list = dao.listHistory(1 ,5, userId);
 		return list;
 	}
+	
+	// 관리자 대시보드 - 총 자산 수
+	public int getTotalAsset() {
+		return dao.totalAsset();
+	}
+	
+	// 관리자 대시보드 - 사용중 자산 수
+	public int getUsingAsset() {
+		return dao.usingAsset();
+	}
+	
+	// 관리자 대시보드 - 대기중 자산 수 
+	public int getPendingAsset() {
+		return dao.pendingAsset();
+	}
+	
+	// 관리자 대시보드 - 불용중 자산 수
+	public int getInvalidAsset() {
+		return dao.invalidAsset();
+	}
+	
 }

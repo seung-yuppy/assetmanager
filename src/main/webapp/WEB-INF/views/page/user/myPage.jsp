@@ -69,7 +69,7 @@
 
 				<!-- 자산 정보 시작 -->
 				<div class="section-card">
-					<h2>사용자 자산 히스토리</h2>
+					<h2>자산 내역</h2>
 					<table class="data-table">
 						<thead>
 							<tr>

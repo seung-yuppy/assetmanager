@@ -42,4 +42,16 @@ public interface AssetDAO {
 	// 사용자 내 자산 확인
 	public List<AssetHistoryDTO> listHistory(@Param("start") int start, @Param("end") int end, @Param("userId") int userId);
 	
+	// 관리자 대시보드
+	// 총 자산 개수
+	public int totalAsset();
+	
+	// 사용 중인 자산 개수
+	public int usingAsset();
+	
+	// 대기 중인 자산 개수
+	public int pendingAsset();
+	
+	// 불용 중인 자산 개수
+	public int invalidAsset();
 }

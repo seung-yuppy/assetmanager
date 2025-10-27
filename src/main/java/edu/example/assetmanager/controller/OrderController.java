@@ -43,13 +43,12 @@ public class OrderController {
 	public String newOrder(HttpSession httpSession, OrderFormDTO orderFormDTO) {
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo != null) {
-			System.out.println("####### user Id : " + userInfo.getId());
 			orderFormDTO.setUserId(userInfo.getId());
 		}
 		System.out.println("title : " + orderFormDTO.getTitle());
 		orderService.save(orderFormDTO);
 		
-		return "redirect:/assetmanager/order/list";
+		return "redirect:/order/list";
 	}
 	
 	@GetMapping("/form/standard")

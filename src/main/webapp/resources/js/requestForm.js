@@ -32,6 +32,7 @@ function showInputForm(method) {
     const excelArea = document.getElementById('excelUploadArea');
     const formInputs = formArea.querySelectorAll('[required]');
     const excelInput = document.getElementById('excelFile');
+    const excelContents = document.getElementById('data-display-area');
 
     if (method === 'form') {
         // 폼 직접 입력 선택 시: 폼 영역 표시, 엑셀 영역 숨김
@@ -40,11 +41,23 @@ function showInputForm(method) {
         
         // 폼 직접 입력 필드 required 설정 (필수 입력으로)
         formInputs.forEach(input => input.setAttribute('required', 'required'));
+        
         // 엑셀 파일 필드 required 해제
         if (excelInput) excelInput.removeAttribute('required');
+        
+        // 엑셀 입력 폼 무효화
+        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select');
+        if (excel_inputs.length) { // 요소가 존재할 때만
+        	excel_inputs.forEach(el => el.disabled = true);
+        }
+        // 직접 입력폼 유효화
+        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select');
+        if (form_inputs.length) { // 요소가 존재할 때만
+        	form_inputs.forEach(el => el.disabled = false);
+        }
 
     } else if (method === 'excel') {
-        // 엑셀 파일 업로드 선택 시: 폼 영역 숨김, 엑셀 영역 표시
+    	// 엑셀 파일 업로드 선택 시: 폼 영역 숨김, 엑셀 영역 표시
         formArea.style.display = 'none';
         excelArea.style.display = 'block';
 
@@ -52,6 +65,17 @@ function showInputForm(method) {
         formInputs.forEach(input => input.removeAttribute('required'));
         // 엑셀 파일 필드 required 설정 (필수 입력으로)
         if (excelInput) excelInput.setAttribute('required', 'required');
+        
+        //직접 입력 폼 무효화
+        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select');
+        if(form_inputs.length){
+        	form_inputs.forEach(el =>  el.disabled = true);
+        }
+        // 엑셀 입력 폼 유효화
+        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select');
+        if(excel_inputs.length){
+        	excel_inputs.forEach(el => el.disabled = false)
+        }
     }
 }
 
@@ -72,6 +96,7 @@ function downloadExcelTemplate() {
 
 function removeProduct(btn){
 	btn.closest(".form-row").remove();
+	setRowIndex();
 }
 
 function checkProductCnt(){

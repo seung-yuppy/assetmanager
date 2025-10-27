@@ -31,6 +31,7 @@
 	    		and (a.status like '%' || #{status} || '%')
 	    	</if>
 	    </where>
+    	order by o.order_date desc
 	    offset #{offset} rows
     	fetch next #{size} rows only
 	</select>
@@ -50,14 +51,17 @@
 	    	</if>
 	    </where>
 	</select>
-
-    <insert id="insertOrder" parameterType="OrderFormDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-        INSERT INTO "Order" (user_id, approval_id, request_msg, title)
-        VALUES (#{userId}, #{approvalId}, #{requestMsg}, #{title})
-    </insert>
+    
+    <insert id="insertOrder" parameterType="OrderFormDTO">
+	    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+	        SELECT ISEQ$$_90697.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO "Order" (id, user_id, approval_id, request_msg, title)
+	    VALUES (#{id}, #{userId}, #{approvalId}, #{requestMsg}, #{title})
+	</insert>
 
     <insert id="insertOrderContent" parameterType="OrderContentDTO">
-        INSERT INTO Order_Content (order_id, item_name, quantity, price , count)
-        VALUES (#{orderId}, #{itemName}, #{quantity}, #{price})
+        INSERT INTO Order_Content (order_id, category_id, item_name, price , count)
+        VALUES (#{orderId}, #{categoryId}, #{itemName}, #{price}, #{count})
     </insert>
 </mapper>

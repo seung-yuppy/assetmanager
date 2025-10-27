@@ -21,29 +21,42 @@ function getCategories() {
 //이벤트 부착
 const inputArea = document.getElementById('formInputArea');
 inputArea.addEventListener('change',function(e){
-	console.log("change event occured");
 	// 총액 계산용
 	if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number'){
 		calculateTotalPrice(e.target);
 	// 권장 제품 로드
-	}else if(e.target && e.target.tagName === 'SELECT' && e.target.id.startsWith('category')){
+	}else if(e.target && e.target.tagName === 'SELECT' && e.target.name.includes('categoryId')){
+		console.log("e.target.name.includes('categoryId') : " + e.target.name.includes('categoryId'));
 		const categoryId =  parseInt(e.target.value);
 		const parentRow = e.target.closest('.form-row');
+		// 권장 제품 목록 로드
 		fetch(`/assetmanager/order/form/standard?categoryId=${categoryId}`)
 			.then(res=> res.json())
 			.then(data => {
-				console.log("json data : " + JSON.stringify(data));
-				productData = data;
-				init_select2(parentRow, data);
+	        	console.log("권장제품 가져오는중 : " + JSON.stringify(data));
+				productData = data.map(item => ({
+			        id: item.itemName,     // value로 itemName 사용
+			        text: item.itemName,   // 화면 표시
+			        itemName: item.itemName,
+			        spec: item.spec,
+			        price: item.price
+			    }));
+				setRowIndex();
+				init_select2(parentRow);
+				calculateTotalPrice(e.target);
 			});
 	}
 })
 
+//이벤트 부착 : 제목 추가용 
+const requestForm = document.getElementById('requestForm');
+requestForm.addEventListener('submit', setTitle);
+
 function calculateTotalPrice(el){
 	const row = el.closest('.form-row');
-	const price = row.querySelector('input[name^="price"]').value;
-	const quantity = row.querySelector('input[name^="quantity"]').value;
-	const targetEl = row.querySelector('input[name^="totalPrice"]');
+	const price = row.querySelector('input[name*="price"]').value;
+	const quantity = row.querySelector('input[name*="count"]').value;
+	const targetEl = row.querySelector('input[name*="totalPrice"]');
 	
 	targetEl.value = price * quantity;
 }
@@ -61,34 +74,34 @@ function addProduct(){
         return;
     }
 	
-	const currentIndex = ++productRowIndex;
 	const targetEl = document.querySelector('#add-product-section');
 	const newFormRowHTML = `
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<select id="category-${currentIndex}" name="category" required>
+									<select name="categoryId" required>
 										${categoryOptionsHTML}
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-							        <select id="product-select-${currentIndex}"></select>
+							        <select name="itemName"></select>
 								</div>
 								<div class="form-group fixed-width-med">
-									<input type="number" id="price-${currentIndex}" name="price" value="0" min="0" required>
+									<input type="number" name="price" value="0" min="0" required>
 								</div>
 
 								<div class="form-group fixed-width-sm">
-									<input type="number" id="quantity-${currentIndex}" name="quantity" min="1" max="10" value="1" required>
+									<input type="number" name="count" min="1" max="10" value="1" required>
 								</div>
 								<div class="form-group fixed-width-med">
 									<div class="last-input-group">
-										<input type="text" id="totalPrice-${currentIndex}" name="totalPrice" value="0" class="locked-input" readonly>
+										<input type="text" name="totalPrice" value="0" class="locked-input" readonly>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>
 							</div>
 	`
-		targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);
+	targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);
+	setRowIndex();
 };
 
 function renderFormFromExcel(json) {
@@ -102,19 +115,19 @@ function renderFormFromExcel(json) {
 	  <div class="form-row">
 	    <div class="form-group category-group fixed-width-med">
 	      <label>카테고리</label>
-	      <input type="text" name="category" value="${firstRow.카테고리}" readonly>
+	      <input type="text" name="products[0].categoryId" value="${firstRow.카테고리}" readonly>
 	    </div>
 	    <div class="form-group product-select-group fixed-width-lg">
 	      <label>제품명</label>
-	      <input type="text" name="product" value="${firstRow.제품명 || ''}" readonly>
+	      <input type="text" name="products[0].itemName" value="${firstRow.제품명 || ''}" readonly>
 	    </div>
 	    <div class="form-group fixed-width-med">
 	      <label>단가 (원)</label>
-	      <input type="number" name="price" value="${firstRow.단가 || 0}" min="0" readonly>
+	      <input type="number" name="products[0].price" value="${firstRow.단가 || 0}" min="0" readonly>
 	    </div>
 	    <div class="form-group fixed-width-sm">
 	      <label>수량</label>
-	      <input type="number" name="quantity" value="${firstRow.수량 || 1}" min="1" max="10" readonly>
+	      <input type="number" name="products[0].count" value="${firstRow.수량 || 1}" min="1" max="10" readonly>
 	    </div>
 	  </div>
 	  `;
@@ -126,24 +139,24 @@ function renderFormFromExcel(json) {
 	    const rowHtml = `
 	    <div class="form-row">
 	      <div class="form-group category-group fixed-width-med">
-	        <input type="text" name="category" value="${row.카테고리 || ''}" readonly>
+	        <input type="text" name="products[${i}].categoryId" value="${row.카테고리 || ''}" readonly>
 	      </div>
 	      <div class="form-group product-select-group fixed-width-lg">
-	        <input type="text" name="product" value="${row.제품명 || ''}" readonly>
+	        <input type="text" name="products[${i}].itemName" value="${row.제품명 || ''}" readonly>
 	      </div>
 	      <div class="form-group fixed-width-med">
-	        <input type="number" name="price" value="${row.단가 || 0}" min="0" readonly>
+	        <input type="number" name="products[${i}].price" value="${row.단가 || 0}" min="0" readonly>
 	      </div>
 	      <div class="form-group fixed-width-sm">
-	        <input type="number" name="quantity" value="${row.수량|| 1}" min="1" max="10" readonly>
+	        <input type="number" name="products[${i}].count" value="${row.수량|| 1}" min="1" max="10" readonly>
 	      </div>
 	    </div>
 	    `;
 	    container.insertAdjacentHTML('beforeend', rowHtml);
 	  }
 	}
-function init_select2(parent, data){
-	const $select = $(parent).find('[id^="product-select"]');
+function init_select2(parent){
+	const $select = $(parent).find('[name*="itemName"]');
 	if($select.hasClass("select2-hidden-accessible")){
 		$select.empty();
 		$select.select2('destroy');
@@ -153,10 +166,11 @@ function init_select2(parent, data){
     $select.append(emptyOption);
     // 3. Select2 데이터를 HTML <option> 태그로 변환하여 삽입
     productData.forEach(item => {
-        const option = new Option(item.itemName, item.id, false, false);
+        const option = new Option(item.itemName, item.itemName, false, false);
         // description을 데이터 속성으로 저장하여 templateResult에서 사용 (Select2 내부 객체에 포함됨)
         $(option).data('description', item.spec); 
         $(option).data('price', item.price); 
+        $(option).data('id', item.id); 
         $select.append(option);
     });
     
@@ -196,16 +210,16 @@ function init_select2(parent, data){
     // 5. 선택 변경 이벤트 핸들러
     $select.on('select2:select', function(e) {
         const selectedData = e.params.data; // 선택된 Select2 내부 객체
-        const $priceInput = $(this).closest('.form-row').find('[id^="price"]');
-
+        const $priceInput = $(this).closest('.form-row').find('[name*="price"]');
+        
         // 가격 반영
         if (selectedData.price !== undefined) {
             $priceInput.val(selectedData.price);
             calculateTotalPrice($priceInput[0]);
-            $priceInput.attr('disabled', true);
+            $priceInput.attr('readonly', true);
         } else {
             $priceInput.val('');
-            $priceInput.removeAttr('disabled');
+            $priceInput.removeAttr('readonly');
         }
 
         // 화면에 선택 정보 표시
@@ -221,7 +235,7 @@ function init_select2(parent, data){
     });
     
     $select.on('select2:unselect', function(e) {
-        const $priceInput = $(this).closest('.form-row').find('[id^="price"]');
+        const $priceInput = $(this).closest('.form-row').find('[name*="price"]');
         $priceInput.val('');// 단가 초기화
         $priceInput.removeAttr('disabled');
         calculateTotalPrice($priceInput[0]);
@@ -252,11 +266,16 @@ function formatProductResult (product) {
     );
 }
 
-function setTitle(){
-	let content = document.querySelector('#select2-product-select-container').textContent;
+function setTitle(e){
+    e.preventDefault(); // 폼 제출 막기
+    const container = document.querySelector('#select2-product-select-container');
+    let content; 
+    if (container){
+    	content = container.textContent;
+    }
 	let length = 0;
 	document.querySelectorAll('.form-row').forEach((row)=> {
-		let quantity = parseInt(row.querySelector('input[name^="quantity"]').value);
+		let quantity = parseInt(row.querySelector('input[name*="count"]').value);
 		if (quantity > 1){
 			length  += quantity;
 		}else{
@@ -267,8 +286,17 @@ function setTitle(){
 		content += " 등 " + length + "개"
 	}
 	document.getElementById('requestTitle').value = content;
+	e.target.submit();
 }
 
-
+function setRowIndex(){
+	document.querySelectorAll('.form-row').forEach((row, idx) =>{
+		row.querySelector('[name*="categoryId"]').name = `products[${idx}].categoryId`;
+		row.querySelector('[name*="itemName"]').name = `products[${idx}].itemName`;
+		row.querySelector('[name*="price"]').name = `products[${idx}].price`;
+		row.querySelector('[name*="count"]').name = `products[${idx}].count`;
+		row.querySelector('[name*="totalPrice"]').name = `products[${idx}].totalPrice`;
+	})
+}
 
 

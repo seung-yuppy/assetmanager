@@ -26,7 +26,7 @@
 				<h1 class="content-title">구매 신청서</h1>
 				<span class="page-description">구매 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="#" method="post" onsubmit="setTitle()">
+					<form id="requestForm" action="#" method="post">
 						<div style="display:none;">
 							<input name="title" type="text" id="requestTitle" value="테스트" >
 						</div>
@@ -67,7 +67,7 @@
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>
-									<select id="category" name="products[0].category" required>
+									<select id="category" name="products[0].categoryId" required>
 										<option value="" disabled selected>선택하세요</option>
 										<c:forEach var="item" items="${categories}">
 											<option value="${item.id}">${item.categoryName}</option>
@@ -116,7 +116,7 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
-							<button type="submit" class="primary-action">제출</button>
+							<button type="submit" class="primary-action" onclick="">제출</button>
 						</div>
 					</form>
 				</div>

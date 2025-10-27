@@ -49,7 +49,7 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<th>품목명</th>
+								<th>요청  내용</th>
 								<th>요청일</th>
 								<th>반납 예정일</th>
 								<th>상태</th>

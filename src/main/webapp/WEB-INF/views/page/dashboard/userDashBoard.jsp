@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,31 +22,13 @@
 			
 			<div class="metric-grid">
                 <div class="metric-card border-green">
-                	<div class="card-header">
-                		<p class="card-title">총 자산 수</p>
-                		<div class="card-logo-box back-green">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
-                		</div>
-                	</div>
-                    <p class="card-value">5</p>
-                </div>
-                <div class="metric-card border-yellow">
 					<div class="card-header">
                 		<p class="card-title">사용 중</p>   
-                		<div class="card-logo-box back-yellow">
+                		<div class="card-logo-box back-green">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>                    
-                    <p class="card-value">3</p>
-                </div>
-				<div class="metric-card border-red">
-					<div class="card-header">
-                		<p class="card-title">불용</p>
-                		<div class="card-logo-box back-red">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
-                		</div>
-                	</div>
-                    <p class="card-value">1</p>
+                    <p class="card-value">${usingCount}</p>
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
@@ -75,49 +59,25 @@
 	                        <th>자산명</th>
 	                        <th>카테고리</th>
 	                        <th>취득일</th>
-	                        <th>반납일</th>
+	                        <th>반납예정일</th>
 	                        <th>분류</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <tr>
-	                        <td>Latitude 7420 노트북</td>
-	                        <td>전자기기</td>
-	                        <td>2023-01-15</td>
-	                        <td>N/A</td>
-	                        <td><span class="status-badge status-approved">개인</span></td>
-	                    </tr>
-	                    <tr>
-	                    	
-	                        <td>Dell U2721DE 모니터</td>
-	                        <td>전자기기</td>
-	                        <td>2023-03-22</td>
-	                        <td>N/A</td>
-	                        <td><span class="status-badge status-approved">개인</span></td>
-	                    </tr>
-	                    <tr>
-	                    	
-	                        <td>로지텍 MX Keys 키보드</td>
-	                        <td>전자기기</td>
-	                        <td>2023-04-10</td>
-	                        <td>N/A</td>
-	                        <td><span class="status-badge status-approved">개인</span></td>
-	                    </tr>
-	                    <tr>
-	                    	
-	                        <td>Microsoft Office 365 라이선스</td>
-	                        <td>전자기기</td>
-	                        <td>2023-01-01</td>
-	                        <td>2024-01-01</td>
-	                        <td><span class="status-badge status-purple">부서</span></td>
-	                    </tr>
-	                    <tr>
-	                    	<td>노트북 충전기</td>
-	                        <td>전자기기</td>
-	                        <td>2023-05-01</td>
-	                        <td>N/A</td>
-	                        <td><span class="status-badge status-purple">부서</span></td>
-	                    </tr>
+	                	<c:forEach var="asset" items="${list}">
+	                		<tr>
+	                			<td>${asset.assetName}</td>
+	                			<td>${asset.categoryName}</td>
+	                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
+	                			<c:if test="${asset.returnDate != null}">
+									<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+								</c:if>
+								<c:if test="${asset.returnDate == null}">
+									<td>-</td>
+								</c:if>
+	                			<td><span class="status-badge status-approved">개인</span></td>
+	                		</tr>
+	                	</c:forEach>
 	                </tbody>
 	            </table>
 	        </div>

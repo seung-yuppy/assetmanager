@@ -34,9 +34,9 @@
 			FROM (
 				SELECT *
 				FROM Asset_Disposal
-				INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
-				INNER JOIN "User" ON Asset_Disposal.approver_id = "User".id
-				INNER JOIN Category ON Asset.category_id = Category.id
+					INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
+					INNER JOIN "User" ON Asset_Disposal.approver_id = "User".id
+					INNER JOIN Category ON Asset.category_id = Category.id
 			) a
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
@@ -45,7 +45,7 @@
 	<select id="assetDetail" resultType="AssetDTO">
 		SELECT *
 		FROM Asset
-		INNER JOIN Category ON Asset.category_id = Category.id
+			INNER JOIN Category ON Asset.category_id = Category.id
 		WHERE Asset.id = #{id}
 	</select>
 	
@@ -77,5 +77,32 @@
 			#{asset.disposalReason}
 		)
 	</insert>
+	
+	<select id="countMyAsset">
+		SELECT COUNT(*)
+		FROM Asset a
+			INNER JOIN Category c ON c.id = a.category_id
+			INNER JOIN Asset_History ah ON ah.asset_id = a.id
+			LEFT OUTER JOIN Rent_Content rc ON rc.asset_id = a.id
+			LEFT OUTER JOIN RENT r ON r.id = rc.rent_id
+		WHERE a.is_valid = 1 AND a.user_id = #{userId}
+	</select>
+	
+	<select id="listHistory">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rnum, k.*
+			FROM (
+				SELECT a.asset_name, a.serial_number, c.category_name, ah.create_date, r.return_date
+				FROM Asset a
+					INNER JOIN Category c ON c.id = a.category_id
+					INNER JOIN Asset_History ah ON ah.asset_id = a.id
+					LEFT OUTER JOIN Rent_Content rc ON rc.asset_id = a.id
+					LEFT OUTER JOIN RENT r ON r.id = rc.rent_id
+				WHERE a.is_valid = 1 AND a.user_id = #{userId}
+			) k
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
 
 </mapper>

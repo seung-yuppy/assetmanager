@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
 
 @Mapper
 public interface AssetDAO {
@@ -34,5 +35,11 @@ public interface AssetDAO {
 	
 	// 자산 불용 리스트
 	public List<AssetDisposalDTO> listDisposal(@Param("start") int start, @Param("end") int end);
+	
+	// 페이징을 위한 사용자 내 자산 개수
+	public int countMyAsset(@Param("userId") int userId);
+	
+	// 사용자 내 자산 확인
+	public List<AssetHistoryDTO> listHistory(@Param("start") int start, @Param("end") int end, @Param("userId") int userId);
 	
 }

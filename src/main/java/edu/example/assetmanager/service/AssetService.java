@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.example.assetmanager.dao.AssetDAO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
 
 @Service
 public class AssetService {
@@ -73,5 +74,32 @@ public class AssetService {
 		int pageSize = 10;
 		int totalItems = dao.countDisposal();
 		return (int)Math.ceil((double) totalItems / pageSize);
+	}
+	
+	// 내 자산 목록
+	public List<AssetHistoryDTO> getPagedMyAssetList(int page, int userId) {
+		int pageSize = 10;
+		int start = (page - 1) * pageSize + 1;
+		int end = start + pageSize - 1;
+		List<AssetHistoryDTO> list = dao.listHistory(start, end, userId);
+		return list;
+	}
+	
+	// 내 자산 총 페이지 수를 계산하는 메서드
+	public int getMyAssetTotalPages(int userId) {
+		int pageSize = 10;
+		int totalItems = dao.countMyAsset(userId);
+		return (int)Math.ceil((double) totalItems / pageSize);
+	}
+	
+	// 내가 사용 중인 총 자산 수 
+	public int totalUsingAssets(int userId) {
+		return dao.countMyAsset(userId);
+	}
+	
+	// 사용자 대시보드에서 내 자산 5개 보여주기 
+	public List<AssetHistoryDTO> getUserDashAsset(int userId) {
+		List<AssetHistoryDTO> list = dao.listHistory(1 ,5, userId);
+		return list;
 	}
 }

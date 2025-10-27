@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,94 +44,88 @@
 								<th>카테고리</th>
 								<th>일련번호</th>
 								<th>취득일</th>
-								<th>반납일</th>
+								<th>반납예정일</th>
 								<th>분류</th>		
 								<th></th>			
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td>개인</td>
-		                        <td>
-		                        	<div class="table-button-container">
-		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
-		                       			<button class="return-button">반납</button>
-		                       		</div>
-		                        </td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td>개인</td>
-		                        <td>
-		                        	<div class="table-button-container">
-		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
-		                       			<button class="return-button">반납</button>
-		                       		</div>
-		                        </td>
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>N/A</td>
-		                        <td>부서</td>		                        
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td>개인</td>
-		                        <td>
-		                        	<div class="table-button-container">
-		                       			<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
-		                       			<button class="return-button">반납</button>
-		                       		</div>
-		                        </td>		                        
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>N/A</td>
-		                        <td>개인</td>
-		                        <td>
-		                        	<div class="table-button-container">
-		                       			<button class="return-button">반납</button>
-		                       		</div>
-		                        </td>		                        
-							</tr>
-							<tr>
-								<td>LG 그램 노트북</td>
-								<td>노트북</td>
-		                        <td>SRV987654321</td>
-		                        <td>2024-11-01</td>
-		                        <td>2025-11-01</td>
-		                        <td>부서</td>	                        
-							</tr>
+							<c:forEach var="asset" items="${list}">
+								<tr>
+									<td>${asset.assetName}</td>
+									<td>${asset.categoryName}</td>
+									<td>${asset.serialNumber}</td>
+									<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
+									<c:if test="${asset.returnDate != null}">
+										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+									</c:if>
+									<c:if test="${asset.returnDate == null}">
+										<td>-</td>
+									</c:if>				
+									<td>개인</td>
+									<td>
+			                        	<div class="table-button-container">
+			                        		<c:if test="${asset.returnDate != null}">
+			                       				<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
+			                       			</c:if>
+			                       			<button class="return-button">반납</button>
+			                       		</div>
+			                        </td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
+
 					<nav class="pagination-container">
 						<ul class="pagination-list">
-							<li class="page-item prev"><a class="page-link" href="#">&lt; 이전</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
+							<c:choose>
+					            <c:when test="${hasPrev}">
+					                <li class="page-item prev">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${startPage - 1}'/>">
+					                        &lt; 이전
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item prev disabled">
+					                    <span class="page-link">&lt; 이전</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
+					
+					        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+					            <c:choose>
+					                <c:when test="${i == currentPage}">
+					                    <li class="page-item active">
+					                        <span class="page-link">${i}</span>
+					                    </li>
+					                </c:when>
+					                <c:otherwise>
+					                    <li class="page-item">
+					                        <a class="page-link" href="<c:url value='/admin/asset/list?page=${i}'/>">
+					                            ${i}
+					                        </a>
+					                    </li>
+					                </c:otherwise>
+					            </c:choose>
+					        </c:forEach>
+					
+					        <c:choose>
+					            <c:when test="${hasNext}">
+					                <li class="page-item next">
+					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${endPage + 1}'/>">
+					                        다음 &gt;
+					                    </a>
+					                </li>
+					            </c:when>
+					            <c:otherwise>
+					                <li class="page-item next disabled">
+					                    <span class="page-link">다음 &gt;</span>
+					                </li>
+					            </c:otherwise>
+					        </c:choose>
 						</ul>
-					</nav>					
+					</nav>				
 					
 				</div>
 			</div>

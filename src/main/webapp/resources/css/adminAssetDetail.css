@@ -6,7 +6,8 @@
 		/* 5. 정보 목록 스타일 */
         .user-info-list {
        	    display: flex;
-    		justify-content: space-between;
+		    gap: 30px;
+		    align-items: center;
         }
         .info-list {
             display: flex;

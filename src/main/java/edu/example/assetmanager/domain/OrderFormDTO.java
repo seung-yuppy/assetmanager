@@ -9,6 +9,7 @@ public class OrderFormDTO {
 	private Long id;
 	private int userId;
 	private int approvalId;
+	private int managerId;
 	private String firstApprover;
 	private String secondApprover;
 	private String requestMsg;

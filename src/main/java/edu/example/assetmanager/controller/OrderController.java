@@ -22,6 +22,7 @@ import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.CategoryService;
 import edu.example.assetmanager.service.ItemService;
 import edu.example.assetmanager.service.OrderService;
+import edu.example.assetmanager.service.RentService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -31,9 +32,21 @@ public class OrderController {
 	private final OrderService orderService;
 	private final CategoryService categoryService;
 	private final ItemService itemService;
+	private final RentService rentService;
 	
 	@GetMapping("/form")
 	public String form(HttpSession httpSession, Model model) {
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+		if (userInfo == null)
+			return "redirect:/login";
+	
+		//결재자 정보
+		List<UserInfoDTO> admin = rentService.findByAdminUser();
+		List<UserInfoDTO> manager = rentService.findByManagerUser();
+		model.addAttribute("admin", admin);
+		model.addAttribute("manager", manager);
+		
+		// 카테고리 목록
 		List<CategoryDTO> categories = categoryService.getCategories();
 		model.addAttribute("categories",categories);
 		return "/order/orderForm";
@@ -45,7 +58,8 @@ public class OrderController {
 		if (userInfo != null) {
 			orderFormDTO.setUserId(userInfo.getId());
 		}
-		System.out.println("title : " + orderFormDTO.getTitle());
+		System.out.println("approvalId: " + orderFormDTO.getApprovalId());
+		System.out.println("managerId: " + orderFormDTO.getManagerId());
 		orderService.save(orderFormDTO);
 		
 		return "redirect:/order/list";

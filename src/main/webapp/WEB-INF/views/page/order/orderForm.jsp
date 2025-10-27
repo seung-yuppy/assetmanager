@@ -32,17 +32,11 @@
 						</div>
 						<div class="form-section">
 							<!-- 결재라인 전체 컨테이너 -->
-							<%@ include file="/WEB-INF/views/component/approver.jsp" %>
-							<!-- 임시 결재 내용 -->
-							<div style="display:none;">
-								<select name="firstApprover">
-									<option value="김성배"></option>
-								</select>
-								<select name="secondApprover">
-									<option value="임꺽정"></option>
-								</select>
-								<input name="approvalId" value="1">
-							</div>
+							<jsp:include page="/WEB-INF/views/component/approver.jsp">
+								<jsp:param name="admin" value="${admin}"/>
+								<jsp:param name="manager" value="${manager}" />
+								<jsp:param name="user" value="${sessionScope.user}"/>
+							</jsp:include>
 						</div>
 						<h2 class="form-section-title">요청 내용</h2>
 						<div class="radio-input-group">

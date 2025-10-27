@@ -1,7 +1,5 @@
 package edu.example.assetmanager.domain;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +12,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentDTO {
-	private int id;
-	private int approvalId;
-	private int userId;
+	private int id; 
+	private Long approvalId;
 	private String requestMsg;
 	private int count;
-	private Date returnDate;
+	private String returnDate;      
 }

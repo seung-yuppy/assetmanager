@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.RentDAO;
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 
 @Service
@@ -54,5 +56,27 @@ public class RentService {
 		List<AssetDTO> asset = rentDAO.findByAsset(categoryId);
 
 		return asset;
-	}	
+	}
+	
+	// approvalId, managerId를 insert하 ,rent insert 하기
+	public boolean insertApproval(ApprovalDTO approvalDTO,RentDTO rentDTO, int userId) {
+		rentDAO.insertApproval(approvalDTO);
+		System.out.println("approvalDTO.getId() : "+ approvalDTO.getId());
+		rentDTO.setApprovalId(approvalDTO.getId());
+		System.out.println(approvalDTO.getId());
+		if(rentDAO.rentRequest(rentDTO, userId)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

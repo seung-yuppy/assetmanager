@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -20,10 +21,10 @@ public interface RentDAO {
 	public List<AssetDTO> findByAsset(@Param("categoryId") int categoryId);
 	
 	// Approval 요청
-	public boolean insertApproval();
+	public boolean insertApproval(ApprovalDTO approvalDTO);
 	
 	// Rent 요청 
-	public boolean rentRequest(RentDTO rentDTO);
+	public boolean rentRequest(@Param("rentDTO") RentDTO rentDTO, @Param("userId") int userId);
 	
 	// rent-content 요청
 	public boolean insertRentContent();

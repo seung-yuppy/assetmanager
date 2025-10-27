@@ -25,12 +25,13 @@
 				<h1 class="content-title">반출 신청서</h1>
 				<span class="page-description">새로운 반출 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="#" method="post">
+					<form action="/assetmanager/rent/approval" method="post">
 						<div class="form-section">
 							<!-- 결재라인 불러오기 -->
 							<jsp:include page="/WEB-INF/views/component/approver.jsp">
 								<jsp:param value="${admin}" name="admin"/>
 								<jsp:param value="${manager}" name="manager"/>
+								<jsp:param value="${user}" name="user"/>
 							</jsp:include>
 						</div>
 
@@ -70,7 +71,7 @@
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" id="quantity" name="quantity" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
+										<input type="number" id="quantity" name="count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
 								</div>
 							</div>
@@ -81,7 +82,7 @@
 							<div class="form-footer">
 								<div class="form-reason">
 									<label for="reason">반출 요청 사유 <span class="required">*</span></label>
-									<textarea id="reason" name="reason" rows="5" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+									<textarea id="reason" name="requestMsg" rows="5" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
 									<div class="char-count-display text-align-right">
 										(<span id="currentLength">0</span> / 200)
 									</div>
@@ -92,7 +93,7 @@
 										<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 									</div>
 									<div class="form-return-date">
-										<label for="return-date">반납 예정일</label> <input type="date" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
+										<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
 									</div>
 								</div>
 							</div>
@@ -109,7 +110,7 @@
 						</div>
 
 						<div class="form-actions">
-							<button type="button" class="primary-action">제출</button>
+							<button type="submit" class="primary-action">제출</button>
 						</div>
 
 					</form>

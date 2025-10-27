@@ -89,9 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         case "desktop":categoryId = 6; break; 
                         case "tv":categoryId = 7; break; 
                         case "projector":categoryId = 8; break;                   
-                        case "": // 직접입력
-                            categoryId = 0; 
-                            break; 
+                        case "other":categoryId = 9; break;                   
                         default: 
                             categoryId = 0;
                     }

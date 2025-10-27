@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.example.assetmanager.dao.RentDAO">
 	<select id="findByAdminUser" resultType="UserInfoDTO">
-		SELECT U.username
+		SELECT U.id
+			   ,U.username
 			   ,U.profile_image
 			   ,D.dept_name
 			   ,U.role
@@ -13,7 +14,8 @@
 	</select>
 	
 	<select id="findByManagerUser" resultType="UserInfoDTO">
-		SELECT U.username
+		SELECT U.id
+			   ,U.username
 			   ,U.profile_image
 			   ,D.dept_name
 			   ,U.role
@@ -22,7 +24,7 @@
 		WHERE U.role = 'manager'
 	</select>
 	
-	<select id="findByAsset" parameterType="int" resultType="edu.example.assetmanager.domain.AssetDTO">
+	<select id="findByAsset" parameterType="int" resultType="AssetDTO">
 		SELECT id
 			  ,asset_name
 			  ,spec
@@ -31,8 +33,22 @@
         <if test="categoryId != 0">
             AND category_id = #{categoryId}
         </if>
-        	AND is_valid = 1;
+        	AND is_valid = 1
         </where>
 	</select>
+	
+	<insert id="insertApproval" parameterType="ApprovalDTO">
+	    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+	        SELECT ISEQ$$_110689.NEXTVAL FROM DUAL
+	    </selectKey>
+	    INSERT INTO Approval (id, approver_id, manager_id, status)
+	    VALUES (#{id}, #{approverId}, #{managerId}, 'pending')       
+	</insert>
+	
+	<insert id="rentRequest" parameterType="RentDTO">
+		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg) 
+		VALUES (#{rentDTO.approvalId}, #{userId}, '가나더', TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg})
+	</insert>
+	
 
 </mapper>

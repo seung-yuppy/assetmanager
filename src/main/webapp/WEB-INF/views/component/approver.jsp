@@ -18,11 +18,8 @@
 		<fieldset class="approver-container pd-30">
 			<legend class="approver-title" align="center">요청자</legend>
 			<div class="approver-image-container">
-				<img class="approver-image" src="https://placehold.co/100x100/f6d5de/31343C?text=KYN" alt="강예나">
-				<div class="approval-badge">
-					<div class="approval-badge-icon">
-						<i class="fas fa-check"></i>
-					</div>
+				<img src="data:image/png;base64,${user.base64ProfileImage}" class="approver-image" >
+				<div class="approval-badge">				
 				</div>
 			</div>
 
@@ -46,16 +43,13 @@
 			<legend class="approver-title" align="center">일반결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
-				<div class="approval-badge">
-					<div class="approval-badge-icon">
-						<i class="fas fa-check"></i>
-					</div>
+				<div class="approval-badge">				
 				</div>
 			</div>
 			<div class="approver-item">
 				<div class="approver-info">
 					<div class="name-title">
-						<select class="approver-select form-input rent-input">
+						<select class="approver-select form-input rent-input" name="approverId">
 							<c:forEach var="ad" items="${admin}">
 								<option value="${ad.id}"
 										data-image-base64="${ad.base64ProfileImage}"
@@ -85,16 +79,13 @@
 			<legend class="approver-title" align="center">최종결재</legend>
 			<div class="approver-image-container">
 				<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">
-				<div class="approval-badge">
-					<div class="approval-badge-icon">
-						<i class="fas fa-check"></i>
-					</div>
+				<div class="approval-badge">					
 				</div>
 			</div>
 			<div class="approver-item">
 				<div class="approver-info">
 					<div class="name-title">
-						<select class="approver-select form-input rent-input">
+						<select class="approver-select form-input rent-input" name="managerId">
 							<c:forEach var="ma" items="${manager}">
 								<option value="${ma.id}"
 										data-image-base64="${ma.base64ProfileImage}"

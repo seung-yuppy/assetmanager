@@ -1,5 +1,7 @@
 package edu.example.assetmanager.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,6 @@ public class RentDTO {
 	private Long id; 
 	private Long approvalId;
 	private String requestMsg;
-	private int count;
-	private String assetName;
-	private String returnDate;      
+	private String returnDate; 
+	private List<RentContentDTO> items;
 }

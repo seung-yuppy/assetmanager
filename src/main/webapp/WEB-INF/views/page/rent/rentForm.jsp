@@ -65,12 +65,12 @@
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label>제품명<span class="required">*</span></label> 
-									<input list="productOptions" name="assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">							
+									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">							
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" id="quantity" name="count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
+										<input type="number" id="quantity" name="items[0].count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
 								</div>
 							</div>

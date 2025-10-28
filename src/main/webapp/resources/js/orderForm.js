@@ -26,14 +26,12 @@ inputArea.addEventListener('change',function(e){
 		calculateTotalPrice(e.target);
 	// 권장 제품 로드
 	}else if(e.target && e.target.tagName === 'SELECT' && e.target.name.includes('categoryId')){
-		console.log("e.target.name.includes('categoryId') : " + e.target.name.includes('categoryId'));
 		const categoryId =  parseInt(e.target.value);
 		const parentRow = e.target.closest('.form-row');
 		// 권장 제품 목록 로드
 		fetch(`/assetmanager/order/form/standard?categoryId=${categoryId}`)
 			.then(res=> res.json())
 			.then(data => {
-	        	console.log("권장제품 가져오는중 : " + JSON.stringify(data));
 				productData = data.map(item => ({
 			        id: item.itemName,     // value로 itemName 사용
 			        text: item.itemName,   // 화면 표시
@@ -46,7 +44,7 @@ inputArea.addEventListener('change',function(e){
 				calculateTotalPrice(e.target);
 			});
 	}
-})
+});
 
 //이벤트 부착 : 제목 추가용 
 const requestForm = document.getElementById('requestForm');
@@ -104,7 +102,7 @@ function addProduct(){
 	setRowIndex();
 };
 
-function renderFormFromExcel(json) {
+function renderFormFromExcel(json, purchase_reason) {
 	  const container = document.getElementById('data-display-area');
 	  container.innerHTML = ""; // 기존 내용 초기화
 
@@ -115,7 +113,8 @@ function renderFormFromExcel(json) {
 	  <div class="form-row">
 	    <div class="form-group category-group fixed-width-med">
 	      <label>카테고리</label>
-	      <input type="text" name="products[0].categoryId" value="${firstRow.카테고리}" readonly>
+	      <input type="text" value="${firstRow.카테고리}" readonly>
+		  <input type="text" name="products[0].categoryId" value="${categoryMap.get(firstRow.카테고리 || '')}" style="display:none">
 	    </div>
 	    <div class="form-group product-select-group fixed-width-lg">
 	      <label>제품명</label>
@@ -139,7 +138,9 @@ function renderFormFromExcel(json) {
 	    const rowHtml = `
 	    <div class="form-row">
 	      <div class="form-group category-group fixed-width-med">
-	        <input type="text" name="products[${i}].categoryId" value="${row.카테고리 || ''}" readonly>
+	        <input type="text" value="${row.카테고리}"  readonly>
+		    <input type="text" name="products[${i}].categoryId" value="${categoryMap.get(row.카테고리 || '')}" style="display:none">
+
 	      </div>
 	      <div class="form-group product-select-group fixed-width-lg">
 	        <input type="text" name="products[${i}].itemName" value="${row.제품명 || ''}" readonly>
@@ -154,7 +155,17 @@ function renderFormFromExcel(json) {
 	    `;
 	    container.insertAdjacentHTML('beforeend', rowHtml);
 	  }
+	  
+	  const reasonHtml = `
+  							<div class="form-group">
+								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
+								<textarea id="reason" name="requestMsg" rows="4" required maxlength="200" readonly>${purchase_reason}</textarea>
+							</div>
+	  `
+	  container.insertAdjacentHTML('beforeend', reasonHtml);
+		  
 	}
+
 function init_select2(parent){
 	const $select = $(parent).find('[name*="itemName"]');
 	if($select.hasClass("select2-hidden-accessible")){
@@ -266,37 +277,7 @@ function formatProductResult (product) {
     );
 }
 
-function setTitle(e){
-    e.preventDefault(); // 폼 제출 막기
-    const container = document.querySelector('#select2-product-select-container');
-    let content; 
-    if (container){
-    	content = container.textContent;
-    }
-	let length = 0;
-	document.querySelectorAll('.form-row').forEach((row)=> {
-		let quantity = parseInt(row.querySelector('input[name*="count"]').value);
-		if (quantity > 1){
-			length  += quantity;
-		}else{
-			length += 1;
-		}
-	});
-	if (length > 1){
-		content += " 등 " + length + "개"
-	}
-	document.getElementById('requestTitle').value = content;
-	e.target.submit();
-}
 
-function setRowIndex(){
-	document.querySelectorAll('.form-row').forEach((row, idx) =>{
-		row.querySelector('[name*="categoryId"]').name = `products[${idx}].categoryId`;
-		row.querySelector('[name*="itemName"]').name = `products[${idx}].itemName`;
-		row.querySelector('[name*="price"]').name = `products[${idx}].price`;
-		row.querySelector('[name*="count"]').name = `products[${idx}].count`;
-		row.querySelector('[name*="totalPrice"]').name = `products[${idx}].totalPrice`;
-	})
-}
+
 
 

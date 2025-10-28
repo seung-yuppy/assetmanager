@@ -48,7 +48,6 @@
 						<thead>
 							<tr>
 								<th>요청 내용</th>
-								<th>요청 사유</th>
 								<th>총액</th>
 								<th>요청일</th>
 								<th>상태</th>
@@ -58,7 +57,6 @@
 							<c:forEach var="item" items="${response.content}">
 								<tr>
 									<td>${item.title}</td>
-									<td>${item.requestMsg} </td>
 									<td>${item.totalPrice}</td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 									<td>

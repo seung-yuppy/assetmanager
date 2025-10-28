@@ -37,13 +37,10 @@
         </where>
 	</select>
 	
-	<insert id="insertApproval" parameterType="ApprovalDTO">
-	    <selectKey keyProperty="id" resultType="long" order="BEFORE">
-	        SELECT ISEQ$$_110689.NEXTVAL FROM DUAL
-	    </selectKey>
-	    INSERT INTO Approval (id, approver_id, manager_id, status)
-	    VALUES (#{id}, #{approverId}, #{managerId}, 'pending')       
-	</insert>
+<insert id="insertApproval" parameterType="ApprovalDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    INSERT INTO Approval (approver_id, manager_id, status)
+    VALUES (#{approverId}, #{managerId}, 'pending')
+</insert>
 	
 	<insert id="rentRequest" parameterType="RentDTO">
 		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg) 

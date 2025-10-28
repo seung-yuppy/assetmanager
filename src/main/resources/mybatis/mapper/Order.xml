@@ -18,7 +18,7 @@
 		            order_id = o.id
 		    ) total_price
 		FROM
-		    "Order" o
+		    orders o
 			    left JOIN order_content oc ON o.id = oc.order_id
 			    left JOIN approval      a ON o.approval_id = a.id
 	    <where>
@@ -37,7 +37,7 @@
 	</select>
 	<select id="countAll" parameterType="OrderParamDTO" resultType="int">
 		select count(distinct o.id) 
-		from "Order" o
+		from orders o
 		left join order_content oc on o.id = oc.order_id
 		left JOIN approval      a ON o.approval_id = a.id
 	    <where>
@@ -52,12 +52,9 @@
 	    </where>
 	</select>
     
-    <insert id="insertOrder" parameterType="OrderFormDTO">
-	    <selectKey keyProperty="id" resultType="long" order="BEFORE">
-	        SELECT ISEQ$$_90697.NEXTVAL FROM dual
-	    </selectKey>
-	    INSERT INTO "Order" (id, user_id, approval_id, request_msg, title)
-	    VALUES (#{id}, #{userId}, #{approvalId}, #{requestMsg}, #{title})
+	<insert id="insertOrder" parameterType="OrderFormDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	    INSERT INTO orders (user_id, approval_id, request_msg, title)
+	    VALUES (#{userId}, #{approvalId}, #{requestMsg}, #{title})
 	</insert>
 
     <insert id="insertOrderContent" parameterType="OrderContentDTO">

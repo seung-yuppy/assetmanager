@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.OrderDAO;
+import edu.example.assetmanager.dao.RentDAO;
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderFormDTO;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class OrderService {
 	private final OrderDAO orderDAO ;
+	private final RentDAO rentDAO;
 	private final int PAGE_SIZE = 10;
 	private final int BLOCK_SIZE = 5;
 	
@@ -40,6 +43,14 @@ public class OrderService {
 	}
 
 	public void save(OrderFormDTO orderFormDTO) {
+		//결재 정보 저장
+		ApprovalDTO approvalDTO = new ApprovalDTO();
+		approvalDTO.setApproverId(orderFormDTO.getApproverId());
+		approvalDTO.setManagerId(orderFormDTO.getManagerId());
+		rentDAO.insertApproval(approvalDTO);
+		orderFormDTO.setApprovalId(approvalDTO.getId());
+		
+		// 구매 정보 저장
 		orderDAO.insertOrder(orderFormDTO);
 		for (OrderContentDTO content : orderFormDTO.getProducts()) {
 	        content.setOrderId(orderFormDTO.getId());

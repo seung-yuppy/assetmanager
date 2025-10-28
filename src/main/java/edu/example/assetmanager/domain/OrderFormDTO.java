@@ -8,10 +8,9 @@ import lombok.Data;
 public class OrderFormDTO {
 	private Long id;
 	private int userId;
-	private int approvalId;
+	private int approverId;
 	private int managerId;
-	private String firstApprover;
-	private String secondApprover;
+	private Long approvalId;
 	private String requestMsg;
 	private String title;
 	private List<OrderContentDTO> products;

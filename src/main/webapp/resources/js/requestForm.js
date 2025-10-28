@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('excelFile').addEventListener('change', showExcelContent, false);
 });
 
+//카테고리 Map
+const categoryMap = new Map();
+const categoryArr = ["카테고리","노트북","모니터","태블릿","스마트폰","복합기","데스크탑","TV","프로젝터","기타"];
+categoryArr.forEach((item, index) => {
+	categoryMap.set(item, index);
+})
 
 // 사유 영역의 글자수를 세고 표시를 업데이트하는 함수
 function updateCharCount(textarea, maxLength) {
@@ -130,24 +136,108 @@ function showExcelContent(event) {
         const data = new Uint8Array(e.target.result);
         
         try {
-            // 1. 워크북 파싱
+            const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: 'array' });
             
-            // 2. 첫 번째 시트 이름 가져오기
-            const firstSheetName = workbook.SheetNames[0];
+            // 첫 번째 시트 이름을 가져옵니다.
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+
+            const data_json = XLSX.utils.sheet_to_json(worksheet, {
+                header: ["카테고리", "제품명", "단가", "수량"], // A열부터 D열까지의 헤더
+                range: 'A2:D11', // 읽어올 셀 범위 지정
+                raw: false // 포맷된 값(예: 통화 형식)을 문자열로 가져옴
+            });
             
-            // 3. 해당 시트 선택
-            const worksheet = workbook.Sheets[firstSheetName];
+            const reason_cell = worksheet['A13'];
+            let purchase_reason = (reason_cell && reason_cell.v) ? reason_cell.v.toString() : '내용 없음';
+            
+            console.log("Excel json :" + JSON.stringify(data_json));
+            console.log("Excel purchase_reason :" + purchase_reason);
+            // 데이터 표시 함수 호출
+            renderFormFromExcel(data_json, purchase_reason);
 
-            const json = XLSX.utils.sheet_to_json(worksheet);
-            renderFormFromExcel(json);
-
-        } catch (error) {
-            console.error("Excel 파일 파싱 오류:", error);
-            displayArea.innerHTML = '파일을 읽는 도중 오류가 발생했습니다. 파일 형식을 확인해 주세요.';
+        } catch(error) {
+            console.error("파일 처리 오류:", error);
         }
     };
 
     reader.readAsArrayBuffer(file);
+}
+
+function setRowIndex() {
+    const container = document.querySelector("#formInputArea");
+    
+    if (!container) {
+        console.error("Error: #formInputArea container not found.");
+        return; 
+    }
+    container.querySelectorAll('.form-row').forEach((row, idx) => {
+        // 1. categoryId 검증 및 처리
+        const categoryInput = row.querySelector('[name*="categoryId"]');
+        if (categoryInput) {
+            categoryInput.name = `products[${idx}].categoryId`;
+        }
+
+        // 2. itemName 검증 및 처리
+        const itemNameInput = row.querySelector('[name*="itemName"]');
+        if (itemNameInput) {
+            itemNameInput.name = `products[${idx}].itemName`;
+        }
+
+        // 3. price 검증 및 처리
+        const priceInput = row.querySelector('[name*="price"]');
+        if (priceInput) {
+            priceInput.name = `products[${idx}].price`;
+        }
+
+        // 4. count 검증 및 처리
+        const countInput = row.querySelector('[name*="count"]');
+        if (countInput) {
+            countInput.name = `products[${idx}].count`;
+        }
+
+        // 5. totalPrice 검증 및 처리
+        const totalPriceInput = row.querySelector('[name*="totalPrice"]');
+        if (totalPriceInput) {
+            totalPriceInput.name = `products[${idx}].totalPrice`;
+        }
+    });
+}
+
+
+function setTitle(e){
+    e.preventDefault(); // 폼 제출 막기
+    const radio = document.querySelector('.radio-input-group input:checked');
+    let content; 
+    let container;
+    if (radio && radio.id=='inputMethodForm'){ // 직접 입력 상태
+    	container = document.querySelector("#formInputArea");
+    	const select2 = container.querySelector('#select2-product-select-container');
+        if (select2){
+        	content = select2.textContent;
+        }
+    }else{ // 엑셀 업로드 상태
+    	container = document.querySelector("#data-display-area");
+    	const input = container.querySelector('.form-row .product-select-group input');
+        if (input){
+        	content = input.value;
+        }
+    }
+
+	let length = 0;
+	container.querySelectorAll('.form-row').forEach((row)=> {
+		let quantity = parseInt(row.querySelector('input[name*="count"]').value);
+		if (quantity > 1){
+			length  += quantity;
+		}else{
+			length += 1;
+		}
+	});
+	if (length > 1){
+		content += " 등 " + length + "개"
+	}
+	document.getElementById('requestTitle').value = content;
+	e.target.submit();
 }
 

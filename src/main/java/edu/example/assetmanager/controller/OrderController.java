@@ -58,8 +58,6 @@ public class OrderController {
 		if (userInfo != null) {
 			orderFormDTO.setUserId(userInfo.getId());
 		}
-		System.out.println("approvalId: " + orderFormDTO.getApprovalId());
-		System.out.println("managerId: " + orderFormDTO.getManagerId());
 		orderService.save(orderFormDTO);
 		
 		return "redirect:/order/list";

@@ -25,27 +25,40 @@
 	</select>
 	
 	<select id="findByAsset" parameterType="int" resultType="AssetDTO">
-		SELECT id
-			  ,asset_name
-			  ,spec
-		FROM Asset
+		SELECT asset_name, spec, count(*) AS count
+		FROM Asset		
 		<where>
         <if test="categoryId != 0">
             AND category_id = #{categoryId}
         </if>
         	AND is_valid = 1
+        	AND user_id IS NULL
         </where>
+        GROUP BY asset_name, spec
 	</select>
-	
-<insert id="insertApproval" parameterType="ApprovalDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    INSERT INTO Approval (approver_id, manager_id, status)
-    VALUES (#{approverId}, #{managerId}, 'pending')
-</insert>
-	
-	<insert id="rentRequest" parameterType="RentDTO">
+		
+	<insert id="insertRent" parameterType="RentDTO" useGeneratedKeys="true" keyProperty="rentDTO.id" keyColumn="id">
 		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg) 
 		VALUES (#{rentDTO.approvalId}, #{userId}, '가나더', TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg})
 	</insert>
 	
+	<insert id="insertRentContent" parameterType="RentContentDTO">
+		INSERT INTO RENT_CONTENT (rent_id,asset_id)
+		VALUES (#{rentContentDTO.rentId}, #{rentContentDTO.assetId})
+	</insert>
+	
+	<select id="selectCount">
+		SELECT id AS asset_id
+		FROM Asset
+		WHERE asset_name = #{assetName} 
+			AND user_id IS NULL
+			AND is_valid = 1
+		FETCH FIRST #{count} ROWS ONLY			
+	</select>
+
+	<update id="updateAsset">
+		UPDATE Asset SET user_id = #{userId}
+		WHERE asset_id IN (#{assetId})
+	</update>
 
 </mapper>

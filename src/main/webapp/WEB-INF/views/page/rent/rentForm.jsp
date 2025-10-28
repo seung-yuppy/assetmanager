@@ -65,8 +65,7 @@
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label>제품명<span class="required">*</span></label> 
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">
-									<input type="hidden" name="assetId">
+									<input list="productOptions" name="assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">							
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>

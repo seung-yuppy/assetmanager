@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 @Mapper
@@ -20,16 +20,14 @@ public interface RentDAO {
 	// categoryId 값으로 제품 찾기  
 	public List<AssetDTO> findByAsset(@Param("categoryId") int categoryId);
 	
-	// Approval 요청
-	public boolean insertApproval(ApprovalDTO approvalDTO);
-	
 	// Rent 요청 
-	public boolean rentRequest(@Param("rentDTO") RentDTO rentDTO, @Param("userId") int userId);
+	public boolean insertRent(@Param("rentDTO") RentDTO rentDTO, @Param("userId") int userId);
 	
 	// rent-content 요청
-	public boolean insertRentContent();
+	public boolean insertRentContent(@Param("rentContentDTO") RentContentDTO rentContentDTO);
 	
-
+	// rent 요청 수량(count) 가져오기
+	public List<RentContentDTO> selectCount(@Param("assetName")String assetName, @Param("count") int count);
 		
 
 

@@ -4,18 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RentDTO {
-	private Long id; 
-	private Long approvalId;
-	private String requestMsg;
-	private int count;
-	private String assetName;
-	private String returnDate;      
+public class RentContentDTO { 
+	private Long id;
+	private Long rentId;
+	private int assetId;
 }

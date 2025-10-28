@@ -26,5 +26,6 @@ public class AssetDTO {
 	private String username;
 	private String deptName;
 	private String deptAddress;
+	private int count;
 	
 }

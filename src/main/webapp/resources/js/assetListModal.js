@@ -23,10 +23,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const lowercasedFilter = filter.toLowerCase();
         
         const filteredData = currentFetchedAssets.filter(asset =>
-        asset.assetName.toLowerCase().includes(lowercasedFilter) ||
-        (asset.spec && asset.spec.toLowerCase().includes(lowercasedFilter))
+        asset.assetName.toLowerCase().includes(lowercasedFilter) || 
+        (asset.spec && asset.spec.toLowerCase().includes(lowercasedFilter)) ||
+        asset.count
     );
-
+ 
         if (filteredData.length === 0) {
         	listBody.innerHTML = '<tr><td colspan="2" style="text-align: center; padding: 1rem;">검색 결과가 없습니다.</td></tr>';
             return;
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         filteredData.forEach(asset => {
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${asset.assetName}</td><td>${asset.spec || ''}</td>`;
+            tr.innerHTML = `<td>${asset.assetName}</td><td>${asset.spec || ''}</td><td>${asset.count || ''}</td>`;
             
             tr.addEventListener('click', () => {
             	const assetId = asset.id; 

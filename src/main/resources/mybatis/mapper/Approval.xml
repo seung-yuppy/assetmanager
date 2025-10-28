@@ -7,5 +7,11 @@
 		INSERT INTO Approval (approver_id, manager_id, status)
 		VALUES (#{approverId}, #{managerId}, 'pending')
 	</insert>
+	
+	<select id="getApprovalById" resultType="ApprovalDTO">
+		select *
+		from approval
+		where id = #{id}
+	</select>
 
 </mapper>

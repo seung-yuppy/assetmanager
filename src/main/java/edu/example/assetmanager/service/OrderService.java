@@ -10,6 +10,7 @@ import edu.example.assetmanager.dao.RentDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
+import edu.example.assetmanager.domain.OrderDetailRESP;
 import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
@@ -60,12 +61,12 @@ public class OrderService {
 		}
 	}
 
-	public void detail(int id) {
-		OrderFormDTO orderFormDTO = new OrderFormDTO();
+	public OrderDetailRESP getOrderDetail(int id) {
 		OrderDTO orderDTO = orderDAO.getOrderById(id);
-		orderFormDTO.setOrder(orderDTO);
 		List<OrderContentDTO> products = orderDAO.getContentsByOrderId(id);
-		orderFormDTO.setProducts(products);
+		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(orderDTO.getApprovalId());
+		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products);
+		return response;
 	}
 
 }

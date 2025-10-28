@@ -67,4 +67,11 @@
     	from orders 
     	where id = ${id}
     </select>
+    
+    <select id="getContentsByOrderId" parameterType="int" resultType="OrderContentDTO">
+    	select o.*, c.category_name
+    	from order_content o
+    		join category c on o.category_id = c.id
+    	where order_id = #{id}
+    </select>
 </mapper>

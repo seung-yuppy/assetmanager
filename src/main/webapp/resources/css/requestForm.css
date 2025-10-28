@@ -497,3 +497,8 @@ input:focus, select:focus, textarea:focus {
 .file-upload-group{
 	margin-bottom: 30px;
 }
+
+/* 첫 form-row만 label 표시 */
+.form-row ~ .form-row label {
+  display: none;
+}

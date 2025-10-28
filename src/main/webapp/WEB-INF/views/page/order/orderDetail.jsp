@@ -8,10 +8,12 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/formStyle.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
@@ -33,46 +35,32 @@
 							<div class="form-date" style="margin-bottom: 20px;">
 								<div class="form-application-date">
 									<label for="application-date">구매 요청일</label> 
-									<input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+									
+									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly>
 								</div>
 							</div>
-							<div class="form-row">
-								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label>
-									<input id="category" name="category" type="text" value="기타" class="locked-input" readonly>
-								</div>
-								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label>
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="복합기" class="locked-input" readonly>
-								</div>
-								<div class="form-group fixed-width-med">
-									<label for="price">단가 (원)</label>
-									<div class="last-input-group">
-										<input type="number" id="price" name="price" value="3000000" class="locked-input" readonly>
-										<button type="button" class="regist-button" data-target="registerModal">등록</button>
+							<c:forEach var="product" items="${products}">
+								<div class="form-row">
+									<div class="form-group category-group fixed-width-med">
+										<label for="category">카테고리 </label>
+										<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
+									</div>
+									<div class="form-group product-select-group fixed-width-lg">
+										<label for="productNameSelect">제품명</label>
+										<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
+									</div>
+									<div class="form-group fixed-width-med">
+										<label for="price">단가 (원)</label>
+										<div class="last-input-group">
+											<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
+											<button type="button" class="regist-button" data-target="registerModal">등록</button>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label>
-									<input id="category" name="category" type="text" value="노트북" class="locked-input" readonly>
-								</div>
-								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label>
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="LG그램" class="locked-input" readonly>
-								</div>
-								<div class="form-group fixed-width-med">
-									<label for="price">단가 (원)</label>
-									<div class="last-input-group">
-										<input type="number" id="price" name="price" value="3000000" class="locked-input" readonly>
-										<button type="button" class="regist-button" data-target="registerModal">등록</button>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>
-								<textarea id="reason" name="reason" rows="4" readonly>신입 사원 배정으로 인한 노트북 구매 요청</textarea>
+								<textarea id="reason" name="reason" rows="4" readonly>${order.requestMsg}</textarea>
 							</div>
 						</div>
 						<div id="excelUploadArea" class ="inputArea">

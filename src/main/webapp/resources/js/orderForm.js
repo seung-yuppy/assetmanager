@@ -107,63 +107,49 @@ function renderFormFromExcel(json, purchase_reason) {
 	  container.innerHTML = ""; // 기존 내용 초기화
 
 	  if (json.length === 0) return;
-	  // 1. 첫 번째 row: label 포함
-	  const firstRow = json[0];
-	  const headerHtml = `
-	  <div class="form-row">
-	    <div class="form-group category-group fixed-width-med">
-	      <label>카테고리</label>
-	      <input type="text" value="${firstRow.카테고리}" readonly>
-		  <input type="text" name="products[0].categoryId" value="${categoryMap.get(firstRow.카테고리 || '')}" style="display:none">
-	    </div>
-	    <div class="form-group product-select-group fixed-width-lg">
-	      <label>제품명</label>
-	      <input type="text" name="products[0].itemName" value="${firstRow.제품명 || ''}" readonly>
-	    </div>
-	    <div class="form-group fixed-width-med">
-	      <label>단가 (원)</label>
-	      <input type="number" name="products[0].price" value="${firstRow.단가 || 0}" min="0" readonly>
-	    </div>
-	    <div class="form-group fixed-width-sm">
-	      <label>수량</label>
-	      <input type="number" name="products[0].count" value="${firstRow.수량 || 1}" min="1" max="10" readonly>
-	    </div>
-	  </div>
-	  `;
-	  container.insertAdjacentHTML('beforeend', headerHtml);
 
-	  // 2. 나머지 row: label 없이 input/select만
-	  for (let i = 1; i < json.length; i++) {
+	  // 모든 row를 처리하는 단일 루프
+	  for (let i = 0; i < json.length; i++) {
 	    const row = json[i];
-	    const rowHtml = `
-	    <div class="form-row">
-	      <div class="form-group category-group fixed-width-med">
-	        <input type="text" value="${row.카테고리}"  readonly>
-		    <input type="text" name="products[${i}].categoryId" value="${categoryMap.get(row.카테고리 || '')}" style="display:none">
+	    // 첫 번째 row (i === 0)에만 실제로 표시될 label 텍스트
+	    // 나머지 row에서는 CSS로 숨길 예정
+	    const categoryLabel = (i === 0) ? '<label>카테고리</label>' : '';
+	    const itemNameLabel = (i === 0) ? '<label>제품명</label>' : '';
+	    const priceLabel = (i === 0) ? '<label>단가 (원)</label>' : '';
+	    const countLabel = (i === 0) ? '<label>수량</label>' : '';
 
+	    const rowHtml = `
+	      <div class="form-row">
+	        <div class="form-group category-group fixed-width-med">
+	          ${categoryLabel}
+	          <input type="text" value="${row.카테고리 || ''}" readonly>
+	          <input type="text" name="products[${i}].categoryId" value="${categoryMap.get(row.카테고리 || '')}" style="display:none">
+	        </div>
+	        <div class="form-group product-select-group fixed-width-lg">
+	          ${itemNameLabel}
+	          <input type="text" name="products[${i}].itemName" value="${row.제품명 || ''}" readonly>
+	        </div>
+	        <div class="form-group fixed-width-med">
+	          ${priceLabel}
+	          <input type="number" name="products[${i}].price" value="${row.단가 || 0}" min="0" readonly>
+	        </div>
+	        <div class="form-group fixed-width-sm">
+	          ${countLabel}
+	          <input type="number" name="products[${i}].count" value="${row.수량 || 1}" min="1" max="10" readonly>
+	        </div>
 	      </div>
-	      <div class="form-group product-select-group fixed-width-lg">
-	        <input type="text" name="products[${i}].itemName" value="${row.제품명 || ''}" readonly>
-	      </div>
-	      <div class="form-group fixed-width-med">
-	        <input type="number" name="products[${i}].price" value="${row.단가 || 0}" min="0" readonly>
-	      </div>
-	      <div class="form-group fixed-width-sm">
-	        <input type="number" name="products[${i}].count" value="${row.수량|| 1}" min="1" max="10" readonly>
-	      </div>
-	    </div>
 	    `;
 	    container.insertAdjacentHTML('beforeend', rowHtml);
 	  }
-	  
+
+	  // 구매 요청 사유는 변경 없이 유지
 	  const reasonHtml = `
-  							<div class="form-group">
-								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
-								<textarea id="reason" name="requestMsg" rows="4" required maxlength="200" readonly>${purchase_reason}</textarea>
-							</div>
-	  `
+	    <div class="form-group">
+	      <label for="reason">구매 요청 사유 <span class="required">*</span></label>
+	      <textarea id="reason" name="requestMsg" rows="4" required maxlength="200" readonly>${purchase_reason || ''}</textarea>
+	    </div>
+	  `;
 	  container.insertAdjacentHTML('beforeend', reasonHtml);
-		  
 	}
 
 

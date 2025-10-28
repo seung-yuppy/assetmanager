@@ -48,6 +48,10 @@
 		                        <span class="info-value">${asset.spec}</span>
 		                    </div> 
 		                    <div class="info-item">
+		                        <span class="info-label">자산 위치</span>
+		                        <span class="info-value">${asset.location}</span>
+		                    </div> 
+		                    <div class="info-item">
 		                        <span class="info-label">등록일자</span>
 		                        <span class="info-value"><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></span>
 		                    </div>

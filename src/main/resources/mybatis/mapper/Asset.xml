@@ -44,7 +44,7 @@
 	
 	<select id="assetDetail" resultType="AssetDTO">
 		SELECT a.id, a.user_id, a.asset_name, c.category_name, a.serial_number, a.spec, a.register_date,
-				u.username, d.dept_name, d.dept_address, a.category_id
+				u.username, d.dept_name, d.dept_address, a.category_id, a.location
 		FROM Asset a
 			INNER JOIN Category c ON a.category_id = c.id
 			LEFT OUTER JOIN "User" u ON a.user_id = u.id

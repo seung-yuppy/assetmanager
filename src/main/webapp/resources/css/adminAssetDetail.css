@@ -12,7 +12,7 @@
         .info-list {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 20px;
         }
         .info-f-list {
         	margin-left: 2.5rem; 
@@ -34,11 +34,10 @@
     		font-weight: 600;
         }        
         .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px dashed #f3f4f6;
-            font-size: 0.95rem;
+			display: flex;
+		    justify-content: space-between;
+		    font-size: 0.95rem;
+		    align-items: center;
         }      
         .user-info-item {
             display: flex;

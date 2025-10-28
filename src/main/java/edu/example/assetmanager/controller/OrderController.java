@@ -88,7 +88,7 @@ public class OrderController {
 	
 	@GetMapping("/detail")
 	public String detail(int id) {
-		
+		orderService.detail(id);
 		return "/order/orderDetail";
 	}
 	

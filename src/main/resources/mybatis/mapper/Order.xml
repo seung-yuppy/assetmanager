@@ -61,4 +61,10 @@
         INSERT INTO Order_Content (order_id, category_id, item_name, price , count)
         VALUES (#{orderId}, #{categoryId}, #{itemName}, #{price}, #{count})
     </insert>
+    
+    <select id="getOrderById" parameterType="int">
+    	select * 
+    	from orders 
+    	where id = ${id}
+    </select>
 </mapper>

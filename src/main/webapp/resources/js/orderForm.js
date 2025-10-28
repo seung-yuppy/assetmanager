@@ -166,6 +166,20 @@ function renderFormFromExcel(json, purchase_reason) {
 		  
 	}
 
+
+	//엑셀 템플릿 다운로드 기능 구현
+	function downloadExcelTemplate() {
+		 // 1. 실제 템플릿 파일이 위치한 경로를 지정합니다.
+		 const templatePath = '/assetmanager/resources/template/구매요청양식.xlsx'; 
+		 // 2. 다운로드를 실행합니다. (가장 일반적인 방법: <a> 태그를 이용)
+		 const link = document.createElement('a');
+		 link.href = templatePath;
+		 link.download = '구매요청양식.xlsx'; // 다운로드될 파일명
+		 document.body.appendChild(link);
+		 link.click(); // 클릭 이벤트 발생
+		 document.body.removeChild(link); // 생성된 <a> 태그 제거
+	}
+
 function init_select2(parent){
 	const $select = $(parent).find('[name*="itemName"]');
 	if($select.hasClass("select2-hidden-accessible")){

@@ -18,11 +18,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class OrderService {
-	private final OrderDAO orderDAO ;
+	private final OrderDAO orderDAO;
 	private final ApprovalDAO approvalDAO;
 	private final int PAGE_SIZE = 10;
 	private final int BLOCK_SIZE = 5;
-	
+
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
 		int page = orderParamDTO.getPage();
 		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
@@ -38,26 +38,34 @@ public class OrderService {
 		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
 		boolean hasPrev = block > 1 ? true : false;
 		boolean hasNext = totalBlocks > block ? true : false;
-		
-		PageResponseDTO<OrderDTO> response = new PageResponseDTO<>(list, page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
+
+		PageResponseDTO<OrderDTO> response = new PageResponseDTO<>(list, page, totalCount, totalPages, hasPrev, hasNext,
+				blockStart, blockEnd);
 		return response;
 	}
 
 	public void save(OrderFormDTO orderFormDTO) {
-		//결재 정보 저장
+		// 결재 정보 저장
 		ApprovalDTO approvalDTO = new ApprovalDTO();
 		approvalDTO.setApproverId(orderFormDTO.getApproverId());
 		approvalDTO.setManagerId(orderFormDTO.getManagerId());
 		approvalDAO.insertApproval(approvalDTO);
 		orderFormDTO.setApprovalId(approvalDTO.getId());
-		
+
 		// 구매 정보 저장
 		orderDAO.insertOrder(orderFormDTO);
 		for (OrderContentDTO content : orderFormDTO.getProducts()) {
-	        content.setOrderId(orderFormDTO.getId());
-	        orderDAO.insertOrderContent(content);
-	    }
+			content.setOrderId(orderFormDTO.getId());
+			orderDAO.insertOrderContent(content);
+		}
 	}
-	
-	
+
+	public void detail(int id) {
+		OrderFormDTO orderFormDTO = new OrderFormDTO();
+		OrderDTO orderDTO = orderDAO.getOrderById(id);
+		orderFormDTO.setOrder(orderDTO);
+		List<OrderContentDTO> products = orderDAO.getContentsByOrderId(id);
+		orderFormDTO.setProducts(products);
+	}
+
 }

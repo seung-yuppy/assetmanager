@@ -1,6 +1,6 @@
 package edu.example.assetmanager.domain;
 
-import java.util.List;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +13,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RentDTO {
-	private Long id; 
-	private Long approvalId;
-	private String requestMsg;
-	private String returnDate; 
-	private List<RentContentDTO> items;
-	private String title;
+public class RentListDTO {
+	private Long id;          
+    private String title;       
+    private Date rentDate;      
+    private Date returnDate;    
+    private String status;
 }

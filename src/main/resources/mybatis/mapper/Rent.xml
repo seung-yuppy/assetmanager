@@ -39,7 +39,7 @@
 		
 	<insert id="insertRent" parameterType="RentDTO" useGeneratedKeys="true" keyProperty="rentDTO.id" keyColumn="id">
 		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg) 
-		VALUES (#{rentDTO.approvalId}, #{userId}, '가나더', TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg})
+		VALUES (#{rentDTO.approvalId}, #{userId}, #{rentDTO.title}, TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg})
 	</insert>
 	
 	<insert id="insertRentContent" parameterType="RentContentDTO">
@@ -55,6 +55,26 @@
 			AND is_valid = 1
 		FETCH FIRST #{count} ROWS ONLY			
 	</select>
+	
+	<select id="findRentListByUserId" parameterType="int" resultType="RentListDTO">
+	    SELECT
+	        R.id,
+	        R.title,
+	        R.rent_date AS rentDate,
+	        R.return_date AS returnDate,
+	        A.status
+	    FROM 
+	        Rent R
+	    JOIN 
+	        Approval A ON R.approval_id = A.id
+	    WHERE 
+	        R.user_id = #{userId}
+	    ORDER BY 
+	        R.rent_date DESC
+	</select>
+	
+	
+	
 
 	<update id="updateAsset">
 		UPDATE Asset SET user_id = #{userId}

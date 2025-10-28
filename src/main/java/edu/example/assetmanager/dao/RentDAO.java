@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
+import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 @Mapper
 public interface RentDAO {
@@ -28,7 +29,8 @@ public interface RentDAO {
 	
 	// rent 요청 수량(count) 가져오기
 	public List<RentContentDTO> selectCount(@Param("assetName")String assetName, @Param("count") int count);
-		
-
+	
+	// userId로 RentList 찾기
+	public List<RentListDTO> findRentListByUserId(@Param("userId") int userId);
 
 }

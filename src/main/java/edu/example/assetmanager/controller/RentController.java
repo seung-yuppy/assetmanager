@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentDTO;
+import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
@@ -71,12 +72,15 @@ public class RentController {
 		}	
 	}
 	
-	
-	
-	
-
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");	
+		if(userId==null) {
+			return "redirect:/login"; // 로그인 안 했으면 로그인 페이지로
+		}
+		List<RentListDTO> rentList = rentService.findRentListByUserId(userId);
+		model.addAttribute("rentList",rentList);
+		
 		return "/rent/rentList";
 	}
 

@@ -56,30 +56,40 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr data-id="REQ001">
-								<td>LG 그램 노트북</td>
-								<td>2024-07-20</td>
-								<td>2025-12-31</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr>
-							<tr data-id="REQ002" data-product="삼성 갤럭시 탭 S9">
-								<td>삼성 갤럭시 탭 S9 외 2개</td>
-								<td>2024-07-19</td>
-								<td>2025-12-31</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							<tr data-id="REQ006" data-product="애플 워치 시리즈 9">
-								<td>애플 워치 시리즈 9</td>
-								<td>2024-07-15</td>
-								<td>2025-12-31</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							<tr data-id="REQ009"> 
-								<td>크롬캐스트 with Google TV</td>
-								<td>2024-07-12</td>
-								<td>2025-12-31</td>
-								<td><span class="status-badge status-rejected">거부됨</span></td>
-							</tr>
+							<c:choose>
+                                <c:when test="${empty rentList}">
+                                    <tr>
+                                        <td colspan="4" style="text-align: center; padding: 20px;">
+                                            요청 내역이 없습니다.
+                                        </td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="rent" items="${rentList}">
+                                        <tr data-id="${rent.id}"> 
+                                        <td>${rent.title}</td>                                           
+                                            <td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd" /></td>
+                                            <td><fmt:formatDate value="${rent.returnDate}" pattern="yyyy-MM-dd" /></td>                            
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${rent.status == 'pending'}">
+                                                        <span class="status-badge status-waited">대기중</span>
+                                                    </c:when>
+                                                    <c:when test="${rent.status == 'approved'}">
+                                                        <span class="status-badge status-approved">승인됨</span>
+                                                    </c:when>
+                                                    <c:when test="${rent.status == 'rejected'}">
+                                                        <span class="status-badge status-rejected">거부됨</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="status-badge">${rent.status}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
 						</tbody>
 					</table>
 

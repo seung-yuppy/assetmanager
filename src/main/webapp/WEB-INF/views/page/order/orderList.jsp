@@ -55,7 +55,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="item" items="${response.content}">
-								<tr>
+								<tr data-id="${item.id}">
 									<td>${item.title}</td>
 									<td>${item.totalPrice}</td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
@@ -74,28 +74,6 @@
 									</td>
 								</tr>
 							</c:forEach>
-						
-							<!-- <tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-rejected">거절됨</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북</td>
-								<td>신입 사원 노트북 배정</td>
-								<td>100,0000</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr> -->
 						</tbody>
 					</table>
 					<c:if test="${response.totalPages > 0 }">

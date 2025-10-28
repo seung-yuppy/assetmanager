@@ -3,7 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	if (tableBody) {
         tableBody.addEventListener('click', function(event) { 
-        	window.location.href="detail"
+        	const row = event.target.closest('tr');
+        	if(row){
+        		const id = row.getAttribute('data-id');
+        		window.location.href=`detail?id=${id}`;
+        	}
         });
 	}
 });

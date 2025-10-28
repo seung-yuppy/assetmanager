@@ -63,22 +63,33 @@ public class RentService {
 		return asset;
 	}
 
-	// approvalId, managerId를 insert하 ,rent insert 하기
-	public boolean insertApproval(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId, RentContentDTO rentContentDTO) {
+	// approvalId, managerId를 insert하기 ,rent insert 하기
+	public boolean insertApproval(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
+		// Approval 테이블 insert
 		approvalDAO.insertApproval(approvalDTO);
 		System.out.println("approvalDTO.getId() : " + approvalDTO.getId());
 		rentDTO.setApprovalId(approvalDTO.getId());		 
 		System.out.println(approvalDTO.getId());
+		// rent 테이블 insert
 		if (rentDAO.insertRent(rentDTO, userId)) { 
-			String assetName = rentDTO.getAssetName();
-			System.out.println(assetName);
-			int count = rentDTO.getCount();
-			System.out.println("rentDTO.getCount() 나오니??"+rentDTO.getCount());
-			List<RentContentDTO> list = rentDAO.selectCount(assetName, count); 
-			list.stream().map(s -> s.getAssetId()).forEach(item -> System.out.println("assetID : "+item));		
-			for(RentContentDTO dto : list) {
-				dto.setRentId(rentDTO.getId());
-				rentDAO.insertRentContent(dto);
+			if (rentDTO.getItems() == null || rentDTO.getItems().isEmpty()) {
+                return false; 
+            }		
+			// 제품 목록 가져오기
+			List<RentContentDTO> items = rentDTO.getItems();
+			for (RentContentDTO item : items) {
+                String assetName = item.getAssetName();
+                int count = item.getCount();
+			
+                // count해서 assetId 찾기 
+                List<RentContentDTO> list = rentDAO.selectCount(assetName, count); 
+                list.stream().map(s -> s.getAssetId()).forEach(assetId -> System.out.println("assetID : "+ assetId));		
+
+                // assetId를 RentContent에 insert
+                for(RentContentDTO dto : list) {
+                    dto.setRentId(rentDTO.getId()); 
+                    rentDAO.insertRentContent(dto);
+                }
 			}
 			return true;
 		} else {

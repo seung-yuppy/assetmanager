@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
-import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.RentService;
@@ -57,12 +56,12 @@ public class RentController {
 	
 	// approvalId, managerId를 insert하기, rent insert 하기
 	@PostMapping("/approval")
-	public String approval(ApprovalDTO approvalDTO,RentDTO rentDTO,RentContentDTO rentContentDTO, HttpSession session) {
+	public String approval(ApprovalDTO approvalDTO,RentDTO rentDTO, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if(userId==null) {
-			return "redirect:/login";
+			return "redirect:/login"; 
 		} else {
-			if(rentService.insertApproval(approvalDTO,rentDTO,userId,rentContentDTO)) {
+			if(rentService.insertApproval(approvalDTO,rentDTO,userId)) {
 				// 요청 성공	
 				return "redirect:/rent/list";
 			}else {

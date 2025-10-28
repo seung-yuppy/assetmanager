@@ -6,6 +6,17 @@
 	gap: 15px;
 }
 
+.modal-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.modal-input-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .modal-input {
 	padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
@@ -14,4 +25,5 @@
     color: #111827;
     transition: border-color 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
+    width: 350px;
 }

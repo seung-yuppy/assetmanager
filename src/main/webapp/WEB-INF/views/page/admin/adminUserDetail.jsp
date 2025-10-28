@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,53 +65,33 @@
 							<tr>
 								<th>자산명</th>
 								<th>카테고리</th>
-								<th>사용 시작</th>
-								<th>사용 끝</th>
-								<th>분류</th>
+								<th>일련 번호</th>
+								<th>사용 시작일</th>
+								<th>사용 반납일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-used">사용중</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
+							<c:forEach var="asset" items="${assetHistory}">
+								<tr>
+									<td>${asset.assetName}</td>
+									<td>${asset.categoryName}</td>
+									<td>${asset.serialNumber}</td>
+									<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+									<c:if test="${asset.returnDate != null}">
+										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+									</c:if>
+									<c:if test="${asset.returnDate == null}">
+										<td>-</td>
+									</c:if>
+									<c:if test="${asset.returnDate != null}">
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</c:if>
+									<c:if test="${asset.returnDate == null}">
+										<td><span class="status-badge status-used">사용중</span></td>
+									</c:if>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

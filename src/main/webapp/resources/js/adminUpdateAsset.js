@@ -12,27 +12,37 @@ const response = async(id) => {
 const formHtml = (data) =>  `
 	<div class="modal-wrapper">
 	<div class="modal-container">
-		<label>
-			자산명
-		</label>
+		<div class="modal-input-title">
+			<span class="title-name">자산명</span>
+		</div>
 		<input type="text" class="modal-input" value="${data.assetName}" data-key="assetName"> 
 	</div>
 	<div class="modal-container">
-		<label>
-			카테고리
-		</label>
-		<input type="text" class="modal-input" value="${data.category}" data-key="category"> 
+		<div class="modal-input-title">
+			<span class="title-name">카테고리</span>
+		</div>
+		<select class="modal-input" name="categoryId" data-key="categoryId">
+			<option value="1" ${data.categoryId == 1 ? 'selected' : ''}>노트북</option>
+		    <option value="2" ${data.categoryId == 2 ? 'selected' : ''}>모니터</option>
+		    <option value="3" ${data.categoryId == 3 ? 'selected' : ''}>태블릿</option>
+		    <option value="4" ${data.categoryId == 4 ? 'selected' : ''}>스마트폰</option>
+		    <option value="5" ${data.categoryId == 5 ? 'selected' : ''}>복합기</option>
+		    <option value="6" ${data.categoryId == 6 ? 'selected' : ''}>데스크탑</option>
+		    <option value="7" ${data.categoryId == 7 ? 'selected' : ''}>TV</option>
+		    <option value="8" ${data.categoryId == 8 ? 'selected' : ''}>프로젝터</option>
+		    <option value="9" ${data.categoryId == 9 ? 'selected' : ''}>기타</option>
+		</select>
 	</div>
 	<div class="modal-container">
-		<label>
-			일련번호
-		</label>
+		<div class="modal-input-title">
+			<span class="title-name">일련번호</span>
+		</div>
 		<input type="text" class="modal-input" value="${data.serialNumber}" data-key="serialNumber"> 
 	</div>
 	<div class="modal-container">
-		<label>
-			스펙
-		</label>
+		<div class="modal-input-title">
+			<span class="title-name">스펙</span>
+		</div>
 		<input type="text" class="modal-input" value="${data.spec}" data-key="spec"> 
 	</div>
 	</div>

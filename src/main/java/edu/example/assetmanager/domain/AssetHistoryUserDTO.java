@@ -11,20 +11,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssetDTO {
+public class AssetHistoryUserDTO {
 	private int id;
-	private int userId;
-	private int categoryId;
-	private String categoryName;
-	private String assetName;
-	private String spec;
-	private String serialNumber;
-	private Date registerDate;
-	private String location;
-	private int isValid;
-	private String status;
+	private int assetId;
 	private String username;
+	private String empNo;
+	private String role;
 	private String deptName;
-	private String deptAddress;
-	
+	private String assetName;
+	private String categoryName;
+	private String serialNumber;
+	private Date createDate;
+	private String status;
 }

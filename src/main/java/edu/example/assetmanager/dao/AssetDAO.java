@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 
 @Mapper
 public interface AssetDAO {
@@ -54,4 +55,11 @@ public interface AssetDAO {
 	
 	// 불용 중인 자산 개수
 	public int invalidAsset();
+	
+	// 관리자 사용자 상세 페이지에서 자산 내역
+	public List<AssetHistoryUserDTO> getUserAssetHistory(int userId);
+	
+	// 관리자 자산 상세 페이지에서 자산 내역
+	public List<AssetHistoryUserDTO> getAssetAssetHistory(int assetId);
+
 }

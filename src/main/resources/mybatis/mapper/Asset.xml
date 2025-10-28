@@ -43,10 +43,13 @@
 	</select>
 	
 	<select id="assetDetail" resultType="AssetDTO">
-		SELECT *
-		FROM Asset
-			INNER JOIN Category ON Asset.category_id = Category.id
-		WHERE Asset.id = #{id}
+		SELECT a.id, a.user_id, a.asset_name, c.category_name, a.serial_number, a.spec, a.register_date,
+				u.username, d.dept_name, d.dept_address, a.category_id
+		FROM Asset a
+			INNER JOIN Category c ON a.category_id = c.id
+			LEFT OUTER JOIN "User" u ON a.user_id = u.id
+			LEFT OUTER JOIN Department d ON d.id = u.department_id
+		WHERE a.id = #{id}
 	</select>
 	
 	<update id="modifyAsset">
@@ -54,7 +57,8 @@
 		SET
 			asset_name = #{asset.assetName},
 			serial_number = #{asset.serialNumber},
-			spec = #{asset.spec}
+			spec = #{asset.spec},
+			category_id = #{asset.categoryId}
 		WHERE
 			id = #{asset.id}
 	</update>
@@ -126,6 +130,29 @@
 		SELECT COUNT(*)
 		FROM Asset
 		WHERE is_valid = 0
+	</select>
+	
+	<select id="getUserAssetHistory">
+		SELECT ah.id, a.asset_name, c.category_name, a.serial_number,
+				ah.create_date, ah.status, ah.asset_id
+		FROM Asset_History ah
+			INNER JOIN Asset a ON ah.asset_id = a.id
+			INNER JOIN Category c ON a.category_id = c.id
+		WHERE ah.user_id = #{userId}
+		ORDER BY ah.asset_id ASC, ah.create_date ASC
+	</select>
+	
+	<select id="getAssetAssetHistory">
+		SELECT ah.id, a.asset_name, c.category_name, a.serial_number, 
+				ah.create_date, ah.status, ah.asset_id,
+		 		u.username, u.emp_no, u.role, d.dept_name
+		FROM Asset_History ah
+			INNER JOIN Asset a ON ah.asset_id = a.id
+			INNER JOIN Category c ON a.category_id = c.id
+			INNER JOIN "User" u ON u.id = ah.user_id
+			INNER JOIN Department d ON u.department_id = d.id
+		WHERE ah.asset_id = #{assetId}
+		ORDER BY ah.asset_id ASC, ah.create_date ASC
 	</select>
 
 </mapper>

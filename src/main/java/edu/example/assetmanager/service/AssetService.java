@@ -1,5 +1,6 @@
 package edu.example.assetmanager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import edu.example.assetmanager.dao.AssetDAO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.AssetHistoryUserDTO;
+import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 
 @Service
 public class AssetService {
@@ -121,6 +124,73 @@ public class AssetService {
 	// 관리자 대시보드 - 불용중 자산 수
 	public int getInvalidAsset() {
 		return dao.invalidAsset();
+	}
+	
+	// 관리자 사용자 상세 페이지에서 자산 내역
+	public List<AssetHistoryUserShowDTO> getUserAssetHistory(int userId) {
+		List<AssetHistoryUserDTO> list = dao.getUserAssetHistory(userId);
+		List<AssetHistoryUserShowDTO> showList = new ArrayList<>();
+
+		for (int i = 0; i < list.size(); i++) {
+			AssetHistoryUserDTO current = list.get(i);
+			
+			if (current.getStatus().equalsIgnoreCase("rent")) {
+				AssetHistoryUserShowDTO showDTO = new AssetHistoryUserShowDTO();
+				showDTO.setAssetId(current.getAssetId());
+				showDTO.setAssetName(current.getAssetName());
+				showDTO.setCategoryName(current.getCategoryName());
+				showDTO.setSerialNumber(current.getSerialNumber());
+				showDTO.setRentDate(current.getCreateDate());
+				if ((i + 1 < list.size()) && 
+						(list.get(i + 1).getAssetId() == current.getAssetId()) && 
+						(list.get(i + 1).getStatus().equalsIgnoreCase("return"))) {
+					showDTO.setReturnDate(list.get(i + 1).getCreateDate());
+					i++;
+				} else {
+					showDTO.setReturnDate(null);
+				}
+				showList.add(showDTO);
+			}
+		}
+		
+		return showList;
+	}
+	
+	// 관리자 자산 상세 페이지에서 자산 내역
+	public List<AssetHistoryUserShowDTO> getAssetAssetHistory(int assetId) {
+		List<AssetHistoryUserDTO> list = dao.getAssetAssetHistory(assetId);
+		List<AssetHistoryUserShowDTO> showList = new ArrayList<>();
+
+		for (int i = 0; i < list.size(); i++) {
+			AssetHistoryUserDTO current = list.get(i);
+			
+			if (current.getStatus().equalsIgnoreCase("rent")) {
+				AssetHistoryUserShowDTO showDTO = new AssetHistoryUserShowDTO();
+				showDTO.setAssetId(current.getAssetId());
+				showDTO.setAssetName(current.getAssetName());
+				showDTO.setCategoryName(current.getCategoryName());
+				showDTO.setSerialNumber(current.getSerialNumber());
+				showDTO.setRentDate(current.getCreateDate());
+				showDTO.setUsername(current.getUsername());
+				showDTO.setEmpNo(current.getEmpNo());
+				showDTO.setDeptName(current.getDeptName());
+				switch(current.getRole()) {
+					case "manager": showDTO.setRole("부장"); break;
+					case "employee": showDTO.setRole("사원");	 break;
+				}
+				if ((i + 1 < list.size()) && 
+						(list.get(i + 1).getAssetId() == current.getAssetId()) && 
+						(list.get(i + 1).getStatus().equalsIgnoreCase("return"))) {
+					showDTO.setReturnDate(list.get(i + 1).getCreateDate());
+					i++;
+				} else {
+					showDTO.setReturnDate(null);
+				}
+				showList.add(showDTO);
+			}
+		}
+		
+		return showList;
 	}
 	
 }

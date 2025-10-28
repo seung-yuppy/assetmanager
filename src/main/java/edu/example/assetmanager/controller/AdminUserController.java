@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.UserService;
 
 @RequestMapping("/admin")
@@ -17,9 +19,11 @@ import edu.example.assetmanager.service.UserService;
 public class AdminUserController {
 	
 	private final UserService service;
+	private final AssetService assetService;
 	
-	public AdminUserController(UserService service) {
+	public AdminUserController(UserService service, AssetService assetService) {
 		this.service = service;
+		this.assetService = assetService;
 	}
 
 	@GetMapping("/user/list")
@@ -50,7 +54,10 @@ public class AdminUserController {
 	@GetMapping("/user/detail/{id}")
 	public String userDetail(Model model, @PathVariable("id") int id) {
 		UserInfoDTO dto = service.getUser(id);
+		List<AssetHistoryUserShowDTO> assetList = assetService.getUserAssetHistory(id);
+	
 		model.addAttribute("user", dto);
+		model.addAttribute("assetHistory", assetList);
 		
 		return "/admin/adminUserDetail";
 	}

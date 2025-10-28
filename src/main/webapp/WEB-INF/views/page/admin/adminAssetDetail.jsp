@@ -64,19 +64,15 @@
 			                    </div>		                    
 			                    <div class="info-item">
 			                        <span class="info-label">사용자 이름</span>
-			                        <span class="info-value">김지원 사원</span>
+			                        <span class="info-value">${asset.username}</span>
 			                    </div>
 			                    <div class="info-item">
 			                        <span class="info-label">부서명</span>
-			                        <span class="info-value">개발팀</span>
+			                        <span class="info-value">${asset.deptName}</span>
 			                    </div>
 			                    <div class="info-item">
 			                        <span class="info-label">부서 주소</span>
-			                        <span class="info-value">B동 5층 개발팀 사무실</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">할당일</span>
-			                        <span class="info-value">2023-01-15</span>
+			                        <span class="info-value">${asset.deptAddress}</span>
 			                    </div>
 							</c:if>
 							<c:if test="${asset.userId == 0}">
@@ -96,10 +92,6 @@
 			                        <span class="info-label">부서 주소</span>
 			                        <span class="info-value">-</span>
 			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">할당일</span>
-			                        <span class="info-value">-</span>
-			                    </div>
 							</c:if>
 		                </div>
 		            </div>
@@ -111,8 +103,9 @@
 		            <table class="data-table">
 		                <thead>
 		                    <tr>
-		                        <th>사용 시작</th>
-		                        <th>사용 끝</th>
+		                        <th>사용 시작일</th>
+		                        <th>사용 반납일</th>
+		                        <th>사번</th>
 		                        <th>사용자 이름</th>
 		                        <th>부서</th>
 		                        <th>직급</th>
@@ -120,30 +113,27 @@
 		                    </tr>
 		                </thead>
 		                <tbody>
-		                    <tr>
-		                        <td>2025-01-15</td>
-		                        <td>현재</td>
-		                        <td>김지원</td>
-		                        <td>개발팀</td>
-		                        <td>사원</td>	                        
-		                        <td><span class="status-badge status-used">사용중</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td>2023-03-22</td>
-		                        <td>2025-01-14</td>
-		                        <td>배고파</td>
-		                        <td>개발팀</td>
-		                        <td>사원</td>	  
-		                        <td><span class="status-badge status-rejected">반납</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td>2023-01-21</td>
-		                        <td>2023-03-21</td>
-		                        <td>힘들어</td>
-		                        <td>개발팀</td>
-		                        <td>사원</td>	  		                        
-		                        <td><span class="status-badge status-rejected">반납</span></td>
-		                    </tr>
+		                	<c:forEach var="asset" items="${assetHistory}">
+		                		<tr>
+		                			<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+		                			<c:if test="${asset.returnDate != null}">
+										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+									</c:if>
+									<c:if test="${asset.returnDate == null}">
+										<td>-</td>
+									</c:if>
+									<td>${asset.empNo}</td>
+									<td>${asset.username}</td>
+									<td>${asset.deptName}</td>
+									<td>${asset.role}</td>
+									<c:if test="${asset.returnDate != null}">
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</c:if>
+									<c:if test="${asset.returnDate == null}">
+										<td><span class="status-badge status-used">사용중</span></td>
+									</c:if>
+		                		</tr>		                	
+		                	</c:forEach>
 		                </tbody>
 		            </table>
 		        </div>

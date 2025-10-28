@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 import edu.example.assetmanager.domain.AssetModifyDTO;
 import edu.example.assetmanager.service.AssetService;
 
@@ -60,7 +61,10 @@ public class AdminAssetController {
 	@GetMapping("/asset/detail/{id}")
 	public String assetDetail(Model model, @PathVariable("id") int id) {
 		AssetDTO dto = service.getAsset(id);
+		List<AssetHistoryUserShowDTO> assetList = service.getAssetAssetHistory(id);
+		
 		model.addAttribute("asset", dto);
+		model.addAttribute("assetHistory", assetList);
 		
 		return "/admin/adminAssetDetail";
 	}

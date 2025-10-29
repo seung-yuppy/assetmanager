@@ -5,22 +5,22 @@ public enum ApprovalStatus {
     FIRST_APPROVAL("처리중","waited"),
     FINAL_APPROVAL("승인됨","approved"),
     FIRST_REJECT("반려됨","rejected"),
-    LAST_REJECT("반려됨","rejected");
+    FINAL_REJECT("반려됨","rejected");
 
     private final String koreanName;
-    private final String lowerCase;
+    private final String badgeType;
 
-    ApprovalStatus(String koreanName, String lowerCase) {
+    ApprovalStatus(String koreanName, String badgeType) {
         this.koreanName = koreanName;
-        this.lowerCase = lowerCase;
+        this.badgeType = badgeType;
     }
     
     public String getKoreanName() {
     	return this.koreanName;
     }
     
-    public String getLowerCase() {
-    	return this.lowerCase;
+    public String getBadgeType() {
+    	return this.badgeType;
     }
     
     // DString → Enum 변환

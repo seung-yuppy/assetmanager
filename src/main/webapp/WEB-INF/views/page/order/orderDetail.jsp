@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +14,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
@@ -30,6 +30,7 @@
 							<!-- 결재라인 전체 컨테이너 -->
 							<%@ include file="/WEB-INF/views/component/approverReadonly.jsp" %>
 						</div>
+						
 						<h2 class="form-section-title">요청 정보</h2>
 						<div id="formInputArea" class ="inputArea">
 							<div class="form-date" style="margin-bottom: 20px;">

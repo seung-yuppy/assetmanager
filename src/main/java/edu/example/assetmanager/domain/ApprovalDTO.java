@@ -16,10 +16,18 @@ import lombok.ToString;
 public class ApprovalDTO {
 	private Long id;
 	private int approverId;
+	private String approverName;
+	private String approverDept;
 	private int managerId;
+	private String managerName;
+	private String managerDept;
 	private Date firstApprovalDate;
 	private Date lastApprovalDate;
 	private Date rejectDate;
 	private String rejectReason;
-	private String status;
+	private ApprovalStatus status;
+	
+	public void setStatus(String status) {
+		this.status = ApprovalStatus.from(status);
+	}
 }

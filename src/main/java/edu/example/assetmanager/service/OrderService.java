@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import edu.example.assetmanager.dao.ApprovalDAO;
 import edu.example.assetmanager.dao.OrderDAO;
 import edu.example.assetmanager.dao.RentDAO;
+import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
+import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderDetailRESP;
 import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
+import edu.example.assetmanager.domain.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderService {
 	private final OrderDAO orderDAO;
 	private final ApprovalDAO approvalDAO;
+	private final UserDAO userDAO;
 	private final int PAGE_SIZE = 10;
 	private final int BLOCK_SIZE = 5;
 
@@ -62,10 +66,18 @@ public class OrderService {
 	}
 
 	public OrderDetailRESP getOrderDetail(int id) {
+		// 주문 정보
 		OrderDTO orderDTO = orderDAO.getOrderById(id);
 		List<OrderContentDTO> products = orderDAO.getContentsByOrderId(id);
+		// 결재 및 결재자 정보
 		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(orderDTO.getApprovalId());
-		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products);
+		UserInfoDTO userInfo = userDAO.getUserInfo(orderDTO.getUserId());
+		UserInfoDTO approverInfo = userDAO.getUserInfo(approvalDTO.getApproverId());
+		UserInfoDTO managerInfo = userDAO.getUserInfo(approvalDTO.getManagerId());
+		ApproverInfoDTO approverInfoDTO = new ApproverInfoDTO(userInfo,approverInfo,managerInfo);
+		
+		System.out.println("서비스 내부 : approval id 와 이유 : " + approvalDTO.getId() + " 이유 : " + approvalDTO.getRejectReason());
+		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products, approverInfoDTO);
 		return response;
 	}
 

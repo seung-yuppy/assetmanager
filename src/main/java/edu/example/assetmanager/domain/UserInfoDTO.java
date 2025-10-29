@@ -1,5 +1,7 @@
 package edu.example.assetmanager.domain;
 
+import java.util.Base64;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +23,11 @@ public class UserInfoDTO {
 	private String base64ProfileImage;
 	private String deptName;
 	private String deptAddress;
+	
+	public void setProfileImage(byte[] profileImage) {
+	    this.profileImage = profileImage;
+	    if(profileImage != null) {
+	        this.base64ProfileImage = Base64.getEncoder().encodeToString(profileImage);
+	    }
+	}
 }

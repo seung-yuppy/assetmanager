@@ -93,6 +93,8 @@ public class OrderController {
 		model.addAttribute("order", response.getOrderDto());
 		model.addAttribute("approval", response.getApprovalDTO());
 		model.addAttribute("products", response.getProducts());
+		model.addAttribute("empInfo", response.getApproverInfoDTO());
+		System.out.println("거절 이유 : " + response.getApprovalDTO().getRejectReason() );
 		return "/order/orderDetail";
 	}
 	

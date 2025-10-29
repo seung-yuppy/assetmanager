@@ -12,4 +12,5 @@ public class OrderDetailRESP {
 	private OrderDTO orderDto;
 	private ApprovalDTO approvalDTO;
 	private List<OrderContentDTO> products;
+	private ApproverInfoDTO approverInfoDTO;
 }

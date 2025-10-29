@@ -35,8 +35,8 @@ public class HomeController {
 			int usingCount = assetService.totalUsingAssets(userId);
 //			List<AssetHistoryDTO> list = assetService.getUserDashAsset(userId);
 			List<AssetHistoryDTO> list = assetService.getMyAsset(userId);
-			
 			session.setMaxInactiveInterval(18000); 
+			System.out.println("Session timeout (sec): " + session.getMaxInactiveInterval());
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("usingCount", usingCount);
 			model.addAttribute("list", list);
@@ -59,6 +59,7 @@ public class HomeController {
 			int totalItem = itemService.getTotalItem();
 			
 			session.setMaxInactiveInterval(18000); 
+			System.out.println("Session timeout ad (sec): " + session.getMaxInactiveInterval());
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("totalAsset", totalAsset);
 			model.addAttribute("usingAsset", usingAsset);

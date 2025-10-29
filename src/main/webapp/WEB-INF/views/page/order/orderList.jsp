@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +15,6 @@
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 </head>
 <body>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
@@ -24,7 +24,6 @@
 			<div class="dashboard-container">
 				<h1>구매 요청 목록</h1>
 				<span>현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
-
 				<div class="section-card">
 					<div class="header-controls">
 				        <div class="filter-controls">
@@ -57,10 +56,10 @@
 							<c:forEach var="item" items="${response.content}">
 								<tr data-id="${item.id}">
 									<td>${item.title}</td>
-									<td>${item.totalPrice}</td>
+									<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 									<td>
-									  <span class="status-badge status-${item.status.lowerCase}">${item.status.koreanName}</span>
+									  <span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span>
 									</td>
 								</tr>
 							</c:forEach>

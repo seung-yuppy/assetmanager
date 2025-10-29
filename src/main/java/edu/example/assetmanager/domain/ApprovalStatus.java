@@ -1,25 +1,26 @@
 package edu.example.assetmanager.domain;
 
 public enum ApprovalStatus {
-    PENDING("대기중"),
-    FIRST_APPROVAL("1차 승인"),
-    FINAL_APPROVAL("최종 승인"),
-    FIRST_REJECT("1차 반려"),
-    LAST_REJECT("최종 반려");
+    PENDING("대기중","waited"),
+    FIRST_APPROVAL("처리중","waited"),
+    FINAL_APPROVAL("승인됨","approved"),
+    FIRST_REJECT("반려됨","rejected"),
+    LAST_REJECT("반려됨","rejected");
 
     private final String koreanName;
+    private final String lowerCase;
 
-    ApprovalStatus(String koreanName) {
+    ApprovalStatus(String koreanName, String lowerCase) {
         this.koreanName = koreanName;
+        this.lowerCase = lowerCase;
     }
     
     public String getKoreanName() {
     	return this.koreanName;
     }
     
-    // 소문자 변환
-    public String toLower() {
-        return this.name().toLowerCase();
+    public String getLowerCase() {
+    	return this.lowerCase;
     }
     
     // DString → Enum 변환

@@ -60,17 +60,7 @@
 									<td>${item.totalPrice}</td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 									<td>
-									  <c:choose>
-									    <c:when test="${fn:contains(item.status, 'APPROVED')}">
-									      <span class="status-badge status-approved">승인됨</span>
-									    </c:when>
-									    <c:when test="${fn:contains(item.status, 'REJECT')}">
-									      <span class="status-badge status-rejected">반려됨</span>
-									    </c:when>
-									    <c:otherwise>
-									      <span class="status-badge status-waited">대기중</span>
-									    </c:otherwise>
-									  </c:choose>
+									  <span class="status-badge status-${item.status.lowerCase}">${item.status.koreanName}</span>
 									</td>
 								</tr>
 							</c:forEach>

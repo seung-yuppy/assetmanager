@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>사용자 상세</title>
-<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/user.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>사용자 상세</title>
+	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/user.css" rel="stylesheet">
 </head>
 <body>
 	<div class="app-layout">
@@ -23,7 +24,7 @@
 			<div class="dashboard-container">
 				<h1>${userInfo.username}님의 마이페이지</h1>
 				<div class="detail-header"> 
-					<span>${userInfo.username}님의 정보를 확인하고 수정합니다.</span>
+					<span>${userInfo.username}님의 정보와 자산 내역을 확인합니다.</span>
 				</div>
 
 				<div class="dashboard-container">
@@ -62,13 +63,13 @@
 									</div>
 								</div>
 								<div class="edit-wrapper">
-									<button type="button" class="main-button">프로필 수정</button>
+									<a href="/assetmanager/mypage/edit" class="edit-button">프로필 수정</a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- 사용자 상세 정보 끝 -->
-					<c:if test="${userInfo.role != '관리자'}">
+					<c:if test="${userInfo.role != '관리자' && !empty list}">
 						<!-- 자산 정보 시작 -->
 						<div class="section-card">
 							<h2>자산 내역</h2>
@@ -77,53 +78,33 @@
 									<tr>
 										<th>자산명</th>
 										<th>카테고리</th>
-										<th>사용 시작</th>
-										<th>사용 끝</th>
-										<th>분류</th>
+										<th>일련 번호</th>
+										<th>사용 시작일</th>
+										<th>사용 반납일</th>
 										<th>상태</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>LG그램</td>
-										<td>노트북</td>
-										<td>2025-10-10</td>
-										<td>현재</td>
-										<td><span class="status-badge status-approved">개인</span></td>
-										<td><span class="status-badge status-used">사용중</span></td>
-									</tr>
-									<tr>
-										<td>LG그램</td>
-										<td>노트북</td>
-										<td>2025-10-10</td>
-										<td>현재</td>
-										<td><span class="status-badge status-approved">개인</span></td>
-										<td><span class="status-badge status-rejected">반납</span></td>
-									</tr>
-									<tr>
-										<td>LG그램</td>
-										<td>노트북</td>
-										<td>2025-10-10</td>
-										<td>현재</td>
-										<td><span class="status-badge status-approved">개인</span></td>
-										<td><span class="status-badge status-rejected">반납</span></td>
-									</tr>
-									<tr>
-										<td>LG그램</td>
-										<td>노트북</td>
-										<td>2025-10-10</td>
-										<td>현재</td>
-										<td><span class="status-badge status-approved">개인</span></td>
-										<td><span class="status-badge status-rejected">반납</span></td>
-									</tr>
-									<tr>
-										<td>LG그램</td>
-										<td>노트북</td>
-										<td>2025-10-10</td>
-										<td>현재</td>
-										<td><span class="status-badge status-approved">개인</span></td>
-										<td><span class="status-badge status-rejected">반납</span></td>
-									</tr>
+									<c:forEach var="asset" items="${list}">
+										<tr>
+											<td>${asset.assetName}</td>
+											<td>${asset.categoryName}</td>
+											<td>${asset.serialNumber}</td>
+											<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+											<c:if test="${asset.returnDate != null}">
+												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td>-</td>
+											</c:if>										
+											<c:if test="${asset.returnDate != null}">
+												<td><span class="status-badge status-rejected">반납됨</span></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td><span class="status-badge status-used">사용중</span></td>
+											</c:if>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

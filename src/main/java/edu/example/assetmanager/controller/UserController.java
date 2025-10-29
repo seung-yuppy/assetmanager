@@ -1,13 +1,14 @@
 package edu.example.assetmanager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,15 +16,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.UserService;
 
 @Controller
 public class UserController {
 	
-	@Autowired
-	UserService service;
+	private final UserService service;
+	private final AssetService assetService;
+	
+	public UserController(UserService service, AssetService assetService) {
+		this.service = service;
+		this.assetService = assetService;
+	}
 
 	@GetMapping("/login")
 	public String s1 () {
@@ -36,13 +44,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage")
-	public String s4(HttpSession session) {
+	public String s4(HttpSession session, Model model) {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null) 
 			return "redirect:/login";
 
 		UserInfoDTO dto = service.getUser(userId);
+		List<AssetHistoryUserShowDTO> list = assetService.getUserAssetHistory(userId);
 		session.setAttribute("userInfo", dto);
+		model.addAttribute("list", list);
 		return "user/myPage";
 	}
 	
@@ -120,6 +130,18 @@ public class UserController {
 	        e.printStackTrace();
 	        return "redirect:/login";
 	    }
-
 	}
+	
+	// 마이페이지
+	@GetMapping("/mypage/edit")
+	public String us1(HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null) 
+			return "redirect:/login";
+		
+		UserInfoDTO dto = service.getUser(userId);
+		session.setAttribute("userInfo", dto);
+		return "user/editMyPage";
+	}
+	
 }

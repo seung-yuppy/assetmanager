@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
 import edu.example.assetmanager.dao.OrderDAO;
-import edu.example.assetmanager.dao.RentDAO;
 import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;

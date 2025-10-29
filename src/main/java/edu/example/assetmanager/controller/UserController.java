@@ -111,8 +111,11 @@ public class UserController {
 	}
 	
 	// 마이페이지 프로필 이미지 수정
-	@PostMapping("/change/myimage")
-	public String changeImage(HttpSession session, @RequestParam("profileImage") MultipartFile profileFile) {
+	@PostMapping("/change/userinfo")
+	public String changeImage(HttpSession session, 
+			@RequestParam(value = "profileImage", required = false) MultipartFile profileFile, 
+			@RequestParam("email") String email,
+			@RequestParam("phone") String phone) {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 	        return "redirect:/login";
@@ -120,9 +123,14 @@ public class UserController {
 		try {
 	        UserDTO dto = new UserDTO();
 	        dto.setId(userId);
-	        dto.setProfileImage(profileFile.getBytes());
-
-	        if (service.changeImage(dto)) 
+	        dto.setEmail(email);
+	        dto.setPhone(phone);
+	        
+	        if (profileFile != null && !profileFile.isEmpty()) {
+	            dto.setProfileImage(profileFile.getBytes());
+	        }
+	        
+	        if (service.changeUserInfo(dto)) 
 	            return "redirect:/mypage";
 	        else 
 	            return "redirect:/login";

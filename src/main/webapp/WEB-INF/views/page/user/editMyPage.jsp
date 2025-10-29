@@ -29,42 +29,30 @@
 				
 				<div class="section-card">
 					<h2>사용자 수정</h2>
-					<div class="edit-wrapper">
-						<div class="edit-image-box">
-							<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" id="profilePreview" >
+					<form action="/assetmanager/change/userinfo" method="POST" enctype="multipart/form-data" class="profile-edit-form">
+						<div class="edit-container">
+							<div class="edit-image-box">
+								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" id="profilePreview" >
+								<div class="edit-image-button">
+									<label for="fileInput" class="edit-label">
+										<span class="btn-label">파일 선택</span>
+									</label>
+									<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input" >
+								</div>
+							</div>
+							<div class="edit-user-info">
+								<span class="user-label">전화번호</span> 
+								<input type="text" value="${userInfo.phone}" name="phone" class="user-value">							
+							</div>
+							<div class="edit-user-info">
+								<span class="user-label">이메일</span> 
+								<input type="email" value="${userInfo.email}" name="email" class="user-value">							
+							</div>					
 						</div>
-						<form action="/assetmanager/change/myimage" method="POST" enctype="multipart/form-data" class="profile-edit-form">
-							<label for="fileInput" class="edit-label">
-								<span class="btn-label">파일 선택</span>
-							</label>
-							<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input">
-							<button type="submit" class="profile-edit-btn">이미지 수정</button>	
-						</form>
-						<div class="edit-user-info">
-							<span class="user-label">사번</span> 
-							<input type="text" value="${userInfo.empNo}" class="user-value">
+						<div class="edit-total-button">
+							<button type="submit" class="profile-edit-btn">수정</button>	
 						</div>
-						<div class="edit-user-info">
-							<span class="user-label">부서명</span>
-							<input type="text" value="${userInfo.deptName}" class="user-value">
-						</div>
-						<div class="edit-user-info">
-							<span class="user-label">직급</span> 
-							<input type="text" value="${userInfo.role}" class="user-value">
-						</div>
-						<div class="edit-user-info">
-							<span class="user-label">전화번호</span> 
-							<input type="text" value="${userInfo.phone}" class="user-value">							
-						</div>
-						<div class="edit-user-info">
-							<span class="user-label">이메일</span> 
-							<input type="text" value="${userInfo.email}" class="user-value">							
-						</div>
-						<div class="edit-user-info">
-							<span class="user-label">주소</span>
-							<input type="text" value="${userInfo.deptAddress}" class="user-value">							
-						</div>						
-					</div>
+					</form>
 				</div>
 				
 			</div>

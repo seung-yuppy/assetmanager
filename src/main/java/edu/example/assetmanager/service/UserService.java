@@ -167,8 +167,8 @@ public class UserService {
 	}
 	
 	// 마이페이지에서 프로필 이미지 수정하는 메서드
-	public boolean changeImage(UserDTO dto) {
-		if (dao.changeImage(dto))
+	public boolean changeUserInfo(UserDTO dto) {
+		if (dao.changeUserInfo(dto))
 			return true;
 		else
 			return false;

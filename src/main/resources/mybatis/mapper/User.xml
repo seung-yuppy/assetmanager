@@ -56,10 +56,15 @@
 		ORDER BY emp_no
 	</select>
 	
-	<update id="changeImage">
+	<update id="changeUserInfo">
 		UPDATE "User"
-		SET
-			profile_image = #{user.profileImage, jdbcType=BLOB}
+		<set>
+			<if test="user.profileImage != null">
+				profile_image = #{user.profileImage, jdbcType=BLOB},
+			</if>
+			email = #{user.email},
+			phone = #{user.phone}
+		</set>
 		WHERE 
 			id = #{user.id}
 	</update>

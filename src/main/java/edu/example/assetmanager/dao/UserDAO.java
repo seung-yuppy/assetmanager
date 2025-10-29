@@ -30,5 +30,5 @@ public interface UserDAO {
 	public List<UserInfoDTO> listAll(@Param("start") int start, @Param("end") int end);
 	
 	// 마이페이지에서 프로필 수정하기
-	public boolean changeImage(@Param("user") UserDTO user);
+	public boolean changeUserInfo(@Param("user") UserDTO user);
 }

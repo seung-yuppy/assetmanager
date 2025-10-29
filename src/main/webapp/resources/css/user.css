@@ -236,11 +236,6 @@
 	column-gap: 100px;
 }
 
-.my-profile-image {
-	width: 200px;
-	border-radius: 10px;
-}
-
 .info-list {
 	display: flex;
 	align-items: center;
@@ -294,6 +289,29 @@
 
 .custom-swal-title-approved {
     margin-top: -0.5em !important; 
+}
+
+/* 마이 페이지  */
+.userinfo-wrapper {
+	display: flex;
+	gap: 40px;
+}
+
+.profile-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.profile-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 100px;
+}
+
+.edit-wrapper {
+	display: flex;
+	justify-content: flex-end;
 }
 
 /* 5. 모바일 반응형 처리 */

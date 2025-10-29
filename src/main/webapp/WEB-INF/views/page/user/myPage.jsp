@@ -8,6 +8,7 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/user.css" rel="stylesheet">
 </head>
 <body>
 	<div class="app-layout">
@@ -26,106 +27,110 @@
 				</div>
 
 				<div class="dashboard-container">
-					<!-- 사용자 상세 정보 -->
+					<!-- 사용자 상세 정보 시작 -->
 					<div class="section-card">
-						<h2>현재 사용자 정보</h2>
-						<div class="user-info-list">
-							<div class="info-f-list">
+						<h2>사용자 정보</h2>
+						<div class="userinfo-wrapper">
+							<div class="image-box">
 								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" >
-								<form action="/assetmanager/change/myimage" method="POST" enctype="multipart/form-data" class="profile-edit-form">
-									<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input">
-									<label for="fileInput" class="edit-label">
-										<span class="btn-label">파일 선택</span>
-									</label>
-									<button type="submit" class="profile-edit-btn">이미지 수정</button>	
-								</form>
 							</div>
-							
-							<div class="info-s-list">					
-								<div class="user-info-item">
-									<span class="info-label">사번</span> <span class="info-value">${userInfo.empNo}</span>
+							<div class="profile-wrapper">
+								<div class="profile-box">
+									<div class="user-info-item">
+										<span class="info-label">사번</span> 
+										<span class="info-value">${userInfo.empNo}</span>
+									</div>
+									<div class="user-info-item">
+										<span class="info-label">부서명</span>
+										<span class="info-value">${userInfo.deptName}</span>
+									</div>
+									<div class="user-info-item">
+										<span class="info-label">직급</span> 
+										<span class="info-value">${userInfo.role}</span>
+									</div>
+									<div class="user-info-item">
+										<span class="info-label">전화번호</span> 
+										<span class="info-value">${userInfo.phone}</span>
+									</div>
+									<div class="user-info-item">
+										<span class="info-label">이메일</span> 
+										<span class="info-value">${userInfo.email}</span>
+									</div>
+									<div class="info-dept-address">
+										<span class="info-label">주소</span> 
+										<span class="info-value">${userInfo.deptAddress}</span>
+									</div>
 								</div>
-								<div class="user-info-item">
-									<span class="info-label">부서명</span> <span class="info-value">${userInfo.deptName}</span>
-								</div>
-								<div class="user-info-item">
-									<span class="info-label">직급</span> <span class="info-value">${userInfo.role}</span>
-								</div>
-							</div>
-							<div class="info-t-list">
-								<div class="user-info-item">
-									<span class="info-label">전화번호</span> <span class="info-value">${userInfo.phone}</span>
-								</div>
-								<div class="user-info-item">
-									<span class="info-label">이메일</span> <span class="info-value">${userInfo.email}</span>
-								</div>
-								<div class="info-dept-address">
-									<span class="info-label">주소</span> <span class="info-value">${userInfo.deptAddress}</span>
+								<div class="edit-wrapper">
+									<button type="button" class="main-button">프로필 수정</button>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- 사용자 상세 정보 끝 -->
+					<c:if test="${userInfo.role != '관리자'}">
+						<!-- 자산 정보 시작 -->
+						<div class="section-card">
+							<h2>자산 내역</h2>
+							<table class="data-table">
+								<thead>
+									<tr>
+										<th>자산명</th>
+										<th>카테고리</th>
+										<th>사용 시작</th>
+										<th>사용 끝</th>
+										<th>분류</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>LG그램</td>
+										<td>노트북</td>
+										<td>2025-10-10</td>
+										<td>현재</td>
+										<td><span class="status-badge status-approved">개인</span></td>
+										<td><span class="status-badge status-used">사용중</span></td>
+									</tr>
+									<tr>
+										<td>LG그램</td>
+										<td>노트북</td>
+										<td>2025-10-10</td>
+										<td>현재</td>
+										<td><span class="status-badge status-approved">개인</span></td>
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</tr>
+									<tr>
+										<td>LG그램</td>
+										<td>노트북</td>
+										<td>2025-10-10</td>
+										<td>현재</td>
+										<td><span class="status-badge status-approved">개인</span></td>
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</tr>
+									<tr>
+										<td>LG그램</td>
+										<td>노트북</td>
+										<td>2025-10-10</td>
+										<td>현재</td>
+										<td><span class="status-badge status-approved">개인</span></td>
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</tr>
+									<tr>
+										<td>LG그램</td>
+										<td>노트북</td>
+										<td>2025-10-10</td>
+										<td>현재</td>
+										<td><span class="status-badge status-approved">개인</span></td>
+										<td><span class="status-badge status-rejected">반납</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 자산 정보 끝 -->
+					</c:if>
 				</div>
 
-				<!-- 자산 정보 시작 -->
-				<div class="section-card">
-					<h2>자산 내역</h2>
-					<table class="data-table">
-						<thead>
-							<tr>
-								<th>자산명</th>
-								<th>카테고리</th>
-								<th>사용 시작</th>
-								<th>사용 끝</th>
-								<th>분류</th>
-								<th>상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-used">사용중</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-							<tr>
-								<td>LG그램</td>
-								<td>노트북</td>
-								<td>2025-10-10</td>
-								<td>현재</td>
-								<td><span class="status-badge status-approved">개인</span></td>
-								<td><span class="status-badge status-rejected">반납</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- 자산 정보 끝 -->
 			</div>
 		</div>
 	</div>

@@ -61,5 +61,8 @@ public interface AssetDAO {
 	
 	// 관리자 자산 상세 페이지에서 자산 내역
 	public List<AssetHistoryUserDTO> getAssetAssetHistory(int assetId);
+	
+	// 사용자 내 자산 확인 2
+	public List<AssetHistoryDTO> myAsset(@Param("userId") int userId);
 
 }

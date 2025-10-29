@@ -33,8 +33,10 @@ public class HomeController {
 		if (userId != null) {
 			UserInfoDTO dto = service.getUser(userId);
 			int usingCount = assetService.totalUsingAssets(userId);
-			List<AssetHistoryDTO> list = assetService.getUserDashAsset(userId);
+//			List<AssetHistoryDTO> list = assetService.getUserDashAsset(userId);
+			List<AssetHistoryDTO> list = assetService.getMyAsset(userId);
 			
+			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("usingCount", usingCount);
 			model.addAttribute("list", list);
@@ -56,6 +58,7 @@ public class HomeController {
 			int invalidAsset = assetService.getInvalidAsset();
 			int totalItem = itemService.getTotalItem();
 			
+			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("totalAsset", totalAsset);
 			model.addAttribute("usingAsset", usingAsset);

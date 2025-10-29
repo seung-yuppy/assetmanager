@@ -106,6 +106,10 @@ public class AssetService {
 		return list;
 	}
 	
+	public List<AssetHistoryDTO> getMyAsset(int userId) {
+		return dao.myAsset(userId);
+	}
+	
 	// 관리자 대시보드 - 총 자산 수
 	public int getTotalAsset() {
 		return dao.totalAsset();

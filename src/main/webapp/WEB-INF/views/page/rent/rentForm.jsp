@@ -29,9 +29,9 @@
 						<div class="form-section">
 							<!-- 결재라인 불러오기 -->
 							<jsp:include page="/WEB-INF/views/component/approver.jsp">
-								<jsp:param value="${admin}" name="admin"/>
-								<jsp:param value="${manager}" name="manager"/>
-								<jsp:param value="${user}" name="user"/>
+								<jsp:param value="${admin}" name="admin" />
+								<jsp:param value="${manager}" name="manager" />
+								<jsp:param value="${user}" name="user" />
 							</jsp:include>
 						</div>
 
@@ -46,11 +46,17 @@
 						</div>
 
 						<div id="formInputArea" class="inputArea">
+							<div class="form-date">
+								<div class="form-application-date">
+									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+								</div>
+								<div class="form-return-date">
+									<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
+								</div>
+							</div>
 							<div class="form-row">
-
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 <span class="required">*</span></label> 
-									<select id="category" name="category" required>
+									<label for="category">카테고리 <span class="required">*</span></label> <select id="category" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
@@ -64,8 +70,7 @@
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label>제품명<span class="required">*</span></label> 
-									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">							
+									<label>제품명<span class="required">*</span></label> <input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal">
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
@@ -78,22 +83,12 @@
 								<button type="button" class="add-product-button" onclick="addProduct();">+</button>
 							</div>
 
-							<div class="form-footer">
-								<div class="form-reason">
-									<label for="reason">반출 요청 사유 <span class="required">*</span></label>
-									<textarea id="reason" name="requestMsg" rows="5" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
-									<div class="char-count-display text-align-right">
-										(<span id="currentLength">0</span> / 200)
-									</div>
-								</div>
 
-								<div class="form-date">
-									<div class="form-application-date">
-										<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
-									</div>
-									<div class="form-return-date">
-										<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
-									</div>
+							<div class="form-group">
+								<label for="reason">반출 요청 사유 <span class="required">*</span></label>
+								<textarea id="reason" name="requestMsg" rows="5" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+								<div class="char-count-display text-align-right">
+									(<span id="currentLength">0</span> / 200)
 								</div>
 							</div>
 						</div>
@@ -117,36 +112,38 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 제품 검색 모달 -->
-    <div id="product-modal" class="modal-overlay hidden">
-        <div class="modal-content" id="modal-content-container">
-            <div class="modal-header">
-                <h3 class="modal-title">자산 리스트 검색</h3>
-                <button id="close-modal-btn" class="close-modal-btn">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="product-search-input" class="input-field" placeholder="제품명 또는 스펙으로 검색하세요...">
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>제품명</th>
-                                <th>스펙</th>
-                            </tr>
-                        </thead>
-                        <tbody id="asset-list-body">
-                            <!-- 자산 데이터가 여기에 동적으로 추가됩니다 -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div id="product-modal" class="modal-overlay hidden">
+		<div class="modal-content" id="modal-content-container">
+			<div class="modal-header">
+				<h3 class="modal-title">자산 리스트 검색</h3>
+				<button id="close-modal-btn" class="close-modal-btn">
+					<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="text" id="product-search-input" class="input-field" placeholder="제품명 또는 스펙으로 검색하세요...">
+				<div class="table-container">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>제품명</th>
+								<th>스펙</th>
+							</tr>
+						</thead>
+						<tbody id="asset-list-body">
+							<!-- 자산 데이터가 여기에 동적으로 추가됩니다 -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
-	<script src="/assetmanager/resources/js/requestForm.js"></script> <!-- 엑셀 업로드 -->
+	<script src="/assetmanager/resources/js/rentExcelUpload.js"></script>
+	<script src="/assetmanager/resources/js/rent.js"></script>
 	<script src="/assetmanager/resources/js/assetListModal.js"></script>
 </body>
 </html>

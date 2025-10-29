@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const productModal = document.querySelector('#product-modal');  
-	
+
 	// 모달이 이 페이지에 없으면, JS가 더 이상 실행되지 않도록 막음
 	if (!productModal) {
         return; 
@@ -58,11 +58,13 @@ document.addEventListener("DOMContentLoaded", function() {
             listBody.appendChild(tr);
         });
 	};
-
+		console.log(formInputArea);
         if (formInputArea) {
             formInputArea.addEventListener('click', (e) => {
                 if (e.target.classList.contains('productSelect')) {
                     
+                	console.log(e.target);
+     
                     // 클릭한 입력창 저장
                     activeProductNameInput = e.target;
 
@@ -72,12 +74,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     // select 찾기
                     const categorySelect = parentRow.querySelector('select[name="category"]');
              
+                    console.log(categorySelect);
+                    
     				if (!categorySelect) {
     					return;
     				}
     				
     				// 현재 category 값 찾기
                     const selectedCategory = categorySelect.value;
+                    
+                    console.log(selectedCategory);
                     
                     // 카테고리 값
                     let categoryId = 0;

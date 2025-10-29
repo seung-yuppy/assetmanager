@@ -58,10 +58,13 @@
 }
 
 .form-date {
-	display:flex;
-	width:300px;
-	flex-direction: column;
-    gap: 10px;
+	display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 20px;
 }
 
 /* --- input 크기--- */
@@ -120,12 +123,8 @@
     color: #343a40;
     margin-bottom:4px;
 }
-.form-date label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    color: #343a40;
-    margin-bottom:4px;
+.form-date input[type="date"] {
+    width:330px;
 }
 
 /* 입력 필드 (text, number, select, textarea 공통) */
@@ -502,3 +501,5 @@ input:focus, select:focus, textarea:focus {
 .form-row ~ .form-row label {
   display: none;
 }
+
+/* rentExcelUpload.js css*/

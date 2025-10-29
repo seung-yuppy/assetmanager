@@ -32,5 +32,10 @@ public interface RentDAO {
 	
 	// userId로 RentList 찾기
 	public List<RentListDTO> findRentListByUserId(@Param("userId") int userId);
+	
+	// rentId로 rent와 approval 찾기(rent&approval???)
+	
+	// rentId로 rentDetail 찾기 (rentContent&asset???)
+	
 
 }

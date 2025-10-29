@@ -83,6 +83,8 @@
 	</div>
 	<!-- 모달 -->
 	<div id="registerModal" class="modal-backdrop" style="display: none;">
+		<jsp:useBean id="now" class="java.util.Date" />
+		<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
 	    <div class="modal-content">
 	        <div class="modal-header">
 	            <h3>일련번호 등록</h3>

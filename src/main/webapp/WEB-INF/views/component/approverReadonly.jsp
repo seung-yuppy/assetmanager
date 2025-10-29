@@ -42,7 +42,7 @@
 			<legend class="approver-title" align="center">요청</legend>
 			<div class="approver-container">
 				<div class="approver-image-container">
-					<img class="approver-image" src="data:image/png;base64,${empInfo.userInfo.base64ProfileImage}" alt="강예나">
+					<img class="approver-image" src="data:image/png;base64,${empInfo.userInfo.base64ProfileImage}" alt="요청자">
 					<div class="approval-badge">
 						<div class="approval-badge-icon">
 							<i class="fas fa-check"></i>
@@ -59,7 +59,7 @@
 					</div>
 				</div>			
 			</div>
-			<p class="approver-date">2025/10/27</p>
+			<p class="approver-date"><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></p>
 		</fieldset>
 
 		<!-- 화살표 -->
@@ -72,15 +72,17 @@
 			<legend class="approver-title" align="center">합의</legend>
 			<div class="approver-container">
 				<div class="approver-image-container">
-					<img class="approver-image" src="data:image/png;base64,${empInfo.approverInfo.base64ProfileImage}" alt="이영호">
+					<img class="approver-image" src="data:image/png;base64,${empInfo.approverInfo.base64ProfileImage}" alt="합의자">
 					<c:if test="${approval.status != 'PENDING'}">
 						<div class="approval-badge">
 							<c:if test="${fn:contains('FIRST_APPROVAL, FINAL_APPROVAL, FINAL_REJECT', approval.status)}">
+								<c:set var="doneDate1" value="${approval.firstApprovalDate}"></c:set>
 								<div class="approval-badge-icon">
 									<i class="fas fa-check"></i>
 								</div>
 							</c:if>
 							<c:if test="${approval.status == 'FIRST_REJECT'}">
+								<c:set var="doneDate1" value="${approval.rejectDate}"></c:set>
 								<div class="reject-badge-icon">
 									<i class="fas fa-times"></i>
 								</div>
@@ -95,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<p class="approver-date">2025/10/27</p>
+			<p class="approver-date"><fmt:formatDate value="${doneDate1}" pattern="yyyy-MM-dd"/></p>
 		</fieldset>
 
 		<!-- 화살표 -->
@@ -108,15 +110,17 @@
 			<legend class="approver-title" align="center">결재</legend>
 			<div class="approver-container">
 				<div class="approver-image-container">
-					<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">
+					<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="결재자">
 					<c:if test="${fn:contains('FINAL_APPROVAL, FINAL_REJECT', approval.status)}">
 						<div class="approval-badge">
 							<c:if test="${approval.status == 'FINAL_APPROVAL'}">
+								<c:set var="doneDate2" value="${approval.lastApprovalDate}"></c:set>
 								<div class="approval-badge-icon">
 									<i class="fas fa-check"></i>
 								</div>
 							</c:if>
 							<c:if test="${approval.status == 'FINAL_REJECT'}">
+								<c:set var="doneDate2" value="${approval.rejectDate}"></c:set>
 								<div class="reject-badge-icon">
 									<i class="fas fa-times"></i>
 								</div>
@@ -131,7 +135,7 @@
 					</div>
 				</div>
 			</div>
-			<p class="approver-date">2025/10/27</p>
+			<p class="approver-date"><fmt:formatDate value="${doneDate2}" pattern="yyyy-MM-dd"/></p>
 		</fieldset>
 	</div>
 	<c:if test="${approval.status.koreanName == '반려됨'}">

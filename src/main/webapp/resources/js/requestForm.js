@@ -52,12 +52,12 @@ function showInputForm(method) {
         if (excelInput) excelInput.removeAttribute('required');
         
         // 엑셀 입력 폼 무효화
-        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select');
+        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select , .form-group textarea');
         if (excel_inputs.length) { // 요소가 존재할 때만
         	excel_inputs.forEach(el => el.disabled = true);
         }
         // 직접 입력폼 유효화
-        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select');
+        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select, .form-group textarea');
         if (form_inputs.length) { // 요소가 존재할 때만
         	form_inputs.forEach(el => el.disabled = false);
         }
@@ -73,12 +73,12 @@ function showInputForm(method) {
         if (excelInput) excelInput.setAttribute('required', 'required');
         
         //직접 입력 폼 무효화
-        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select');
+        const form_inputs = formArea.querySelectorAll('.form-row input, .form-row select, .form-group textarea');
         if(form_inputs.length){
         	form_inputs.forEach(el =>  el.disabled = true);
         }
         // 엑셀 입력 폼 유효화
-        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select');
+        const excel_inputs = excelContents.querySelectorAll('.form-row input, .form-row select, .form-group textarea');
         if(excel_inputs.length){
         	excel_inputs.forEach(el => el.disabled = false)
         }

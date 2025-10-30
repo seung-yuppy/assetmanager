@@ -1,40 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자 구매요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 </head>
 <body>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
-
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
 				<h1>구매 요청 목록</h1>
-				<span style="font-size: 1rem; color: var(--gray-color);">현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
-
+				<span>현재 처리 중인 모든 구매 요청의 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
-					<div class="header-controls" style="margin-bottom:20px;">
+					<div class="header-controls">
 				        <div class="filter-controls">
 				            <div class="status-filter">
 				                <label for="statusFilter">상태:</label>
-				                <select id="statusFilter" onchange="applyFilter()">
-				                    <option value="all">전체</option>
-				                    <option value="waited">승인 대기</option>
-				                    <option value="approved">승인 완료</option>
-				                    <option value="rejected">반려</option>
-				                    <option value="using">등록 완료</option>
+				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
+				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
+								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
+								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
+								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>
 				            </div>
 				            <div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="요청자 검색" class="search-field">
-				                <button onclick="applySearch()"><img src="/assetmanager/resources/image/icon_search.svg"></button>
+				                <input type="text" id="assetSearch" placeholder="자산명 검색..." class="search-field">
+				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
 				            </div>
 				        </div>
 				    </div>
@@ -43,92 +42,62 @@
 						<thead>
 							<tr>
 								<th>요청 내용</th>
-								<th>부서</th>
+								<th>총액</th>
 								<th>요청자</th>
+								<th>부서</th>
 								<th>요청일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a href="detail">Latitude 7420 노트북 등 2개</a></td>
-								<td>공공사업1팀</td>
-								<td><a href="/assetmanager/admin/user/detail">김성배</a></td>
-								<td>2023-01-27</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr>
-							<tr>
-								<td>Latitude 7420 노트북 등 2개</td>
-								<td>공공사업1팀</td>
-								<td>강예나</td>
-								<td>2023-01-27</td>
-								<td><span class="status-badge status-rejected">거부됨</span></td>
-							</tr>
-
-							<tr>
-								<td>Latitude 7420 노트북 등 2개</td>
-								<td>공공사업1팀</td>
-								<td>강예나</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							
-							<tr>
-								<td>Latitude 7420 노트북 등 2개</td>
-								<td>공공사업1팀</td>
-								<td>강예나</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							
-							<tr>
-								<td>Latitude 7420 노트북 등 2개</td>
-								<td>공공사업1팀</td>
-								<td>강예나</td>
-								<td>2023-01-15</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
+							<c:forEach var="item" items="${response.content}">
+								<tr data-id="${item.id}">
+									<td><a href="detail">${item.title}</a></td>
+									<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
+									<td>${item.deptName}</td>
+									<td><a href="/assetmanager/admin/user/detail">${item.username}</a></td>
+									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
+									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
-					<nav class="pagination-container">
-						<ul class="pagination-list">
-							<li class="page-item prev">
-								<a class="page-link" onclick="setBoardParam('page', '이전_페이지_번호')" style="cursor: pointer;"> <span style="font-size: 14px;">&lt;</span>이전</a>
-							</li>
+					<c:if test="${response.totalPages > 0 }">
+						<nav class="pagination-container">
+							<ul class="pagination-list">
+								<c:if test="${response.hasPrev}">
+									<li class="page-item prev"><a class="page-link"
+										onclick="setBoardParam('page', ${response.start - response.blockSize})"
+										style="cursor: pointer;"> Previous </a></li>
+								</c:if>
 				
-							<li class="page-item active"><a class="page-link"
-								onclick="setBoardParam('page', 1)" style="cursor: pointer;"> 1
-							</a></li>
+								<c:forEach var="num" begin="${response.start}" end="${response.end}">
+									<c:choose>
+										<c:when test="${num == response.page}">
+											<li class="page-item active"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 				
-							<li class="page-item">
-								<a class="page-link" onclick="setBoardParam('page', 2)" style="cursor: pointer;"> 2</a>
-							</li>
-				
-							<li class="page-item"><a class="page-link"
-								onclick="setBoardParam('page', 3)" style="cursor: pointer;"> 3
-							</a></li>
-				
-							<li class="page-item next"><a class="page-link"
-								onclick="setBoardParam('page', '다음_페이지_번호')"
-								style="cursor: pointer;"> 다음 <span style="font-size: 14px;">&gt;</span>
-							</a></li>
-						</ul>
-					</nav>
+								<c:if test="${response.hasNext}">
+									<li class="page-item next"><a class="page-link"
+										onclick="setBoardParam('page', ${response.end + 1})"
+										style="cursor: pointer;"> Next </a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</c:if>
 				</div>
 			</div>
 		</div>	
 	</div>
-<script>
-	function setBoardParam(key, value) {
-		  const url = new URL(window.location.href); 
-		  url.searchParams.delete('page');
-		  if (value != null){
-			  url.searchParams.set(key, value);  // 기존 query 유지하면서 order만 세팅
-		  }else{
-			  url.searchParams.delete(key);
-		  }
-		  window.location.href = url.toString(); // url로 이동
-	}
-</script>
+<script src="/assetmanager/resources/js/orderList.js"></script>
 </body>
 </html>

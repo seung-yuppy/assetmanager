@@ -19,9 +19,8 @@ public class PageResponseDTO<T> {
     private boolean hasPrev;   // 이전 block 존재 여부
     private boolean hasNext;   // 다음 block 존재 여부
     
-	public PageResponseDTO(List<T> content, int page, int totalCount, int totalPages, boolean hasPrev,
+	public PageResponseDTO(int page, int totalCount, int totalPages, boolean hasPrev,
 		boolean hasNext, int start, int end) {
-		this.content = content;
 		this.page = page;
 		this.totalCount = totalCount;
 		this.totalPages = totalPages;

@@ -24,15 +24,29 @@ public class OrderService {
 	private final OrderDAO orderDAO;
 	private final ApprovalDAO approvalDAO;
 	private final UserDAO userDAO;
-	private final int PAGE_SIZE = 10;
-	private final int BLOCK_SIZE = 5;
 
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
+		PageResponseDTO<OrderDTO> response = paging(orderParamDTO); 
+		List<OrderDTO> list = orderDAO.listAll(orderParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
+	public PageResponseDTO<OrderDTO> listAllForAdmin(OrderParamDTO orderParamDTO) {
+		PageResponseDTO<OrderDTO> response = paging(orderParamDTO); 
+		List<OrderDTO> list = orderDAO.listAllForAdmin(orderParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
+	private PageResponseDTO<OrderDTO> paging(OrderParamDTO orderParamDTO){
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
 		int page = orderParamDTO.getPage();
 		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
 		orderParamDTO.setOffset(offset);
+		
 		int totalCount = orderDAO.countAll(orderParamDTO);
-		List<OrderDTO> list = orderDAO.listAll(orderParamDTO);
 		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
 		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
 		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
@@ -42,12 +56,9 @@ public class OrderService {
 		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
 		boolean hasPrev = block > 1 ? true : false;
 		boolean hasNext = totalBlocks > block ? true : false;
-
-		PageResponseDTO<OrderDTO> response = new PageResponseDTO<>(list, page, totalCount, totalPages, hasPrev, hasNext,
-				blockStart, blockEnd);
-		return response;
+		return new PageResponseDTO<OrderDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
-
+	
 	public void save(OrderFormDTO orderFormDTO) {
 		// 결재 정보 저장
 		ApprovalDTO approvalDTO = new ApprovalDTO();
@@ -74,8 +85,6 @@ public class OrderService {
 		UserInfoDTO approverInfo = userDAO.getUserInfo(approvalDTO.getApproverId());
 		UserInfoDTO managerInfo = userDAO.getUserInfo(approvalDTO.getManagerId());
 		ApproverInfoDTO approverInfoDTO = new ApproverInfoDTO(userInfo,approverInfo,managerInfo);
-		
-		System.out.println("서비스 내부 : approval id 와 이유 : " + approvalDTO.getId() + " 이유 : " + approvalDTO.getRejectReason());
 		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products, approverInfoDTO);
 		return response;
 	}

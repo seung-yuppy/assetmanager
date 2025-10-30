@@ -3,7 +3,7 @@
 <mapper namespace="edu.example.assetmanager.dao.OrderDAO">
 	<select id="listAll" parameterType="OrderParamDTO" resultType="OrderDto">
 		SELECT 
-			DISTINCT o.id,
+			o.id,
 		    o.title,
 		    o.user_id,
 		    o.order_date,
@@ -11,7 +11,7 @@
 		    a.status,
 		    (
 		        SELECT
-		            SUM(price)
+		            SUM(count*price)
 		        FROM
 		            order_content
 		        WHERE
@@ -19,13 +19,46 @@
 		    ) total_price
 		FROM
 		    orders o
-			    left JOIN order_content oc ON o.id = oc.order_id
 			    left JOIN approval      a ON o.approval_id = a.id
 	    <where>
 		    o.user_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
-	    		and (o.title like '%' || #{keyword} || '%'
-	    			or o.request_msg like '%' || #{keyword} || '%')
+	    		and (o.title like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	order by o.order_date desc
+	    offset #{offset} rows
+    	fetch next #{size} rows only
+	</select>
+	<select id="listAllForAdmin" parameterType="OrderParamDTO" resultType="OrderDto">
+		SELECT 
+			o.id,
+		    o.title,
+		    o.user_id,
+		    o.order_date,
+		    o.request_msg,
+		    a.status,
+		    u.username,
+		    d.dept_name,
+		    (
+		        SELECT
+		            SUM(count*price)
+		        FROM
+		            order_content
+		        WHERE
+		            order_id = o.id
+		    ) total_price
+		FROM
+		    orders o
+			    left JOIN approval      a ON o.approval_id = a.id
+			    JOIN "User" u ON o.user_id = u.id
+			    JOIN department d ON u.department_id = d.id
+	    <where>
+	       	<if test="keyword != null and keyword != ''">
+	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
 	    		and (upper(a.status) like upper('%' || #{status} || '%'))
@@ -36,18 +69,18 @@
     	fetch next #{size} rows only
 	</select>
 	<select id="countAll" parameterType="OrderParamDTO" resultType="int">
-		select count(distinct o.id) 
+		select count(o.id) 
 		from orders o
-		left join order_content oc on o.id = oc.order_id
-		left JOIN approval      a ON o.approval_id = a.id
+			left JOIN approval      a ON o.approval_id = a.id
 	    <where>
-		    o.user_id = #{userId}
+  	    	<if test="userId > 0 ">
+			    o.user_id = #{userId}
+	    	</if>
 	       	<if test="keyword != null and keyword != ''">
-	    		and (o.title like '%' || #{keyword} || '%'
-	    			or o.request_msg like '%' || #{keyword} || '%')
+	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
-	    		and (a.status like '%' || #{status} || '%')
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
 	    	</if>
 	    </where>
 	</select>

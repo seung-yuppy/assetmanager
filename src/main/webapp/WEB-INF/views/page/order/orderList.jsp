@@ -9,16 +9,11 @@
 <meta charset="UTF-8">
 <title>직원 구매요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/modal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/orderList.css" rel="stylesheet">
-<%-- 반출 자산 등록 모달 --%>
-<link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 </head>
 <body>
-
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
@@ -59,15 +54,13 @@
 									<td>${item.title}</td>
 									<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
-									<td>
-									  <span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span>
-									</td>
+									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 					<c:if test="${response.totalPages > 0 }">
-						<nav aria-label="Page navigation example" class="pagination-container">
+						<nav class="pagination-container">
 							<ul class="pagination-list">
 								<c:if test="${response.hasPrev}">
 									<li class="page-item prev"><a class="page-link"

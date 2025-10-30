@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         	const row = event.target.closest('tr');
         	if(row){
         		const id = row.getAttribute('data-id');
-        		window.location.href=`detail?id=${id}`;
+        		window.location.href=`detail/${id}`;
         	}
         });
 	}

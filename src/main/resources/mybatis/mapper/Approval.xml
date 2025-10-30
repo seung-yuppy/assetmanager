@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.example.assetmanager.dao.ApprovalDAO">
 	
-	<insert id="insertApproval" parameterType="ApprovalDTO"
-		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="insertApproval" parameterType="ApprovalDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		INSERT INTO Approval (approver_id, manager_id, status)
 		VALUES (#{approverId}, #{managerId}, 'pending')
 	</insert>
@@ -13,4 +12,10 @@
 		from approval
 		where id = #{id}
 	</select>
+	
+	<update id="insertFirstApproval">
+		update approval
+		set status = 'FIRST_APPROVAL'
+		where id = #{id}
+	</update>
 </mapper>

@@ -53,7 +53,7 @@
 							<div class="form-content">
 								<div class="form-date">
 									<div class="form-application-date">
-										<label for="application-date">반출 신청일</label> 
+										<label for="application-date">구매 요청일</label> 
 										<input type="date" id="application-date" value="${today}" class="form-input rent-input" disabled>
 									</div>
 								</div>

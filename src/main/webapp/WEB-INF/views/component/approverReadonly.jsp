@@ -59,7 +59,7 @@
 					</div>
 				</div>			
 			</div>
-			<%-- <p class="approver-date"><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></p> --%>
+			<p class="approver-date"><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></p>
 		</fieldset>
 
 		<!-- 화살표 -->

@@ -38,90 +38,62 @@
 						<!-- 내용 목록 -->
 						<div class="applicant-info-list">
 							<dl class="applicant-info-f-list">
-								<dt>요청ID(사번)</dt>
-								<dd>ams1001</dd>
+								<dt>사번</dt>
+								<dd>${empInfo.userInfo.empNo}</dd>
 
 								<dt>이름</dt>
-								<dd>홍길동</dd>
+								<dd>${empInfo.userInfo.username}</dd>
 
 								<dt>부서명</dt>
-								<dd>영업팀</dd>
+								<dd>${empInfo.userInfo.deptName}</dd>
 							</dl>
 							<dl class="applicant-info-s-list">
 								<dt>직책</dt>
-								<dd>팀장</dd>
+								<dd>사원</dd>
 
 								<dt>연락처</dt>
-								<dd>010 - 1234 - 5678</dd>
+								<dd>${empInfo.userInfo.phone}</dd>
 
 								<dt>주소</dt>
-								<dd>서울 종로구 대명길 28 대학로</dd>
+								<dd>${empInfo.userInfo.deptAddress}</dd>
 							</dl>
 						</div>
 					</div>
 					<form action="#" method="post">
 						<h2 class="form-section-title">요청 내용</h2>
-						<div id="formInputArea" class="inputArea">
-							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label> <input
-										type="checkbox" id="isDepartmentUse" name="isDepartmentUse"
-										checked onclick="return false">
-								</div>
-								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label> <input id="category"
-										name="category" type="text" value="기타" class="locked-input"
-										readonly>
-								</div>
-								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label> <input
-										list="productOptions" name="productNameSelect"
-										id="productNameSelect" type="text" value="복합기"
-										class="locked-input" readonly>
-								</div>
-								<div class="form-group fixed-width-med">
-									<label for="price">단가 (원)</label> <input type="number"
-										id="price" name="price" value="3000000" class="locked-input"
-										readonly>
-								</div>
-								<div class="form-group fixed-width-sm" style="display: none;">
-									<label for="quantity">수량</label> <input type="number"
-										id="quantity" name="quantity" value="1" class="locked-input"
-										readonly>
+						<div id="formInputArea" class ="inputArea">
+							<div class="form-date">
+								<div class="form-application-date">
+									<label for="application-date">구매 요청일</label> 
+									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly>
 								</div>
 							</div>
-							<div class="form-row">
-								<div class="form-group fixed-width-sm">
-									<label for="isDepartmentUse">부서 자산</label> <input
-										type="checkbox" id="isDepartmentUse" name="isDepartmentUse"
-										onclick="return false">
-								</div>
-								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label> <input id="category"
-										name="category" type="text" value="노트북" class="locked-input"
-										readonly>
-								</div>
-								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label> <input
-										list="productOptions" name="productNameSelect"
-										id="productNameSelect" type="text" value="LG그램"
-										class="locked-input" readonly>
-								</div>
-								<div class="form-group fixed-width-med">
-									<label for="price">단가 (원)</label> <input type="number"
-										id="price" name="price" value="1000000" class="locked-input"
-										readonly>
-								</div>
-								<div class="form-group fixed-width-sm" style="display: none;">
-									<label for="quantity">수량</label> <input type="number"
-										id="quantity" name="quantity" value="1" class="locked-input"
-										readonly>
-								</div>
-							</div>
-
+							<c:forEach var="product" items="${products}">
+								<c:forEach var="i" begin="1" end="${product.count}">
+									<div class="form-row">
+										<div class="form-group category-group fixed-width-med">
+											<label for="category">카테고리 </label>
+											<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
+										</div>
+										<div class="form-group product-select-group fixed-width-lg">
+											<label for="productNameSelect">제품명</label>
+											<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
+										</div>
+										<div class="form-group fixed-width-med">
+											<label for="price">단가 (원)</label>
+											<div class="last-input-group">
+												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
+												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
+													<button type="button" class="regist-button" data-target="registerModal">등록</button>
+												</c:if>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</c:forEach>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>
-								<textarea id="reason" name="reason" rows="4" readonly>신입 사원 배정으로 인한 노트북 구매 요청</textarea>
+								<textarea id="reason" name="reason" rows="4" readonly>${order.requestMsg}</textarea>
 							</div>
 						</div>
 

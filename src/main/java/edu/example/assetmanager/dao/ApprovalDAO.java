@@ -8,4 +8,5 @@ public interface ApprovalDAO {
 	// Approval 요청
 	public boolean insertApproval(ApprovalDTO approvalDTO);
 	public ApprovalDTO getApprovalById(int id);
+	public boolean insertFirstApproval(int id);
 }

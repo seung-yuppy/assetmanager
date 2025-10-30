@@ -25,39 +25,41 @@
 					<span class="page-description">구매 요청의 상세 내용을 확인하세요</span>
 				</div>
 				<div class="section-card">
+					<div class="form-section">
+						<!-- 결재라인 전체 컨테이너 -->
+						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp" %>
+					</div>
 					<form action="#" method="post">
-						<div class="form-section">
-							<!-- 결재라인 전체 컨테이너 -->
-							<%@ include file="/WEB-INF/views/component/approverReadonly.jsp" %>
-						</div>
-						
 						<h2 class="form-section-title">요청 정보</h2>
 						<div id="formInputArea" class ="inputArea">
-							<div class="form-date" style="margin-bottom: 20px;">
+							<div class="form-date">
 								<div class="form-application-date">
 									<label for="application-date">구매 요청일</label> 
-									
 									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly>
 								</div>
 							</div>
 							<c:forEach var="product" items="${products}">
-								<div class="form-row">
-									<div class="form-group category-group fixed-width-med">
-										<label for="category">카테고리 </label>
-										<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
-									</div>
-									<div class="form-group product-select-group fixed-width-lg">
-										<label for="productNameSelect">제품명</label>
-										<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
-									</div>
-									<div class="form-group fixed-width-med">
-										<label for="price">단가 (원)</label>
-										<div class="last-input-group">
-											<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
-											<button type="button" class="regist-button" data-target="registerModal">등록</button>
+								<c:forEach var="i" begin="1" end="${product.count}">
+									<div class="form-row">
+										<div class="form-group category-group fixed-width-med">
+											<label for="category">카테고리 </label>
+											<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
+										</div>
+										<div class="form-group product-select-group fixed-width-lg">
+											<label for="productNameSelect">제품명</label>
+											<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
+										</div>
+										<div class="form-group fixed-width-med">
+											<label for="price">단가 (원)</label>
+											<div class="last-input-group">
+												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
+												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
+													<button type="button" class="regist-button" data-target="registerModal">등록</button>
+												</c:if>
+											</div>
 										</div>
 									</div>
-								</div>
+								</c:forEach>
 							</c:forEach>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>

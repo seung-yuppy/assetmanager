@@ -13,6 +13,7 @@ import edu.example.assetmanager.domain.OrderParamDTO;
 public interface OrderDAO {
 	// 페이징을 위한 모든 자산 개수
 	public int countAll(OrderParamDTO orderParamDTO);
+	public int countAllForAdmin(OrderParamDTO orderParamDTO);
 	public List<OrderDTO> listAll(OrderParamDTO orderParamDTO);
 	public List<OrderDTO> listAllForAdmin(OrderParamDTO orderParamDTO);
     public int insertOrder(OrderFormDTO orderFormDTO); 

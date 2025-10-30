@@ -57,6 +57,7 @@
 			    JOIN "User" u ON o.user_id = u.id
 			    JOIN department d ON u.department_id = d.id
 	    <where>
+	    	a.approver_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
@@ -73,9 +74,21 @@
 		from orders o
 			left JOIN approval      a ON o.approval_id = a.id
 	    <where>
-  	    	<if test="userId > 0 ">
-			    o.user_id = #{userId}
+		    o.user_id = #{userId}
+	       	<if test="keyword != null and keyword != ''">
+	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+	<select id="countAllForAdmin" parameterType="OrderParamDTO" resultType="int">
+		select count(o.id) 
+		from orders o
+			left JOIN approval      a ON o.approval_id = a.id
+	    <where>
+		    a.approver_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>

@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.example.assetmanager.domain.OrderDTO;
+import edu.example.assetmanager.domain.OrderDetailRESP;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -22,13 +24,22 @@ public class AdminOrderController {
 	
 	@GetMapping("/order/list")
 	public String index(HttpSession httpSession, OrderParamDTO orderParamDTO, Model model) {
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+		if (userInfo != null) {
+			orderParamDTO.setUserId(userInfo.getId());
+		}
 		PageResponseDTO<OrderDTO> response = orderService.listAllForAdmin(orderParamDTO);
 		model.addAttribute("response", response);
 		return "/admin/adminOrderList";
 	}
 	
-	@GetMapping("/order/detail")
-	public String detail() {
+	@GetMapping("/order/detail/{id}")
+	public String detail(@PathVariable int id, Model model) {
+		OrderDetailRESP response = orderService.getOrderDetail(id);
+		model.addAttribute("order", response.getOrderDto());
+		model.addAttribute("approval", response.getApprovalDTO());
+		model.addAttribute("products", response.getProducts());
+		model.addAttribute("empInfo", response.getApproverInfoDTO());
 		return "/admin/adminOrderDetail";
 	}
 }

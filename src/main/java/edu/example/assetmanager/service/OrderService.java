@@ -26,27 +26,27 @@ public class OrderService {
 	private final UserDAO userDAO;
 
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
-		PageResponseDTO<OrderDTO> response = paging(orderParamDTO); 
+		int totalCount = orderDAO.countAll(orderParamDTO);
+		PageResponseDTO<OrderDTO> response = paging(orderParamDTO, totalCount); 
 		List<OrderDTO> list = orderDAO.listAll(orderParamDTO);
 		response.setContent(list);
 		return response;
 	}
 	
 	public PageResponseDTO<OrderDTO> listAllForAdmin(OrderParamDTO orderParamDTO) {
-		PageResponseDTO<OrderDTO> response = paging(orderParamDTO); 
+		int totalCount = orderDAO.countAllForAdmin(orderParamDTO);
+		PageResponseDTO<OrderDTO> response = paging(orderParamDTO, totalCount); 
 		List<OrderDTO> list = orderDAO.listAllForAdmin(orderParamDTO);
 		response.setContent(list);
 		return response;
 	}
 	
-	private PageResponseDTO<OrderDTO> paging(OrderParamDTO orderParamDTO){
+	private PageResponseDTO<OrderDTO> paging(OrderParamDTO orderParamDTO, int totalCount){
 		final int PAGE_SIZE = 10;
 		final int BLOCK_SIZE = 5;
 		int page = orderParamDTO.getPage();
 		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
 		orderParamDTO.setOffset(offset);
-		
-		int totalCount = orderDAO.countAll(orderParamDTO);
 		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
 		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
 		int block = (int) Math.ceil((double) page / BLOCK_SIZE);

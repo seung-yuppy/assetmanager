@@ -31,4 +31,10 @@ public interface UserDAO {
 	
 	// 마이페이지에서 프로필 수정하기
 	public boolean changeUserInfo(@Param("user") UserDTO user);
+	
+	// 사용자 대시보드에서 구입 요청 개수
+	public int countOrder(@Param("userId") int userId);
+	
+	// 사용자 대시보드에서 반출 요청 개수
+	public int countRent(@Param("userId") int userId);
 }

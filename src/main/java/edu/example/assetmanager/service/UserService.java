@@ -176,4 +176,14 @@ public class UserService {
 		else
 			return false;
 	}
+	
+	// 사용자 화면에서 구매 요청 개수
+	public int getOrderCount(int userId) {
+		return dao.countOrder(userId);
+	}
+	
+	// 사용자 화면에서 반출 요청 개수
+	public int getRentCount(int userId) {
+		return dao.countRent(userId);
+	}
 }

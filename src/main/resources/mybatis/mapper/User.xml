@@ -69,4 +69,18 @@
 			id = #{user.id}
 	</update>
 	
+	<select id="countOrder">
+	SELECT COUNT(*)
+	FROM Orders o
+		INNER JOIN Approval a ON o.approval_id = a.id
+	WHERE o.user_id = #{userId} AND a.status IN ('pending', 'first_approval')
+	</select>
+	
+	<select id="countRent">
+	SELECT COUNT(*)
+	FROM Rent r
+		INNER JOIN Approval a ON r.approval_id = a.id
+	WHERE r.user_id = #{userId} AND a.status IN ('pending', 'first_approval')
+	</select>
+	
 </mapper>

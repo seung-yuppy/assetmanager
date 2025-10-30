@@ -39,15 +39,6 @@
                 	</div>                    
                     <p class="card-value">${deptCount}</p>
                 </div>
-                <div class="metric-card border-purple">
-					<div class="card-header">
-						<p class="card-title">반출 요청</p>
-                		<div class="card-logo-box back-purple">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
-                		</div>
-                	</div>   
-                    <p class="card-value">3</p>
-                </div>
                 <div class="metric-card border-blue">
 					<div class="card-header">
                 		<p class="card-title">구매 요청</p> 
@@ -55,7 +46,16 @@
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
                 		</div>
                 	</div>                    
-                    <p class="card-value">3</p>
+                    <p class="card-value">${orderCount}</p>
+                </div>
+                <div class="metric-card border-purple">
+					<div class="card-header">
+						<p class="card-title">반출 요청</p>
+                		<div class="card-logo-box back-purple">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
+                		</div>
+                	</div>   
+                    <p class="card-value">${rentCount}</p>
                 </div>
             </div>
             

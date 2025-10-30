@@ -1,12 +1,16 @@
 package edu.example.assetmanager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -72,5 +76,23 @@ public class HomeController {
 		} else {
 			return "redirect:/login";
 		}
+	}
+	
+	// 창고 자산 보유 현황을 위한 차트
+	@ResponseBody
+	@GetMapping(value = "/asset/value", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> h3() {
+		Map<String, Object> response = new HashMap<>();
+		int totalAsset = assetService.getTotalAsset();
+		int usingAsset = assetService.getUsingAsset();
+		int pendingAsset = assetService.getPendingAsset();
+		int invalidAsset = assetService.getInvalidAsset();
+		
+		response.put("totalAsset", totalAsset);
+		response.put("usingAsset", usingAsset);
+		response.put("pendingAsset", pendingAsset);
+		response.put("invalidAsset", invalidAsset);
+		
+		return ResponseEntity.ok(response);
 	}
 }

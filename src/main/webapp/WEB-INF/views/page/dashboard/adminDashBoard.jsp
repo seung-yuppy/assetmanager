@@ -156,15 +156,15 @@
 		                    <div style="margin-top: 1rem; margin-left: 2rem;">
 		                        <div class="legend-item">
 		                            <span class="legend-color back-green"></span>
-		                            <span>사용 가능 재고 (65%)</span>
+		                            <span>사용 가능 자산</span>
 		                        </div>
 		                        <div class="legend-item">
 		                            <span class="legend-color back-blue"></span>
-		                            <span>사용 중인 재고(20%)</span>
+		                            <span>사용 중인 자산</span>
 		                        </div>
 		                        <div class="legend-item">
 		                            <span class="legend-color back-red"></span>
-		                            <span>불용 처리 재고 (15%)</span>
+		                            <span>불용 처리 자산	</span>
 		                        </div>  
 		                    </div>
 		                </div>

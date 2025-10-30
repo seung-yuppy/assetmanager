@@ -42,4 +42,11 @@ public class AdminOrderController {
 		model.addAttribute("empInfo", response.getApproverInfoDTO());
 		return "/admin/adminOrderDetail";
 	}
+	
+	@GetMapping("order/approve")
+	public String approve(int id) {
+		
+			
+		return "redirect:/admin/adminOrderDetail";
+	}
 }

@@ -31,12 +31,12 @@
 	        </svg>
 	        <c:set var="rejecter" value="${approval.status == 'FIRST_REJECT' ? empInfo.approverInfo.username:empInfo.managerInfo.username}"/>
 	        <c:set var="rejecterDept" value="${approval.status == 'FIRST_REJECT' ? empInfo.approverInfo.deptName: empInfo.managerInfo.deptName}"/>
-	        <p>[반려됨] ${rejecter} 사원(${rejecterDept})에 의해 요청이 반려되었습니다.</p>
+	        <p>[반려됨] ${rejecter}(${rejecterDept})에 의해 요청이 반려되었습니다.</p>
 	    </div>
     </c:if>
-	<h2 class="form-section-title">결재 정보</h2>
+	<h2 class="form-section-title" >결재 정보</h2>
 	<!-- 결재라인 전체 컨테이너 -->
-	<div id="approval-line-container">
+	<div id="approval-line-container" data-approvalId = "${approval.id}">
 		<!-- 첫 번째 : 신청자 -->
 		<fieldset class="approver-wrapper">
 			<legend class="approver-title" align="center">요청</legend>
@@ -147,7 +147,7 @@
 	        </h3>
 	        <div class="rejection-box-content">
 	        	<div class="title">
-		            <p class="meta">결재자: ${rejecter} 부장(${rejecterDept}) </p>
+		            <p class="meta">결재자: ${rejecter}(${rejecterDept}) </p>
 		            <p class="rejection-date-info">반려 일시:  <td><fmt:formatDate value="${approval.rejectDate}" pattern="yyyy-MM-dd hh:mm" /></td></p>
 	        	</div>
 	            <div class="rejection-detail">

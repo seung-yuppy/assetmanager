@@ -12,10 +12,11 @@
 		from approval
 		where id = #{id}
 	</select>
-	
-	<update id="insertFirstApproval">
+		
+	<update id="updateApproval">
 		update approval
-		set status = 'FIRST_APPROVAL'
+		set status = #{status}
 		where id = #{id}
 	</update>
+
 </mapper>

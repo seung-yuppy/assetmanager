@@ -110,8 +110,10 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
-							<button type="submit" class="primary-action">승인</button>
-							<button type="button" class="cancel-action">반려</button>
+							<c:if test="${approval.status == 'PENDING'}">
+								<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
+								<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+							</c:if>
 						</div>
 					</form>
 				</div>

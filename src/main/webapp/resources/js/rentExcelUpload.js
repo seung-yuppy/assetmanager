@@ -27,17 +27,18 @@ function showInputForm(method) {
         if (excelInput) excelInput.removeAttribute('required');
         
         // 엑셀 입력 폼 무효화
-        const excel_inputs = excelContents.querySelectorAll('.form-date input, .form-row select', '.form-row input', '.form-group input', '.form-group textarea', '.last-input-group input');
+        const excel_inputs = excelContents.querySelectorAll('select, input, textarea');
         if (excel_inputs.length) { // 요소가 존재할 때만
         	excel_inputs.forEach(el => el.disabled = true);
         }
         // 직접 입력폼 유효화
-        const form_inputs = formArea.querySelectorAll('.form-date input, .form-row select', '.form-row input', '.form-group input', '.form-group textarea', '.last-input-group input');
+        const form_inputs = formArea.querySelectorAll('select, input, textarea');
         if (form_inputs.length) { // 요소가 존재할 때만
         	form_inputs.forEach(el => el.disabled = false);
         }
 
     } else if (method === 'excel') {
+    	console.log("excel로 전환");
         // 엑셀 파일 업로드 선택 시: 폼 영역 숨김, 엑셀 영역 표시
         formArea.style.display = 'none';
         excelArea.style.display = 'block';
@@ -48,12 +49,12 @@ function showInputForm(method) {
         if (excelInput) excelInput.setAttribute('required', 'required');
         
         //직접 입력 폼 무효화
-        const form_inputs = formArea.querySelectorAll('.form-date input, .form-row select', '.form-row input', '.form-group input', '.form-group textarea', '.last-input-group input');
+        const form_inputs = formArea.querySelectorAll('select, input, textarea');
         if(form_inputs.length){
         	form_inputs.forEach(el =>  el.disabled = true);
         }
         // 엑셀 입력 폼 유효화
-        const excel_inputs = excelContents.querySelectorAll('.form-date input, .form-row select', '.form-row input', '.form-group input', '.form-group textarea', '.last-input-group input');
+        const excel_inputs = excelContents.querySelectorAll('select, input, textarea');
         if(excel_inputs.length){
         	excel_inputs.forEach(el => el.disabled = false)
         }
@@ -196,7 +197,7 @@ function renderFormFromExcel(json, rent_reason, return_date) {
 	  // 반출 요청 사유는 변경 없이 유지
 	  const reasonHtml = `		
 	    <div class="form-group">
-	      <label for="reason">반출 요청 사유 <span class="required">*</span></label>
+	      <label for="reason">반출 요청 사유</label>
 	      <textarea id="reason" name="requestMsg" rows="4" required maxlength="200" readonly>${rent_reason || ''}</textarea>
 	    </div>
 	  `;

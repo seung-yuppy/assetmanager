@@ -7,16 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @Getter
 @Setter
-@ToString
+@ToString 
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentDTO {
 	private Long id; 
 	private Long approvalId;
+	private int userId;
 	private String requestMsg;
+	private String rentDate;
 	private String returnDate; 
 	private List<RentContentDTO> items;
 	private String title;

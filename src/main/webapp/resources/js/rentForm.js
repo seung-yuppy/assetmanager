@@ -57,6 +57,23 @@ function addProduct(){
 		targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);
 } 
 
+//사유 영역의 글자수를 세고 표시를 업데이트하는 함수
+function updateCharCount(textarea, maxLength) {
+    const currentLength = textarea.value.length;
+    const displayElement = document.getElementById('currentLength');
+    
+    if (displayElement) {
+        // 현재 글자수를 업데이트
+        displayElement.textContent = currentLength;
+        
+        // (선택 사항) 최대 길이에 도달했을 때 색상 변경
+        if (currentLength >= maxLength) {
+            displayElement.style.color = '#dc3545'; // 경고색 (빨간색)
+        } else {
+            displayElement.style.color = '#6c757d'; // 기본색 (회색)
+        }
+    }
+}
 
 
 

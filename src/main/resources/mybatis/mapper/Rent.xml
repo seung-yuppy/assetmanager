@@ -73,6 +73,33 @@
 	        R.rent_date DESC
 	</select>
 	
+	<select id="getRentApprovalId" resultType="RentDTO">
+		SELECT id
+			   ,approval_id 
+			   ,user_id
+		FROM Rent R 
+		WHERE R.id = #{id}
+	</select>
+	
+	<select id="getRent">
+		SELECT request_msg
+			  ,return_date
+			  ,rent_date
+		FROM Rent R
+		WHERE R.id = #{id}
+	</select>
+	
+	<select id="getRentContent" >
+		SELECT rent_id
+			  ,asset_id
+			  ,asset_name
+			  ,category_name
+			  ,spec
+		FROM RENT_CONTENT RC
+		JOIN Asset A ON RC.asset_id = A.id
+		JOIN Category C ON C.id = A.category_id
+		WHERE RC.rent_id = #{rentId}
+	</select>
 	
 	
 

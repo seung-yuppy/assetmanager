@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
+import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
@@ -85,7 +88,18 @@ public class RentController {
 	}
 
 	@GetMapping("/detail")
-	public String rentList() {
+	public String rentList(Long id, Model model) {
+		System.out.println("id는 나오니?? "+id);
+		ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
+		RentShowDTO rentDTO = rentService.getRentDetail(id);
+		List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
+		System.out.println("approverInfoDTO나오니?? "+approverInfoDTO.getApproverInfo());
+		model.addAttribute("empInfo", approverInfoDTO);
+		model.addAttribute("rent", rentDTO);
+		System.out.println(rentDTO.getRentDate());
+		System.out.println(rentDTO.getReturnDate());
+		System.out.println(rentDTO.getRequestMsg());
+		model.addAttribute("items",rentContentDTO);
 		return "/rent/rentDetail";
 	}
 }

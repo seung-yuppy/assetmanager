@@ -7,21 +7,26 @@ import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
 import edu.example.assetmanager.dao.RentDAO;
+import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
+import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 
 @Service
 public class RentService {
 	private final RentDAO rentDAO;
 	private final ApprovalDAO approvalDAO;
+	private final UserDAO userDAO;
 
-	public RentService(RentDAO rentDAO, ApprovalDAO approvalDAO) {
+	public RentService(RentDAO rentDAO, ApprovalDAO approvalDAO, UserDAO userDAO) {
 		this.rentDAO = rentDAO;
 		this.approvalDAO = approvalDAO;
+		this.userDAO = userDAO;
 
 	}
 
@@ -80,6 +85,7 @@ public class RentService {
 		
 		// items의 첫번째를 가지고 와서 title 만들기
 		RentContentDTO itemName = items.get(0);
+		System.out.println("############## itemname : "+itemName);
         String title = itemName.getAssetName(); 
         System.out.println("첫번째 itemName 잘 나오니??? "+title);
     
@@ -88,8 +94,11 @@ public class RentService {
         }
         rentDTO.setTitle(title);
 				
+        System.out.println("title까지 나와?" + title + " " + rentDTO.getTitle());
+        System.out.println("title까지 나와?" + userId);
 		// rent 테이블 insert
-		if (rentDAO.insertRent(rentDTO, userId)) {			
+		if (rentDAO.insertRent(rentDTO, userId)) {	
+			
 			// 제품 목록 가져오기
 			for (RentContentDTO item : items) {
 				String assetName = item.getAssetName();
@@ -116,10 +125,34 @@ public class RentService {
 		return rentDAO.findRentListByUserId(userId);
 	}
 	
-	
-	
-	
-	
-	
+	// rentId로 detail 결재 정보 불러오기 
+	public ApproverInfoDTO getRentApprovalDetail(Long id) {
+		// rentId 로 rentApprovalId 가져오기 
+		RentDTO rentDTO = rentDAO.getRentApprovalId(id);
+		System.out.println("rentDTO 나오니??? "+rentDTO);
+		// approverId로 approval 가져오기 
+		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(rentDTO.getApprovalId().intValue());	
+		UserInfoDTO adminInfoDTO = userDAO.getUserInfo(approvalDTO.getApproverId());
+		UserInfoDTO managerInfoDTO = userDAO.getUserInfo(approvalDTO.getManagerId());
+		UserInfoDTO userInfoDTO = userDAO.getUserInfo(rentDTO.getUserId());
+		
+		ApproverInfoDTO approverInfoDTO = new ApproverInfoDTO(userInfoDTO,adminInfoDTO,managerInfoDTO);
+ 
+		return approverInfoDTO;
+	}
+	// rent 정보 가져오기
+	public RentShowDTO getRentDetail(Long id) {
+		RentShowDTO rentDTO = rentDAO.getRent(id);
 
+		return rentDTO;
+	}
+	
+	// rentContent 찾기 
+	public List<RentContentDTO> getRentContentDetail(Long id){
+		List<RentContentDTO> rentContentDTO = rentDAO.getRentContent(id);
+		for(RentContentDTO dto : rentContentDTO) {
+			System.out.println("카테고리는 ???" + dto.getCategoryName());
+		}
+		return rentContentDTO;
+	}
 }

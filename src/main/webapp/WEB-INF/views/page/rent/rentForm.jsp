@@ -35,7 +35,7 @@
 							</jsp:include>
 						</div>
 
-						<h2 class="form-section-title">요청 내용</h2>
+						<h2 class="form-section-title">요청 정보</h2>
 						<div class="radio-input-group">
 							<div class="radio-input">
 								<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')"> <label for="inputMethodForm">폼 직접 입력 </label>
@@ -51,7 +51,7 @@
 									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 								</div>
 								<div class="form-return-date">
-									<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
+									<label for="return-date">반납 예정일 <span class="required">*</span></label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input">
 								</div>
 							</div>
 							<div class="form-row">
@@ -131,6 +131,7 @@
 							<tr>
 								<th>제품명</th>
 								<th>스펙</th>
+								<th>수량</th>
 							</tr>
 						</thead>
 						<tbody id="asset-list-body">

@@ -9,6 +9,7 @@ import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 @Mapper
 public interface RentDAO {
@@ -33,9 +34,14 @@ public interface RentDAO {
 	// userId로 RentList 찾기
 	public List<RentListDTO> findRentListByUserId(@Param("userId") int userId);
 	
-	// rentId로 rent와 approval 찾기(rent&approval???)
+	// rentId로 rentApprovalId 가져오기 
+	public RentDTO getRentApprovalId(Long id);
 	
-	// rentId로 rentDetail 찾기 (rentContent&asset???)
+	// rentInfo 가져오기
+	public RentShowDTO getRent(Long id);
 	
-
+	// rentId로 rentContent 가져오기
+	public List<RentContentDTO> getRentContent(@Param("rentId") Long id);
+	
+	
 }

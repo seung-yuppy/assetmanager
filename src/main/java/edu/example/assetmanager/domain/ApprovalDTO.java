@@ -16,11 +16,7 @@ import lombok.ToString;
 public class ApprovalDTO {
 	private Long id;
 	private int approverId;
-	private String approverName;
-	private String approverDept;
 	private int managerId;
-	private String managerName;
-	private String managerDept;
 	private Date firstApprovalDate;
 	private Date lastApprovalDate;
 	private Date rejectDate;

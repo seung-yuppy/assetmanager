@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="currentDate" />
+<fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd" var="rentDate" />
+<fmt:formatDate value="${rent.returnDate}" pattern="yyyy-MM-dd" var="returnDate" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +29,7 @@
 				<div class="detail-header">
 					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
 				</div>
-				
+
 				<div class="section-card">
 
 					<div class="form-section">
@@ -35,64 +37,44 @@
 						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
 					</div>
 
-					<h2 class="form-section-title">요청 내용</h2>
+					<h2 class="form-section-title">요청 정보</h2>
 					<div id="formInputArea" class="inputArea">
-						<div class="form-row">
-							<div class="form-group fixed-width-sm">
-								<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse" checked onclick="return false">
+						<div class="form-date">
+							<div class="form-application-date">
+								<label for="application-date">반출 신청일</label>
+								<input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
 							</div>
-							<div class="form-group category-group fixed-width-med">
-								<label for="category">카테고리 </label> <input id="category" name="category" type="text" value="기타" class="locked-input" readonly>
-							</div>
-							<div class="form-group product-select-group fixed-width-lg">
-								<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="복합기" class="locked-input" readonly>
-							</div>
-							<div class="form-group">
-								<label for="spec">스펙</label>
-								<div class="last-input-group">
-									<input type="text" id="spec" value="cpu~~~~~" class="locked-input" readonly>
-									<button type="button" class="regist-button" data-target="registerModal">등록</button>
-								</div>
+							<div class="form-return-date">
+								<label for="return-date">반납 예정일</label> 
+								<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
 							</div>
 						</div>
-
-						<div class="form-row">
-							<div class="form-group fixed-width-sm">
-								<label for="isDepartmentUse">부서 자산</label> <input type="checkbox" id="isDepartmentUse" name="isDepartmentUse" checked onclick="return false">
-							</div>
-							<div class="form-group category-group fixed-width-med">
-								<label for="category">카테고리 </label> <input id="category" name="category" type="text" value="기타" class="locked-input" readonly>
-							</div>
-							<div class="form-group product-select-group fixed-width-lg">
-								<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="복합기" class="locked-input" readonly>
-							</div>
-							<div class="form-group">
-								<label for="spec">스펙</label>
-								<div class="last-input-group">
-									<input type="text" id="spec" value="cpu~~~~~" class="locked-input" readonly>
-									<button type="button" class="regist-button" data-target="registerModal">등록</button>
+						<c:forEach var="item" items="${items}">
+							<div class="form-row">							
+								<div class="form-group category-group fixed-width-med">
+									<label for="category">카테고리 </label> 
+									<input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input" readonly>
+								</div>
+								<div class="form-group product-select-group fixed-width-lg">
+									<label for="productNameSelect">제품명</label> 
+									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input" readonly>
+								</div>
+								<div class="form-group">
+									<label for="spec">스펙</label>
+									<div class="last-input-group">
+										<input type="text" id="spec" value="${item.spec}" class="locked-input" readonly>
+										<button type="button" class="regist-button" data-target="registerModal">등록</button>
+									</div>
 								</div>
 							</div>
-						</div>
-
-
-						<div class="form-footer">
+						</c:forEach>
+						
+						<div class="form-group">
 							<div class="form-reason">
 								<label for="reason">반출 요청 사유</label>
-								<textarea id="reason" name="reason" rows="6" required placeholder="프로젝트 시작하여 새로운 기기 필요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)" readonly></textarea>
+								<textarea id="reason" name="requestMsg" rows="5" cols="81" maxlength="200" readonly >${rent.requestMsg}</textarea>
 								<div class="char-count-display text-align-right"></div>
 							</div>
-
-							<div class="form-date">
-								<div class="form-application-date">
-									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="locked-input" readonly>
-								</div>
-								<div class="form-return-date">
-									<label for="return-date">반납 예정일</label> <input type="date" id="return-date" placeholder="반납 예정일 선택" class="locked-input" readonly>
-								</div>
-
-							</div>
-
 						</div>
 					</div>
 					<div class="form-actions">
@@ -119,12 +101,11 @@
 					<label for="application-date">등록일</label> <input id="application-date" value="${currentDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" value="2025-12-31" class="form-input" readonly>
+					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" value="${returnDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
 					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input">
 				</div>
-
 
 			</div>
 			<div class="modal-footer">

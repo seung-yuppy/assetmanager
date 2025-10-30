@@ -40,14 +40,32 @@
 									<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input" >
 								</div>
 							</div>
-							<div class="edit-user-info">
-								<span class="user-label">전화번호</span> 
-								<input type="text" value="${userInfo.phone}" name="phone" class="user-value">							
-							</div>
-							<div class="edit-user-info">
-								<span class="user-label">이메일</span> 
-								<input type="email" value="${userInfo.email}" name="email" class="user-value">							
-							</div>					
+							<div class="profile-box">
+								<div class="edit-user-info">
+									<span class="user-label">사번</span> 
+									<input type="text" value="${userInfo.empNo}" class="user-value" readonly>							
+								</div>
+								<div class="edit-user-info">
+									<span class="user-label">부서명</span> 
+									<input type="text" value="${userInfo.deptName}" class="user-value" readonly>							
+								</div>		
+								<div class="edit-user-info">
+									<span class="user-label">직급</span> 
+									<input type="text" value="${userInfo.role}" class="user-value" readonly>							
+								</div>
+								<div class="edit-user-info">
+									<span class="user-label">이메일</span> 
+									<input type="text" value="${userInfo.email}" name="email" class="user-value">							
+								</div>		
+								<div class="edit-user-info">
+									<span class="user-label">전화번호</span> 
+									<input type="text" value="${userInfo.phone}" name="phone" class="user-value">							
+								</div>
+								<div class="edit-user-info">
+									<span class="user-label">주소</span> 
+									<input type="email" value="${userInfo.deptAddress}" class="user-value" readonly>							
+								</div>		
+							</div>			
 						</div>
 						<div class="edit-total-button">
 							<button type="submit" class="profile-edit-btn">수정</button>	

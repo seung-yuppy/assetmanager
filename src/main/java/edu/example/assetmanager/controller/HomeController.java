@@ -33,12 +33,14 @@ public class HomeController {
 		if (userId != null) {
 			UserInfoDTO dto = service.getUser(userId);
 			int usingCount = assetService.totalUsingAssets(userId);
-//			List<AssetHistoryDTO> list = assetService.getUserDashAsset(userId);
-			List<AssetHistoryDTO> list = assetService.getMyAsset(userId);
+			int deptCount = assetService.totalDeptAssets(userId);
+			List<AssetHistoryDTO> list = assetService.getMyUsingAsset(userId);
+			
 			session.setMaxInactiveInterval(18000); 
 			System.out.println("Session timeout (sec): " + session.getMaxInactiveInterval());
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("usingCount", usingCount);
+			model.addAttribute("deptCount", deptCount);
 			model.addAttribute("list", list);
 			return "dashboard/userDashBoard";
 		} else {

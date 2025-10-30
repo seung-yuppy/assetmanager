@@ -102,15 +102,18 @@ public class UserService {
 		if (dto != null) {
 			String role = dto.getRole();
 			switch (role) {
-			case "employee":
-				dto.setRole("사원");
-				break;
-			case "manager":
-				dto.setRole("부장");
-				break;
-			case "admin" :
-				dto.setRole("관리자");
-				break;
+				case "employee":
+					dto.setRole("사원");
+					break;
+				case "manager":
+					dto.setRole("부장");
+					break;
+				case "admin":
+					dto.setRole("관리자");
+					break;
+				case "department":
+					dto.setRole("부서");
+					break;
 			}
 			
 			byte[] profileImageBytes = dto.getProfileImage();

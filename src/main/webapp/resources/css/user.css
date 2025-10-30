@@ -348,9 +348,10 @@
 }
 
 .user-value {
-	font-size: 20px;
-	padding: 10px 20px;
-    border-radius: 5px;
+	font-size: 18px;
+	padding: 7px 20px;
+    border-radius: 7px;
+    width: 100%;
 }
 
 .edit-total-button{

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>내 자산 목록</title>
+	<title>부서 자산 목록</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
@@ -16,8 +16,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>사용중인 내 자산 목록</h1>
-				<span>사용중인 나의 모든 자산 목록을 확인하고 관리합니다.</span>
+				<h1>사용중인 내 부서 자산 목록</h1>
+				<span>사용중인 나의 부서 모든 자산 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
 					<div class="search-card">
 						<div class="filter-controls">
@@ -44,8 +44,7 @@
 								<th>카테고리</th>
 								<th>일련번호</th>
 								<th>취득일</th>
-								<th>반납예정일</th>	
-								<th></th>			
+								<th>반납예정일</th>			
 							</tr>
 						</thead>
 						<tbody>
@@ -61,14 +60,6 @@
 									<c:if test="${asset.returnDate == null}">
 										<td>-</td>
 									</c:if>				
-									<td>
-			                        	<div class="table-button-container">
-			                        		<c:if test="${asset.returnDate != null}">
-			                       				<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
-			                       			</c:if>
-			                       			<button class="return-button">반납</button>
-			                       		</div>
-			                        </td>
 								</tr>
 							</c:forEach>
 						</tbody>

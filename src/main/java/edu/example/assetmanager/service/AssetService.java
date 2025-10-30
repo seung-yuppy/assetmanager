@@ -79,25 +79,14 @@ public class AssetService {
 		return (int)Math.ceil((double) totalItems / pageSize);
 	}
 	
-	// 내 자산 목록
-	public List<AssetHistoryDTO> getPagedMyAssetList(int page, int userId) {
-		int pageSize = 10;
-		int start = (page - 1) * pageSize + 1;
-		int end = start + pageSize - 1;
-		List<AssetHistoryDTO> list = dao.listHistory(start, end, userId);
-		return list;
-	}
-	
-	// 내 자산 총 페이지 수를 계산하는 메서드
-	public int getMyAssetTotalPages(int userId) {
-		int pageSize = 10;
-		int totalItems = dao.countMyAsset(userId);
-		return (int)Math.ceil((double) totalItems / pageSize);
-	}
-	
-	// 내가 사용 중인 총 자산 수 
+	// 사용 중인 내 자산 수 
 	public int totalUsingAssets(int userId) {
 		return dao.countMyAsset(userId);
+	}
+	
+	// 사용 중인 내 부서 자산 수
+	public int totalDeptAssets(int userId) {
+		return dao.countMyDeptAsset(userId);
 	}
 	
 	// 사용자 대시보드에서 내 자산 5개 보여주기 
@@ -106,8 +95,14 @@ public class AssetService {
 		return list;
 	}
 	
-	public List<AssetHistoryDTO> getMyAsset(int userId) {
-		return dao.myAsset(userId);
+	// 사용자 자산 - 내 (사용중인) 자산
+	public List<AssetHistoryDTO> getMyUsingAsset(int userId) {
+		return dao.myUsingAsset(userId);
+	}
+	
+	// 사용자 자산 - 내 부서 자산
+	public List<AssetHistoryDTO> getMyDeptAsset(int userId) {
+		return dao.myDeptAsset(userId);
 	}
 	
 	// 관리자 대시보드 - 총 자산 수

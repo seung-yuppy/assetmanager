@@ -14,6 +14,7 @@ import lombok.Setter;
 public class AssetHistoryDTO {
 	private int id;
 	private int userId;
+	private String role;
 	private String assetName;
 	private String categoryName;
 	private String serialNumber;

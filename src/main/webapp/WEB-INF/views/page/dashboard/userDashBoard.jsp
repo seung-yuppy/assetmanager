@@ -21,14 +21,23 @@
 			</div>
 			
 			<div class="metric-grid">
-                <div class="metric-card border-green">
+                <div class="metric-card border-yellow">
 					<div class="card-header">
-                		<p class="card-title">사용 중</p>   
-                		<div class="card-logo-box back-green">
+                		<p class="card-title">내 자산</p>   
+                		<div class="card-logo-box back-yellow">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>                    
                     <p class="card-value">${usingCount}</p>
+                </div>
+                <div class="metric-card border-green">
+					<div class="card-header">
+                		<p class="card-title">내 부서 자산</p>   
+                		<div class="card-logo-box back-green">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+                		</div>
+                	</div>                    
+                    <p class="card-value">${deptCount}</p>
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
@@ -58,9 +67,9 @@
 	                    <tr>
 	                        <th>자산명</th>
 	                        <th>카테고리</th>
+	                        <th>일련번호</th>
 	                        <th>취득일</th>
 	                        <th>반납예정일</th>
-	                        <th>분류</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -68,6 +77,7 @@
 	                		<tr>
 	                			<td>${asset.assetName}</td>
 	                			<td>${asset.categoryName}</td>
+	                			<td>${asset.serialNumber}</td>
 	                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
 	                			<c:if test="${asset.returnDate != null}">
 									<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
@@ -75,7 +85,6 @@
 								<c:if test="${asset.returnDate == null}">
 									<td>-</td>
 								</c:if>
-	                			<td><span class="status-badge status-approved">개인</span></td>
 	                		</tr>
 	                	</c:forEach>
 	                </tbody>

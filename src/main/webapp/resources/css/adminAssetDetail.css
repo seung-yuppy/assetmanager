@@ -73,8 +73,7 @@
         
         .profile-edit-form {
         	display: flex;
-			gap: 7px;
-    		justify-content: center;
+			justify-content: space-between;
         }
         
         .file-input {

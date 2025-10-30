@@ -28,7 +28,7 @@
 	    			or o.request_msg like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
-	    		and (a.status like '%' || #{status} || '%')
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
 	    	</if>
 	    </where>
     	order by o.order_date desc

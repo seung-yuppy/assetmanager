@@ -18,7 +18,7 @@
 		<fieldset class="approver-container pd-30">
 			<legend class="approver-title" align="center">요청</legend>
 			<div class="approver-image-container">
-				<img src="data:image/png;base64,${user.base64ProfileImage}" class="approver-image" >
+				<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="approver-image" >
 				<div class="approval-badge">				
 				</div>
 			</div>

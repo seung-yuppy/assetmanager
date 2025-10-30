@@ -38,7 +38,7 @@
 								<jsp:param name="user" value="${sessionScope.user}"/>
 							</jsp:include>
 						</div>
-						<h2 class="form-section-title">요청 내용</h2>
+						<h2 class="form-section-title">요청 정보</h2>
 						<div class="radio-input-group">
 							<div class="radio-input">
 								<input type="radio" id="inputMethodForm" name="inputMethod" value="form" checked onclick="showInputForm('form')">

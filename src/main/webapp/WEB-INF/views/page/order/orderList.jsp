@@ -30,10 +30,11 @@
 				            <div class="status-filter">
 				                <label for="statusFilter">상태:</label>
 				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
-				                    <option value="all">전체</option>
-				                    <option value="PENDING">대기중</option>
-				                    <option value="APPROVAL">승인됨</option>
-				                    <option value="REJECT">거절됨</option>
+				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
+								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
+								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
+								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>
 				            </div>
 				            <div class="search-box">
@@ -101,18 +102,7 @@
 			</div>
 		</div>
 	</div>
-<script>
-	function setBoardParam(key, value) {
-		  const url = new URL(window.location.href);
-		  url.searchParams.delete('page');
-		  if (value != null){
-			  url.searchParams.set(key, value);  // 기존 query 유지하면서 order만 세팅
-		  }else{
-			  url.searchParams.delete(key);
-		  }
-		  window.location.href = url.toString(); // url로 이동
-	}
-</script>
 <script src="/assetmanager/resources/js/toDetail.js"></script>
+<script src="/assetmanager/resources/js/orderList.js"></script>
 </body>
 </html>

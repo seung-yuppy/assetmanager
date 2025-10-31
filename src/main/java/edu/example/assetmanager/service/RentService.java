@@ -140,6 +140,7 @@ public class RentService {
  
 		return approverInfoDTO;
 	}
+	
 	// rent 정보 가져오기
 	public RentShowDTO getRentDetail(Long id) {
 		RentShowDTO rentDTO = rentDAO.getRent(id);
@@ -155,4 +156,17 @@ public class RentService {
 		}
 		return rentContentDTO;
 	}
+	
+	// approverId가 userId인 adminList 찾기
+	public List<RentListDTO> adminList(int userId){ 
+		System.out.println("userId 들어가??"+userId);
+		
+		System.out.println("approvalDTO 들어가??"+userId);
+		
+		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId);
+		System.out.println("adminRentList 나와??"+adminRentList);
+        return adminRentList;
+	}
+	
+	
 }

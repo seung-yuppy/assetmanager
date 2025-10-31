@@ -62,7 +62,7 @@
 	        R.title,
 	        R.rent_date AS rentDate,
 	        R.return_date AS returnDate,
-	        A.status
+	        A.status status
 	    FROM 
 	        Rent R
 	    JOIN 
@@ -101,11 +101,20 @@
 		WHERE RC.rent_id = #{rentId}
 	</select>
 	
+	<select id="findAdminListByUserId">
+		SELECT R.id
+		      ,R.title
+		      ,R.rent_date rentDate
+		      ,A.status status
+		      ,U.username username
+		      ,D.dept_name deptName
+		FROM Rent R 
+		JOIN Approval A ON A.id = R.approval_id
+		LEFT JOIN "User" U ON U.id = R.user_id
+		LEFT JOIN Department D ON D.id = U.department_id
+		WHERE A.approver_id = #{userId} 
+		ORDER BY R.rent_date DESC
+	</select>
 	
-
-	<update id="updateAsset">
-		UPDATE Asset SET user_id = #{userId}
-		WHERE asset_id IN (#{assetId})
-	</update>
-
+	
 </mapper>

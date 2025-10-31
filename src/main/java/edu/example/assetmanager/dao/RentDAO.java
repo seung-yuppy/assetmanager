@@ -43,5 +43,7 @@ public interface RentDAO {
 	// rentId로 rentContent 가져오기
 	public List<RentContentDTO> getRentContent(@Param("rentId") Long id);
 	
+	// userId와 approverId와 같은  admin 리스트 불러오기 
+	public List<RentListDTO> findAdminListByUserId(@Param("userId") int userId);
 	
 }

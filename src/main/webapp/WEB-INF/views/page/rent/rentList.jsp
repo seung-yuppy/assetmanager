@@ -30,12 +30,14 @@
 					<div class="header-controls">
 						<div class="filter-controls">
 							<div class="status-filter">
-								<label for="statusFilter">상태:</label> <select id="statusFilter">
-									<option value="all">전체</option>
-									<option value="pending">대기 중</option>
-									<option value="approved">승인됨</option>
-									<option value="rejected">거부됨</option>
-								</select>
+								<label for="statusFilter">상태:</label>
+				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
+				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
+								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
+								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
+								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
+				                </select>
 							</div>
 							<div class="search-box">
 								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
@@ -59,9 +61,7 @@
 							<c:choose>
                                 <c:when test="${empty rentList}">
                                     <tr>
-                                        <td colspan="4" style="text-align: center; padding: 20px;">
-                                            요청 내역이 없습니다.
-                                        </td>
+                                        <td colspan="4" style="text-align: center; padding: 20px;">요청 내역이 존재하지 않습니다.</td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
@@ -70,22 +70,7 @@
                                         <td>${rent.title}</td>                                           
                                             <td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd" /></td>
                                             <td><fmt:formatDate value="${rent.returnDate}" pattern="yyyy-MM-dd" /></td>                            
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${rent.status == 'pending'}">
-                                                        <span class="status-badge status-waited">대기중</span>
-                                                    </c:when>
-                                                    <c:when test="${rent.status == 'approved'}">
-                                                        <span class="status-badge status-approved">승인됨</span>
-                                                    </c:when>
-                                                    <c:when test="${rent.status == 'rejected'}">
-                                                        <span class="status-badge status-rejected">거부됨</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="status-badge">${rent.status}</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
+                                            <td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
                                         </tr>
                                     </c:forEach>
                                 </c:otherwise>

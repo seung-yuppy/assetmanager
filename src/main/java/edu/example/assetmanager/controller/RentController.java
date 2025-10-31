@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,8 +88,8 @@ public class RentController {
 		return "/rent/rentList";
 	}
 
-	@GetMapping("/detail")
-	public String rentList(Long id, Model model) {
+	@GetMapping("/detail/{id}") 
+	public String rentList(@PathVariable Long id, Model model) {
 		System.out.println("id는 나오니?? "+id);
 		ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
 		RentShowDTO rentDTO = rentService.getRentDetail(id);
@@ -102,4 +103,5 @@ public class RentController {
 		model.addAttribute("items",rentContentDTO);
 		return "/rent/rentDetail";
 	}
+	
 }

@@ -131,7 +131,7 @@
 							<tr>
 								<th>제품명</th>
 								<th>스펙</th>
-								<th>수량</th>
+								<th style="width:30px";>수량</th>
 							</tr>
 						</thead>
 						<tbody id="asset-list-body">

@@ -14,9 +14,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentListDTO {
-	private Long id;          
+	private Long id;      
     private String title;       
     private Date rentDate;      
     private Date returnDate;    
-    private String status;
+    private ApprovalStatus status;
+    private String username;
+    private String deptName;
+    
+    public void setStatus(String status) {
+		this.status = ApprovalStatus.from(status);
+	}
 }

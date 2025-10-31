@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +29,14 @@
 					<div class="search-card">
 						<div class="filter-controls">
 							<div class="status-filter">
-								<label for="statusFilter">카테고리:</label>
-								<select id="statusFilter">
-									<option value="all">전체</option>
-									<option value="laptop">노트북</option>
-									<option value="monitor">모니터</option>
-									<option value="keyboard">키보드</option>
-								</select>
+								<label for="statusFilter">상태:</label>
+				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
+				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
+								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
+								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
+								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
+				                </select>
 							</div>
 							<div class="search-box">
 								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
@@ -46,62 +49,28 @@
 					<table class="data-table">
 						<thead>
 							<tr>
-								<%--<th><input type="checkbox" id="selectAllCheckbox"></th>--%>
 								<th>요청 내용</th>	
-								<th>부서</th>
-								<th>요청자</th>						
-								<!-- <th>요청 사유</th> -->
+								<th>요청자</th>	
+								<th>부서</th>													
 								<th>요청일</th>
 								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
-							<%-- 모든 tr 태그에 data-id="요청ID" 를 추가합니다 --%>
-							<tr data-id="REQ001">
-								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
-								<td><a href="detail">Latitude 7420 노트북 등 2개</a></td>
-								<td>공공사업1팀</td>
-								<td><a href="/assetmanager/admin/user/detail">김성배</a></td>							
-								<!-- <td>사업상 새 개발용 노트북</td> -->
-								<td>2024-07-20</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr>
-							<tr data-id="REQ002">
-								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
-								<td>삼성 갤럭시 탭 S9</td>	
-								<td>공공사업1팀</td>
-								<td>또치</td>										
-								<!-- <td>잘못된 모델이 배송되어, 교환 요청.</td> -->
-								<td>2024-07-19</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr>
-							<tr data-id="REQ003">
-								<%--<td><input type="checkbox" class="row-checkbox"></td>--%>
-								<td>로지텍 MX 마스터 3S 마우스</td>
-								<td>공공사업1팀</td>
-								<td>도우너</td>								
-								<!-- <td>더블 클릭 문제, 스크롤 휠 작동 불량.</td> -->
-								<td>2024-07-18</td>
-								<td><span class="status-badge status-waited">대기중</span></td>
-							</tr>
-							<tr class="processed" data-id="REQ003">
-								<%--<td><input type="checkbox" class="row-checkbox" disabled></td>--%>
-								<td>애플 워치 시리즈 9</td>	
-								<td>공공사업1팀</td>
-								<td>도우너</td>															
-								<!-- 	<td>배터리 수명 기대 이하, 교환 요청.</td> -->
-								<td>2025-07-15</td>
-								<td><span class="status-badge status-approved">승인됨</span></td>
-							</tr>
-							<tr class="processed" data-id="REQ005">
-								<%--<td><input type="checkbox" class="row-checkbox" disabled></td>--%>
-								<td>크롬캐스트 with Google TV</td>	
-								<td>공공사업1팀</td>
-								<td>고길동</td>															
-								<!-- <td>회의실 디스플레이용</td> -->
-								<td>2025-10-12</td>
-								<td><span class="status-badge status-rejected">거부됨</span></td>
-							</tr>
+							<c:if test="${empty adminList}">
+						        <tr>
+						            <td colspan="5" style="text-align: center; padding: 20px;">결재 요청이 존재하지 않습니다.</td>
+						        </tr>
+						    </c:if>
+							<c:forEach var="item" items="${adminList}">
+								<tr data-id="${item.id}">
+									<td><a href="/assetmanager/admin/user/detail">${item.title}</td>
+									<td><a href="/assetmanager/admin/user/detail">${item.username}</a></td>
+									<td>${item.deptName}</td>									
+									<td><fmt:formatDate value="${item.rentDate}" pattern="yyyy-MM-dd" /></td>
+									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<nav class="pagination-container">

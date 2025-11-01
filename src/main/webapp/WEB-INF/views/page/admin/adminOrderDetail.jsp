@@ -49,7 +49,7 @@
 							</dl>
 							<dl class="applicant-info-s-list">
 								<dt>직책</dt>
-								<dd>사원</dd>
+								<dd>${empInfo.userInfo.position}</dd>
 
 								<dt>연락처</dt>
 								<dd>${empInfo.userInfo.phone}</dd>
@@ -69,27 +69,36 @@
 								</div>
 							</div>
 							<c:forEach var="product" items="${products}">
-								<c:forEach var="i" begin="1" end="${product.count}">
-									<div class="form-row">
-										<div class="form-group category-group fixed-width-med">
-											<label for="category">카테고리 </label>
-											<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
-										</div>
-										<div class="form-group product-select-group fixed-width-lg">
-											<label for="productNameSelect">제품명</label>
-											<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
-										</div>
-										<div class="form-group fixed-width-med">
-											<label for="price">단가 (원)</label>
-											<div class="last-input-group">
-												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
-												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
-													<button type="button" class="regist-button" data-target="registerModal">등록</button>
-												</c:if>
-											</div>
+								<div class="form-row">
+									<div class="form-group category-group fixed-width-med">
+										<label for="category">카테고리 </label>
+										<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
+									</div>
+									<div class="form-group product-select-group fixed-width-lg">
+										<label for="productNameSelect">제품명</label>
+										<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
+									</div>
+									<div class="form-group fixed-width-med">
+										<label for="price">단가 (원)</label>
+										<div class="last-input-group">
+											<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
+											<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
+												<button type="button" class="regist-button" data-target="registerModal">등록</button>
+											</c:if>
 										</div>
 									</div>
-								</c:forEach>
+									<div class="form-group fixed-width-sm">
+										<label for="quantity">수량 <span class="required">*</span></label>
+										<input type="number" id="quantity" name="products[0].count" min="1" max="10" value="${product.count}" required>
+									</div>
+									<div class="form-group fixed-width-med">
+										<label for="totalPrice">총액 (원)</label>
+										<div class="last-input-group">
+											<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
+											<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
+										</div>
+									</div>
+								</div>
 							</c:forEach>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>
@@ -120,6 +129,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/assetmanager/resources/js/requestForm.js"></script>
+	<script src="/assetmanager/resources/js/adminOrderDetail.js"></script>
 </body>
 </html>

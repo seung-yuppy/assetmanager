@@ -33,7 +33,7 @@
 				                </select>
 				            </div>
 				            <div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="자산명 검색..." class="search-field">
+				                <input type="text" id="assetSearch" placeholder="요청 내용" class="search-field">
 				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
 				            </div>
 				        </div>

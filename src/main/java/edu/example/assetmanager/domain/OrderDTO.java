@@ -12,6 +12,7 @@ public class OrderDTO {
 	private int totalPrice;
 	private String title;
 	private String username;
+	private String position;
 	private String deptName;
 	private String requestMsg;
 	private ApprovalStatus status;

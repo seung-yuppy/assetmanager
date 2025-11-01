@@ -25,6 +25,7 @@ import edu.example.assetmanager.service.CategoryService;
 import edu.example.assetmanager.service.ItemService;
 import edu.example.assetmanager.service.OrderService;
 import edu.example.assetmanager.service.RentService;
+import edu.example.assetmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -47,6 +48,7 @@ public class OrderController {
 		List<UserInfoDTO> manager = rentService.findByManagerUser();
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);
+		System.out.println("manager 포지션:" + manager.get(0).getPosition());
 		
 		// 카테고리 목록
 		List<CategoryDTO> categories = categoryService.getCategories();

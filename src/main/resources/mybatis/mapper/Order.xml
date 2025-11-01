@@ -42,6 +42,7 @@
 		    o.request_msg,
 		    a.status,
 		    u.username,
+		    u.position,
 		    d.dept_name,
 		    (
 		        SELECT
@@ -59,7 +60,7 @@
 	    <where>
 	    	a.approver_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
-	    		and (o.title like '%' || #{keyword} || '%')
+	    		and (u.username like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
 	    		and (upper(a.status) like upper('%' || #{status} || '%'))

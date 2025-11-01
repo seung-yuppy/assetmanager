@@ -32,7 +32,7 @@
 				                </select>
 				            </div>
 				            <div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="자산명 검색..." class="search-field">
+				                <input type="text" id="assetSearch" placeholder="요청자" class="search-field">
 				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
 				            </div>
 				        </div>
@@ -54,7 +54,7 @@
 								<tr data-id="${item.id}">
 									<td><a href="detail/${item.id}">${item.title}</a></td>
 									<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
-									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
+									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username} ${item.position}</a></td>
 									<td>${item.deptName}</td>
 									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>

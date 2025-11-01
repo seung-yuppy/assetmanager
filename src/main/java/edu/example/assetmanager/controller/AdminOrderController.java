@@ -45,8 +45,6 @@ public class AdminOrderController {
 	
 	@GetMapping("order/approve")
 	public String approve(int id) {
-		
-			
 		return "redirect:/admin/adminOrderDetail";
 	}
 }

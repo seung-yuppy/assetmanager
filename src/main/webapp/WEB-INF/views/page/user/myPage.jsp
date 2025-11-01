@@ -22,9 +22,9 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1>${userInfo.username}님의 마이페이지</h1>
+				<h1>${userInfo.username} ${userInfo.position}님의 마이페이지</h1>
 				<div class="detail-header"> 
-					<span>${userInfo.username}님의 정보와 자산 내역을 확인합니다.</span>
+					<span>${userInfo.username} ${userInfo.position}님의 정보와 자산 내역을 확인합니다.</span>
 				</div>
 
 				<div class="dashboard-container">
@@ -47,7 +47,7 @@
 									</div>
 									<div class="user-info-item">
 										<span class="info-label">직급</span> 
-										<span class="info-value">${userInfo.role}</span>
+										<span class="info-value">${userInfo.position}</span>
 									</div>
 									<div class="user-info-item">
 										<span class="info-label">전화번호</span> 
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<!-- 사용자 상세 정보 끝 -->
-					<c:if test="${userInfo.role != '관리자' && !empty list}">
+					<c:if test="${userInfo.role != '관리자'}">
 						<!-- 자산 정보 시작 -->
 						<div class="section-card">
 							<h2>자산 내역</h2>
@@ -84,27 +84,38 @@
 										<th>상태</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach var="asset" items="${list}">
-										<tr>
-											<td>${asset.assetName}</td>
-											<td>${asset.categoryName}</td>
-											<td>${asset.serialNumber}</td>
-											<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
-											<c:if test="${asset.returnDate != null}">
-												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-											</c:if>
-											<c:if test="${asset.returnDate == null}">
-												<td>-</td>
-											</c:if>										
-											<c:if test="${asset.returnDate != null}">
-												<td><span class="status-badge status-rejected">반납됨</span></td>
-											</c:if>
-											<c:if test="${asset.returnDate == null}">
-												<td><span class="status-badge status-used">사용중</span></td>
-											</c:if>
-										</tr>
-									</c:forEach>
+								<tbody>							
+									<c:choose>
+				                		<c:when test="${empty list}">
+						                	<tr>
+						                		<td colspan="6" style="text-align: center;">
+						               				<p>내 자산 내역이 존재하지 않습니다.</p>
+					                			</td>
+					                		</tr>	                	
+			                			</c:when>
+			                			<c:otherwise>
+											<c:forEach var="asset" items="${list}">
+												<tr>
+													<td>${asset.assetName}</td>
+													<td>${asset.categoryName}</td>
+													<td>${asset.serialNumber}</td>
+													<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+													<c:if test="${asset.returnDate != null}">
+														<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+													</c:if>
+													<c:if test="${asset.returnDate == null}">
+														<td>-</td>
+													</c:if>										
+													<c:if test="${asset.returnDate != null}">
+														<td><span class="status-badge status-rejected">반납됨</span></td>
+													</c:if>
+													<c:if test="${asset.returnDate == null}">
+														<td><span class="status-badge status-used">사용중</span></td>
+													</c:if>
+												</tr>
+											</c:forEach>			                			
+			                			</c:otherwise>
+			                		</c:choose>
 								</tbody>
 							</table>
 						</div>

@@ -23,6 +23,7 @@ public class UserInfoDTO {
 	private String base64ProfileImage;
 	private String deptName;
 	private String deptAddress;
+	private String position;
 	
 	public void setProfileImage(byte[] profileImage) {
 	    this.profileImage = profileImage;

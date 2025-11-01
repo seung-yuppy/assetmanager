@@ -49,28 +49,39 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="asset" items="${list}">
-								<tr>
-									<td>${asset.assetName}</td>
-									<td>${asset.categoryName}</td>
-									<td>${asset.serialNumber}</td>
-									<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
-									<c:if test="${asset.returnDate != null}">
-										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-									</c:if>
-									<c:if test="${asset.returnDate == null}">
-										<td>-</td>
-									</c:if>				
-									<td>
-			                        	<div class="table-button-container">
-			                        		<c:if test="${asset.returnDate != null}">
-			                       				<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
-			                       			</c:if>
-			                       			<button class="return-button">반납</button>
-			                       		</div>
-			                        </td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty list}">
+				                	<tr>
+				                		<td colspan="6" style="text-align: center;">
+				               				<p>사용 중인 내 자산이 존재하지 않습니다.</p>
+			                			</td>
+			                		</tr>	                	
+	                			</c:when>
+	                			<c:otherwise>
+									<c:forEach var="asset" items="${list}">
+										<tr>
+											<td>${asset.assetName}</td>
+											<td>${asset.categoryName}</td>
+											<td>${asset.serialNumber}</td>
+											<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
+											<c:if test="${asset.returnDate != null}">
+												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td>-</td>
+											</c:if>				
+											<td>
+					                        	<div class="table-button-container">
+					                        		<c:if test="${asset.returnDate != null}">
+					                       				<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
+					                       			</c:if>
+					                       			<button class="return-button">반납</button>
+					                       		</div>
+					                        </td>
+										</tr>
+									</c:forEach>	                			
+	                			</c:otherwise>
+                			</c:choose>
 						</tbody>
 					</table>			
 					

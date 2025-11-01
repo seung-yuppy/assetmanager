@@ -83,10 +83,13 @@
 	                </div>
 	                
 	                <div class="form-group">
-				    	<select name="role" required>
+				    	<select name="position" required>
 				    		<option value="">직책을 선택하세요</option>
-				    		<option value="manager">부장</option>
-				    		<option value="employee">사원</option>
+				    		<option value="부장">부장</option>
+				    		<option value="차장">차장</option>
+				    		<option value="과장">과장</option>
+				    		<option value="대리">대리</option>
+				    		<option value="사원">사원</option>
 				    	</select>
 	                </div>
                 </div>

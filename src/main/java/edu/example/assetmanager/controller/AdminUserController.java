@@ -7,49 +7,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.domain.UserParamDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.UserService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 @Controller
 public class AdminUserController {
 	
 	private final UserService service;
 	private final AssetService assetService;
-	
-	public AdminUserController(UserService service, AssetService assetService) {
-		this.service = service;
-		this.assetService = assetService;
-	}
 
 	@GetMapping("/user/list")
-	public String userList(Model model, @RequestParam(defaultValue = "1") int page) {
-		List<UserInfoDTO> list = service.getPagedList(page);
-		int totalPages = service.getTotalPages();
-		int pageBlockSize = 3;
-		
-	    int currentBlock = (int) Math.ceil((double) page / pageBlockSize);
-	    int startPage = (currentBlock - 1) * pageBlockSize + 1;
-	    int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
-	    
-	    boolean hasPrev = startPage > 1;
-	    boolean hasNext = endPage < totalPages;
-		
-		model.addAttribute("list", list);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		
-		model.addAttribute("startPage", startPage);
-	    model.addAttribute("endPage", endPage);
-	    model.addAttribute("hasPrev", hasPrev);
-	    model.addAttribute("hasNext", hasNext);
-		
+	public String userList(Model model, UserParamDTO dto) {
+		PageResponseDTO<UserInfoDTO> list = service.listAll(dto);
+		model.addAttribute("response", list);
+		for (UserInfoDTO user : list.getContent()) {
+			System.out.println(user.getEmpNo());
+		}
 		return "/admin/adminUserList";
-	}
+	}	
 	
 	@GetMapping("/user/detail/{id}")
 	public String userDetail(Model model, @PathVariable("id") int id) {

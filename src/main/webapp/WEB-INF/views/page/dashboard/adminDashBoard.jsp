@@ -16,7 +16,7 @@
 				<!-- 0. 페이지 & 사용자 설명 -->
 				<div class="home-head">
 					<span>${userInfo.deptName}</span>
-					<h1>${userInfo.username}님, 안녕하세요!</h1>
+					<h1>${userInfo.username} ${userInfo.position}님, 안녕하세요!</h1>
 				</div>
 				<!-- 1. 총 통계 section -->
 				<div class="metric-grid">
@@ -40,7 +40,7 @@
 	                </div>
 	                <div class="metric-card border-gray">
 						<div class="card-header">
-	                		<p class="card-title">창고 대기 중</p>  
+	                		<p class="card-title">대기 중</p>  
 	                		<div class="card-logo-box back-gray">
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
 	                		</div>
@@ -58,7 +58,7 @@
 	                </div>
 	                <div class="metric-card border-purple">
 						<div class="card-header">
-							<p class="card-title">제품</p>
+							<p class="card-title">추천 제품</p>
 	                		<div class="card-logo-box back-purple">
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
 	                		</div>

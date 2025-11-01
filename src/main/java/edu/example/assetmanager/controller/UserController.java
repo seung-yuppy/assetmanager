@@ -21,17 +21,14 @@ import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.UserService;
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 	
 	private final UserService service;
 	private final AssetService assetService;
-	
-	public UserController(UserService service, AssetService assetService) {
-		this.service = service;
-		this.assetService = assetService;
-	}
 
 	@GetMapping("/login")
 	public String s1 () {

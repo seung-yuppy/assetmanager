@@ -72,26 +72,37 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="asset" items="${assetHistory}">
-								<tr>
-									<td>${asset.assetName}</td>
-									<td>${asset.categoryName}</td>
-									<td>${asset.serialNumber}</td>
-									<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
-									<c:if test="${asset.returnDate != null}">
-										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-									</c:if>
-									<c:if test="${asset.returnDate == null}">
-										<td>-</td>
-									</c:if>
-									<c:if test="${asset.returnDate != null}">
-										<td><span class="status-badge status-rejected">반납됨</span></td>
-									</c:if>
-									<c:if test="${asset.returnDate == null}">
-										<td><span class="status-badge status-used">사용중</span></td>
-									</c:if>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty assetHistory}">
+									<tr>
+										<td colspan="6" style="text-align: center;">
+											<p>사용자의 자산 내역이 존재하지 않습니다.</p>
+										</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="asset" items="${assetHistory}">
+										<tr>
+											<td>${asset.assetName}</td>
+											<td>${asset.categoryName}</td>
+											<td>${asset.serialNumber}</td>
+											<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+											<c:if test="${asset.returnDate != null}">
+												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td>-</td>
+											</c:if>
+											<c:if test="${asset.returnDate != null}">
+												<td><span class="status-badge status-rejected">반납됨</span></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td><span class="status-badge status-used">사용중</span></td>
+											</c:if>
+										</tr>
+									</c:forEach>						
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>

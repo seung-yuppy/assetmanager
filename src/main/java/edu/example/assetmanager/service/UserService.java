@@ -15,8 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.UserDAO;
+import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.domain.UserParamDTO;
 
 @Service
 public class UserService {
@@ -37,12 +39,13 @@ public class UserService {
 	
 	// 회원가입 처리
 	public boolean join(UserDTO dto) {
+		// 비밀번호 암호화
 		if (!dto.getPassword().equals(dto.getPasswordCheck()))
             return false;
-		
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
 
+        // 프로필 기본 이미지 설정
 		try {
 			String webPath = "/resources/image/img_profile.png";
 			String absolutePath = servletContext.getRealPath(webPath);
@@ -59,6 +62,18 @@ public class UserService {
 			e.printStackTrace();
 			System.err.println("프로필 이미지 경로 변경 수정 에러 발생" + e);
 		}
+		
+		// 직책과 권한 부여
+		if (dto.getDepartmentId() == 1) {
+			dto.setRole("admin");
+		} else {
+			if (dto.getPosition().equals("부장")) {
+				dto.setRole("manager");
+			} else {
+				dto.setRole("employee");
+			}
+		}
+			
 
         boolean isUserJoin = dao.userJoin(dto);  
 		if (isUserJoin) {
@@ -154,12 +169,30 @@ public class UserService {
 	}
 	
 	// 페이징 처리된 목록을 가져오는 메서드
-	public List<UserInfoDTO> getPagedList(int page) {
-		int pageSize = 10;
-		int start = (page - 1) * pageSize + 1;
-		int end = start + pageSize - 1;
-		List<UserInfoDTO> list = dao.listAll(start, end);
-		return refactorList(list);
+	public PageResponseDTO<UserInfoDTO> listAll(UserParamDTO dto) {
+		int totalCount = dao.countAll();
+		PageResponseDTO<UserInfoDTO> response = paging(dto, totalCount);
+		List<UserInfoDTO> list = dao.listAll(dto);
+		response.setContent(list);
+		return response;
+	}
+	
+	private PageResponseDTO<UserInfoDTO> paging(UserParamDTO dto, int totalCount){
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
+		int page = dto.getPage();
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		dto.setOffset(offset);
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
+		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
+		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
+		if (totalBlocks < 0)
+			totalBlocks = 0;
+		int blockStart = (block - 1) * BLOCK_SIZE + 1;
+		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
+		boolean hasPrev = block > 1 ? true : false;
+		boolean hasNext = totalBlocks > block ? true : false;
+		return new PageResponseDTO<UserInfoDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
 	
 	// 총 페이지 수를 계산하는 메서드

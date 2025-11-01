@@ -3,7 +3,7 @@
 <mapper namespace="edu.example.assetmanager.dao.UserDAO">
 	<insert id="userJoin">
 		INSERT INTO "User"
-			(department_id, emp_no, password, username, email, phone, role, profile_image)
+			(department_id, emp_no, password, username, email, phone, role, profile_image, position)
 		VALUES (
 			#{user.departmentId},
 			#{user.empNo},
@@ -12,7 +12,8 @@
 			#{user.email},
 			#{user.phone},
 			#{user.role},
-			#{user.profileImage}
+			#{user.profileImage},
+			#{user.position}
 		)
 	</insert>
 	
@@ -48,12 +49,13 @@
 			FROM (
 				SELECT *
 				FROM "User"
-				INNER JOIN Department ON Department.id = "User".department_id
+                JOIN Department ON "User".department_id = Department.id
 			) u
 		)
-		WHERE rnum BETWEEN #{start} AND #{end}
-		AND role = 'employee' OR role = 'manager'
+		WHERE role NOT IN ('admin', 'department')
 		ORDER BY emp_no
+        offset #{offset} rows
+    	fetch next #{size} rows only
 	</select>
 	
 	<update id="changeUserInfo">

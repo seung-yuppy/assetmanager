@@ -22,9 +22,9 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1>${userInfo.username}님의 수정 페이지</h1>
+				<h1>${userInfo.username} ${userInfo.position}님의 수정 페이지</h1>
 				<div class="detail-header">
-					<span>${userInfo.username}님의 정보를 수정합니다.</span>	
+					<span>${userInfo.username} ${userInfo.position}님의 정보를 수정합니다.</span>	
 				</div>
 				
 				<div class="section-card">
@@ -51,7 +51,7 @@
 								</div>		
 								<div class="edit-user-info">
 									<span class="user-label">직급</span> 
-									<input type="text" value="${userInfo.role}" class="user-value" readonly>							
+									<input type="text" value="${userInfo.position}" class="user-value" readonly>							
 								</div>
 								<div class="edit-user-info">
 									<span class="user-label">이메일</span> 

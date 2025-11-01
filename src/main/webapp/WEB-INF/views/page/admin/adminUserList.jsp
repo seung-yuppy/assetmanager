@@ -45,66 +45,61 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="user" items="${list}">
-								<tr>
-									<td><a href="/assetmanager/admin/user/detail/${user.id}">${user.empNo}</a></td>
-									<td>${user.username}</td>
-									<td>${user.deptName}</td>
-									<td>${user.role}</td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty response.content}">
+									<tr>
+										<td colspan="4" style="text-align: center;">
+											<p>사용자가 존재하지 않습니다.</p>
+										</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="user" items="${response.content}">
+										<tr>
+											<td><a href="/assetmanager/admin/user/detail/${user.id}">${user.empNo}</a></td>
+											<td>${user.username}</td>
+											<td>${user.deptName}</td>
+											<td>${user.position}</td>
+										</tr>
+									</c:forEach>								
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
-					<nav class="pagination-container">
-						<ul class="pagination-list">
-							<c:choose>
-					            <c:when test="${hasPrev}">
-					                <li class="page-item prev">
-					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${startPage - 1}'/>">
-					                        &lt; 이전
-					                    </a>
-					                </li>
-					            </c:when>
-					            <c:otherwise>
-					                <li class="page-item prev disabled">
-					                    <span class="page-link">&lt; 이전</span>
-					                </li>
-					            </c:otherwise>
-					        </c:choose>
-					
-					        <c:forEach var="i" begin="${startPage}" end="${endPage}">
-					            <c:choose>
-					                <c:when test="${i == currentPage}">
-					                    <li class="page-item active">
-					                        <span class="page-link">${i}</span>
-					                    </li>
-					                </c:when>
-					                <c:otherwise>
-					                    <li class="page-item">
-					                        <a class="page-link" href="<c:url value='/admin/asset/list?page=${i}'/>">
-					                            ${i}
-					                        </a>
-					                    </li>
-					                </c:otherwise>
-					            </c:choose>
-					        </c:forEach>
-					
-					        <c:choose>
-					            <c:when test="${hasNext}">
-					                <li class="page-item next">
-					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${endPage + 1}'/>">
-					                        다음 &gt;
-					                    </a>
-					                </li>
-					            </c:when>
-					            <c:otherwise>
-					                <li class="page-item next disabled">
-					                    <span class="page-link">다음 &gt;</span>
-					                </li>
-					            </c:otherwise>
-					        </c:choose>
-						</ul>
-					</nav>			
+
+					<c:if test="${response.totalPages > 0 }">
+						<nav class="pagination-container">
+							<ul class="pagination-list">
+								<c:if test="${response.hasPrev}">
+									<li class="page-item prev"><a class="page-link"
+										onclick="setBoardParam('page', ${response.start - response.blockSize})"
+										style="cursor: pointer;"> Previous </a></li>
+								</c:if>
+				
+								<c:forEach var="num" begin="${response.start}" end="${response.end}">
+									<c:choose>
+										<c:when test="${num == response.page}">
+											<li class="page-item active"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+				
+								<c:if test="${response.hasNext}">
+									<li class="page-item next"><a class="page-link"
+										onclick="setBoardParam('page', ${response.end + 1})"
+										style="cursor: pointer;"> Next </a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</c:if>
+			
 				</div>
 			</div>
 		</div>	

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.UserDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.domain.UserParamDTO;
 
 @Mapper
 public interface UserDAO {
@@ -27,7 +28,7 @@ public interface UserDAO {
 	public int countAll();
 	
 	// 관리자 회원 목록
-	public List<UserInfoDTO> listAll(@Param("start") int start, @Param("end") int end);
+	public List<UserInfoDTO> listAll(UserParamDTO dto);
 	
 	// 마이페이지에서 프로필 수정하기
 	public boolean changeUserInfo(@Param("user") UserDTO user);

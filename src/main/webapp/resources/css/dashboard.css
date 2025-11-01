@@ -115,27 +115,27 @@
         }
         
         .border-green {
-        	border-top: 3px solid var(--green-color);
+        	border-top: 5px solid var(--green-color);
         }
         
         .border-yellow {
-        	border-top: 3px solid var(--yellow-color);
+        	border-top: 5px solid var(--yellow-color);
         }
         
         .border-purple {
-        	border-top: 3px solid var(--purple-color);
+        	border-top: 5px solid var(--purple-color);
         }
         
         .border-blue {
-        	border-top: 3px solid var(--blue-color);
+        	border-top: 5px solid var(--blue-color);
         }
         
         .border-red {
-        	border-top: 3px solid var(--red-color);
+        	border-top: 5px solid var(--red-color);
         }
         
         .border-gray {
-        	border-top: 3px solid var(--gray-color);
+        	border-top: 5px solid var(--gray-color);
         }
         
 

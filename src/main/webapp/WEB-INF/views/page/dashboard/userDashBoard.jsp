@@ -17,42 +17,51 @@
 		<div class="dashboard-container">
 			<div class="home-head">
 				<span>${userInfo.deptName}</span>
-				<h1>${userInfo.username} ${userInfo.role}님, 안녕하세요!</h1>
+				<h1>${userInfo.username} ${userInfo.position}님, 안녕하세요!</h1>
 			</div>
 			
 			<div class="metric-grid">
-                <div class="metric-card border-yellow">
+                <div class="metric-card border-green">
 					<div class="card-header">
                 		<p class="card-title">내 자산</p>   
-                		<div class="card-logo-box back-yellow">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+                		<div class="card-logo-box back-green">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
                 		</div>
                 	</div>                    
                     <p class="card-value">${usingCount}</p>
                 </div>
-                <div class="metric-card border-green">
+                <div class="metric-card border-blue">
 					<div class="card-header">
-                		<p class="card-title">내 부서 자산</p>   
-                		<div class="card-logo-box back-green">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+                		<p class="card-title">구매 대기</p>   
+                		<div class="card-logo-box back-blue">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
                 		</div>
                 	</div>                    
                     <p class="card-value">${deptCount}</p>
                 </div>
                 <div class="metric-card border-blue">
 					<div class="card-header">
-                		<p class="card-title">구매 요청</p> 
+                		<p class="card-title">구매 승인</p> 
                 		<div class="card-logo-box back-blue">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>                    
                     <p class="card-value">${orderCount}</p>
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
-						<p class="card-title">반출 요청</p>
+						<p class="card-title">반출 대기</p>
                 		<div class="card-logo-box back-purple">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
+                		</div>
+                	</div>   
+                    <p class="card-value">${rentCount}</p>
+                </div>
+                <div class="metric-card border-purple">
+					<div class="card-header">
+						<p class="card-title">반출 승인</p>
+                		<div class="card-logo-box back-purple">
+                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>   
                     <p class="card-value">${rentCount}</p>
@@ -73,20 +82,32 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                	<c:forEach var="asset" items="${list}">
-	                		<tr>
-	                			<td>${asset.assetName}</td>
-	                			<td>${asset.categoryName}</td>
-	                			<td>${asset.serialNumber}</td>
-	                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
-	                			<c:if test="${asset.returnDate != null}">
-									<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-								</c:if>
-								<c:if test="${asset.returnDate == null}">
-									<td>-</td>
-								</c:if>
-	                		</tr>
-	                	</c:forEach>
+	                	<c:choose>
+	                		<c:when test="${empty list}">
+			                	<tr>
+			                		<td colspan="5" style="text-align: center;">
+			               				<p>사용 중인 내 자산이 존재하지 않습니다.</p>
+		                			</td>
+		                		</tr>	                	
+                			</c:when>
+                			<c:otherwise>
+			                	<c:forEach var="asset" items="${list}">
+			                		<tr>
+			                			<td>${asset.assetName}</td>
+			                			<td>${asset.categoryName}</td>
+			                			<td>${asset.serialNumber}</td>
+			                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
+			                			<c:if test="${asset.returnDate != null}">
+											<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+										</c:if>
+										<c:if test="${asset.returnDate == null}">
+											<td>-</td>
+										</c:if>
+			                		</tr>
+			                	</c:forEach>                			
+                			</c:otherwise>
+	                	</c:choose>
+
 	                </tbody>
 	            </table>
 	        </div>

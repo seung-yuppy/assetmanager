@@ -21,4 +21,5 @@ public class UserDTO {
 	private String phone; 
 	private String role;
 	private byte[] profileImage;
+	private String position;
 }

@@ -209,3 +209,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 }
+
+td a:hover{
+	text-decoration: underline;
+}

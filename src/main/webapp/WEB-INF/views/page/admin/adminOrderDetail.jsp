@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<script
 		src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 	<div class="app-layout">
@@ -119,9 +118,17 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
-							<c:if test="${approval.status == 'PENDING'}">
-								<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
-								<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+							<c:if test="${sessionScope.userInfo.role == '관리자'}">
+								<c:if test="${approval.status == 'PENDING'}">
+									<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
+									<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+								</c:if>
+							</c:if>
+							<c:if test="${sessionScope.userInfo.role == '부장'}">
+								<c:if test="${approval.status == 'FIRST_APPROVAL'}">
+									<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
+									<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+								</c:if>
 							</c:if>
 						</div>
 					</form>

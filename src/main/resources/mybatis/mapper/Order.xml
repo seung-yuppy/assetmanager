@@ -70,6 +70,43 @@
 	    offset #{offset} rows
     	fetch next #{size} rows only
 	</select>
+	<select id="listAllForManager" parameterType="OrderParamDTO" resultType="OrderDto">
+		SELECT 
+			o.id,
+		    o.title,
+		    o.user_id,
+		    o.order_date,
+		    o.request_msg,
+		    a.status,
+		    u.username,
+		    u.position,
+		    d.dept_name,
+		    (
+		        SELECT
+		            SUM(count*price)
+		        FROM
+		            order_content
+		        WHERE
+		            order_id = o.id
+		    ) total_price
+		FROM
+		    orders o
+			    left JOIN approval      a ON o.approval_id = a.id
+			    JOIN "User" u ON o.user_id = u.id
+			    JOIN department d ON u.department_id = d.id
+	    <where>
+	    	a.manager_id = #{userId}
+	       	<if test="keyword != null and keyword != ''">
+	    		and (u.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	order by o.order_date desc
+	    offset #{offset} rows
+    	fetch next #{size} rows only
+	</select>
 	<select id="countAll" parameterType="OrderParamDTO" resultType="int">
 		select count(o.id) 
 		from orders o
@@ -88,10 +125,27 @@
 		select count(o.id) 
 		from orders o
 			left JOIN approval      a ON o.approval_id = a.id
+			JOIN "User" u ON o.user_id = u.id
 	    <where>
 		    a.approver_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
-	    		and (o.title like '%' || #{keyword} || '%')
+	    		and (u.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(a.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+	
+	<select id="countAllForManager" parameterType="OrderParamDTO" resultType="int">
+		select count(o.id) 
+		from orders o
+			left JOIN approval      a ON o.approval_id = a.id
+			JOIN "User" u ON o.user_id = u.id
+	    <where>
+		    a.manager_id = #{userId}
+	       	<if test="keyword != null and keyword != ''">
+	    		and (u.username like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
 	    		and (upper(a.status) like upper('%' || #{status} || '%'))

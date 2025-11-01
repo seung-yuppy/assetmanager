@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>관리자 Side Menu</title>
+	<title>Side Menu</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/sideMenu.css" rel="stylesheet"> 	
 </head>
@@ -20,46 +20,27 @@
                         <span>대시보드</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="/assetmanager/admin/user/list">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_user.svg" />
-                        <span>사용자</span>
-                    </a>
-                </li>
-                <li class="menu-item menu-sub">
-					<div class="menu-arrow">
-		                <div class="menu-link">
-							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
-	                        <span>자산</span>      
-		                </div>
-						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
-                	</div>
-                	<ul class="sub-menu-list">
-		            	<li><a href="/assetmanager/admin/asset/list">자산 목록</a></li>
-		            	<li><a href="/assetmanager/admin/asset/disposal">불용 자산</a></li>
-		            </ul>
-                </li>
                 <li class="menu-item menu-sub">
                     <div class="menu-arrow">
 		                <div class="menu-link">
-							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_item.svg" />
-		                    <span>제품</span>            
+							<img class="sidebar-logo-item"  src="/assetmanager/resources/image/icon_asset.svg" />
+		                    <span>자산</span>           
 		                </div>
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
                 	</div>
 	                <ul class="sub-menu-list">
-		            	<li><a href="/assetmanager/admin/item/form">제품 추가</a></li>
-		            	<li><a href="/assetmanager/admin/item/list">제품 목록</a></li>
-		            </ul>                	
+		            	<li><a href="/assetmanager/myasset/list">내 자산</a></li>
+		            	<li><a href="/assetmanager/deptasset/list">부서 자산</a></li>
+		            </ul> 
                 </li>
-				<li class="menu-item">
-	            	<a href="/assetmanager/admin/order/list?status=PENDING">
+                <li class="menu-item">
+	            	<a href="/assetmanager/admin/order/list?status=FIRST_APPROVAL">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
 		                <span>구입</span>
 		            </a>          
 	            </li>
 	            <li class="menu-item">
-	            	<a href="/assetmanager/admin/rent/list?status=PENDING">
+	            	<a href="/assetmanager/admin/rent/list?status=FIRST_APPROVAL">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
                         <span>반출</span>
 		            </a>          

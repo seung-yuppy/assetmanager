@@ -60,6 +60,7 @@
 
 .data-table tbody tr:hover {
     background-color: var(--gray-color-light);
+    cursor:pointer;
 }
 
 /* 요청 관리 섹션 (2열 레이아웃) */

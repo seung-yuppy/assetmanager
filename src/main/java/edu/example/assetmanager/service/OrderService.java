@@ -41,6 +41,14 @@ public class OrderService {
 		return response;
 	}
 	
+	public PageResponseDTO<OrderDTO> listAllForManager(OrderParamDTO orderParamDTO) {
+		int totalCount = orderDAO.countAllForManager(orderParamDTO);
+		PageResponseDTO<OrderDTO> response = paging(orderParamDTO, totalCount); 
+		List<OrderDTO> list = orderDAO.listAllForManager(orderParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
 	private PageResponseDTO<OrderDTO> paging(OrderParamDTO orderParamDTO, int totalCount){
 		final int PAGE_SIZE = 10;
 		final int BLOCK_SIZE = 5;

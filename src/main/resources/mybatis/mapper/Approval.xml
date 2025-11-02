@@ -16,13 +16,18 @@
 	<update id="rejectApproval">
 		update approval
 		set status = #{status},
-			reject_date = #{rejectDate}
+			reject_date = #{rejectDate},
+			reject_reason = #{rejectReason}
 		where id = #{id}
 	</update>
 	
-	<update id="updateApproval">
+	<update id="approveApproval">
 		update approval
-		set status = #{status}
+		set status = #{status},
+			<trim suffixOverrides=",">
+				<if test="firstApprovalDate != null">first_approval_date = #{firstApprovalDate},</if>
+				<if test="lastApprovalDate != null">last_approval_date = #{lastApprovalDate},</if>
+			</trim>
 		where id = #{id}
 	</update>
 </mapper>

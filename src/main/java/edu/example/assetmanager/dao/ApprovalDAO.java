@@ -10,5 +10,5 @@ public interface ApprovalDAO {
 	public boolean insertApproval(ApprovalDTO approvalDTO);
 	public ApprovalDTO getApprovalById(int id);
 	public boolean rejectApproval(ApprovalDTO approvalDTO);
-	public boolean updateApproval(@Param("id")Long id, @Param("status") String status);
+	public boolean approveApproval(ApprovalDTO approvalDTO);
 }

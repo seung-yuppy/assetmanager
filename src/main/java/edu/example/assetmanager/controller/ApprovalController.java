@@ -24,27 +24,33 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/approval")
 public class ApprovalController {
 	private final ApprovalService approvalService;
-	
-	@GetMapping("/approve")
-	public String approve(HttpServletRequest request, Long id, String status) {
-        String referer = request.getHeader("Referer");
-        approvalService.approve(id, status);
-        if (referer != null) {
-            return "redirect:" + referer;
-        } else {
-            return "redirect:/assetmanager/home";
-        }
+
+	@ResponseBody
+	@PostMapping(value = "/approve", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> approve(@RequestBody ApprovalDTO approvalDTO, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		ApprovalDTO dto = approvalDTO;
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+			response.put("msg", "로그인 후 진행해주세요.");
+		dto.setApproverId(userId);
+		
+		if (approvalService.approve(dto))
+			response.put("msg", "승인 처리가 완료되었습니다.");
+		else
+			response.put("msg", "승인 처리에 실패하였습니다.");
+		
+		return ResponseEntity.ok(response);
 	}
+	
 	@ResponseBody
 	@PostMapping(value = "/reject", produces = "application/json; charset=utf-8")
 	public ResponseEntity<Map<String, Object>> reject(@RequestBody ApprovalDTO approvalDTO, HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
 		ApprovalDTO dto = approvalDTO;
-		
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 			response.put("msg", "로그인 후 진행해주세요.");
-		
 		dto.setApproverId(userId);
 			
 		if (approvalService.reject(dto))

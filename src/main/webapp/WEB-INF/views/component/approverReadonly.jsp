@@ -148,10 +148,10 @@
 	        <div class="rejection-box-content">
 	        	<div class="title">
 		            <p class="meta">결재자: ${rejecter}(${rejecterDept}) </p>
-		            <p class="rejection-date-info">반려 일시:  <td><fmt:formatDate value="${approval.rejectDate}" pattern="yyyy-MM-dd hh:mm" /></td></p>
+		            <p class="rejection-date-info">반려 일시: <fmt:formatDate value="${approval.rejectDate}" pattern="yyyy-MM-dd hh:mm" /></p>
 	        	</div>
 	            <div class="rejection-detail">
-	                <p>${approval.rejectReason}</p>
+	                ${approval.rejectReason}
 	            </div>
 	        </div>
 	   	</div>

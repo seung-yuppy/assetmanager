@@ -73,5 +73,66 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
     });
 });
 
+// 승인 처리
+const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
+	btn.addEventListener("click", async () => {
+		const container = document.getElementById('approval-line-container');
+		const id = container.getAttribute('data-approvalId');
+		const status = container.getAttribute('data-status');
+		
+		
+		Swal.fire({
+			text: "요청을 승인하시겠습니까?",
+			imageUrl: "/assetmanager/resources/image/approval_admin.jpg",
+			imageWidth: 90,
+			imageHeight: 90, 
+			imageAlt: "경고 아이콘",
+			confirmButtonColor: "#14b3ae",
+			confirmButtonText: "승인",
+			showCancelButton: true,
+			cancelButtonText: '취소',
+			customClass: {
+				input: 'custom-swal-input'
+			},
+			preConfirm: async () => { 
+				const resultObject = {
+						id: id,
+						status: status
+				};
+				const res = await fetch("/assetmanager/approval/approve", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(resultObject),
+				});
+				const data = await res.json();
+				
+				if (data.msg === "승인 처리가 완료되었습니다.") {
+					Swal.fire({
+						title: "성공",
+						text: data.msg,
+						icon: "success",
+						confirmButtonColor: "#a5dc86",
+						confirmButtonText: "확인",
+					}).then(() =>{
+						location.reload();
+					});
+				} else {
+					Swal.fire({
+						title: "실패",
+						text: data.msg,
+						icon: "error",
+						confirmButtonColor: "#d33",
+						confirmButtonText: "확인",
+					}).then(() =>{
+						window.location.reload();
+					});
+				}
+			}
+		})
+	});
+});
+
 
 

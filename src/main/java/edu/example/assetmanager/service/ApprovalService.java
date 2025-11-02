@@ -13,12 +13,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApprovalService{
 	private final ApprovalDAO approvalDAO;
-	public boolean approve(Long id, String status) {
-		ApprovalStatus current = ApprovalStatus.valueOf(status); // 문자열 to Enum
+	
+	public boolean approve(ApprovalDTO approvalDTO) {
+		// 상태 설정
+		ApprovalStatus current = approvalDTO.getStatus();
 		ApprovalStatus[] values = ApprovalStatus.values();
 		int nextIndex = current.ordinal() + 1;
 		String nextName = (nextIndex < values.length) ? values[nextIndex].name() : null;
-		return approvalDAO.updateApproval(id, nextName);
+		approvalDTO.setStatus(nextName);
+		
+		// 날짜 설정
+		if (current.name().equals("PENDING")) {
+			approvalDTO.setFirstApprovalDate(new Date());
+		}else if(current.name().equals("FIRST_APPROVAL")) {
+			approvalDTO.setLastApprovalDate(new Date());
+		}
+		return approvalDAO.approveApproval(approvalDTO);
 	}
 
 	public boolean reject(ApprovalDTO approvalDTO) {

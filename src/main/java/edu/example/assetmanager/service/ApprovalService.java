@@ -1,8 +1,11 @@
 package edu.example.assetmanager.service;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApprovalStatus;
 import lombok.RequiredArgsConstructor;
 
@@ -17,13 +20,15 @@ public class ApprovalService{
 		String nextName = (nextIndex < values.length) ? values[nextIndex].name() : null;
 		return approvalDAO.updateApproval(id, nextName);
 	}
-	public boolean reject(Long id, String status) {
-		ApprovalStatus current = ApprovalStatus.valueOf(status); // 문자열 to Enum
+
+	public boolean reject(ApprovalDTO approvalDTO) {
+		ApprovalStatus current = approvalDTO.getStatus();
 		ApprovalStatus[] values = ApprovalStatus.values();
 		int nextIndex = current.ordinal() + 3;
 		String nextName = (nextIndex < values.length) ? values[nextIndex].name() : null;
-		return approvalDAO.updateApproval(id, nextName);
-		
+		approvalDTO.setStatus(nextName);
+		approvalDTO.setRejectDate(new Date());
+		return approvalDAO.rejectApproval(approvalDTO);
 	}
 
 }

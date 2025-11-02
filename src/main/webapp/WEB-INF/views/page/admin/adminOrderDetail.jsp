@@ -120,14 +120,14 @@
 						<div class="form-actions">
 							<c:if test="${sessionScope.userInfo.role == '관리자'}">
 								<c:if test="${approval.status == 'PENDING'}">
-									<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
-									<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+									<button type="button" class="primary-action">승인</button>
+									<button type="button" class="cancel-action reject-btn">반려</button>
 								</c:if>
 							</c:if>
 							<c:if test="${sessionScope.userInfo.role == '부장'}">
 								<c:if test="${approval.status == 'FIRST_APPROVAL'}">
-									<button type="button" class="primary-action" onclick="location.href='/assetmanager/approve?id=${approval.id}&status=${approval.status}'">승인</button>
-									<button type="button" class="cancel-action" onclick="location.href='/assetmanager/reject?id=${approval.id}&status=${approval.status}'">반려</button>
+									<button type="button" class="primary-action" >승인</button>
+									<button type="button" class="cancel-action reject-btn">반려</button>
 								</c:if>
 							</c:if>
 						</div>
@@ -136,6 +136,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/adminOrderDetail.js"></script>
 </body>
 </html>

@@ -12,11 +12,17 @@
 		from approval
 		where id = #{id}
 	</select>
-		
+	
+	<update id="rejectApproval">
+		update approval
+		set status = #{status},
+			reject_date = #{rejectDate}
+		where id = #{id}
+	</update>
+	
 	<update id="updateApproval">
 		update approval
 		set status = #{status}
 		where id = #{id}
 	</update>
-
 </mapper>

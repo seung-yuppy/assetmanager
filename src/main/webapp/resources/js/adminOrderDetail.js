@@ -1,3 +1,4 @@
+// 총액 계산
 document.querySelectorAll(".form-row").forEach(row => calculateTotalPrice(row));
 
 function calculateTotalPrice(row){
@@ -8,65 +9,69 @@ function calculateTotalPrice(row){
 	targetEl.value = (price * quantity).toLocaleString();
 }
 
-
-deleteBtn.addEventListener("click", async () => {
-	const assetId = deleteBtn.dataset.assetId;
-	const deleteForm = `
-		<input type='text' class='modal-input' name='disposalReason'>
-		<input type='hidden' class='modal-input' name='assetId' value='${assetId}'>
-	`;
+// 반려 처리
+const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+    const container = document.getElementById('approval-line-container');
+	const id = container.getAttribute('data-approvalId');
+	const status = container.getAttribute('data-status');
+	const rejectForm = "<input type='text' id='reject-reason' class='modal-input' name='rejectReason'>";
 	
-    Swal.fire({
-		title: "불용 사유를 입력해주세요.",
-	    html: deleteForm,
-	    imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
-	    imageWidth: 90,
-	    imageHeight: 90, 
-	    imageAlt: "경고 아이콘",
-	    confirmButtonColor: "#14b3ae",
-	    confirmButtonText: "확인",
-	    showCancelButton: true,
-        cancelButtonText: '취소',
-	    customClass: {
-	    	input: 'custom-swal-input'
-	    },
-	    preConfirm: async () => { 
-	    	const input = Swal.getHtmlContainer().querySelector('.modal-input');
-	    	const resultObject = {
-	    		    assetId: assetId,
-	    		    disposalReason: input.value
-	    	};
-	    	console.log(resultObject);
-	    	const res = await fetch("/assetmanager/admin/asset/delete", {
-	    		method: "POST",
-	    		headers: {
-	    			"Content-Type": "application/json",
-	    		},
-	    		body: JSON.stringify(resultObject),
-	    	});
-	    	const data = await res.json();
-	    	
-	    	if (data.msg === "불용처리가 완료되었습니다.") {
-	            Swal.fire({
-	                title: "성공",
-	                text: data.msg,
-	                icon: "success",
-	                confirmButtonColor: "#a5dc86",
-	                confirmButtonText: "확인",
-	            }).then(() =>{
-	            	location.href = "/assetmanager/admin/asset/list";
-	            });
-	    	} else {
-	            Swal.fire({
-	                title: "실패",
-	                text: data.msg,
-	                icon: "error",
-	                confirmButtonColor: "#d33",
-	                confirmButtonText: "확인",
-	            }).then(() =>{
-	            	window.location.reload();
-	            });
-	    	}
-	    }
-    })
+        Swal.fire({
+            title: "반려 사유를 입력해주세요.",
+            html: rejectForm,
+            imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
+            imageWidth: 90,
+            imageHeight: 90, 
+            imageAlt: "경고 아이콘",
+            confirmButtonColor: "#14b3ae",
+            confirmButtonText: "확인",
+            showCancelButton: true,
+            cancelButtonText: '취소',
+            customClass: {
+                input: 'custom-swal-input'
+            },
+            preConfirm: async () => { 
+                const reason = Swal.getHtmlContainer().querySelector('#reject-reason').value;
+                const resultObject = {
+                        id: id,
+                        rejectReason: reason,
+                        status: status
+                };
+                const res = await fetch("/assetmanager/approval/reject", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(resultObject),
+                });
+                const data = await res.json();
+                
+                if (data.msg === "반려 처리가 완료되었습니다.") {
+                    Swal.fire({
+                        title: "성공",
+                        text: data.msg,
+                        icon: "success",
+                        confirmButtonColor: "#a5dc86",
+                        confirmButtonText: "확인",
+                    }).then(() =>{
+                    	location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: "실패",
+                        text: data.msg,
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                        confirmButtonText: "확인",
+                    }).then(() =>{
+                        window.location.reload();
+                    });
+                }
+            }
+        })
+    });
 });
+
+
+

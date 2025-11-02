@@ -95,12 +95,15 @@ public class RentController {
 		RentShowDTO rentDTO = rentService.getRentDetail(id);
 		List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
 		System.out.println("approverInfoDTO나오니?? "+approverInfoDTO.getApproverInfo());
+		ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
+		System.out.println("approvalDTO 나와?? "+approvalDTO);
 		model.addAttribute("empInfo", approverInfoDTO);
 		model.addAttribute("rent", rentDTO);
 		System.out.println(rentDTO.getRentDate());
 		System.out.println(rentDTO.getReturnDate());
 		System.out.println(rentDTO.getRequestMsg());
 		model.addAttribute("items",rentContentDTO);
+		model.addAttribute("approval", approvalDTO);
 		return "/rent/rentDetail";
 	}
 	

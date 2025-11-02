@@ -158,15 +158,26 @@ public class RentService {
 	}
 	
 	// approverId가 userId인 adminList 찾기
-	public List<RentListDTO> adminList(int userId){ 
+	public List<RentListDTO> adminList(int userId, String status){ 
 		System.out.println("userId 들어가??"+userId);
+		System.out.println("status 들어가??"+status); 
 		
-		System.out.println("approvalDTO 들어가??"+userId);
-		
-		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId);
+		// [수정] DAO 호출 시 status 전달
+		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId, status);
 		System.out.println("adminRentList 나와??"+adminRentList);
-        return adminRentList;
+		
+		return adminRentList;
 	}
+	
+	// rentId로 ApprovalDTO 정보 가져오기
+	public ApprovalDTO getApprovalByRentId(Long rentId) {
+        RentDTO rentDTO = rentDAO.getRentApprovalId(rentId);
+        if (rentDTO != null && rentDTO.getApprovalId() != null) {
+            
+            return approvalDAO.getApprovalById(rentDTO.getApprovalId().intValue());
+        }
+        return null;
+    }
 	
 	
 }

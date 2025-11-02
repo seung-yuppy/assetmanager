@@ -64,8 +64,8 @@
 						    </c:if>
 							<c:forEach var="item" items="${adminList}">
 								<tr data-id="${item.id}">
-									<td><a href="/assetmanager/admin/user/detail">${item.title}</td>
-									<td><a href="/assetmanager/admin/user/detail">${item.username}</a></td>
+									<td><a href="/assetmanager/admin/rent/detail/${item.id}">${item.title}</td>
+									<td><a href="/assetmanager/admin/rent/detail/${item.id}">${item.username}</a></td>
 									<td>${item.deptName}</td>									
 									<td><fmt:formatDate value="${item.rentDate}" pattern="yyyy-MM-dd" /></td>
 									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>

@@ -55,10 +55,10 @@
 										data-image-base64="${ad.base64ProfileImage}"
 										data-image-type="image/png"										
 										data-dept="(${ad.deptName})"
-										data-alt="${ad.username}">
+										data-alt="${ad.username}"> 
 									${ad.username}
 									<c:choose>
-		                                <c:when test="${ad.role == 'admin'}">팀장</c:when>       		                               
+		                                <c:when test="${ad.role == 'admin'}">${ad.position}</c:when>       		                               
 		                            </c:choose>											
 								</option>
 							</c:forEach>
@@ -94,7 +94,7 @@
 										data-alt="${ma.username}">
 									${ma.username}									
 									<c:choose>
-		                                <c:when test="${ma.role == 'manager'}">부장</c:when>       		                               
+		                                <c:when test="${ma.role == 'manager'}">${ma.position}</c:when>       		                               
 		                            </c:choose>										
 								</option>
 							</c:forEach>

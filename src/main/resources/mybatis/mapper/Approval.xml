@@ -15,9 +15,9 @@
 	
 	<update id="rejectApproval">
 		update approval
-		set status = #{status},
-			reject_date = #{rejectDate},
-			reject_reason = #{rejectReason}
+		set status = #{status}
+			,reject_date = #{rejectDate}
+			,reject_reason = #{rejectReason}
 		where id = #{id}
 	</update>
 	

@@ -7,6 +7,7 @@
 			   ,U.profile_image
 			   ,D.dept_name
 			   ,U.role
+			   ,U.position
 		FROM "User" U 
 		JOIN Department D ON U.department_id = D.id
 		WHERE D.dept_name = '경영지원팀' 
@@ -19,6 +20,7 @@
 			   ,U.profile_image
 			   ,D.dept_name
 			   ,U.role
+			   ,U.position
 		FROM "User" U
 		JOIN Department D ON U.department_id = D.id
 		WHERE U.role = 'manager'
@@ -101,19 +103,33 @@
 		WHERE RC.rent_id = #{rentId}
 	</select>
 	
-	<select id="findAdminListByUserId">
-		SELECT R.id
-		      ,R.title
-		      ,R.rent_date rentDate
-		      ,A.status status
-		      ,U.username username
-		      ,D.dept_name deptName
-		FROM Rent R 
-		JOIN Approval A ON A.id = R.approval_id
-		LEFT JOIN "User" U ON U.id = R.user_id
-		LEFT JOIN Department D ON D.id = U.department_id
-		WHERE A.approver_id = #{userId} 
-		ORDER BY R.rent_date DESC
+	<select id="findAdminListByUserId" resultType="RentListDTO">
+	    SELECT R.id
+	         , R.title
+	         , R.rent_date rentDate
+	         , A.status status
+	         , U.username username
+	         , D.dept_name deptName
+	    FROM Rent R
+	    JOIN Approval A ON A.id = R.approval_id
+	    LEFT JOIN "User" U ON U.id = R.user_id
+	    LEFT JOIN Department D ON D.id = U.department_id
+	    <where>
+	        (A.approver_id = #{userId} OR A.manager_id = #{userId})
+	        
+	        <if test="status != null and status != ''">
+	            <choose>
+	                <when test="status == 'REJECT'">
+	                    AND (UPPER(A.status) = 'FIRST_REJECT' OR UPPER(A.status) = 'FINAL_REJECT')
+	                </when>
+	                
+	                <otherwise>
+	                    AND UPPER(A.status) = #{status}
+	                </otherwise>
+	            </choose>
+	        </if>
+	    </where>
+	    ORDER BY R.rent_date DESC
 	</select>
 	
 	

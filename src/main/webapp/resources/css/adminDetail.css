@@ -16,7 +16,7 @@
 
 .applicant-info-list {
 	display: flex;
-    gap: 300px;
+    gap: 250px;
 }
 
 /* dt, dd 목록 스타일 */

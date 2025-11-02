@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="currentDate" />
+<fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd" var="rentDate" />
+<fmt:formatDate value="${rent.returnDate}" pattern="yyyy-MM-dd" var="returnDate" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,147 +51,110 @@
 						<div class="applicant-info-list">
 							<dl class="applicant-info-f-list">
 								<dt>요청ID(사번)</dt>
-								<dd>ams1001</dd>
+								<dd>${empInfo.userInfo.empNo}</dd>
 
 								<dt>이름</dt>
-								<dd>홍길동</dd>
+								<dd>${empInfo.userInfo.username}</dd>
 
 								<dt>부서명</dt>
-								<dd>영업팀</dd>
+								<dd>${empInfo.userInfo.deptName}</dd>
 							</dl>
 							<dl class="applicant-info-s-list">
 								<dt>직책</dt>
-								<dd>팀장</dd>
+								<dd>${empInfo.userInfo.position}</dd>
 
 								<dt>연락처</dt>
-								<dd>010 - 1234 - 5678</dd>
+								<dd>${empInfo.userInfo.phone}</dd>
 
 								<dt>주소</dt>
-								<dd>서울 종로구 대명길 28 대학로</dd>
+								<dd>${empInfo.userInfo.deptAddress}</dd>
 							</dl>
 						</div>
 					</div>
 
-					<h2 class="form-section-title">요청 내용</h2>
+					<h2 class="form-section-title">요청 정보</h2>
 					<div id="formInputArea" class="inputArea">
-						<div class="form-row">
-							<div class="form-group fixed-width-sm">
-								<label for="isDepartmentUse">부서 자산</label> <input
-									type="checkbox" id="isDepartmentUse" name="isDepartmentUse"
-									checked onclick="return false">
+						<div class="form-date">
+							<div class="form-application-date">
+								<label for="application-date">반출 신청일</label> 
+								<input type="date"
+									   id="application-date" value="${rentDate}"
+									   class="locked-input" readonly>
 							</div>
+							<div class="form-return-date">
+								<label for="return-date">반납 예정일</label> 
+								<input type="date"
+									   id="return-date" value="${returnDate}" class="locked-input" readonly>
+							</div>
+						</div>
+						<c:forEach var="contentItem" items="${item}">
+						<div class="form-row">
 							<div class="form-group category-group fixed-width-med">
 								<label for="category">카테고리 </label> <input id="category"
-									name="category" type="text" value="기타" class="locked-input"
+									name="category" type="text" value="${contentItem.categoryName}" class="locked-input"
 									readonly>
 							</div>
 							<div class="form-group product-select-group fixed-width-lg">
 								<label for="productNameSelect">제품명</label> <input
 									list="productOptions" name="productNameSelect"
-									id="productNameSelect" type="text" value="복합기"
+									id="productNameSelect" type="text" value="${contentItem.assetName}"
 									class="locked-input" readonly>
 							</div>
 							<div class="form-group">
 								<label for="spec">스펙</label>
 								<div class="last-input-group">
-									<input type="text" id="spec" value="cpu~~~~~"
+									<input type="text" id="spec" value="${contentItem.spec}"
 										class="locked-input" readonly>
 								</div>
 							</div>
 						</div>
+						</c:forEach>
 
-						<div class="form-row">
-							<div class="form-group fixed-width-sm">
-								<label for="isDepartmentUse">부서 자산</label> <input
-									type="checkbox" id="isDepartmentUse" name="isDepartmentUse"
-									checked onclick="return false">
-							</div>
-							<div class="form-group category-group fixed-width-med">
-								<label for="category">카테고리 </label> <input id="category"
-									name="category" type="text" value="기타" class="locked-input"
-									readonly>
-							</div>
-							<div class="form-group product-select-group fixed-width-lg">
-								<label for="productNameSelect">제품명</label> <input
-									list="productOptions" name="productNameSelect"
-									id="productNameSelect" type="text" value="복합기"
-									class="locked-input" readonly>
-							</div>
-							<div class="form-group">
-								<label for="spec">스펙</label>
-								<div class="last-input-group">
-									<input type="text" id="spec" value="cpu~~~~~"
-										class="locked-input" readonly>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-footer">
+						<div class="form-group">
 							<div class="form-reason">
 								<label for="reason">반출 요청 사유 </label>
-								<textarea id="reason" name="reason" rows="6" required
-									placeholder="프로젝트 시작하여 새로운 기기 필요." cols="81" maxlength="200"
-									onkeyup="updateCharCount(this, 200)" readonly></textarea>
+								<textarea id="reason" name="reason" rows="6" cols="81" maxlength="200"
+									readonly>${rent.requestMsg}</textarea>
 								<div class="char-count-display text-align-right"></div>
-							</div>
-
-							<div class="form-date">
-								<div class="form-application-date">
-									<label for="application-date">반출 신청일</label> <input type="date"
-										id="application-date" value="${currentDate}"
-										class="locked-input" readonly>
-								</div>
-								<div class="form-return-date">
-									<label for="return-date">반납 예정일</label> <input type="date"
-										id="return-date" placeholder="반납 예정일 선택" class="locked-input"
-										readonly>
-								</div>
 							</div>
 						</div>
 					</div>
-
+					
 					<div class="form-actions">
-						<button type="submit" class="primary-action">승인</button>
+						<c:if test="${isApprover}">
+							<button type="submit" class="primary-action">승인</button>
 						<button type="button" class="cancel-action">반려</button>
+						</c:if>
+						<c:if test="${!isApprover}">
+							<button type="button" class="btn-secondary" onclick="location.href='/assetmanager/admin/rent/list'">목록</button>
+						</c:if>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<%-- 자산 등록 모달창 --%>
-	<div id="registerModal" class="modal-backdrop" style="display: none;">
+	<div id="rejectModal" class="modal-backdrop" style="display: none;">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2>물품 반출 등록</h2>
-				<button id="closeModalBtn" class="modal-close-btn">&times;</button>
+				<h2>반려 사유</h2>
+				<button id="closeRejectModalBtn" class="modal-close-btn">&times;</button>
 			</div>
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="modalProductName">제품명</label> <input type="text"
-						id="modalProductName" class="form-input" readonly>
-				</div>
-				<div class="form-group">
-					<label for="application-date">등록일</label> <input
-						id="application-date" value="${currentDate}" class="form-input"
-						readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> <input
-						id="modalReturnDate" value="2025-12-31" class="form-input"
-						readonly>
-				</div>
-				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label> <input type="text"
-						id="modalSerialNumber" class="form-input">
-				</div>
+				<form id="rejectForm" method="POST" action="/assetmanager/api/approval/reject">
+					<div class="form-group">
+						<label for="rejectReason">반려 사유를 입력하세요</label>
+						<textarea id="rejectReason" name="rejectReason" rows="5" class="form-input" required maxlength="200"></textarea>
 
-
+						<input type="hidden" name="id" value="${approval.id}">
+						<input type="hidden" id="rejectStatus" name="status" value="">
+					</div>
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button id="cancelBtn" class="btn-secondary">취소</button>
-				<button class="btn-primary">반출 등록</button>
+				<button id="cancelRejectBtn" class="btn-secondary" type="button">취소</button>
+				<button id="confirmRejectBtn" class="btn-primary" type="button">반려 처리</button>
 			</div>
 		</div>
 	</div>

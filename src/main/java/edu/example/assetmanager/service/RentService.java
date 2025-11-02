@@ -161,8 +161,7 @@ public class RentService {
 	public List<RentListDTO> adminList(int userId, String status){ 
 		System.out.println("userId 들어가??"+userId);
 		System.out.println("status 들어가??"+status); 
-		
-		// [수정] DAO 호출 시 status 전달
+
 		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId, status);
 		System.out.println("adminRentList 나와??"+adminRentList);
 		

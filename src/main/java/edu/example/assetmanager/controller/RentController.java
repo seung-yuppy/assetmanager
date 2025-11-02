@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.RegisterDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
 
@@ -30,10 +33,12 @@ public class RentController {
 
 	private final RentService rentService;
 	private final UserService userService;
+	private final AssetService assetService;
 
-	public RentController(RentService rentService, UserService userService) {
+	public RentController(RentService rentService, UserService userService, AssetService assetService) {
 		this.rentService = rentService;
 		this.userService = userService;
+		this.assetService = assetService;
 	}
 
 	@GetMapping("/form")
@@ -80,7 +85,7 @@ public class RentController {
 	public String list(Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");	
 		if(userId==null) {
-			return "redirect:/login"; // 로그인 안 했으면 로그인 페이지로
+			return "redirect:/login"; 
 		}
 		List<RentListDTO> rentList = rentService.findRentListByUserId(userId);
 		model.addAttribute("rentList",rentList);
@@ -106,5 +111,11 @@ public class RentController {
 		model.addAttribute("approval", approvalDTO);
 		return "/rent/rentDetail";
 	}
-	
+	 
+	@ResponseBody
+	@PostMapping(value = "/register-item", produces = "application/json; charset=utf-8")
+	public RegisterDTO registerItem(@RequestBody RegisterDTO registerDTO) {
+		
+	    return assetService.registerAssetItem(registerDTO);
+	}
 }

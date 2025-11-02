@@ -127,5 +127,6 @@
 		</div>
 	</div>
 	<script src="/assetmanager/resources/js/notice.js"></script>
+	<script src="/assetmanager/resources/js/rentList.js"></script>
 </body>
 </html>

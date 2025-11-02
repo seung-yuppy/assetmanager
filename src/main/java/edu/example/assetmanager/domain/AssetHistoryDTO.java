@@ -14,10 +14,12 @@ import lombok.Setter;
 public class AssetHistoryDTO {
 	private int id;
 	private int userId;
+	private int assetId;
 	private String role;
 	private String assetName;
 	private String categoryName;
 	private String serialNumber;
 	private Date createDate;
 	private Date returnDate;
+	private String status;
 }

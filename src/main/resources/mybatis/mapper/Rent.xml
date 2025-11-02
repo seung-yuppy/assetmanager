@@ -132,5 +132,11 @@
 	    ORDER BY R.rent_date DESC
 	</select>
 	
-	
+	<select id="getDeptAddressByUserId" resultType="String">
+        SELECT D.dept_address
+        FROM "User" U
+        JOIN Department D ON U.department_id = D.id
+        WHERE U.id = #{userId}
+    </select>
+
 </mapper>

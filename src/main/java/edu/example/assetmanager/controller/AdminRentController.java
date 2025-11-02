@@ -55,26 +55,17 @@ public class AdminRentController {
         RentShowDTO rentDTO = rentService.getRentDetail(id);
         List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
         ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
-        
-        // 현재 결재자가 맞는지 확인하기 
-        boolean isApprover = false;
-        if (approvalDTO != null) {
-            String currentStatus = approvalDTO.getStatus().name(); 
-        
-            if ("PENDING".equals(currentStatus) && userId.equals(approvalDTO.getApproverId())) {
-            	isApprover = true;
-            } 
-            else if ("FIRST_APPROVAL".equals(currentStatus) && userId.equals(approvalDTO.getManagerId())) {
-            	isApprover = true;
-            }
-        }
 
         model.addAttribute("empInfo", approverInfoDTO); 
         model.addAttribute("rent", rentDTO);           
         model.addAttribute("item", rentContentDTO);   
         model.addAttribute("approval", approvalDTO);   
-        model.addAttribute("isApprover", isApprover);  
 		
 		return "/admin/adminRentDetail";
+	}
+	
+	@GetMapping("rent/approve")
+	public String approve(int id) {
+		return "redirect:/admin/adminRentDetail";
 	}
 }

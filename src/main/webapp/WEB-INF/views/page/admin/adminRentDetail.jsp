@@ -120,13 +120,22 @@
 						</div>
 					</div>
 					
-					<div class="form-actions">
-						<c:if test="${isApprover}">
-							<button type="submit" class="primary-action">승인</button>
-						<button type="button" class="cancel-action">반려</button>
+					<div class="form-actions" 
+						 id="approval-data-provider"
+						 data-approval-id="${approval.id}"
+						 data-approval-status="${approval.status}">
+						
+						<c:if test="${sessionScope.userInfo.role == '관리자'}">
+							<c:if test="${approval.status == 'PENDING'}">
+								<button type="button" class="primary-action approve-btn">승인</button>
+								<button type="button" class="cancel-action reject-btn">반려</button>
+							</c:if>
 						</c:if>
-						<c:if test="${!isApprover}">
-							<button type="button" class="btn-secondary" onclick="location.href='/assetmanager/admin/rent/list'">목록</button>
+						<c:if test="${sessionScope.userInfo.role == '부장'}">
+							<c:if test="${approval.status == 'FIRST_APPROVAL'}">
+								<button type="button" class="primary-action approve-btn" >승인</button>
+								<button type="button" class="cancel-action reject-btn">반려</button>
+							</c:if>
 						</c:if>
 					</div>
 				</div>
@@ -134,33 +143,9 @@
 		</div>
 	</div>
 
-	<%-- 자산 등록 모달창 --%>
-	<div id="rejectModal" class="modal-backdrop" style="display: none;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2>반려 사유</h2>
-				<button id="closeRejectModalBtn" class="modal-close-btn">&times;</button>
-			</div>
-			<div class="modal-body">
-				<form id="rejectForm" method="POST" action="/assetmanager/api/approval/reject">
-					<div class="form-group">
-						<label for="rejectReason">반려 사유를 입력하세요</label>
-						<textarea id="rejectReason" name="rejectReason" rows="5" class="form-input" required maxlength="200"></textarea>
-
-						<input type="hidden" name="id" value="${approval.id}">
-						<input type="hidden" id="rejectStatus" name="status" value="">
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button id="cancelRejectBtn" class="btn-secondary" type="button">취소</button>
-				<button id="confirmRejectBtn" class="btn-primary" type="button">반려 처리</button>
-			</div>
-		</div>
-	</div>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>
-	<script src="/assetmanager/resources/js/adminListDetail.js"></script>
+	<script src="/assetmanager/resources/js/adminRentDetail.js"></script>
 </body>
 </html>

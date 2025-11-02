@@ -46,4 +46,7 @@ public interface RentDAO {
 	// userId와 approverId와 같은  admin 리스트 불러오기 
 	public List<RentListDTO> findAdminListByUserId(@Param("userId") int userId, @Param("status") String status);
 	
+	// user_id로 부서 주소 찾기
+	String getDeptAddressByUserId(@Param("userId") int userId);
+	
 }

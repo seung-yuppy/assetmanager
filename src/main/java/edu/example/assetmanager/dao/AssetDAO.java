@@ -70,5 +70,14 @@ public interface AssetDAO {
 	
 	// 사용자 내 부서 자산 확인
 	public List<AssetHistoryDTO> myDeptAsset(@Param("userId") int userId);
+	
+	// serial_number로 자산 찾기 
+	AssetDTO getAssetBySerialNumber(@Param("serialNumber") String serialNumber);
+	
+	// user_id, sefial_number, location 자산테이블 업데이트
+	boolean updateAsset(@Param("userId") int userId, @Param("serialNumber") String serialNumber, @Param("location") String location);
+	
+	// Asset_History 테이블 insert 하기
+	boolean insertAssetHistory(AssetHistoryDTO historyDTO);
 
 }

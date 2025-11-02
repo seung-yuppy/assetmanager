@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerButtons = document.querySelectorAll('.regist-button');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const cancelBtn = document.getElementById('cancelBtn');
-    const submitBtn = document.getElementById('submitTakeOutBtn');
+    const submitBtn = document.getElementById('submitBtn');
 
     const modalAssetId = document.getElementById('modalAssetId');
     const modalRentId = document.getElementById('modalRentId');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             serialNumber: serialNumber
         };
         
-        fetch('/assetmanager/asset/register-item', {
+        fetch('/assetmanager/rent/register-item', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

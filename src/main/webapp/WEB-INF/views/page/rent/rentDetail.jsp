@@ -63,7 +63,14 @@
 									<label for="spec">스펙</label>
 									<div class="last-input-group">
 										<input type="text" id="spec" value="${item.spec}" class="locked-input" readonly>
-										<button type="button" class="regist-button" data-target="registerModal">등록</button>
+										<c:if test="${approval.status == 'FINAL_APPROVAL'}">
+						                    <button type="button" class="regist-button" 
+						                            data-target="registerModal"
+						                            data-asset-name="${item.assetName}"
+						                            data-return-date="${returnDate}"
+						                            data-asset-id="${item.assetId}"
+						                            data-rent-id="${item.rentId}">등록</button>
+						                </c:if>
 									</div>
 								</div>
 							</div>
@@ -77,10 +84,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-actions">
-						<button type="button" class="cancel-action">요청 취소</button>
+					<div class="form-actions">						
+						<c:if test="${approval.status == 'PENDING' or approval.status == 'FIRST_APPROVAL'}">
+							<button type="button" class="cancel-action">요청 취소</button>
+						</c:if>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -94,6 +102,9 @@
 				<button id="closeModalBtn" class="modal-close-btn">&times;</button>
 			</div>
 			<div class="modal-body">
+				<input type="hidden" id="modalAssetId">
+            	<input type="hidden" id="modalRentId">
+			
 				<div class="form-group">
 					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
@@ -110,13 +121,12 @@
 			</div>
 			<div class="modal-footer">
 				<button id="cancelBtn" class="btn-secondary">취소</button>
-				<button class="btn-primary">반출 등록</button>
+				<button class="btn-primary" id="submitBtn">반출 등록</button>
 			</div>
 		</div>
 	</div>
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
-	<script src="/assetmanager/resources/js/requestForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>
 </body>
 </html>

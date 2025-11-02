@@ -59,7 +59,14 @@
 					</div>
 				</div>			
 			</div>
-			<p class="approver-date"><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></p>
+			<p class="approver-date">
+		        <c:if test="${not empty rent.rentDate}">
+		            <fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/>
+		        </c:if>
+		        <c:if test="${not empty order.orderDate}">
+		            <fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>
+		        </c:if>
+		    </p>
 		</fieldset>
 
 		<!-- 화살표 -->

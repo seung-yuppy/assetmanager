@@ -93,5 +93,6 @@
 	</div>
 	<script src="/assetmanager/resources/js/rent.js"></script>
 	<script src="/assetmanager/resources/js/toDetail.js"></script>
+	<script src="/assetmanager/resources/js/rentList.js"></script>
 </body>
 </html>

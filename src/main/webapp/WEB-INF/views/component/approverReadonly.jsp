@@ -121,7 +121,7 @@
 					<c:if test="${fn:contains('FINAL_APPROVAL, FINAL_REJECT', approval.status)}">
 						<div class="approval-badge">
 							<c:if test="${approval.status == 'FINAL_APPROVAL'}">
-								<c:set var="doneDate2" value="${approval.lastApprovalDate}"></c:set>
+								<c:set var="doneDate2" value="${approval.finalApprovalDate}"></c:set>
 								<div class="approval-badge-icon">
 									<i class="fas fa-check"></i>
 								</div>

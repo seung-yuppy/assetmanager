@@ -26,7 +26,7 @@ public class ApprovalService{
 		if (current.name().equals("PENDING")) {
 			approvalDTO.setFirstApprovalDate(new Date());
 		}else if(current.name().equals("FIRST_APPROVAL")) {
-			approvalDTO.setLastApprovalDate(new Date());
+			approvalDTO.setFinalApprovalDate(new Date());
 		}
 		return approvalDAO.approveApproval(approvalDTO);
 	}

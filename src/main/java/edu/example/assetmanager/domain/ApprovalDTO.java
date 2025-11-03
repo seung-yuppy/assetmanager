@@ -18,7 +18,7 @@ public class ApprovalDTO {
 	private int approverId;
 	private int managerId;
 	private Date firstApprovalDate;
-	private Date lastApprovalDate;
+	private Date finalApprovalDate;
 	private Date rejectDate;
 	private String rejectReason;
 	private ApprovalStatus status;

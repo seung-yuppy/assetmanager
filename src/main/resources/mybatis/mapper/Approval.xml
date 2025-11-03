@@ -26,7 +26,7 @@
 		set status = #{status},
 			<trim suffixOverrides=",">
 				<if test="firstApprovalDate != null">first_approval_date = #{firstApprovalDate},</if>
-				<if test="lastApprovalDate != null">last_approval_date = #{lastApprovalDate},</if>
+				<if test="finalApprovalDate != null">final_approval_date = #{finalApprovalDate},</if>
 			</trim>
 		where id = #{id}
 	</update>

@@ -13,12 +13,7 @@
 </head>
 <body>
 	<div class="app-layout">
-		<c:if test="${userInfo.role == '사원' || userInfo.role == '부장'}">
-			<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-		</c:if>
-		<c:if test="${userInfo.role == '관리자'}">
-			<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
-		</c:if>
+		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">

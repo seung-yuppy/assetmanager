@@ -149,8 +149,8 @@ public class RentService {
 		List<RentContentDTO> rentContentDTO = rentDAO.getRentContent(id);
 		
 		for (RentContentDTO rent : rentContentDTO) {
-			int userId = assetDAO.findUserIdByAsset(rent.getAssetId());
-			if (userId == 0) {
+			int userCount= assetDAO.findUserIdByAsset(rent.getAssetId());
+			if (userCount == 0) {
 				rent.setRegister(true);
 			} else {
 				rent.setRegister(false);
@@ -180,6 +180,16 @@ public class RentService {
         }
         return null;
     }
+	
+	// rentDTO 가져오기
+	public RentDTO getRentDTO(int userId, Long id) {
+		return rentDAO.getRentIdWithUserId(userId, id);
+	}
+	
+	// rentId로 요청 취소
+	public boolean cancelRent(int id) {
+		return rentDAO.cancelRent(id);
+	}
 	
 	
 }

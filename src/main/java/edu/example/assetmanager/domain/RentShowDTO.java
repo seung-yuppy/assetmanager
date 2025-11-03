@@ -15,6 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class RentShowDTO {
 	private Long rentId; 
+	private int userId;
 	private Date rentDate;
 	private Date returnDate;
 	private String requestMsg;

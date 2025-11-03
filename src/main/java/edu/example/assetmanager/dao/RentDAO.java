@@ -47,6 +47,13 @@ public interface RentDAO {
 	public List<RentListDTO> findAdminListByUserId(@Param("userId") int userId, @Param("status") String status);
 	
 	// user_id로 부서 주소 찾기
-	String getDeptAddressByUserId(@Param("userId") int userId);
+	public String getDeptAddressByUserId(@Param("userId") int userId);
+	
+	// rentId로 요청 취소
+	public boolean cancelRent(int id);
+	
+	// rentDTO 가져오기 
+	public RentDTO getRentIdWithUserId(@Param("userId")int userId, @Param("id") Long id);
+	
 		
 }

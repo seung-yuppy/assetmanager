@@ -30,7 +30,7 @@
 					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
 				</div>
 
-				<div class="section-card">
+				<div class="section-card" data-id="${rentdto.id}" data-author="${rentdto.userId}">
 
 					<div class="form-section">
 						<!-- 결재라인 불러오기 -->
@@ -41,55 +41,46 @@
 					<div id="formInputArea" class="inputArea">
 						<div class="form-date">
 							<div class="form-application-date">
-								<label for="application-date">반출 신청일</label>
-								<input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
+								<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
 							</div>
 							<div class="form-return-date">
-								<label for="return-date">반납 예정일</label> 
-								<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
+								<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
 							</div>
 						</div>
 						<c:forEach var="item" items="${items}">
-							<div class="form-row">							
+							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label> 
-									<input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input" readonly>
+									<label for="category">카테고리 </label> <input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input" readonly>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label> 
-									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input" readonly>
+									<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input" readonly>
 								</div>
 								<div class="form-group">
 									<label for="spec">스펙</label>
 									<div class="last-input-group">
 										<input type="text" id="spec" value="${item.spec}" class="locked-input" readonly>
 										<c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==true}">
-						                    <button type="button" class="regist-button" 
-						                            data-target="registerModal"
-						                            data-asset-name="${item.assetName}"
-						                            data-return-date="${returnDate}"
-						                            data-asset-id="${item.assetId}"
-						                            data-rent-id="${item.rentId}">등록</button>
-						                </c:if>
-						                <c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==false}">
-						                	<button type="button" class="regist-button-save" disabled>완료</button>
-						                </c:if>
+											<button type="button" class="regist-button" data-target="registerModal" data-asset-name="${item.assetName}" data-return-date="${returnDate}" data-asset-id="${item.assetId}" data-rent-id="${item.rentId}">등록</button>
+										</c:if>
+										<c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==false}">
+											<button type="button" class="regist-button-save" disabled>완료</button>
+										</c:if>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-						
+
 						<div class="form-group">
 							<div class="form-reason">
 								<label for="reason">반출 요청 사유</label>
-								<textarea id="reason" name="requestMsg" rows="5" cols="81" maxlength="200" readonly >${rent.requestMsg}</textarea>
+								<textarea id="reason" name="requestMsg" rows="5" cols="81" maxlength="200" readonly>${rent.requestMsg}</textarea>
 								<div class="char-count-display text-align-right"></div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions">						
+					<div class="form-actions">
 						<c:if test="${approval.status == 'PENDING' or approval.status == 'FIRST_APPROVAL'}">
-							<button type="button" class="cancel-action">요청 취소</button>
+							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
 						</c:if>
 					</div>
 				</div>
@@ -105,9 +96,8 @@
 				<button id="closeModalBtn" class="modal-close-btn">&times;</button>
 			</div>
 			<div class="modal-body">
-				<input type="hidden" id="modalAssetId">
-            	<input type="hidden" id="modalRentId">
-			
+				<input type="hidden" id="modalAssetId"> <input type="hidden" id="modalRentId">
+
 				<div class="form-group">
 					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
@@ -131,5 +121,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>
+	<script src="/assetmanager/resources/js/toDetail.js"></script> 
 </body>
 </html>

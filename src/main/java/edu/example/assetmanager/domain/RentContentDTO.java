@@ -14,6 +14,7 @@ import lombok.ToString;
 public class RentContentDTO { 
 	private Long id;
 	private Long rentId;
+	private int userId;
 	private int assetId;
 	private int count;
 	private String assetName;

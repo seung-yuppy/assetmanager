@@ -93,16 +93,22 @@ public class RentController {
 	}
 
 	@GetMapping("/detail/{id}") 
-	public String rentList(@PathVariable Long id, Model model) {
+	public String rentList(@PathVariable Long id, HttpSession session, Model model) {
+		Integer userId =(Integer)session.getAttribute("userId");
+		System.out.println("userid는 " +userId);
 		ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
 		RentShowDTO rentDTO = rentService.getRentDetail(id);
 		List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
+		RentDTO dto = rentService.getRentDTO(userId, id);
 		ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
-
+		System.out.println(dto.getId());
+		System.out.println(dto.getUserId());
+		
 		model.addAttribute("empInfo", approverInfoDTO);
 		model.addAttribute("rent", rentDTO);
 		model.addAttribute("items",rentContentDTO);
 		model.addAttribute("approval", approvalDTO);
+		model.addAttribute("rentdto", dto);
 
 		return "/rent/rentDetail";
 	}
@@ -116,12 +122,27 @@ public class RentController {
 		assetHistoryDTO.setUserId(userId);
 		
 		if(assetService.registerAssetItem(assetHistoryDTO)) {
-			System.out.println("여기기ㅣ기기"+assetService.registerAssetItem(assetHistoryDTO));
 			response.put("msg", "자산 등록에 성공하였습니다.");
 		}else {
 			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
 		}
 		
 	    return ResponseEntity.ok(response);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/cancel", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> cancelRent(int id, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+			response.put("msg", "로그인 후 진행해주세요.");
+		
+		if (rentService.cancelRent(id))
+			response.put("msg", "요청 취소가 완료되었습니다.");
+		else
+			response.put("msg", "요청 취소에 실패하였습니다.");
+		
+		return ResponseEntity.ok(response);
 	}
 }

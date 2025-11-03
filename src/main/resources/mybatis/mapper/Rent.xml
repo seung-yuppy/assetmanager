@@ -71,6 +71,7 @@
 	        Approval A ON R.approval_id = A.id
 	    WHERE 
 	        R.user_id = #{userId}
+	    AND R.is_valid = 1
 	    ORDER BY 
 	        R.rent_date DESC
 	</select>
@@ -93,6 +94,7 @@
 	
 	<select id="getRentContent" >
 		SELECT rent_id
+			  ,user_id
 			  ,asset_id
 			  ,asset_name
 			  ,category_name
@@ -137,6 +139,18 @@
         FROM "User" U
         JOIN Department D ON U.department_id = D.id
         WHERE U.id = #{userId}
+    </select>
+    
+    <update id="cancelRent">
+    	update Rent
+    	set is_valid = 0
+    	where id = #{id} 
+    </update>
+    
+    <select id="getRentIdWithUserId">
+    	SELECT *
+    	FROM Rent 
+    	WHERE user_id = #{userId} AND id = #{id}
     </select>
 
 </mapper>

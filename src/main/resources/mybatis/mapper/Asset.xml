@@ -378,5 +378,9 @@
     	FROM Asset A
     	WHERE A.id = #{assetId} 
     </select>
- 
+    
+    <insert id="insertAsset" parameterType="AssetDTO">
+	    insert into asset (user_id, category_id, asset_name, spec, SERIAL_NUMBER)
+		values (1, 1, '테스트 제품', '스펙 테스트','123456');
+    </insert>
 </mapper>

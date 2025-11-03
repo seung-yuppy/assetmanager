@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.CategoryDTO;
 import edu.example.assetmanager.domain.ItemDTO;
 import edu.example.assetmanager.domain.OrderDTO;
@@ -28,6 +29,7 @@ import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.CategoryService;
 import edu.example.assetmanager.service.ItemService;
 import edu.example.assetmanager.service.OrderService;
@@ -43,6 +45,7 @@ public class OrderController {
 	private final CategoryService categoryService;
 	private final ItemService itemService;
 	private final UserService userService;
+	private final AssetService assetService;
 	
 	@GetMapping("/form")
 	public String form(HttpSession httpSession, Model model) {
@@ -129,5 +132,21 @@ public class OrderController {
 		
 		return ResponseEntity.ok(response);
 	}
+	
+//	@ResponseBody
+//	@PostMapping(value = "/register/item", produces = "application/json; charset=utf-8")
+//	public ResponseEntity<Map<String, Object>> registerNewAsset(@RequestBody Asset,  HttpSession session) {
+//		Map<String, Object> response = new HashMap<>();
+//		Integer userId = (Integer) session.getAttribute("userId");
+//		assetHistoryDTO.setUserId(userId);
+//		
+//		if(orderService.registerAsset(Asset)) {
+//			response.put("msg", "자산 등록에 성공하였습니다.");
+//		}else {
+//			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
+//		}
+//		
+//	    return ResponseEntity.ok(response);
+//	}
 	
 }

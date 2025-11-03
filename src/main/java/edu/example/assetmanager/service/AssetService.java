@@ -222,7 +222,10 @@ public class AssetService {
         } else {
         	return false;
         }
-       
     }
+	
+	public boolean insertAsset(AssetDTO assetDTO) {
+		return dao.insertAsset(assetDTO);
+	}
 
 }

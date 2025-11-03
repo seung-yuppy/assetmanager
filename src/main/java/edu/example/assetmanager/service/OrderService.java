@@ -100,5 +100,9 @@ public class OrderService {
 	public boolean cancelOrder(int id) {
 		return orderDAO.cancelOrder(id);
 	}
+	
+	public boolean registerAsset() {
+		return true;
+	}
 
 }

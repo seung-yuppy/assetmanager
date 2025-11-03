@@ -79,5 +79,7 @@ public interface AssetDAO {
 	
 	// userId로 AssetId 찾기
 	public int findUserIdByAsset(@Param("assetId") int assetId);  
+	
+	public boolean insertAsset(AssetDTO assetDTO);
 
 }

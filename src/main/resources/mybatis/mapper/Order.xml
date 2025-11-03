@@ -173,12 +173,25 @@
     	select o.*, c.category_name
     	from order_content o
     		join category c on o.category_id = c.id
-    	where order_id = #{id}
+    	where o.order_id = #{id}
+    </select>
+    
+    <select id="getContentById" parameterType="int" resultType="OrderContentDTO">
+    	select *
+    	from order_content o
+    		join category c on o.category_id = c.id
+   		where o.id = #{id}
     </select>
     
     <update id="cancelOrder">
     	update orders
     	set is_valid = 0
     	where id = #{id} 
+    </update>
+    
+    <update id="updateContentAssetId">
+    	update order_content
+    	set asset_id = #{assetId}
+    	where id = #{id}
     </update>
 </mapper>

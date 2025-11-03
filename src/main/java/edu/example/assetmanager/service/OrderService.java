@@ -9,6 +9,7 @@ import edu.example.assetmanager.dao.OrderDAO;
 import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
+import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderDetailRESP;
@@ -24,6 +25,7 @@ public class OrderService {
 	private final OrderDAO orderDAO;
 	private final ApprovalDAO approvalDAO;
 	private final UserService userService;
+	private final AssetService assetService;
 
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
 		int totalCount = orderDAO.countAll(orderParamDTO);
@@ -64,6 +66,7 @@ public class OrderService {
 		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
 		boolean hasPrev = block > 1 ? true : false;
 		boolean hasNext = totalBlocks > block ? true : false;
+		
 		return new PageResponseDTO<OrderDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
 	
@@ -97,12 +100,21 @@ public class OrderService {
 		return response;
 	}
 	
+	// 구매 자산 등록
+	public boolean registerAsset(AssetDTO assetDTO, int orderContentId) {
+		boolean isAssetInserted =  assetService.insertAsset(assetDTO);
+		boolean isContentUpdated = updateContentAssetId(orderContentId, assetDTO.getId());
+		return isAssetInserted && isContentUpdated;
+	}
+	
+	public boolean updateContentAssetId(int id, int orderContentId) {
+		return orderDAO.updateContentAssetId(id, orderContentId);
+	}
+	
+	// 구매 요청 취소
 	public boolean cancelOrder(int id) {
 		return orderDAO.cancelOrder(id);
 	}
 	
-	public boolean registerAsset() {
-		return true;
-	}
 
 }

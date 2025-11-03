@@ -7,6 +7,7 @@ public class OrderContentDTO {
 	private Long id;
 	private Long orderId;
 	private Long categoryId;
+	private Long assetId;
 	private String categoryName;
 	private String itemName;
 	private int price;

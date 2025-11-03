@@ -3,17 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerModal = document.getElementById('registerModal');
     
     if (registerModal) {
+    	// 모달 html 요소 선언
         const closeModalBtn = registerModal.querySelector('.modal-close-btn');      
         const modalProductName = document.getElementById('modalProductName');
         const modalSerialNumber = document.getElementById('modalSerialNumber'); 
         const cancelBtn = document.getElementById('cancelBtn');
+        const registerBtn = document.getElementById('registerBtn');
         
         //정보 불러오기 + 모달 띄우기
         function openRegisterModal(btn) {
         	const formRow = btn.closest('.form-row');
         	if (formRow){
         		modalProductName.value = formRow.querySelector("[name='productNameSelect']").value;
-        		
+        		modalProductName.setAttribute('data-category-id', formRow.querySelector("[name*='category']").getAttribute('data-id'));  
+        		modalProductName.setAttribute('data-content-id', formRow.getAttribute('data-content-id'));  
         	}
             registerModal.style.display = 'flex';
         }
@@ -27,6 +30,50 @@ document.addEventListener('DOMContentLoaded', function() {
         registerModal.addEventListener('click', function(event) {
             if (event.target === registerModal) closeRegisterModal();
         });
+        // 자산 등록
+        if(registerBtn) registerBtn.addEventListener('click', (e) =>{
+        	const serialNum = modalSerialNumber.value.trim();
+        	const assetName = modalProductName.value;
+        	const categoryId = modalProductName.getAttribute('data-category-id');
+        	const orderContentId = modalProductName.getAttribute('data-content-id');
+        	const data = {
+        			categoryId: categoryId, 
+        			assetName: assetName , 
+        			serialNumber: serialNum
+                };
+        	fetch(`/assetmanager/order/register/${orderContentId}`, {
+        		  method: 'POST',
+        		  headers: { 'Content-Type': 'application/json' },
+        		  body: JSON.stringify(data)
+        		})
+        		.then(response => {
+                	return response.json();
+                })
+                .then(data => {
+                	console.log(data);
+                    if(data.msg==='일련번호가 일치하지 않거나 오류가 발생했습니다.'){
+                    		 Swal.fire('처리 실패', data.msg, 'error');
+                    } else {
+                    		return Swal.fire({
+                                title: '처리 완료',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: '확인' 
+                            });
+                    	}
+                })
+                .then((result) => {
+                	if (result && result.isConfirmed) {
+                		closeRegisterModal();
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('처리 실패' , '일련번호 등록에 실패했습니다.', 'error');
+                });
+        });
+        
     }
 
     // 모든 등록 버튼에 리스너 등록

@@ -3,6 +3,7 @@ package edu.example.assetmanager.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
@@ -15,13 +16,19 @@ public interface OrderDAO {
 	public int countAll(OrderParamDTO orderParamDTO);
 	public int countAllForAdmin(OrderParamDTO orderParamDTO);
 	public int countAllForManager(OrderParamDTO orderParamDTO);
+	
 	public List<OrderDTO> listAll(OrderParamDTO orderParamDTO);
 	public List<OrderDTO> listAllForAdmin(OrderParamDTO orderParamDTO);
 	public List<OrderDTO> listAllForManager(OrderParamDTO orderParamDTO);
+	
+	//Order
     public int insertOrder(OrderFormDTO orderFormDTO); 
-    public int insertOrderContent(OrderContentDTO content);
     public OrderDTO getOrderById(int id);
-    public List<OrderContentDTO> getContentsByOrderId(int id);
     public boolean cancelOrder(int id);
+    
+    //OrderContent
+    public int insertOrderContent(OrderContentDTO content);
+    public List<OrderContentDTO> getContentsByOrderId(int id);
+    public boolean updateContentAssetId(@Param("id") int id, @Param("assetId") int assetId);
 
 }

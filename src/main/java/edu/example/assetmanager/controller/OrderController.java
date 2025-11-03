@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
+import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.CategoryDTO;
 import edu.example.assetmanager.domain.ItemDTO;
@@ -45,7 +46,6 @@ public class OrderController {
 	private final CategoryService categoryService;
 	private final ItemService itemService;
 	private final UserService userService;
-	private final AssetService assetService;
 	
 	@GetMapping("/form")
 	public String form(HttpSession httpSession, Model model) {
@@ -133,20 +133,21 @@ public class OrderController {
 		return ResponseEntity.ok(response);
 	}
 	
-//	@ResponseBody
-//	@PostMapping(value = "/register/item", produces = "application/json; charset=utf-8")
-//	public ResponseEntity<Map<String, Object>> registerNewAsset(@RequestBody Asset,  HttpSession session) {
-//		Map<String, Object> response = new HashMap<>();
-//		Integer userId = (Integer) session.getAttribute("userId");
-//		assetHistoryDTO.setUserId(userId);
-//		
-//		if(orderService.registerAsset(Asset)) {
-//			response.put("msg", "자산 등록에 성공하였습니다.");
-//		}else {
-//			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
-//		}
-//		
-//	    return ResponseEntity.ok(response);
-//	}
+	@ResponseBody
+	@PostMapping(value = "/register/{orderContentId}", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> registerNewAsset(@RequestBody AssetDTO assetDTO, @PathVariable Long orderContentId,  HttpSession session) {
+		// 파라미터를 count에 따라 list로 받아야하나
+		Map<String, Object> response = new HashMap<>();
+		Integer userId = (Integer) session.getAttribute("userId");
+		assetDTO.setUserId(userId);
+		
+		if(orderService.registerAsset(assetDTO, orderContentId.intValue())) {
+			response.put("msg", "자산 등록에 성공하였습니다.");
+		}else {
+			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
+		}
+		
+	    return ResponseEntity.ok(response);
+	}
 	
 }

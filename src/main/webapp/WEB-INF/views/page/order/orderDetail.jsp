@@ -40,10 +40,10 @@
 							</div>
 							<c:forEach var="product" items="${products}">
 								<c:forEach var="i" begin="1" end="${product.count}">
-									<div class="form-row">
+									<div class="form-row" data-content-id ="${product.id}">
 										<div class="form-group category-group fixed-width-med">
 											<label for="category">카테고리 </label>
-											<input id="category" name="category" type="text" value="${product.categoryName}" class="locked-input" readonly>
+											<input id="category" name="category" type="text" value="${product.categoryName}" data-id="${product.categoryId}" class="locked-input" readonly>
 										</div>
 										<div class="form-group product-select-group fixed-width-lg">
 											<label for="productNameSelect">제품명</label>
@@ -54,7 +54,12 @@
 											<div class="last-input-group">
 												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
 												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
-													<button type="button" class="regist-button" data-target="registerModal">등록</button>
+													<c:if test="${product.assetId != null}">
+														<button type="button" class="regist-button-save" disabled>완료</button>
+													</c:if>
+													<c:if test="${product.assetId == null}">
+														<button type="button" class="regist-button" data-target="registerModal">등록</button>
+													</c:if>
 												</c:if>
 											</div>
 										</div>
@@ -88,7 +93,7 @@
 	<!-- 모달 -->
 	<div id="registerModal" class="modal-backdrop" style="display: none;">
 		<jsp:useBean id="now" class="java.util.Date" />
-		<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
+		<fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
 	    <div class="modal-content">
 	        <div class="modal-header">
 	            <h3>일련번호 등록</h3>
@@ -110,7 +115,7 @@
 	        </div>
 	        <div class="modal-footer">
 	            <button id="cancelBtn" class="btn-secondary">취소</button>
-	            <button class="btn-primary" onclick="registerSerial()">등록하기</button>
+	            <button id="registerBtn" class="btn-primary">등록하기</button>
 	        </div>
 	    </div>
 	</div>

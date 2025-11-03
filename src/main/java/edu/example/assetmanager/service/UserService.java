@@ -219,4 +219,9 @@ public class UserService {
 	public int getRentCount(int userId) {
 		return dao.countRent(userId);
 	}
+	
+	// 특정 role을 가진 user 리스트 얻기
+	public List<UserInfoDTO> getUsersByRole(String role){
+		return dao.getUsersByRole(role);
+	}
 }

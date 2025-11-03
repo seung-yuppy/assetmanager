@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderService {
 	private final OrderDAO orderDAO;
 	private final ApprovalDAO approvalDAO;
-	private final UserDAO userDAO;
+	private final UserService userService;
 
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
 		int totalCount = orderDAO.countAll(orderParamDTO);
@@ -89,9 +89,9 @@ public class OrderService {
 		List<OrderContentDTO> products = orderDAO.getContentsByOrderId(id);
 		// 결재 및 결재자 정보
 		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(orderDTO.getApprovalId());
-		UserInfoDTO userInfo = userDAO.getUserInfo(orderDTO.getUserId());
-		UserInfoDTO approverInfo = userDAO.getUserInfo(approvalDTO.getApproverId());
-		UserInfoDTO managerInfo = userDAO.getUserInfo(approvalDTO.getManagerId());
+		UserInfoDTO userInfo = userService.getUser(orderDTO.getUserId());
+		UserInfoDTO approverInfo = userService.getUser(approvalDTO.getApproverId());
+		UserInfoDTO managerInfo = userService.getUser(approvalDTO.getManagerId());
 		ApproverInfoDTO approverInfoDTO = new ApproverInfoDTO(userInfo,approverInfo,managerInfo);
 		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products, approverInfoDTO);
 		return response;

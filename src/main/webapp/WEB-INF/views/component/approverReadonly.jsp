@@ -53,7 +53,7 @@
 				<div class="approver-item">
 					<div class="approver-info">
 						<div class="name-title">
-							 ${empInfo.userInfo.username}  <span class="title">사원</span>
+							 ${empInfo.userInfo.username}  <span class="title">${empInfo.userInfo.position}</span>
 						</div>
 						<div class="team">${empInfo.userInfo.deptName} </div>
 					</div>
@@ -99,7 +99,7 @@
 				</div>
 				<div class="approver-item">
 					<div class="approver-info">
-						<div class="name-title"> ${empInfo.approverInfo.username} <span class="title">팀장</span></div>
+						<div class="name-title"> ${empInfo.approverInfo.username} <span class="title">${empInfo.approverInfo.position}</span></div>
 						<div class="team">${empInfo.approverInfo.deptName}</div>
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 				</div>
 				<div class="approver-item">
 					<div class="approver-info">
-						<div class="name-title"> ${empInfo.managerInfo.username} <span class="title">부장</span></div>
+						<div class="name-title"> ${empInfo.managerInfo.username} <span class="title">${empInfo.managerInfo.position}</span></div>
 						<div class="team">${empInfo.managerInfo.deptName}</div>
 					</div>
 				</div>

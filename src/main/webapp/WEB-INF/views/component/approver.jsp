@@ -26,7 +26,7 @@
 			<div class="approver-item">
 				<div class="approver-info">
 					<div class="name-title">
-						${userInfo.username} <span class="title">${userInfo.role}</span>
+						${userInfo.username} <span class="title">${userInfo.position}</span>
 					</div>
 					<div class="team">(${userInfo.deptName})</div>
 				</div>
@@ -56,10 +56,7 @@
 										data-image-type="image/png"										
 										data-dept="(${ad.deptName})"
 										data-alt="${ad.username}"> 
-									${ad.username}
-									<c:choose>
-		                                <c:when test="${ad.role == 'admin'}">${ad.position}</c:when>       		                               
-		                            </c:choose>											
+									${ad.username} ${ad.position}										
 								</option>
 							</c:forEach>
 						</select>
@@ -92,10 +89,7 @@
 										data-image-type="image/png"										
 										data-dept="(${ma.deptName})"
 										data-alt="${ma.username}">
-									${ma.username}									
-									<c:choose>
-		                                <c:when test="${ma.role == 'manager'}">${ma.position}</c:when>       		                               
-		                            </c:choose>										
+									${ma.username} ${ma.position}																		
 								</option>
 							</c:forEach>
 						</select>

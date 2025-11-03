@@ -38,4 +38,6 @@ public interface UserDAO {
 	
 	// 사용자 대시보드에서 반출 요청 개수
 	public int countRent(@Param("userId") int userId);
+	
+	public List<UserInfoDTO> getUsersByRole(String role);
 }

@@ -35,20 +35,18 @@ public class OrderController {
 	private final OrderService orderService;
 	private final CategoryService categoryService;
 	private final ItemService itemService;
-	private final RentService rentService;
+	private final UserService userService;
 	
 	@GetMapping("/form")
 	public String form(HttpSession httpSession, Model model) {
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo == null)
 			return "redirect:/login";
-	
 		//결재자 정보
-		List<UserInfoDTO> admin = rentService.findByAdminUser();
-		List<UserInfoDTO> manager = rentService.findByManagerUser();
+		List<UserInfoDTO> admin = userService.getUsersByRole("admin");
+		List<UserInfoDTO> manager = userService.getUsersByRole("manager");
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);
-		System.out.println("manager 포지션:" + manager.get(0).getPosition());
 		
 		// 카테고리 목록
 		List<CategoryDTO> categories = categoryService.getCategories();

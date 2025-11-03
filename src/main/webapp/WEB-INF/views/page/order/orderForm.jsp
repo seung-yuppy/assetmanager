@@ -35,7 +35,6 @@
 							<jsp:include page="/WEB-INF/views/component/approver.jsp">
 								<jsp:param name="admin" value="${admin}"/>
 								<jsp:param name="manager" value="${manager}" />
-								<jsp:param name="user" value="${sessionScope.user}"/>
 							</jsp:include>
 						</div>
 						<h2 class="form-section-title">요청 정보</h2>

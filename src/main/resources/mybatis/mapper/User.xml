@@ -85,4 +85,16 @@
 	WHERE r.user_id = #{userId} AND a.status IN ('pending', 'first_approval')
 	</select>
 	
+	<select id="getUsersByRole" parameterType="String" resultType="UserInfoDTO">
+	SELECT u.id
+		   ,u.username
+		   ,u.profile_image
+		   ,d.dept_name
+		   ,u.role
+		   ,u.position
+	FROM "User" u 
+	JOIN Department d ON u.department_id = d.id
+	WHERE upper(u.role) = upper(#{role})
+	</select>
+	
 </mapper>

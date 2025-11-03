@@ -13,10 +13,10 @@
 </head>
 <body>
 	<div class="app-layout">
-		<c:if test="${userInfo.role == '사원' || userInfo.role == '부장' || userInfo.role == '부서'}">
+		<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager' || userInfo.role == 'department'}">
 			<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		</c:if>
-		<c:if test="${userInfo.role == '관리자'}">
+		<c:if test="${userInfo.role == 'admin'}">
 			<%@ include file="/WEB-INF/views/component/adminSideMenu.jsp"%>
 		</c:if>
 		<div class="main-content">
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<!-- 사용자 상세 정보 끝 -->
-					<c:if test="${userInfo.role != '관리자'}">
+					<c:if test="${userInfo.role != 'admin'}">
 						<!-- 자산 정보 시작 -->
 						<div class="section-card">
 							<h2>자산 내역</h2>

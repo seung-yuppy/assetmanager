@@ -87,7 +87,7 @@ public class UserController {
 			if (userId != null) {
 				UserInfoDTO dto = service.getUser(userId);
 				String role = dto.getRole();
-				if (role.equals("관리자")) 
+				if (role.equals("admin")) 
 					return "redirect:/admin/home";
 				else 
 					return "redirect:/home";

@@ -17,18 +17,14 @@ import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.ItemService;
 import edu.example.assetmanager.service.UserService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Controller
 public class HomeController {
 	private final UserService service;
 	private final AssetService assetService;
 	private final ItemService itemService;
-	
-	public HomeController(UserService service, AssetService assetService, ItemService itemService) {
-		this.service = service;
-		this.assetService = assetService;
-		this.itemService = itemService;
-	}
 	
 	// 사원 & 부장 대시보드
 	@GetMapping("/home")

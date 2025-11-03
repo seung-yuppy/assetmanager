@@ -44,7 +44,7 @@
 	
 	<select id="assetDetail" resultType="AssetDTO">
 		SELECT a.id, a.user_id, a.asset_name, c.category_name, a.serial_number, a.spec, a.register_date,
-				u.username, d.dept_name, d.dept_address, a.category_id, a.location
+				u.username, d.dept_name, d.dept_address, a.category_id, a.location, u.email, u.phone, u.position
 		FROM Asset a
 			INNER JOIN Category c ON a.category_id = c.id
 			LEFT OUTER JOIN "User" u ON a.user_id = u.id
@@ -378,5 +378,9 @@
     	FROM Asset A
     	WHERE A.id = #{assetId} 
     </select>
- 
+    
+    <insert id="insertAsset" parameterType="AssetDTO">
+	    insert into asset (user_id, category_id, asset_name, spec, SERIAL_NUMBER)
+		values (1, 1, '테스트 제품', '스펙 테스트','123456');
+    </insert>
 </mapper>

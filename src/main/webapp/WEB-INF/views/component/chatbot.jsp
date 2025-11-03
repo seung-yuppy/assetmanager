@@ -11,7 +11,7 @@
 	<!-- 챗봇 버튼 시작  -->
 	<div class="chatbot-wrapper">
 		<button type="button" class="chatbot-button">
-			챗봇
+			<img src="/assetmanager/resources/image/icon_chat.svg" class="chat-icon">
 		</button>
 	</div>
 	<!-- 챗봇 버튼 끝 -->

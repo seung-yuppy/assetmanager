@@ -22,8 +22,17 @@
 }
 
 .chatbot-button:hover {
-	transform: scale(1.05); /* 호버 시 살짝 커짐 */
 	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.chat-icon {
+	position: fixed;
+	bottom: 39px;
+    right: 42px;
+    width: 35px;
+    height: 35px;
+	color: var(--white-color);
+	filter: invert(100%);
 }
 
 /* 4. 챗봇 내용 (채팅창 스타일) */

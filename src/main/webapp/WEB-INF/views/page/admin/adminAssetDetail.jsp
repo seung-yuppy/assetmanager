@@ -71,6 +71,18 @@
 			                        <span class="info-value">${asset.username}</span>
 			                    </div>
 			                    <div class="info-item">
+			                        <span class="info-label">이메일</span>
+			                        <span class="info-value">${asset.email}</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">전화번호</span>
+			                        <span class="info-value">${asset.phone}</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">직책</span>
+			                        <span class="info-value">${asset.position}</span>
+			                    </div>
+			                    <div class="info-item">
 			                        <span class="info-label">부서명</span>
 			                        <span class="info-value">${asset.deptName}</span>
 			                    </div>
@@ -86,6 +98,18 @@
 			                    </div>
 			                    <div class="info-item">
 			                        <span class="info-label">사용자 이름</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">이메일</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">전화번호</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">직책</span>
 			                        <span class="info-value">-</span>
 			                    </div>
 			                    <div class="info-item">

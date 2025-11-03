@@ -11,4 +11,5 @@ public class OrderContentDTO {
 	private String itemName;
 	private int price;
 	private int count;
+	private boolean isRegistered;
 }

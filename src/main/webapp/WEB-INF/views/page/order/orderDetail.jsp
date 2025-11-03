@@ -24,7 +24,7 @@
 				<div class="detail-header">
 					<span class="page-description">구매 요청의 상세 내용을 확인하세요</span>
 				</div>
-				<div class="section-card">
+				<div class="section-card" data-id="${order.id}" data-author="${order.userId}">
 					<div class="form-section">
 						<!-- 결재라인 전체 컨테이너 -->
 						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp" %>
@@ -76,7 +76,9 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
-							<button type="button" class="cancel-action">요청 취소</button>
+							<c:if test="${approval.status == 'PENDING'}">
+								<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
+							</c:if>
 						</div>
 					</form>
 				</div>
@@ -112,7 +114,8 @@
 	        </div>
 	    </div>
 	</div>
-	<script src="/assetmanager/resources/js/orderDetail.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
+	<script src="/assetmanager/resources/js/orderDetail.js"></script>
 </body>
 </html>

@@ -15,11 +15,11 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
     const container = document.getElementById('approval-line-container');
 	const id = container.getAttribute('data-approvalId');
 	const status = container.getAttribute('data-status');
-	const rejectForm = "<input type='text' id='reject-reason' class='modal-input' name='rejectReason'>";
 	
         Swal.fire({
-            title: "반려 사유를 입력해주세요.",
-            html: rejectForm,
+            title: "반려하시겠습니까?",
+            text:"반려 사유를 입력해주세요.",
+            input: "text",
             imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
             imageWidth: 90,
             imageHeight: 90, 
@@ -31,8 +31,7 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
             customClass: {
                 input: 'custom-swal-input'
             },
-            preConfirm: async () => { 
-                const reason = Swal.getHtmlContainer().querySelector('#reject-reason').value;
+            preConfirm: async (reason) => { 
                 const resultObject = {
                         id: id,
                         rejectReason: reason,
@@ -80,9 +79,9 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 		const id = container.getAttribute('data-approvalId');
 		const status = container.getAttribute('data-status');
 		
-		
 		Swal.fire({
-			text: "요청을 승인하시겠습니까?",
+			title:"승인하시겠습니까?",
+			text: "요청을 승인 처리합니다.",
 			imageUrl: "/assetmanager/resources/image/approval_admin.jpg",
 			imageWidth: 90,
 			imageHeight: 90, 

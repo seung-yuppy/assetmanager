@@ -28,7 +28,11 @@ public class UserInfoDTO {
 	public void setProfileImage(byte[] profileImage) {
 	    this.profileImage = profileImage;
 	    if(profileImage != null) {
-	        this.base64ProfileImage = Base64.getEncoder().encodeToString(profileImage);
+	    	updateBase64ProfileImage(profileImage);
 	    }
+	}
+	
+	public void updateBase64ProfileImage(byte[] profileImage) {
+		 this.base64ProfileImage = Base64.getEncoder().encodeToString(profileImage);
 	}
 }

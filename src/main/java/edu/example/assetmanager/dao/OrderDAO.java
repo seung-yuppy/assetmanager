@@ -22,5 +22,6 @@ public interface OrderDAO {
     public int insertOrderContent(OrderContentDTO content);
     public OrderDTO getOrderById(int id);
     public List<OrderContentDTO> getContentsByOrderId(int id);
+    public boolean cancelOrder(int id);
 
 }

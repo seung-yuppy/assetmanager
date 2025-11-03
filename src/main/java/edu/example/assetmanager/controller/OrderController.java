@@ -1,18 +1,25 @@
 package edu.example.assetmanager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.CategoryDTO;
 import edu.example.assetmanager.domain.ItemDTO;
 import edu.example.assetmanager.domain.OrderDTO;
@@ -89,13 +96,38 @@ public class OrderController {
 	}
 	
 	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable int id, Model model) {
+	public String detail(@PathVariable int id, Model model, HttpSession session) {
 		OrderDetailRESP response = orderService.getOrderDetail(id);
-		model.addAttribute("order", response.getOrderDto());
-		model.addAttribute("approval", response.getApprovalDTO());
+		OrderDTO orderDTO =  response.getOrderDto();
+		ApprovalDTO approvalDTO = response.getApprovalDTO();
+		int userId = (int)session.getAttribute("userId");
+		
+		// 결재에 포함된 사용자만 조회 가능 
+		if((userId != orderDTO.getUserId()) && (userId != approvalDTO.getManagerId()) && (userId != approvalDTO.getApproverId())) 
+			return "redirect:/login";
+		
+		model.addAttribute("order", orderDTO);
+		model.addAttribute("approval", approvalDTO);
 		model.addAttribute("products", response.getProducts());
 		model.addAttribute("empInfo", response.getApproverInfoDTO());
+		
 		return "/order/orderDetail";
+	}
+
+	@ResponseBody
+	@GetMapping(value = "/cancel", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> cancelOrder(int id, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+			response.put("msg", "로그인 후 진행해주세요.");
+		
+		if (orderService.cancelOrder(id))
+			response.put("msg", "요청 취소가 완료되었습니다.");
+		else
+			response.put("msg", "요청 취소에 실패하였습니다.");
+		
+		return ResponseEntity.ok(response);
 	}
 	
 }

@@ -96,5 +96,9 @@ public class OrderService {
 		OrderDetailRESP response = new OrderDetailRESP(orderDTO, approvalDTO, products, approverInfoDTO);
 		return response;
 	}
+	
+	public boolean cancelOrder(int id) {
+		return orderDAO.cancelOrder(id);
+	}
 
 }

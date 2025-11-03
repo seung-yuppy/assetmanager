@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.addEventListener('click', () => { 
         
         const assetId = modalAssetId.value;
-        const rentId = modalRentId.value;
         const serialNumber = modalSerialNumber.value.trim();
 
         if (!serialNumber) {
@@ -56,37 +55,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = {
             assetId: assetId,
-            rentId: rentId,
             serialNumber: serialNumber
         };
         
-        fetch('/assetmanager/rent/register-item', {
+        fetch('/assetmanager/rent/register/item', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body : JSON.stringify(data)
+            
         })
         .then(response => {
-            if (response.ok) {
-                return; 
+        	return response.json();
+        })
+        .then(data => {
+        	console.log(data);
+            if(data.msg==='일련번호가 일치하지 않거나 오류가 발생했습니다.'){
+            		 Swal.fire('처리 실패', data.msg, 'error');
             } else {
-                return response.json().then(errorData => {
-                    const error = new Error(errorData.message || '일련번호가 일치하지 않거나 오류가 발생했습니다.');
-                    throw error; 
-                });
+            		return Swal.fire({
+                        title: '처리 완료',
+                        text: data.msg,
+                        icon: 'success',
+                        confirmButtonText: '확인' 
+                    });
+            	}
+        })
+        .then((result) => {
+        	if (result && result.isConfirmed) {
+                closeModal();
+                location.reload();
             }
-        })
-        .then(() => {
-            return Swal.fire('처리 완료', '자산 반출이 등록되었습니다.', 'success');
-        })
-        .then(() => {
-            closeModal();
-            location.reload();
         })
         .catch(error => {
             console.error('Error:', error);
-            Swal.fire('처리 실패', error.message || '요청 중 오류가 발생했습니다.', 'error');
+            Swal.fire('처리 실패' , '일련번호 등록에 실패했습니다.', 'error');
         });
     });
 });

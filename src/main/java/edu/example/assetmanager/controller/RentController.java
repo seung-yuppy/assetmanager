@@ -1,9 +1,12 @@
 package edu.example.assetmanager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
-import edu.example.assetmanager.domain.RegisterDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
@@ -26,7 +29,9 @@ import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RequestMapping("/rent")
 @Controller
 public class RentController {
@@ -34,12 +39,6 @@ public class RentController {
 	private final RentService rentService;
 	private final UserService userService;
 	private final AssetService assetService;
-
-	public RentController(RentService rentService, UserService userService, AssetService assetService) {
-		this.rentService = rentService;
-		this.userService = userService;
-		this.assetService = assetService;
-	}
 
 	@GetMapping("/form")
 	public String requestForm(Model model, HttpSession session) {
@@ -95,27 +94,34 @@ public class RentController {
 
 	@GetMapping("/detail/{id}") 
 	public String rentList(@PathVariable Long id, Model model) {
-		System.out.println("id는 나오니?? "+id);
 		ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
 		RentShowDTO rentDTO = rentService.getRentDetail(id);
 		List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
-		System.out.println("approverInfoDTO나오니?? "+approverInfoDTO.getApproverInfo());
 		ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
-		System.out.println("approvalDTO 나와?? "+approvalDTO);
+
 		model.addAttribute("empInfo", approverInfoDTO);
 		model.addAttribute("rent", rentDTO);
-		System.out.println(rentDTO.getRentDate());
-		System.out.println(rentDTO.getReturnDate());
-		System.out.println(rentDTO.getRequestMsg());
 		model.addAttribute("items",rentContentDTO);
 		model.addAttribute("approval", approvalDTO);
+
 		return "/rent/rentDetail";
 	}
 	 
 	@ResponseBody
-	@PostMapping(value = "/register-item", produces = "application/json; charset=utf-8")
-	public RegisterDTO registerItem(@RequestBody RegisterDTO registerDTO) {
+	@PostMapping(value = "/register/item", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> registerItem(@RequestBody AssetHistoryDTO assetHistoryDTO,  HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		Integer userId = (Integer) session.getAttribute("userId");
+		System.out.println("userId???  " +  userId);
+		assetHistoryDTO.setUserId(userId);
 		
-	    return assetService.registerAssetItem(registerDTO);
+		if(assetService.registerAssetItem(assetHistoryDTO)) {
+			System.out.println("여기기ㅣ기기"+assetService.registerAssetItem(assetHistoryDTO));
+			response.put("msg", "자산 등록에 성공하였습니다.");
+		}else {
+			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
+		}
+		
+	    return ResponseEntity.ok(response);
 	}
 }

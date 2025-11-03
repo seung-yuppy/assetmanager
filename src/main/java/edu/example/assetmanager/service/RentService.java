@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
+import edu.example.assetmanager.dao.AssetDAO;
 import edu.example.assetmanager.dao.RentDAO;
 import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
@@ -16,19 +17,14 @@ import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
-
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor
 @Service
 public class RentService {
 	private final RentDAO rentDAO;
 	private final ApprovalDAO approvalDAO;
 	private final UserDAO userDAO;
-
-	public RentService(RentDAO rentDAO, ApprovalDAO approvalDAO, UserDAO userDAO) {
-		this.rentDAO = rentDAO;
-		this.approvalDAO = approvalDAO;
-		this.userDAO = userDAO;
-
-	}
+	private final AssetDAO assetDAO;
 
 	// dept가 경영지원팀인 user 가지고 오기
 	public List<UserInfoDTO> findByAdminUser() {
@@ -151,9 +147,16 @@ public class RentService {
 	// rentContent 찾기 
 	public List<RentContentDTO> getRentContentDetail(Long id){
 		List<RentContentDTO> rentContentDTO = rentDAO.getRentContent(id);
-		for(RentContentDTO dto : rentContentDTO) {
-			System.out.println("카테고리는 ???" + dto.getCategoryName());
+		
+		for (RentContentDTO rent : rentContentDTO) {
+			int userId = assetDAO.findUserIdByAsset(rent.getAssetId());
+			if (userId == 0) {
+				rent.setRegister(true);
+			} else {
+				rent.setRegister(false);
+			}
 		}
+		
 		return rentContentDTO;
 	}
 	

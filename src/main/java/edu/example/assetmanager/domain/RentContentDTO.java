@@ -19,4 +19,5 @@ public class RentContentDTO {
 	private String assetName;
 	private String categoryName;
 	private String spec;
+	private boolean register;
 }

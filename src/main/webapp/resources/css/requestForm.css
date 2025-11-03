@@ -417,6 +417,14 @@ input:focus, select:focus, textarea:focus {
     color: white;
 }
 
+.regist-button-save {
+	width: 46px;
+    border: 0;
+    background-color: lightslategray;
+    border-radius: 6px;
+    color: white;
+}
+
 /* Select2 입력 요소 */
 /* Input/Selection box */
 .select2-container--default .select2-selection--single {

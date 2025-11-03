@@ -1,7 +1,6 @@
 package edu.example.assetmanager.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
-import edu.example.assetmanager.domain.RegisterDTO;
-import edu.example.assetmanager.domain.RentDTO;
 
 @Service
 public class AssetService {
@@ -203,66 +200,29 @@ public class AssetService {
 	}
 	
 	@Transactional 
-    public RegisterDTO registerAssetItem(RegisterDTO registerDTO) {
-        String serialNumber = registerDTO.getSerialNumber();
-        Long rentId = registerDTO.getRentId();
+    public boolean registerAssetItem(AssetHistoryDTO historyDTO) {
+        int userId = historyDTO.getUserId();
+        String serialNumber = historyDTO.getSerialNumber();
 
-        // 자산 조회
-        AssetDTO asset = dao.getAssetBySerialNumber(serialNumber);
-        if (asset == null) {
-            registerDTO.setSuccess(false);
-            registerDTO.setErrorMessage("자산 없음"); 
-            return registerDTO;
-        }
-
-        RentDTO rentDTO = rentDAO.getRentApprovalId(rentId);
-        if (rentDTO == null) {
-            registerDTO.setSuccess(false);
-            registerDTO.setErrorMessage("유효하지 않은 요청"); 
-            return registerDTO;
-        }
-        int rentUserId = rentDTO.getUserId();
-        
         // 부서 주소 찾기
-        String deptAddress = rentDAO.getDeptAddressByUserId(rentUserId);
+        String deptAddress = rentDAO.getDeptAddressByUserId(userId);
+        if(deptAddress==null) {
+        	return false;
+        }    
+
+        int assetId = historyDTO.getAssetId();
         
-        if (deptAddress == null) {
-            registerDTO.setSuccess(false);
-            registerDTO.setErrorMessage("주소 정보 없음");
-            return registerDTO;
+        if(dao.updateAsset(userId, serialNumber, deptAddress, assetId)) {
+        	historyDTO.setStatus("rent");
+        	if(dao.insertAssetHistory(historyDTO)) {
+        		return true;
+        	} else {
+        		return false;
+        	}
+        } else {
+        	return false;
         }
-        
-        // Asset 테이블 업데이트
-        boolean assetUpdated = dao.updateAsset(
-            rentUserId,
-            serialNumber,
-            deptAddress
-        );
-
-        if (!assetUpdated) {
-             registerDTO.setSuccess(false);
-             registerDTO.setErrorMessage("업데이트 실패");
-             return registerDTO;
-        }
-
-        // Asset_History 테이블 insert
-        AssetHistoryDTO history = new AssetHistoryDTO();
-        history.setUserId(rentUserId);      
-        history.setAssetId(asset.getId());  
-        history.setCreateDate(new Date());                   
-        history.setStatus("rent");      
-
-        boolean historyInserted = dao.insertAssetHistory(history);
-
-        if (!historyInserted) {
-            registerDTO.setSuccess(false);
-            registerDTO.setErrorMessage("기록 실패");
-            return registerDTO;
-        }
-
-        registerDTO.setSuccess(true);
-        registerDTO.setErrorMessage(null); 
-        return registerDTO;
+       
     }
-	
+
 }

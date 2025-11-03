@@ -63,13 +63,16 @@
 									<label for="spec">스펙</label>
 									<div class="last-input-group">
 										<input type="text" id="spec" value="${item.spec}" class="locked-input" readonly>
-										<c:if test="${approval.status == 'FINAL_APPROVAL'}">
+										<c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==true}">
 						                    <button type="button" class="regist-button" 
 						                            data-target="registerModal"
 						                            data-asset-name="${item.assetName}"
 						                            data-return-date="${returnDate}"
 						                            data-asset-id="${item.assetId}"
 						                            data-rent-id="${item.rentId}">등록</button>
+						                </c:if>
+						                <c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==false}">
+						                	<button type="button" class="regist-button-save" disabled>완료</button>
 						                </c:if>
 									</div>
 								</div>

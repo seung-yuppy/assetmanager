@@ -358,33 +358,25 @@
 		WHERE
 		    a.user_id IN (SELECT id FROM DepartmentAsset)
 	</select>
-	
-	<select id="getAssetBySerialNumber" resultType="AssetDTO">
-        SELECT id
-        	  ,user_id
-        	  ,category_id
-        	  ,asset_name
-        	  ,spec
-        	  ,serial_number
-        	  ,register_date
-        	  ,location
-        	  ,is_valid
-        FROM Asset
-        WHERE serial_number = #{serialNumber}
-    </select>
 
     <update id="updateAsset">
         UPDATE Asset
         SET 
             user_id = #{userId}
             ,location = #{location}
-            ,is_valid = 1
         WHERE serial_number = #{serialNumber}
+        	AND id = #{assetId}
     </update>
 
     <insert id="insertAssetHistory" parameterType="AssetHistoryDTO">
-        INSERT INTO Asset_History (user_id, asset_id, create_date, status)
-        VALUES (#{userId}, #{assetId}, #{createDate}, #{status})
+        INSERT INTO Asset_History (user_id, asset_id, status)
+        VALUES (#{userId}, #{assetId}, #{status})
     </insert>
-
+    
+    <select id="findUserIdByAsset">
+    	SELECT COUNT(A.user_id)
+    	FROM Asset A
+    	WHERE A.id = #{assetId} 
+    </select>
+ 
 </mapper>

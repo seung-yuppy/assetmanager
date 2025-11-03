@@ -48,5 +48,5 @@ public interface RentDAO {
 	
 	// user_id로 부서 주소 찾기
 	String getDeptAddressByUserId(@Param("userId") int userId);
-	
+		
 }

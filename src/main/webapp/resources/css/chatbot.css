@@ -6,32 +6,30 @@
 
 .chatbot-button {
 	position: fixed;
-	bottom: 30px; /* 위치 변경: 하단 */
-	right: 30px; /* 위치 변경: 우측 */
-	width: 60px; /* 크기 지정 */
-	height: 60px; /* 크기 지정 */
-	border-radius: 50%; /* 원형 */
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
 	background-color: var(--primary-color);
 	color: var(--white-color);
 	border: none;
-	font-size: 1.2rem; /* 텍스트 크기 */
-	font-weight: 600;
 	cursor: pointer;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .chatbot-button:hover {
 	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
 }
 
 .chat-icon {
-	position: fixed;
-	bottom: 39px;
-    right: 42px;
-    width: 35px;
-    height: 35px;
-	color: var(--white-color);
+	width: 35px;
+   	height: 35px;
 	filter: invert(100%);
 }
 

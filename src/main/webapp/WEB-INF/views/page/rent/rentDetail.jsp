@@ -79,7 +79,7 @@
 						</div>
 					</div>
 					<div class="form-actions">
-						<c:if test="${approval.status == 'PENDING' or approval.status == 'FIRST_APPROVAL'}">
+						<c:if test="${approval.status == 'PENDING'}">
 							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
 						</c:if>
 					</div>

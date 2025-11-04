@@ -112,6 +112,7 @@
 	         , A.status status
 	         , U.username username
 	         , D.dept_name deptName
+	         , R.user_id
 	    FROM Rent R
 	    JOIN Approval A ON A.id = R.approval_id
 	    LEFT JOIN "User" U ON U.id = R.user_id

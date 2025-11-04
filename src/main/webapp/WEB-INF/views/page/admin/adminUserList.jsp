@@ -109,6 +109,6 @@
 		</div>	
 	</div>
 	
-	<script src="/assetmanager/resources/js/orderList.js"></script>
+	<script src="/assetmanager/resources/js/pageFilter.js"></script>
 </body>
 </html>

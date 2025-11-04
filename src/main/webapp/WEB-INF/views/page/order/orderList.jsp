@@ -32,10 +32,12 @@
 								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>
 				            </div>
-				            <div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="요청 내용" class="search-field">
-				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
-				            </div>
+				            <form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">
+								<div class="search-box">
+									<input type="text" name="keyword" id="assetSearch" placeholder="요청 내용" class="search-field" value="${param.keyword}">
+								    <button type="submit"><img src="/assetmanager/resources/image/icon_search.svg"></button>
+								</div>
+							</form>
 				        </div>
 				    </div>
 
@@ -96,6 +98,6 @@
 		</div>
 	</div>
 <script src="/assetmanager/resources/js/toDetail.js"></script>
-<script src="/assetmanager/resources/js/orderList.js"></script>
+<script src="/assetmanager/resources/js/pageFilter.js"></script>
 </body>
 </html>

@@ -212,4 +212,13 @@
 		AND o.user_id = #{userId}
 		AND o.is_valid = 1
     </select>
+    
+    <select id="getOrderTop3">
+	    SELECT *
+		FROM Orders o
+			INNER JOIN Approval a ON o.approval_id = a.id
+		WHERE o.user_id = #{userId}
+		ORDER BY o.order_date DESC
+		FETCH FIRST 3 ROWS ONLY
+    </select>
 </mapper>

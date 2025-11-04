@@ -112,11 +112,9 @@
 	            </table>
 	        </div>
 	
-	        <!-- 2. 요청 관리 섹션 -->
 	        <div class="request-grid">
-	            <!-- 2-1. 반출 요청 -->
 	            <div class="section-card">
-	                <h3>반출 요청</h3>
+	                <h3>구매 요청</h3>
 	                <table class="data-table">
 	                    <thead>
 	                        <tr>
@@ -126,28 +124,30 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr>
-	                            <td>iPad Pro</td>
-	                            <td>2024-06-10</td>
-	                            <td><span class="status-badge status-waited">대기중</span></td>
-	                        </tr>
-	                        <tr>
-	                            <td>웹캠 C920</td>
-	                            <td>2024-05-20</td>
-	                            <td><span class="status-badge status-rejected">거절됨</span></td>
-	                        </tr>
-	                        <tr>
-	                            <td>외장 SSD</td>
-	                            <td>2024-05-05</td>
-	                            <td><span class="status-badge status-approved">승인됨</span></td>
-	                        </tr>
+	                    	<c:choose>
+	                    		<c:when test="${empty orderList}">
+		                    		<tr>
+				                		<td colspan="3" style="text-align: center;">
+				               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
+			                			</td>
+			                		</tr>
+	                    		</c:when>     	
+		                    	<c:otherwise>
+		                    		<c:forEach var="order" items="${orderList}">
+		                    			<tr>
+		                    				<td>${order.title}</td>
+		                    				<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></td>
+		                    				<td><span class="status-badge status-${order.status.badgeType}">${order.status.koreanName}</span></td>
+		                    			</tr>
+		                    		</c:forEach>
+		                    	</c:otherwise>
+	                    	</c:choose>
 	                    </tbody>
 	                </table>
 	            </div>
 	
-	            <!-- 2-2. 구매 요청 (취소 버튼 추가됨) -->
 	            <div class="section-card">
-	                <h3>구매 요청</h3>
+	                <h3>반출 요청</h3>
 	                <table class="data-table">
 	                    <thead>
 	                        <tr>

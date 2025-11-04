@@ -27,7 +27,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
 	                		</div>
 	                	</div>
-	                    <p class="card-value">${totalAsset}</p>
+	                    <p class="card-value">${totalAsset}개</p>
 	                </div>
 	                <div class="metric-card border-green">
 						<div class="card-header">
@@ -36,7 +36,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
 	                		</div>
 	                	</div>                    
-	                    <p class="card-value">${usingAsset}</p>
+	                    <p class="card-value">${usingAsset}개</p>
 	                </div>
 	                <div class="metric-card border-gray">
 						<div class="card-header">
@@ -45,7 +45,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
 	                		</div>
 	                	</div>    
-	                    <p class="card-value">${pendingAsset}</p>
+	                    <p class="card-value">${pendingAsset}개</p>
 	                </div>
 					<div class="metric-card border-red">
 						<div class="card-header">
@@ -54,7 +54,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
 	                		</div>
 	                	</div>
-	                    <p class="card-value">${invalidAsset}</p>
+	                    <p class="card-value">${invalidAsset}개</p>
 	                </div>
 	                <div class="metric-card border-purple">
 						<div class="card-header">
@@ -63,7 +63,7 @@
 	                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
 	                		</div>
 	                	</div>   
-	                    <p class="card-value">${totalItem}</p>
+	                    <p class="card-value">${totalItem}개</p>
 	                </div>
 	            </div>
             

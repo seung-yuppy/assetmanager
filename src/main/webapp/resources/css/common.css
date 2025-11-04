@@ -21,6 +21,7 @@
     --slate-color: #475569;
     --blue-color-dark: #1e3a8a;
     --blue-dark: #0056b3;
+    --gradient-color: linear-gradient(to bottom right, #0a1931, #183a6a, #4a4a8a, #301934);
 	
 	--card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 	--border-radius: 12px;
@@ -58,7 +59,8 @@ body {
 .main-button {
 	width: 100%;
 	padding: 10px 15px;
-	background-color: var(--primary-color);
+	/* background-color: var(--primary-color); */
+	background-image: var(--gradient-color);
 	color: #fff;
 	font-size: 1.1rem;
 	font-weight: 500;

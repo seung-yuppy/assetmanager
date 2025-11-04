@@ -132,4 +132,7 @@ public class OrderService {
 		return orderDAO.getApprovalOrder(userId);
 	}
 
+	public List<OrderDTO> getOrderTop3(int userId) {
+		return orderDAO.getOrderTop3(userId);
+	}
 }

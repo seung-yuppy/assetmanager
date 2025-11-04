@@ -51,7 +51,8 @@
 
 /* 5. 채팅창 헤더 */
 .chatbot-content-wrapper h2 {
-	background-color: var(--primary-color);
+	/* background-color: var(--primary-color); */
+	background-image: var(--gradient-color);
 	color: var(--white-color);
 	font-size: 1.1rem;
 	font-weight: 600;

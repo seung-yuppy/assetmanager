@@ -34,4 +34,5 @@ public interface OrderDAO {
     // User DashBoard
     public int getPendingOrder(@Param("userId") int userId);
     public int getApprovalOrder(@Param("userId") int userId);
+    public List<OrderDTO> getOrderTop3(@Param("userId") int userId);
 }

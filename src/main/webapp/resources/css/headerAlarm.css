@@ -1,0 +1,140 @@
+@charset "UTF-8";
+        .notification-toggle {
+            /* li 안에 포함되지만, 드롭다운 패널의 anchor 역할을 함 */
+            position: relative;
+            display: inline-block; /* img가 li 안에서 잘 작동하도록 */
+            cursor: pointer;
+        }
+
+        /* 알림 배지 스타일 */
+        .notification-badge {
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 700;
+            line-height: 1;
+            color: white; /* text-red-100 대신 white 사용 */
+            background-color: #dc2626; /* bg-red-600 */
+            border-radius: 9999px; /* rounded-full */
+            white-space: nowrap;
+            z-index: 11;
+            border: 1px solid white; /* 배경색과 구분 */
+        }
+
+        /* 알림 드롭다운 패널 스타일 */
+        .notification-dropdown {
+            display: none; 
+            position: absolute;
+            right: 0;
+            margin-top: 0.75rem; 
+            width: 320px; 
+            background-color: white;
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); 
+            border: 1px solid #f3f4f6; 
+            z-index: 20; /* 헤더보다 높게 */
+            transform-origin: top right;
+            transition: opacity 300ms ease, transform 300ms ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .notification-dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* 드롭다운 헤더 */
+        .dropdown-header {
+            padding: 0.75rem 1.25rem; 
+            border-bottom: 1px solid #f3f4f6; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-header h3 {
+            font-size: 1.125rem; 
+            font-weight: 600; 
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .mark-all-read-button {
+            font-size: 0.875rem; 
+            color: #2563eb; 
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 150ms ease-in-out;
+            padding: 0;
+        }
+
+        .mark-all-read-button:hover {
+            color: #1e40af; 
+        }
+
+        /* 알림 목록 */
+        .notification-list {
+            max-height: 24rem; 
+            overflow-y: auto;
+        }
+
+        /* 알림 아이템 기본 스타일 */
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #f3f4f6; 
+            cursor: pointer;
+            display: flex;
+            gap: 0.75rem; 
+            align-items: flex-start;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* 읽지 않은 알림 */
+        .unread-notification {
+            background-color: rgba(239, 246, 255, 0.7); 
+        }
+        
+        .unread-notification:hover {
+            background-color: #eff6ff; 
+        }
+
+        .unread-dot {
+            margin-top: 4px; 
+            width: 8px; 
+            height: 8px; 
+            background-color: #2563eb; 
+            border-radius: 9999px; 
+            flex-shrink: 0;
+        }
+
+        .unread-notification .content p:first-child {
+            font-weight: 500; 
+            color: #111827;
+        }
+        
+        .read-notification .spacer {
+            width: 8px;
+            flex-shrink: 0;
+        }
+        
+        /* 기타 스타일 유지 */
+        .content { flex-grow: 1; overflow: hidden; }
+        .content p { margin: 0; font-size: 0.875rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .content p:last-child { font-size: 0.75rem; margin-top: 0.125rem; color: #6b7280;}
+        .content span { font-weight: 700; }
+        .dropdown-footer { padding: 0.75rem 1.25rem; border-top: 1px solid #f3f4f6; text-align: center; }
+        .dropdown-footer a { font-size: 0.875rem; color: #4b5563; text-decoration: none; transition: color 150ms ease-in-out; font-weight: 500; }
+        .dropdown-footer a:hover { color: #111827; }

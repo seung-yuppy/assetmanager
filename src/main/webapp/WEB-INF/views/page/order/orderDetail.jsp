@@ -39,7 +39,28 @@
 								</div>
 							</div>
 							<c:forEach var="product" items="${products}">
-								<c:forEach var="i" begin="1" end="${product.count}">
+								<c:forEach var="i" begin="1" end="${product.registerCount}">
+										<div class="form-row" data-content-id ="${product.id}">
+											<div class="form-group category-group fixed-width-med">
+												<label for="category">카테고리 </label>
+												<input id="category" name="category" type="text" value="${product.categoryName}" data-id="${product.categoryId}" class="locked-input" readonly>
+											</div>
+											<div class="form-group product-select-group fixed-width-lg">
+												<label for="productNameSelect">제품명</label>
+												<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
+											</div>
+											<div class="form-group fixed-width-med">
+												<label for="price">단가 (원)</label>
+												<div class="last-input-group">
+													<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
+													<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
+														<button type="button" class="regist-button-save" disabled>완료</button>
+													</c:if>
+												</div>
+											</div>
+										</div>
+								</c:forEach>
+								<c:forEach var="i" begin="1" end="${product.count - product.registerCount}">
 									<div class="form-row" data-content-id ="${product.id}">
 										<div class="form-group category-group fixed-width-med">
 											<label for="category">카테고리 </label>
@@ -54,17 +75,13 @@
 											<div class="last-input-group">
 												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
 												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
-													<c:if test="${product.assetId != null}">
-														<button type="button" class="regist-button-save" disabled>완료</button>
-													</c:if>
-													<c:if test="${product.assetId == null}">
-														<button type="button" class="regist-button" data-target="registerModal">등록</button>
-													</c:if>
+													<button type="button" class="regist-button" data-target="registerModal">등록</button>
 												</c:if>
 											</div>
 										</div>
 									</div>
 								</c:forEach>
+								
 							</c:forEach>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유</label>

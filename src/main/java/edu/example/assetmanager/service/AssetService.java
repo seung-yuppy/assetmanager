@@ -198,7 +198,7 @@ public class AssetService {
 		
 		return showList;
 	}
-	
+	// 반출 자산의 등록
 	@Transactional 
     public boolean registerAssetItem(AssetHistoryDTO historyDTO) {
         int userId = historyDTO.getUserId();
@@ -214,16 +214,18 @@ public class AssetService {
         
         if(dao.updateAsset(userId, serialNumber, deptAddress, assetId)) {
         	historyDTO.setStatus("rent");
-        	if(dao.insertAssetHistory(historyDTO)) {
-        		return true;
-        	} else {
-        		return false;
-        	}
+        	return insertAssetHistory(historyDTO, "rent");
         } else {
         	return false;
         }
     }
 	
+	// 자산내역 추가
+	public boolean insertAssetHistory(AssetHistoryDTO historyDTO , String status) {
+    	historyDTO.setStatus(status);
+    	return dao.insertAssetHistory(historyDTO);
+	}
+	// 자산 추가
 	public boolean insertAsset(AssetDTO assetDTO) {
 		return dao.insertAsset(assetDTO);
 	}

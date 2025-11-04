@@ -29,6 +29,6 @@ public interface OrderDAO {
     //OrderContent
     public int insertOrderContent(OrderContentDTO content);
     public List<OrderContentDTO> getContentsByOrderId(int id);
-    public boolean updateContentAssetId(@Param("id") int id, @Param("assetId") int assetId);
+    public boolean updateContentRegisterCount(int id);
 
 }

@@ -189,9 +189,9 @@
     	where id = #{id} 
     </update>
     
-    <update id="updateContentAssetId">
+    <update id="updateContentRegisterCount">
     	update order_content
-    	set asset_id = #{assetId}
+    	set register_count = register_count + 1
     	where id = #{id}
     </update>
 </mapper>

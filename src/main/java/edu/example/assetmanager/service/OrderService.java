@@ -10,6 +10,7 @@ import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderDetailRESP;
@@ -103,12 +104,18 @@ public class OrderService {
 	// 구매 자산 등록
 	public boolean registerAsset(AssetDTO assetDTO, int orderContentId) {
 		boolean isAssetInserted =  assetService.insertAsset(assetDTO);
-		boolean isContentUpdated = updateContentAssetId(orderContentId, assetDTO.getId());
-		return isAssetInserted && isContentUpdated;
+		boolean isContentUpdated = updateContentRegisterCount(orderContentId);
+		
+		AssetHistoryDTO assetHistoryDTO = new AssetHistoryDTO();
+		assetHistoryDTO.setAssetId(assetDTO.getId());
+		assetHistoryDTO.setUserId(assetDTO.getUserId());
+		boolean isHistoryUpdated =  assetService.insertAssetHistory(assetHistoryDTO, "rent");
+		
+		return isAssetInserted && isContentUpdated && isHistoryUpdated;
 	}
 	
-	public boolean updateContentAssetId(int id, int orderContentId) {
-		return orderDAO.updateContentAssetId(id, orderContentId);
+	public boolean updateContentRegisterCount(int id) {
+		return orderDAO.updateContentRegisterCount(id);
 	}
 	
 	// 구매 요청 취소

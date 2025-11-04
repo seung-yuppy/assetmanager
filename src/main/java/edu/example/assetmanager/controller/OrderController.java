@@ -88,7 +88,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/list")
-	public String index (HttpSession httpSession, Model model, OrderParamDTO orderParamDTO) {
+	public String orderList (HttpSession httpSession, Model model, OrderParamDTO orderParamDTO) {
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo != null) {
 			orderParamDTO.setUserId(userInfo.getId());
@@ -99,7 +99,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/detail/{id}")
-	public String detail(@PathVariable int id, Model model, HttpSession session) {
+	public String orderDetail(@PathVariable int id, Model model, HttpSession session) {
 		OrderDetailRESP response = orderService.getOrderDetail(id);
 		OrderDTO orderDTO =  response.getOrderDto();
 		ApprovalDTO approvalDTO = response.getApprovalDTO();
@@ -135,18 +135,16 @@ public class OrderController {
 	
 	@ResponseBody
 	@PostMapping(value = "/register/{orderContentId}", produces = "application/json; charset=utf-8")
-	public ResponseEntity<Map<String, Object>> registerNewAsset(@RequestBody AssetDTO assetDTO, @PathVariable Long orderContentId,  HttpSession session) {
-		// 파라미터를 count에 따라 list로 받아야하나
+	public ResponseEntity<Map<String, Object>> registerNewAsset(@RequestBody AssetDTO assetDTO, @PathVariable int orderContentId,  HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
 		Integer userId = (Integer) session.getAttribute("userId");
 		assetDTO.setUserId(userId);
 		
-		if(orderService.registerAsset(assetDTO, orderContentId.intValue())) {
+		if(orderService.registerAsset(assetDTO, orderContentId)) {
 			response.put("msg", "자산 등록에 성공하였습니다.");
 		}else {
-			response.put("msg", "일련번호가 일치하지 않거나 오류가 발생했습니다.");
+			response.put("msg", "자산 등록 중 오류가 발생했습니다.");
 		}
-		
 	    return ResponseEntity.ok(response);
 	}
 	

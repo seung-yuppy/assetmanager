@@ -88,7 +88,8 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/assetmanager/resources/js/returnAsset.js"></script>
 </body>
 </html>

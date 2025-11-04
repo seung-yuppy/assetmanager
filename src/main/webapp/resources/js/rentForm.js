@@ -43,7 +43,7 @@ function addProduct(){
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 									<label>제품명<span class="required">*</span></label> 
-									<input list="productOptions" name="items[${currentIndex}].assetName" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal">
+									<input list="productOptions" name="items[${currentIndex}].assetName" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>

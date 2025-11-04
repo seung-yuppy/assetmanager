@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>반출 승인 목록</title>
+<title>연장 승인 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
@@ -22,8 +22,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>		
 			<div class="dashboard-container">
-				<h1>반출 요청 목록</h1>
-				<span>현재 처리 중인 모든 반출 요청의 목록을 확인하고 관리합니다.</span>
+				<h1>연장 요청 목록</h1>
+				<span>현재 처리 중인 모든 연장 요청의 목록을 확인하고 관리합니다.</span>
 
 				<div class="section-card">
 					<div class="search-card">

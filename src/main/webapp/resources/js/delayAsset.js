@@ -1,0 +1,1 @@
+const delayBtn = document.querySelector("#delay-button");

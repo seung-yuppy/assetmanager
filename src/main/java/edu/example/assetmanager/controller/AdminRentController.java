@@ -68,4 +68,9 @@ public class AdminRentController {
 	public String approve(int id) {
 		return "redirect:/admin/adminRentDetail";
 	}
+	
+	@GetMapping("/delay/list")
+	public String delayList(){
+		return "/admin/adminDelayList";
+	}
 }

@@ -145,4 +145,5 @@ public class RentController {
 		
 		return ResponseEntity.ok(response);
 	}
+	
 }

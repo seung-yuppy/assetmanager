@@ -39,7 +39,15 @@
 	<select id="countAll">
 		SELECT COUNT(*)
 		FROM "User"
-		WHERE role = 'employee' OR role = 'manager'
+		<where>
+				role NOT IN ('admin', 'department')
+        	<if test="deptId != 0">
+        		AND department_id = #{deptId}
+        	</if>
+        	<if test="keyword != null and keyword != ''">
+        		AND username LIKE '%' || #{keyword} || '%'
+        	</if>
+       	</where>
 	</select>
 	
 	<select id="listAll">
@@ -52,7 +60,15 @@
                 JOIN Department ON "User".department_id = Department.id
 			) u
 		)
-		WHERE role NOT IN ('admin', 'department')
+		<where>
+				role NOT IN ('admin', 'department')
+        	<if test="deptId != 0">
+        		AND department_id = #{deptId}
+        	</if>
+        	<if test="keyword != null and keyword != ''">
+        		AND username LIKE '%' || #{keyword} || '%'
+        	</if>
+       	</where>
 		ORDER BY emp_no
         offset #{offset} rows
     	fetch next #{size} rows only

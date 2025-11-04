@@ -43,6 +43,16 @@
 				</c:if>
 			</li>
 			<!-- 대시보드 끝-->
+			<!-- 사용자 메뉴 시작 -->
+			<c:if test="${userInfo.role == 'admin'}">
+                <li class="menu-item">
+                    <a href="/assetmanager/admin/user/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_user.svg" />
+                        <span>사용자</span>
+                    </a>
+                </li>			
+			</c:if>
+			<!-- 사용자 메뉴 끝 -->
 			<!-- 자산메뉴 시작 -->
 			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
 				<li class="menu-item menu-sub">
@@ -59,16 +69,6 @@
 					</ul> 
 				</li>
 			</c:if>
-			<!-- 사용자 메뉴 시작 -->
-			<c:if test="${userInfo.role == 'admin'}">
-                <li class="menu-item">
-                    <a href="/assetmanager/admin/user/list">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_user.svg" />
-                        <span>사용자</span>
-                    </a>
-                </li>			
-			</c:if>
-			<!-- 사용자 메뉴 끝 -->
 			<c:if test="${userInfo.role == 'admin'}">
                 <li class="menu-item menu-sub">
 					<div class="menu-arrow">
@@ -102,8 +102,48 @@
                 </li>
 			</c:if>
 			<!-- 상품메뉴 끝 -->
+			<!-- 반출메뉴 시작 -->
+			<c:if test="${userInfo.role == 'employee'}">
+				<li class="menu-item menu-sub">
+					<div class="menu-arrow">
+						<div class="menu-link">
+							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
+							<span>반출</span>
+						</div>
+						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />
+					</div>
+					<ul class="sub-menu-list">
+						<li><a href="/assetmanager/rent/form">반출 요청</a></li>
+						<li><a href="/assetmanager/rent/list">반출 목록</a></li>
+					</ul>                    
+				</li>
+			</c:if>
+			<c:if test="${userInfo.role == 'admin'}">
+				<li class="menu-item menu-sub">
+					<div class="menu-arrow">
+						<div class="menu-link">
+							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
+	                        <span>반출</span>          
+						</div>
+						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
+					</div>
+					<ul class="sub-menu-list">
+						<li><a href="/assetmanager/admin/rent/list">반출 목록</a></li>
+						<li><a href="/assetmanager/admin/delay/list">연장 목록</a></li>
+					</ul>                        
+				</li>		
+			</c:if>
+			<c:if test="${userInfo.role == 'manager'}">
+				<li class="menu-item">
+	            	<a href="/assetmanager/manager/rent/list?status=FIRST_APPROVAL">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg"  />
+		                <span>반출</span>
+		            </a>          
+	            </li>
+			</c:if>
+			<!-- 반출메뉴 끝 -->
 			<!-- 구입메뉴 시작 -->
-			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
+			<c:if test="${userInfo.role == 'employee'}">
 				<li class="menu-item menu-sub">
 					<div class="menu-arrow">
 						<div class="menu-link">
@@ -126,32 +166,25 @@
 		            </a>          
 	            </li>
 			</c:if>
-			<!-- 구입메뉴 끝 -->
-			<!-- 반출메뉴 시작 -->
-			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
-				<li class="menu-item menu-sub">
-					<div class="menu-arrow">
-						<div class="menu-link">
-							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
-							<span>반출</span>
-						</div>
-						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />
-					</div>
-					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/rent/form">반출 요청</a></li>
-						<li><a href="/assetmanager/rent/list">반출 목록</a></li>
-					</ul>                    
-				</li>
+			<c:if test="${userInfo.role == 'manager'}">
+				<li class="menu-item">
+	            	<a href="/assetmanager/manager/order/list?status=FIRST_APPROVAL">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
+		                <span>구입</span>
+		            </a>          
+	            </li>
 			</c:if>
+			<!-- 구입메뉴 끝 -->
+			<!-- 반납메뉴 시작 -->
 			<c:if test="${userInfo.role == 'admin'}">
 	            <li class="menu-item">
-	            	<a href="/assetmanager/admin/rent/list?status=PENDING">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg" />
-                        <span>반출</span>
+	            	<a href="/assetmanager/admin/return/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_return.png" />
+                        <span>반납</span>
 		            </a>          
 	            </li>			
-			</c:if>
-			<!-- 반출메뉴 끝 -->
+			</c:if>			
+			<!-- 반납메뉴 끝 -->
 		</ul>
 	</nav>
 	<script src="/assetmanager/resources/js/sidemenu.js"></script>

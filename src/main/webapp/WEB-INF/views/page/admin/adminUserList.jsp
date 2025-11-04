@@ -21,16 +21,20 @@
 						<div class="filter-controls">
 							<div class="status-filter">
 								<label for="statusFilter">부서</label>
-								<select id="statusFilter">
-									<option value="all">전체</option>
-									<option value="1">개발팀</option>
-									<option value="2">마케팅팀</option>
-									<option value="3">인사팀</option>
+								<select id="statusFilter"  onchange="setBoardParam('deptId', this.value)">
+									<option value="0">전체</option>
+									<option value="2">공공사업1팀</option>
+									<option value="3">공공사업2팀</option>
+									<option value="4">공공사업3팀</option>
+									<option value="5">공공사업4팀</option>
+									<option value="6">전략사업1팀</option>
+									<option value="7">전략사업2팀</option>
+									<option value="8">영업팀</option>
 								</select>
 							</div>
 							<div class="search-box">
-								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
-								<button><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
+								<input type="text" id="assetSearch" placeholder="사용자 이름을 입력해주세요." class="search-field">
+								<button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
 							</div>
 						</div>
 					</div>
@@ -39,7 +43,7 @@
 						<thead>
 							<tr>
 								<th>사번</th>
-								<th>사용자명</th>
+								<th>사용자 이름</th>
 								<th>부서</th>
 								<th>직급</th>						
 							</tr>
@@ -104,5 +108,7 @@
 			</div>
 		</div>	
 	</div>
+	
+	<script src="/assetmanager/resources/js/orderList.js"></script>
 </body>
 </html>

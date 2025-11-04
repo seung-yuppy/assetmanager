@@ -41,7 +41,7 @@
                 </div>
                 <div class="metric-card border-blue">
 					<div class="card-header">
-                		<p class="card-title">구매 승인</p> 
+                		<p class="card-title">구매 등록</p> 
                 		<div class="card-logo-box back-blue">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
-						<p class="card-title">반출 승인</p>
+						<p class="card-title">반출 등록</p>
                 		<div class="card-logo-box back-purple">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>

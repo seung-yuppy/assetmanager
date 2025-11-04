@@ -28,9 +28,6 @@ public class AdminUserController {
 	public String userList(Model model, UserParamDTO dto) {
 		PageResponseDTO<UserInfoDTO> list = service.listAll(dto);
 		model.addAttribute("response", list);
-		for (UserInfoDTO user : list.getContent()) {
-			System.out.println(user.getEmpNo());
-		}
 		return "/admin/adminUserList";
 	}	
 	

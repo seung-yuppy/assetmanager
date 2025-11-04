@@ -5,10 +5,12 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class AlarmDTO {
+public class NotificationDTO {
 	private int id;
 	private int userId;
-	private String alarmMsg;
+	private int targetId;
+	private String targetType;
+	private String message;
 	private Date createDate;
 	private boolean isRead;
 	

@@ -39,24 +39,27 @@
                 </div>
             </div>
 
-            <!-- 알림 아이템: 읽지 않음 -->
+            <!-- 알림 아이템: 읽음 -->
             <div class="notification-item unread-notification">
-                <div class="unread-dot"></div>
+                <div class="spacer"></div>
                 <div class="content">
-                    <p>
-                        <span>김지수</span> 님이 회원님의 게시물에 댓글을 남겼습니다.
-                    </p>
-                    <p>2시간 전</p>
+                    <p> 구매 요청(갤럭시북 pro 등 2개)이 승인되었습니다. 수령 후 자산을 등록해주세요</p>
+                    <p>3일 전</p>
                 </div>
             </div>
-
-            <!-- 알림 아이템: 읽음 -->
+            
             <div class="notification-item read-notification">
                 <div class="spacer"></div>
                 <div class="content">
-                    <p>
-                        회원님의 요청이 성공적으로 처리되었습니다.
-                    </p>
+                    <p> 반출 요청(갤럭시북 pro 등 2개)이 승인되었습니다. 수령 후 자산을 등록해주세요</p>
+                    <p>3일 전</p>
+                </div>
+            </div>
+            
+            <div class="notification-item read-notification">
+                <div class="spacer"></div>
+                <div class="content">
+                    <p>반출 요청(맥북 에어 등 3개)이 반려되었습니다.</p>
                     <p>3일 전</p>
                 </div>
             </div>
@@ -64,11 +67,11 @@
         </div>
 
         <!-- 푸터 -->
-        <div class="dropdown-footer">
+<!--         <div class="dropdown-footer">
             <a href="/assetmanager/notifications/all">
                 전체 알림 보기
             </a>
-        </div>
+        </div> -->
     </div>
 </div>
 

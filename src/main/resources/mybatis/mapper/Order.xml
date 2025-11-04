@@ -169,6 +169,12 @@
     	where id = ${id}
     </select>
     
+    <select id="getOrderByApprovalId" parameterType="int">
+    	select * 
+    	from orders 
+    	where approval_id = ${id}
+    </select>
+    
     <select id="getContentsByOrderId" parameterType="int" resultType="OrderContentDTO">
     	select o.*, c.category_name
     	from order_content o

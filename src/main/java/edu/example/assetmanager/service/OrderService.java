@@ -26,6 +26,14 @@ public class OrderService {
 	private final ApprovalDAO approvalDAO;
 	private final UserService userService;
 	private final AssetService assetService;
+	
+	public OrderDTO getOrderById(int id) {
+		return orderDAO.getOrderById(id);
+	}
+	
+	public OrderDTO getOrderByApprovalId(int id) {
+		return orderDAO.getOrderByApprovalId(id);
+	}
 
 	public PageResponseDTO<OrderDTO> listAll(OrderParamDTO orderParamDTO) {
 		int totalCount = orderDAO.countAll(orderParamDTO);
@@ -88,7 +96,7 @@ public class OrderService {
 
 	public OrderDetailRESP getOrderDetail(int id) {
 		// 주문 정보
-		OrderDTO orderDTO = orderDAO.getOrderById(id);
+		OrderDTO orderDTO = getOrderById(id);
 		List<OrderContentDTO> products = orderDAO.getContentsByOrderId(id);
 		// 결재 및 결재자 정보
 		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(orderDTO.getApprovalId());

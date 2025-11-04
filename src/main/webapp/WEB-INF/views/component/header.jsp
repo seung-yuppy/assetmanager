@@ -7,7 +7,7 @@
 	<title>헤더</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/header.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/headerAlarm.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/notification.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -21,7 +21,7 @@
 			</li>			
 
 			<li class="header-item-profile">
-				<%@ include file="/WEB-INF/views/component/headerAlarm.jsp" %>
+				<%@ include file="/WEB-INF/views/component/notification.jsp" %>
 			</li>
 			
 			<li class="header-item-profile">

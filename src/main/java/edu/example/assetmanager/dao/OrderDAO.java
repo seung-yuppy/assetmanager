@@ -31,4 +31,7 @@ public interface OrderDAO {
     public List<OrderContentDTO> getContentsByOrderId(int id);
     public boolean updateContentRegisterCount(int id);
 
+    // User DashBoard
+    public int getPendingOrder(@Param("userId") int userId);
+    public int getApprovalOrder(@Param("userId") int userId);
 }

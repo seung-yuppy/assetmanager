@@ -153,5 +153,23 @@
     	FROM Rent 
     	WHERE user_id = #{userId} AND id = #{id}
     </select>
+    
+    <select id="getPendingRent">
+		SELECT COUNT(r.id)
+		FROM Rent r
+			JOIN Approval a ON r.approval_id = a.id
+		WHERE a.status = 'pending'
+		AND r.user_id = #{userId}
+		AND r.is_valid = 1
+	</select>
+	
+	<select id="getApprovalRent">
+		SELECT COUNT(r.id)
+		FROM Rent r
+			JOIN Approval a ON r.approval_id = a.id
+		WHERE a.status = 'final_approval'
+		AND r.user_id = #{userId}
+		AND r.is_valid = 1
+	</select>
 
 </mapper>

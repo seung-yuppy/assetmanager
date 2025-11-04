@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
 import edu.example.assetmanager.dao.OrderDAO;
-import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
@@ -123,5 +122,14 @@ public class OrderService {
 		return orderDAO.cancelOrder(id);
 	}
 	
+	// 사용자 대시보드 - 구매 대기 개수
+	public int countPendingOrder(int userId) {
+		return orderDAO.getPendingOrder(userId);
+	}
+	
+	// 사용자 대시보드 - 구매 승인 개수
+	public int countApprovalOrder(int userId) {
+		return orderDAO.getApprovalOrder(userId);
+	}
 
 }

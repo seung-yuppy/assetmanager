@@ -112,7 +112,7 @@ public class UserService {
 
 	// 페이징 처리된 목록을 가져오는 메서드
 	public PageResponseDTO<UserInfoDTO> listAll(UserParamDTO dto) {
-		int totalCount = dao.countAll();
+		int totalCount = dao.countAll(dto);
 		PageResponseDTO<UserInfoDTO> response = paging(dto, totalCount);
 		List<UserInfoDTO> list = dao.listAll(dto);
 		response.setContent(list);
@@ -138,9 +138,9 @@ public class UserService {
 	}
 
 	// 총 페이지 수를 계산하는 메서드
-	public int getTotalPages() {
+	public int getTotalPages(UserParamDTO dto) {
 		int pageSize = 10;
-		int totalItems = dao.countAll();
+		int totalItems = dao.countAll(dto);
 		return (int) Math.ceil((double) totalItems / pageSize);
 	}
 

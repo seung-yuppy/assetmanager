@@ -55,5 +55,10 @@ public interface RentDAO {
 	// rentDTO 가져오기 
 	public RentDTO getRentIdWithUserId(@Param("userId")int userId, @Param("id") Long id);
 	
+	// 사용자 대시보드 - 반출 대기
+	public int getPendingRent(@Param("userId") int userId);
+	
+	// 사용자 대시보드 - 반출 승인
+	public int getApprovalRent(@Param("userId") int userId);
 		
 }

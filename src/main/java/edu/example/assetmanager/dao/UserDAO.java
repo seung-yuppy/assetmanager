@@ -25,7 +25,7 @@ public interface UserDAO {
 	public UserInfoDTO getUserInfo(@Param("userId") int userId);
 	
 	// 관리자 회원 정보 전체 개수
-	public int countAll();
+	public int countAll(UserParamDTO dto);
 	
 	// 관리자 회원 목록
 	public List<UserInfoDTO> listAll(UserParamDTO dto);

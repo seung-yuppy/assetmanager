@@ -191,5 +191,14 @@ public class RentService {
 		return rentDAO.cancelRent(id);
 	}
 	
+	// 사용자 대시보드 - 반출 대기 개수
+	public int countPendingRent(int userId) {
+		return rentDAO.getPendingRent(userId);
+	}
+	
+	// 사용자 대시보드 - 반출 승인 개수
+	public int countingApprovalRent(int userId) {
+		return rentDAO.getApprovalRent(userId);
+	}
 	
 }

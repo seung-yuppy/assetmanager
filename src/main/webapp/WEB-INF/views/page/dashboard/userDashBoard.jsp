@@ -28,7 +28,7 @@
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
                 		</div>
                 	</div>                    
-                    <p class="card-value">${usingCount}</p>
+                    <p class="card-value">${usingCount}개</p>
                 </div>
                 <div class="metric-card border-blue">
 					<div class="card-header">
@@ -37,16 +37,16 @@
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
                 		</div>
                 	</div>                    
-                    <p class="card-value">${deptCount}</p>
+                    <p class="card-value">${pendingOrder}건</p>
                 </div>
                 <div class="metric-card border-blue">
 					<div class="card-header">
-                		<p class="card-title">구매 등록</p> 
+                		<p class="card-title">구매 승인</p> 
                 		<div class="card-logo-box back-blue">
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>                    
-                    <p class="card-value">${orderCount}</p>
+                    <p class="card-value">${approvalOrder}건</p>
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
@@ -55,7 +55,7 @@
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
                 		</div>
                 	</div>   
-                    <p class="card-value">${rentCount}</p>
+                    <p class="card-value">${pendingRent}건</p>
                 </div>
                 <div class="metric-card border-purple">
 					<div class="card-header">
@@ -64,7 +64,7 @@
                 			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
                 		</div>
                 	</div>   
-                    <p class="card-value">${rentCount}</p>
+                    <p class="card-value">${approvalRent}건</p>
                 </div>
             </div>
             

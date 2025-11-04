@@ -225,6 +225,7 @@ public class AssetService {
     	historyDTO.setStatus(status);
     	return dao.insertAssetHistory(historyDTO);
 	}
+	
 	// 자산 추가
 	public boolean insertAsset(AssetDTO assetDTO) {
 		return dao.insertAsset(assetDTO);

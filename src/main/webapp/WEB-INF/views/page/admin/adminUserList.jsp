@@ -22,14 +22,14 @@
 							<div class="status-filter">
 								<label for="statusFilter">부서</label>
 								<select id="statusFilter"  onchange="setBoardParam('deptId', this.value)">
-									<option value="0">전체</option>
-									<option value="2">공공사업1팀</option>
-									<option value="3">공공사업2팀</option>
-									<option value="4">공공사업3팀</option>
-									<option value="5">공공사업4팀</option>
-									<option value="6">전략사업1팀</option>
-									<option value="7">전략사업2팀</option>
-									<option value="8">영업팀</option>
+									<option value="0" ${empty param.deptId ? 'selected' : ''}>전체</option>
+									<option value="2" ${param.deptId == '2' ? 'selected' : ''}>공공사업1팀</option>
+									<option value="3" ${param.deptId == '3' ? 'selected' : ''}>공공사업2팀</option>
+									<option value="4" ${param.deptId == '4' ? 'selected' : ''}>공공사업3팀</option>
+									<option value="5" ${param.deptId == '5' ? 'selected' : ''}>공공사업4팀</option>
+									<option value="6" ${param.deptId == '6' ? 'selected' : ''}>전략사업1팀</option>
+									<option value="7" ${param.deptId == '7' ? 'selected' : ''}>전략사업2팀</option>
+									<option value="8" ${param.deptId == '8' ? 'selected' : ''}>영업팀</option>
 								</select>
 							</div>
 							<div class="search-box">

@@ -16,6 +16,8 @@ import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.ItemService;
+import edu.example.assetmanager.service.OrderService;
+import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,8 @@ public class HomeController {
 	private final UserService service;
 	private final AssetService assetService;
 	private final ItemService itemService;
+	private final OrderService orderService;
+	private final RentService rentService;
 	
 	// 사원 & 부장 대시보드
 	@GetMapping("/home")
@@ -33,17 +37,20 @@ public class HomeController {
 		if (userId != null) {
 			UserInfoDTO dto = service.getUser(userId);
 			int usingCount = assetService.totalUsingAssets(userId);
-			int deptCount = assetService.totalDeptAssets(userId);
-			int orderCount = service.getOrderCount(userId);
-			int rentCount = service.getRentCount(userId);
+			int pendingOrder = orderService.countPendingOrder(userId);
+			int approvalOrder = orderService.countApprovalOrder(userId);
+			int pendingRent = rentService.countPendingRent(userId);
+			int approvalRent = rentService.countingApprovalRent(userId);
+
 			List<AssetHistoryDTO> list = assetService.getMyUsingAsset(userId);
 			
 			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);
 			model.addAttribute("usingCount", usingCount);
-			model.addAttribute("deptCount", deptCount);
-			model.addAttribute("orderCount", orderCount);
-			model.addAttribute("rentCount", rentCount);
+			model.addAttribute("pendingOrder", pendingOrder);
+			model.addAttribute("approvalOrder", approvalOrder);
+			model.addAttribute("pendingRent", pendingRent);
+			model.addAttribute("approvalRent", approvalRent);
 			model.addAttribute("list", list);
 			return "dashboard/userDashBoard";
 		} else {

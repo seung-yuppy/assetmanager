@@ -194,4 +194,22 @@
     	set register_count = register_count + 1
     	where id = #{id}
     </update>
+    
+    <select id="getPendingOrder">
+	    SELECT COUNT(o.id)
+		FROM Orders o
+			JOIN Approval a ON o.approval_id = a.id
+		WHERE a.status = 'pending'
+		AND o.user_id = #{userId}
+		AND o.is_valid = 1
+    </select>
+    
+    <select id="getApprovalOrder">
+    	SELECT COUNT(o.id)
+		FROM Orders o
+			JOIN Approval a ON o.approval_id = a.id
+		WHERE a.status = 'final_approval'
+		AND o.user_id = #{userId}
+		AND o.is_valid = 1
+    </select>
 </mapper>

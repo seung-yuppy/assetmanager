@@ -35,14 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	const notificationSection = document.querySelector('.notification-list');
 	const getMoreBtn =  document.querySelector('.dropdown-footer');
 	
+	// 안읽은 알림 갯수 구하기
 	getUnreadCount();
 	
 	// 알림 드롭다운 토글 함수
 	function toggleDropdown() {
-	    // img는 토글을 담당하고, dropdown에 show 클래스를 토글하여 표시
 	    dropdown.classList.toggle('show'); 
 	}
-
 	
 	// 종 아이콘 이미지 클릭 이벤트 리스너
 	bellImage.addEventListener('click', (event) => {
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	    }
 	});
 	
-	// 클릭 -> 알림 읽기 처리
+	// 알림 항목 클릭 -> 알림 읽기 처리
 	notificationSection.addEventListener('click', (e) => {
 		const item = e.target.closest('.notification-item');
 		if (item){
@@ -128,7 +127,9 @@ function getUnreadCount(){
 }
 
 function initNotifications(){
-	const notificationSection = document.querySelector('.notification-list').innerHTML = "";
+	notificationOffset = 0; 
+	const notificationSection = document.querySelector('.notification-list');
+	notificationSection.innerHTML = "";
 	getNotifications(notificationOffset);
 }
 
@@ -162,6 +163,5 @@ function getNotifications(offset){
     	notificationOffset = offset + 10;
     })
     .catch(err => console.error("알림 불러오기 실패:", err));
-	
 }
 

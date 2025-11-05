@@ -79,12 +79,7 @@
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="price">단가 (원)</label>
-										<div class="last-input-group">
-											<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
-											<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
-												<button type="button" class="regist-button" data-target="registerModal">등록</button>
-											</c:if>
-										</div>
+										<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-sm">
 										<label for="quantity">수량 <span class="required">*</span></label>
@@ -92,10 +87,8 @@
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="totalPrice">총액 (원)</label>
-										<div class="last-input-group">
-											<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
-											<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
-										</div>
+										<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>
 								</div>
 							</c:forEach>

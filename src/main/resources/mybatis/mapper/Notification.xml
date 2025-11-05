@@ -6,4 +6,25 @@
 		INSERT INTO Notification (user_id,target_type, target_id, message)
 		VALUES (#{userId}, #{targetType}, #{targetId}, #{message})
 	</insert>
+	
+	<select id="getListByUserId" parameterType="int" resultType="NotificationDTO">
+		select *
+		from notification n
+		where n.user_id = #{userId}
+		order by n.create_date DESC
+		offset #{offset} rows
+		fetch next 10 rows only
+	</select>
+	
+	<select id="getUnreadCountByUserId">
+		select count(*)
+		from notification
+		where user_id = #{id} and is_read = 0
+	</select>
+	
+	<update id="readById">
+		update notification
+		set is_read = 1
+		where id = #{id}
+	</update>
 </mapper>

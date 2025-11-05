@@ -18,45 +18,100 @@ document.addEventListener("DOMContentLoaded", function() {
     	productModal.classList.add('hidden');
     };
 		
+    function collectRequestedCounts() {
+        const requestedMap = new Map();
+        const rows = document.querySelectorAll('#formInputArea .form-row'); 
+        
+        rows.forEach(row => {
+            const nameInput = row.querySelector('.productSelect');
+            const quantityInput = row.querySelector('input[name*=".count"]');
+            
+            if (nameInput && quantityInput && nameInput.value.trim()) {
+                const assetName = nameInput.value.trim();
+                const quantity = parseInt(quantityInput.value) || 0; 
+                
+                if (nameInput === activeProductNameInput) {
+                    return;
+                }
+                
+                requestedMap.set(assetName, (requestedMap.get(assetName) || 0) + quantity);
+            }
+        });
+        return requestedMap;
+    }
+		
 	const renderAssetList = (filter = '') => {
 		listBody.innerHTML = '';
-        const lowercasedFilter = filter.toLowerCase();
         
-        const filteredData = currentFetchedAssets.filter(asset =>
-        asset.assetName.toLowerCase().includes(lowercasedFilter) || 
-        (asset.spec && asset.spec.toLowerCase().includes(lowercasedFilter)) ||
-        asset.count
-    );
- 
-        if (filteredData.length === 0) {
-        	listBody.innerHTML = '<tr><td colspan="2" style="text-align: center; padding: 1rem;">검색 결과가 없습니다.</td></tr>';
-            return;
-        }
+        const requestedCounts = collectRequestedCounts();
+        const lowercasedFilter = filter.toLowerCase();
+        
+        const filteredData = currentFetchedAssets.filter(asset =>
+        asset.assetName.toLowerCase().includes(lowercasedFilter) || 
+        (asset.spec && asset.spec.toLowerCase().includes(lowercasedFilter)) ||
+        String(asset.count).includes(lowercasedFilter)
+    );
+ 
+        if (filteredData.length === 0) {
+        	listBody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 1rem;">검색 결과가 없습니다.</td></tr>';
+            return;
+        }
 
-        filteredData.forEach(asset => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${asset.assetName}</td><td>${asset.spec || ''}</td><td>${asset.count || ''}</td>`;
+        filteredData.forEach(asset => {
+            const assetName = asset.assetName;
+            let availableCount = asset.count;
+            const requested = requestedCounts.get(assetName) || 0;
             
-            tr.addEventListener('click', () => {
-            	const assetId = asset.id; 
-                const assetName = asset.assetName;
-            	
-                if (activeProductNameInput) {
-                    activeProductNameInput.value = assetName;
-                    
-                    // 숨겨진 assetId 값 찾기
-                    const parentRow = activeProductNameInput.closest('.form-row');
-                    if (parentRow) {
-                        const hiddenInput = parentRow.querySelector('input[name="assetId"]');
-                        if(hiddenInput) {                 
-                            hiddenInput.value = assetId;
-                        }
-                    }
-                }
-                closeModal();
-            });
-            listBody.appendChild(tr);
-        });
+            // 총 재고
+            availableCount = availableCount - requested;
+            const AssetCount = Math.max(0, availableCount); 
+            
+            const tr = document.createElement('tr');
+
+			// 0 이면 선택 불가능
+			if (AssetCount === 0) {
+			    tr.classList.add('disabled-asset');
+			}
+            tr.innerHTML = `<td>${assetName}</td><td>${asset.spec || ''}</td><td>${AssetCount || '0'}</td>`;
+            
+			if (AssetCount > 0) {
+	            tr.addEventListener('click', () => {
+	            	const assetId = asset.id; 
+	                const assetName = asset.assetName;
+	                const maxCount = AssetCount; 
+	            	
+	                if (activeProductNameInput) {
+	                    activeProductNameInput.value = assetName;
+	                    
+	                    // 숨겨진 assetId 값 찾기
+	                    const parentRow = activeProductNameInput.closest('.form-row');
+	                    if (parentRow) {
+	                    	const quantityInput = parentRow.querySelector('input[type="number"][name*=".count"]');
+	                    	const hiddenInput = parentRow.querySelector('input[name="items[0].assetId"], input[name*="items["][name*="].assetId"]');
+	                        
+	                        if (quantityInput) {
+	                            const finalMaxCount = parseInt(maxCount);
+	                            
+	                            // max 속성 설정 
+	                            quantityInput.setAttribute('max', finalMaxCount);
+	
+	                            // max를 초과하면 조정
+	                            if (parseInt(quantityInput.value) > finalMaxCount || parseInt(quantityInput.value) < 1) {
+	                                quantityInput.value = finalMaxCount > 0 ? 1 : 0;
+	                            }                          
+	                            quantityInput.disabled = false;
+	                        }
+	                        
+	                        if(hiddenInput) {                 
+	                            hiddenInput.value = assetId;
+	                        }
+	                    }
+	                }
+	                closeModal();
+	            });
+			}
+            listBody.appendChild(tr);
+        });
 	};
 		console.log(formInputArea);
         if (formInputArea) {

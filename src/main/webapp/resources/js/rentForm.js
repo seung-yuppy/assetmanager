@@ -50,8 +50,7 @@ function addProduct(){
 									<div class="last-input-group">
 										<input type="number" id="quantity" name="items[${currentIndex}].count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
 									</div>
-								</div>
-
+								</div>							
 							</div>  
 	`
 		targetEl.insertAdjacentHTML('beforebegin', newFormRowHTML);

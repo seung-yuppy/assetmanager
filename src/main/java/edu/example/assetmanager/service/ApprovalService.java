@@ -11,6 +11,7 @@ import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApprovalStatus;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.RentDTO;
+import edu.example.assetmanager.domain.RentListDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -35,7 +36,13 @@ public class ApprovalService{
 		}else if(current.name().equals("FIRST_APPROVAL")) {
 			approvalDTO.setFinalApprovalDate(new Date());
 		}
-		return approvalDAO.approveApproval(approvalDTO);
+		boolean isSucceed = approvalDAO.approveApproval(approvalDTO);
+		
+		// 알림 생성 
+		if(current.name().equals("FIRST_APPROVAL") && isSucceed) { //최종 승인 때만 알림 생성
+			return insertNotification(approvalDTO, true);
+		}
+		return isSucceed;
 	}
 
 	public boolean reject(ApprovalDTO approvalDTO) {
@@ -49,17 +56,53 @@ public class ApprovalService{
 		
 		boolean isSucceed = approvalDAO.rejectApproval(approvalDTO);
 		
-		// insert notification
+		// 알림 생성 
 		if(isSucceed){
-			int approvalId = approvalDTO.getId().intValue();
-			OrderDTO orderDTO =  orderService.getOrderByApprovalId(approvalId);
-			if (orderDTO != null) {
-				return notificationService.insertRejectNotice(orderDTO);
-			}else {
-				//return notificationService.insertRejectNotice(rentDTO);
-			}
+			return insertNotification(approvalDTO, false);
 		}
 		return isSucceed;
+	}
+	
+	private boolean insertNotification(ApprovalDTO approvalDTO, boolean isApproved) {
+		int approvalId = approvalDTO.getId().intValue();
+		OrderDTO orderDTO =  orderService.getOrderByApprovalId(approvalId);
+		NotificationDTO notificationDTO = new NotificationDTO();
+		if (orderDTO != null) { 
+			String targetType = "order";
+		    notificationDTO.setTargetId(orderDTO.getId());
+		    notificationDTO.setTargetType(targetType);
+		    notificationDTO.setUserId(orderDTO.getUserId());
+		    notificationDTO.setMessage(buildMessage(targetType, orderDTO.getTitle(),isApproved));
+		    
+		} else { 
+			String targetType = "rent";
+		    RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
+		    notificationDTO.setTargetId(rentListDTO.getId().intValue());
+		    notificationDTO.setTargetType(targetType);
+		    notificationDTO.setUserId(rentListDTO.getUserId());
+		    notificationDTO.setMessage(buildMessage(targetType, rentListDTO.getTitle(), isApproved));
+		}
+		return notificationService.insert(notificationDTO);
+	}
+
+	private String buildMessage(String targetType, String title, boolean approved) {
+	    String action; // 요청 종류
+	    switch (targetType) {
+	        case "order":
+	            action = "구매 요청";
+	            break;	
+	        case "rent":
+	            action = "반출 요청";
+	            break;
+	        default:
+	            action = "요청";
+	    }
+
+	    if (approved) {
+	        return action + "(" + title + ")이 승인되었습니다. 수령 후 자산을 등록하세요.";
+	    } else {
+	        return action + "(" + title + ")이 반려되었습니다.";
+	    }
 	}
 
 }

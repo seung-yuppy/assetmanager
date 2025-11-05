@@ -18,18 +18,7 @@ public class NotificationService {
 	public boolean insert(NotificationDTO notificationDTO) {
 		return notificationDAO.insert(notificationDTO);
 	}
-	
-	// 추후 제거 : OrderDTO에 의존성이 생김 -> 결합도 상승
-	public boolean insertRejectNotice(OrderDTO orderDTO) {
-		NotificationDTO notificationDTO = new NotificationDTO();
-		notificationDTO.setTargetId(orderDTO.getId());
-		notificationDTO.setTargetType("order");
-		notificationDTO.setUserId(orderDTO.getUserId());
-		String msg = "구매 요청(" +  orderDTO.getTitle() + ")이 반려되었습니다.";
-		notificationDTO.setMessage(msg);
-		return insert(notificationDTO);
-	}
-	
+
 	public boolean insertRejectNotice(RentDTO rentDTO) {
 		NotificationDTO notificationDTO = new NotificationDTO();
 		notificationDTO.setTargetId(rentDTO.getId().intValue());

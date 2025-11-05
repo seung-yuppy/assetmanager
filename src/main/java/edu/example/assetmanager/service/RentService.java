@@ -243,4 +243,8 @@ public class RentService {
 	public List<RentListDTO> getRentTop3(int userId) {
 		return rentDAO.getRentTop3(userId);
 	}
+	
+	public RentListDTO getRentByApprovalId(int approvalId) {
+		return rentDAO.getRentByApprovalId(approvalId);
+	}
 }

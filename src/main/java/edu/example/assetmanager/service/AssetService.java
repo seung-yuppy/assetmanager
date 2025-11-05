@@ -244,5 +244,9 @@ public class AssetService {
 	public boolean insertAsset(AssetDTO assetDTO) {
 		return dao.insertAsset(assetDTO);
 	}
+	
+	public List<AssetHistoryDTO> getMyUsingAssetTop3(int userId) {
+		return dao.myUsingAssetTop3(userId);
+	}
 
 }

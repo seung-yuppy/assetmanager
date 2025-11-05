@@ -44,7 +44,7 @@ public class HomeController {
 			int pendingRent = rentService.countPendingRent(userId);
 			int approvalRent = rentService.countingApprovalRent(userId);
 
-			List<AssetHistoryDTO> list = assetService.getMyUsingAsset(userId);
+			List<AssetHistoryDTO> list = assetService.getMyUsingAssetTop3(userId);
 			List<OrderDTO> orderList = orderService.getOrderTop3(userId);
 			List<RentListDTO> rentList = rentService.getRentTop3(userId);
 			

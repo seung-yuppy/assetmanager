@@ -82,5 +82,7 @@ public interface AssetDAO {
 	public int findUserIdByAsset(@Param("assetId") int assetId);  
 	
 	public boolean insertAsset(AssetDTO assetDTO);
-
+	
+	// 사용자 대시보드 - 내 자산 3개만 리스트 나오기
+	public List<AssetHistoryDTO> myUsingAssetTop3(@Param("userId") int userId);
 }

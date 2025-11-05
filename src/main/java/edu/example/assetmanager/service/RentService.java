@@ -1,6 +1,5 @@
 package edu.example.assetmanager.service;
 
-import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -74,9 +73,7 @@ public class RentService {
 	public boolean insertApproval(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
 		// Approval 테이블 insert
 		approvalDAO.insertApproval(approvalDTO);
-		System.out.println("approvalDTO.getId() : " + approvalDTO.getId());
 		rentDTO.setApprovalId(approvalDTO.getId());
-		System.out.println(approvalDTO.getId());
 		
 		// items 가지고 오기 
 		List<RentContentDTO> items = rentDTO.getItems();
@@ -86,17 +83,13 @@ public class RentService {
 		
 		// items의 첫번째를 가지고 와서 title 만들기
 		RentContentDTO itemName = items.get(0);
-		System.out.println("############## itemname : "+itemName);
         String title = itemName.getAssetName(); 
-        System.out.println("첫번째 itemName 잘 나오니??? "+title);
     
         if (items.size() > 1) {
             title += " 외 " + (items.size() - 1) + "건";
         }
         rentDTO.setTitle(title);
-				
-        System.out.println("title까지 나와?" + title + " " + rentDTO.getTitle());
-        System.out.println("title까지 나와?" + userId);
+			
 		// rent 테이블 insert
 		if (rentDAO.insertRent(rentDTO, userId)) {	
 			
@@ -130,7 +123,6 @@ public class RentService {
 	public ApproverInfoDTO getRentApprovalDetail(Long id) {
 		// rentId 로 rentApprovalId 가져오기 
 		RentDTO rentDTO = rentDAO.getRentApprovalId(id);
-		System.out.println("rentDTO 나오니??? "+rentDTO);
 		// approverId로 approval 가져오기 
 		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(rentDTO.getApprovalId().intValue());	
 		UserInfoDTO adminInfoDTO = userDAO.getUserInfo(approvalDTO.getApproverId());
@@ -167,12 +159,7 @@ public class RentService {
 	
 	// approverId가 userId인 adminList 찾기
 	public List<RentListDTO> adminList(int userId, String status){ 
-		System.out.println("userId 들어가??"+userId);
-		System.out.println("status 들어가??"+status); 
-
 		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId, status);
-		System.out.println("adminRentList 나와??"+adminRentList);
-		
 		return adminRentList;
 	}
 	
@@ -214,14 +201,12 @@ public class RentService {
 	// returnList 찾기
 	public List<AssetReturnDTO> assetReturn(){	
 		List<AssetReturnDTO> adminReturnList = rentDAO.findAssetReturn();
-		System.out.println("adminReturnList여기기기 "+adminReturnList.toString());		
 		return adminReturnList ;
 	}
 	
 	// returnAsset 정보 찾기
 	public AssetReturnDTO getReturnAsset(int id) { 
 		AssetReturnDTO assetReturnDTO = rentDAO.findReturnAsset(id);
-		System.out.println("assetReturnDTO 여기야?? " +assetReturnDTO);
 		return assetReturnDTO;
 	}
 	
@@ -237,7 +222,6 @@ public class RentService {
 	
 	public boolean adminReturnConfirm(AssetReturnDTO assetReturnDTO) {
 		if(updateAssetReturn(assetReturnDTO.getId(),assetReturnDTO.getUserId(), new Date())) {
-			
 			if(updateAsset(assetReturnDTO.getAssetId())) {
 				AssetHistoryDTO historyDTO = new AssetHistoryDTO();
 				historyDTO.setAssetId(assetReturnDTO.getAssetId());
@@ -253,5 +237,10 @@ public class RentService {
 		} else {
 			return false;
 		}
+	}
+	
+	// 사용자 대시보드 - 반출 최신순 3개
+	public List<RentListDTO> getRentTop3(int userId) {
+		return rentDAO.getRentTop3(userId);
 	}
 }

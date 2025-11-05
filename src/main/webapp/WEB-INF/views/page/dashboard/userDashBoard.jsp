@@ -157,21 +157,24 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr>
-	                            <td>에르고 휴먼 의자</td>
-	                            <td>2024-06-12</td>
-	                            <td><span class="status-badge status-waited">대기중</span></td>
-	                        </tr>
-	                        <tr>
-	                            <td>Adobe Creative Cloud</td>
-	                            <td>2024-05-25</td>
-	                            <td><span class="status-badge status-rejected">거절됨</span></td>
-	                        </tr>
-	                        <tr>
-	                            <td>초고속 무선 마우스</td>
-	                            <td>2024-05-15</td>
-	                            <td><span class="status-badge status-approved">승인됨</span></td>
-	                        </tr>
+	                    	<c:choose>
+	                    		<c:when test="${empty rentList}">
+		                    		<tr>
+				                		<td colspan="3" style="text-align: center;">
+				               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
+			                			</td>
+			                		</tr>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<c:forEach var="rent" items="${rentList}">
+	                    				<tr>
+	                    					<td>${rent.title}</td>
+	                    					<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/></td>
+	                    					<td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
+	                    				</tr>
+	                    			</c:forEach>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </tbody>
 	                </table>
 	            </div>

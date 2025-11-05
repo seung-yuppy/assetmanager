@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.OrderDTO;
+import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.ItemService;
@@ -45,6 +46,7 @@ public class HomeController {
 
 			List<AssetHistoryDTO> list = assetService.getMyUsingAsset(userId);
 			List<OrderDTO> orderList = orderService.getOrderTop3(userId);
+			List<RentListDTO> rentList = rentService.getRentTop3(userId);
 			
 			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);
@@ -55,6 +57,7 @@ public class HomeController {
 			model.addAttribute("approvalRent", approvalRent);
 			model.addAttribute("list", list);
 			model.addAttribute("orderList", orderList);
+			model.addAttribute("rentList", rentList);
 			return "dashboard/userDashBoard";
 		} else {
 			return "redirect:/login";

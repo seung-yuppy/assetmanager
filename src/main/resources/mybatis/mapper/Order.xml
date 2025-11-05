@@ -214,7 +214,7 @@
     	SELECT COUNT(o.id)
 		FROM Orders o
 			JOIN Approval a ON o.approval_id = a.id
-		WHERE a.status = 'final_approval'
+		WHERE a.status = 'FINAL_APPROVAL'
 		AND o.user_id = #{userId}
 		AND o.is_valid = 1
     </select>

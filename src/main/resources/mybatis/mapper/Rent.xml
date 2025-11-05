@@ -167,7 +167,7 @@
 		SELECT COUNT(r.id)
 		FROM Rent r
 			JOIN Approval a ON r.approval_id = a.id
-		WHERE a.status = 'final_approval'
+		WHERE a.status = 'FINAL_APPROVAL'
 		AND r.user_id = #{userId}
 		AND r.is_valid = 1
 	</select>
@@ -234,5 +234,14 @@
 			,location = '서울특별시 구로구 디지털로26길 123, 1605호 (구로동, G+코오롱디지털타워)'
 		WHERE id = #{assetId}	
 	</update>
+
+	<select id="getRentTop3">
+		SELECT *
+		FROM Rent r
+			INNER JOIN Approval a ON r.approval_id = a.id
+		WHERE r.user_id = #{userId}
+		ORDER BY r.rent_date DESC
+		FETCH FIRST 3 ROWS ONLY
+	</select>
 
 </mapper>

@@ -78,6 +78,7 @@ public interface RentDAO {
 	// 반납 완료 Asset 업데이트
 	public boolean updateAsset(int assetId);
 	
-	
+	// 사용자 대시보드 - 반출 요청 3개
+	public List<RentListDTO> getRentTop3(@Param("userId") int userId);
 	
 }

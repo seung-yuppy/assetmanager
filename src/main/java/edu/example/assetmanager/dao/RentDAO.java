@@ -81,4 +81,7 @@ public interface RentDAO {
 	// 사용자 대시보드 - 반출 요청 3개
 	public List<RentListDTO> getRentTop3(@Param("userId") int userId);
 	
+	// approvalId로 Rent 찾기 
+	public RentListDTO getRentByApprovalId(int approvalId);
+	
 }

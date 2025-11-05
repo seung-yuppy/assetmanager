@@ -243,5 +243,11 @@
 		ORDER BY r.rent_date DESC
 		FETCH FIRST 3 ROWS ONLY
 	</select>
+	
+	<select id="getRentByApprovalId">
+		SELECT *
+		FROM Rent
+		WHERE approval_id = #{approvalId}
+	</select>
 
 </mapper>

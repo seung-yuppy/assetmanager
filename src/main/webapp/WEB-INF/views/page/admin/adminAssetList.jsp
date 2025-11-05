@@ -23,16 +23,22 @@
 						<div class="filter-controls">
 							<div class="status-filter">
 								<label for="statusFilter">카테고리:</label>
-								<select id="statusFilter">
-									<option value="all">전체</option>
-									<option value="laptop">노트북</option>
-									<option value="monitor">모니터</option>
-									<option value="keyboard">키보드</option>
+								<select id="statusFilter" onchange="setBoardParam('categoryId', this.value)">
+									<option value="0" ${empty param.categoryId ? 'selected' : ''}>전체</option>
+									<option value="1" ${param.categoryId == '1' ? 'selected' : ''}>노트북</option>
+									<option value="2" ${param.categoryId == '2' ? 'selected' : ''}>모니터</option>
+									<option value="3" ${param.categoryId == '3' ? 'selected' : ''}>태블릿</option>
+									<option value="4" ${param.categoryId == '4' ? 'selected' : ''}>스마트폰</option>
+									<option value="5" ${param.categoryId == '5' ? 'selected' : ''}>복합기</option>
+									<option value="6" ${param.categoryId == '6' ? 'selected' : ''}>데스크탑</option>
+									<option value="7" ${param.categoryId == '7' ? 'selected' : ''}>TV</option>
+									<option value="8" ${param.categoryId == '8' ? 'selected' : ''}>프로젝터</option>
+									<option value="9" ${param.categoryId == '9' ? 'selected' : ''}>기타</option>
 								</select>
 							</div>
 							<div class="search-box">
 								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
-								<button><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
+								<button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
 							</div>
 						</div>
 					</div>
@@ -48,75 +54,73 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="asset" items="${list}">
-								<tr>
-									<td><a href="/assetmanager/admin/asset/detail/${asset.id}">${asset.assetName}</a></td>
-									<td>${asset.categoryName}</td>
-									<td>${asset.serialNumber}</td>
-									<td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
-									<c:if test="${asset.userId == 0}">
-										<td><span class="status-badge status-waited">대기중</span></td>
-									</c:if>
-									<c:if test="${asset.userId != 0}">
-										<td><span class="status-badge status-used">사용중</span></td>
-									</c:if>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty response.content}">
+									<tr>
+										<td colspan="5" style="text-align: center;">
+											<p>자산이 존재하지 않습니다.</p>
+										</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="asset" items="${response.content}">
+										<tr>
+											<td><a href="/assetmanager/admin/asset/detail/${asset.id}">${asset.assetName}</a></td>
+											<td>${asset.categoryName}</td>
+											<td>${asset.serialNumber}</td>
+											<td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
+											<c:if test="${asset.userId == 0}">
+												<td><span class="status-badge status-waited">대기중</span></td>
+											</c:if>
+											<c:if test="${asset.userId != 0}">
+												<td><span class="status-badge status-used">사용중</span></td>
+											</c:if>
+										</tr>
+									</c:forEach>								
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
-					<nav class="pagination-container">
-						<ul class="pagination-list">
-							<c:choose>
-					            <c:when test="${hasPrev}">
-					                <li class="page-item prev">
-					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${startPage - 1}'/>">
-					                        &lt; 이전
-					                    </a>
-					                </li>
-					            </c:when>
-					            <c:otherwise>
-					                <li class="page-item prev disabled">
-					                    <span class="page-link">&lt; 이전</span>
-					                </li>
-					            </c:otherwise>
-					        </c:choose>
-					
-					        <c:forEach var="i" begin="${startPage}" end="${endPage}">
-					            <c:choose>
-					                <c:when test="${i == currentPage}">
-					                    <li class="page-item active">
-					                        <span class="page-link">${i}</span>
-					                    </li>
-					                </c:when>
-					                <c:otherwise>
-					                    <li class="page-item">
-					                        <a class="page-link" href="<c:url value='/admin/asset/list?page=${i}'/>">
-					                            ${i}
-					                        </a>
-					                    </li>
-					                </c:otherwise>
-					            </c:choose>
-					        </c:forEach>
-					
-					        <c:choose>
-					            <c:when test="${hasNext}">
-					                <li class="page-item next">
-					                    <a class="page-link" href="<c:url value='/admin/asset/list?page=${endPage + 1}'/>">
-					                        다음 &gt;
-					                    </a>
-					                </li>
-					            </c:when>
-					            <c:otherwise>
-					                <li class="page-item next disabled">
-					                    <span class="page-link">다음 &gt;</span>
-					                </li>
-					            </c:otherwise>
-					        </c:choose>
-						</ul>
-					</nav>
+
+					<c:if test="${response.totalPages > 0 }">
+						<nav class="pagination-container">
+							<ul class="pagination-list">
+								<c:if test="${response.hasPrev}">
+									<li class="page-item prev"><a class="page-link"
+										onclick="setBoardParam('page', ${response.start - response.blockSize})"
+										style="cursor: pointer;"> Previous </a></li>
+								</c:if>
+				
+								<c:forEach var="num" begin="${response.start}" end="${response.end}">
+									<c:choose>
+										<c:when test="${num == response.page}">
+											<li class="page-item active"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+				
+								<c:if test="${response.hasNext}">
+									<li class="page-item next"><a class="page-link"
+										onclick="setBoardParam('page', ${response.end + 1})"
+										style="cursor: pointer;"> Next </a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</c:if>
+
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script src="/assetmanager/resources/js/pageFilter.js"></script>
+	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

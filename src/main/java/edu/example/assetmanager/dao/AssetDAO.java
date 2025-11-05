@@ -9,15 +9,16 @@ import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
+import edu.example.assetmanager.domain.AssetParamDTO;
 
 @Mapper
 public interface AssetDAO {
 
 	// 페이징을 위한 모든 자산 개수(불용 제외)
-	public int countAll();
+	public int countAll(AssetParamDTO dto);
 	
 	// 자산 모든 리스트(불용 제외)
-	public List<AssetDTO> listAll(@Param("start") int start, @Param("end") int end);
+	public List<AssetDTO> listAll(AssetParamDTO dto);
 	
 	// 자산 상세
 	public AssetDTO assetDetail(@Param("id") int id);

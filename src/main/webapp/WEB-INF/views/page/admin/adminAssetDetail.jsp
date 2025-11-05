@@ -155,7 +155,7 @@
 									<td>${asset.deptName}</td>
 									<td>${asset.role}</td>
 									<c:if test="${asset.returnDate != null}">
-										<td><span class="status-badge status-rejected">반납</span></td>
+										<td><span class="status-badge status-rejected">반납됨</span></td>
 									</c:if>
 									<c:if test="${asset.returnDate == null}">
 										<td><span class="status-badge status-used">사용중</span></td>

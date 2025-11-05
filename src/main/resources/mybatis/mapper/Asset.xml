@@ -5,21 +5,39 @@
 	<select id="countAll" resultType="int">
 		SELECT COUNT(*)
 		FROM Asset
-		WHERE is_valid = 1
+		<where>
+			is_valid = 1
+			<if test="categoryId != 0 and categoryId != ''">
+				AND category_id = #{categoryId}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND asset_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where> 
 	</select>
 	
 	<select id="listAll" resultType="AssetDTO">
 		SELECT *
 		FROM (
-			SELECT ROWNUM AS rnum, a.*
-			FROM (
-				SELECT *
-				FROM Asset
-				INNER JOIN Category ON Asset.category_id = Category.id
-				WHERE is_valid = 1
-			) a
+		    SELECT ROWNUM AS rnum, k.*
+		    FROM (
+		        SELECT *
+		        FROM Asset a
+		        JOIN Category c ON a.category_id = c.id
+		        <where>
+					is_valid = 1
+					<if test="categoryId != 0 and categoryId != ''">
+						AND category_id = #{categoryId}
+					</if>
+					<if test="keyword != null and keyword != ''">
+						AND asset_name LIKE '%' || #{keyword} || '%'
+					</if>
+				</where> 
+		        ORDER BY a.id
+		    ) k
 		)
-		WHERE rnum BETWEEN #{start} AND #{end}
+        offset #{offset} rows
+    	fetch next #{size} rows only
 	</select>
 	
 	<select id="countDisposal">

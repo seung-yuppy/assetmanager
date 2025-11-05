@@ -3,7 +3,6 @@ package edu.example.assetmanager.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,35 +13,50 @@ import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
+import edu.example.assetmanager.domain.AssetParamDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service
 public class AssetService {
 
-	@Autowired
-	AssetDAO dao;
-
+	private final AssetDAO dao;
 	private final RentDAO rentDAO;
 	
-	public AssetService(RentDAO rentDAO) {
-		this.rentDAO = rentDAO;
+	private PageResponseDTO<AssetDTO> paging(AssetParamDTO dto, int totalCount) {
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
+		int page = dto.getPage();
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		dto.setOffset(offset);
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
+		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
+		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
+		if (totalBlocks < 0)
+			totalBlocks = 0;
+		int blockStart = (block - 1) * BLOCK_SIZE + 1;
+		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
+		boolean hasPrev = block > 1 ? true : false;
+		boolean hasNext = totalBlocks > block ? true : false;
+		return new PageResponseDTO<AssetDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
 	
-	// 페이징 처리된 목록을 가져오는 메서드
-	public List<AssetDTO> getPagedList(int page) {
+	public int getTotalPages(AssetParamDTO dto) {
 		int pageSize = 10;
-		int start = (page - 1) * pageSize + 1;
-		int end = start + pageSize - 1;
-		List<AssetDTO> list = dao.listAll(start, end);
-		return list;
+		int totalItems = dao.countAll(dto);
+		return (int) Math.ceil((double) totalItems / pageSize);
 	}
 	
-	// 총 페이지 수를 계산하는 메서드
-	public int getTotalPages() {
-		int pageSize = 10;
-		int totalItems = dao.countAll();
-		return (int)Math.ceil((double) totalItems / pageSize);
+	public PageResponseDTO<AssetDTO> listAll(AssetParamDTO dto) {
+		int totalCount = dao.countAll(dto);
+		PageResponseDTO<AssetDTO> response = paging(dto, totalCount);
+		List<AssetDTO> list = dao.listAll(dto);
+		response.setContent(list);
+		return response;
 	}
-	
+
+
 	// 자산 상세 가져오기
 	public AssetDTO getAsset(int id) {
 		AssetDTO dto = dao.assetDetail(id);

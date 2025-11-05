@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'success',
             title: toastMessage,  // 저장했던 메시지 ("거절 처리가 완료되었습니다.")
             showConfirmButton: false,
-            timer: 800,
+            timer: 3000,
             timerProgressBar: true,
             customClass: {
                 popup: 'custom-swal-toast'

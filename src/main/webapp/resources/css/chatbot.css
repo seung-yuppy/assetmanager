@@ -11,7 +11,8 @@
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
-	background-color: var(--primary-color);
+	/* background-color: var(--primary-color); */
+	background-image: var(--gradient-color);
 	color: var(--white-color);
 	border: none;
 	cursor: pointer;

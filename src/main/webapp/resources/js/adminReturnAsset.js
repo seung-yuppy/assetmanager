@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		            },
 		            body : JSON.stringify(data)
 				})
-		    	
-		    	.then(()=>{
-		    		location.href = "/assetmanager/admin/return/list";
-		    	});
+				.then(result => {					
+					sessionStorage.setItem('showToastMessage', '반납 처리가 완료되었습니다.');
+					location.href = "/assetmanager/admin/return/list";
+				})
 			}
 		})
 	});

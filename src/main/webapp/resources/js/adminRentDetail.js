@@ -75,6 +75,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 					input: 'custom-swal-input'
 				}
 			}).then((result) => {
+				console.log(result+" 승인 결과 나와???")
 				if (result.isConfirmed) {
 					const rejectReason = result.value;
 									
@@ -88,6 +89,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 						status: currentStatus,
 						rejectReason: rejectReason
 					};
+					console.log(data)
 
 					fetch('/assetmanager/approval/reject', {
 						method: 'POST',

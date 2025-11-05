@@ -57,20 +57,35 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:if test="${empty adminList}">
+						<c:choose>
+							<c:when test="${empty returnList}">
 						        <tr>
-						            <td colspan="5" style="text-align: center; padding: 20px;">결재 요청이 존재하지 않습니다.</td>
+						            <td colspan="5" style="text-align: center; padding: 20px;">반납 요청이 존재하지 않습니다.</td>
 						        </tr>
-						    </c:if>
-							<c:forEach var="item" items="${adminList}">
-								<tr data-id="${item.id}">
-									<td><a href="/assetmanager/admin/rent/detail/${item.id}">${item.title}</a></td>
-									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
-									<td>${item.deptName}</td>									
-									<td><fmt:formatDate value="${item.rentDate}" pattern="yyyy-MM-dd" /></td>
-									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
-								</tr>
-							</c:forEach>
+						    </c:when>
+						    <c:otherwise>
+								<c:forEach var="item" items="${returnList}">
+									<tr data-id="${item.id}">
+									<c:if test="${item.isReturn == 0}">
+										<td><a href="/assetmanager/admin/return/detail/${item.id}">${item.assetName}</a></td>
+										<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>			
+									</c:if>
+									<c:if test="${item.isReturn == 1}">
+										<td>${item.assetName}</td>
+										<td>${item.username}</td>	
+									</c:if>									
+										<td>${item.deptName}</td>									
+										<td><fmt:formatDate value="${item.requestDate}" pattern="yyyy-MM-dd" /></td>
+										<c:if test="${item.isReturn == 0}">
+											<td><span class="status-badge status-waited">대기중</span></td>							
+										</c:if>
+										<c:if test="${item.isReturn == 1}">
+											<td><span class="status-badge status-rejected">반납됨</span></td>							
+										</c:if>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 					<nav class="pagination-container">

@@ -171,5 +171,68 @@
 		AND r.user_id = #{userId}
 		AND r.is_valid = 1
 	</select>
+	
+	<insert id="insertAssetReturn">
+		INSERT INTO Asset_Return (user_id, asset_id,is_return)
+		VALUES (#{userId}, #{assetId}, 0)
+	</insert>
+	
+	<select id="findAssetReturn">
+		SELECT AR.*
+		      ,U.username
+		      ,D.dept_name
+		      ,A.*
+		FROM Asset_Return AR
+		JOIN "User" U ON U.id = AR.user_id
+		JOIN Department D ON D.id = U.department_id
+		JOIN Asset A ON A.id = AR.asset_id
+		WHERE U.id = AR.user_id
+	</select>
+	
+	<select id="findReturnAsset">
+		SELECT U.username
+			  ,U.email
+			  ,U.phone
+			  ,U.position
+			  ,D.dept_name
+			  ,D.dept_address
+			  ,A.asset_name
+			  ,A.serial_number
+			  ,A.spec
+			  ,A.location
+			  ,A.register_date
+			  ,C.category_name
+			  ,AR.id
+			  ,AR.asset_id
+			  ,AR.is_return
+			  ,AR.user_id
+			  ,R.return_date  
+			  ,AH.create_date
+			  ,TRUNC(R.return_date) - TRUNC(SYSDATE) as deadLine
+		FROM Asset_Return AR
+        JOIN "User" U ON U.id = AR.user_id
+        JOIN Department D ON D.id = U.department_id
+        JOIN Asset A ON A.id = AR.asset_id
+        JOIN Category C ON C.id = A.category_id
+        LEFT OUTER JOIN Rent_Content RC ON RC.asset_id = A.id
+        LEFT OUTER JOIN Rent R ON R.id = RC.rent_id
+        JOIN Asset_History AH ON AH.asset_id = A.id  
+        WHERE AR.id = #{id}
+	</select>
+	
+	<update id="updateAssetReturn">
+		UPDATE Asset_Return 
+		SET approver_id = #{approverId}
+			,return_date = #{returnDate}
+			,is_return = 1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateAsset">
+		UPDATE Asset
+		SET user_id = null
+			,location = '서울특별시 구로구 디지털로26길 123, 1605호 (구로동, G+코오롱디지털타워)'
+		WHERE id = #{assetId}	
+	</update>
 
 </mapper>

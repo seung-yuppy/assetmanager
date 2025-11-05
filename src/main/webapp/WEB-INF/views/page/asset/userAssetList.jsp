@@ -59,7 +59,7 @@
 	                			</c:when>
 	                			<c:otherwise>
 									<c:forEach var="asset" items="${list}">
-										<tr>
+										<tr class="asset-box" data-id="${asset.assetId}">
 											<td>${asset.assetName}</td>
 											<td>${asset.categoryName}</td>
 											<td>${asset.serialNumber}</td>

@@ -1,11 +1,13 @@
 package edu.example.assetmanager.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.AssetReturnDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
@@ -60,5 +62,22 @@ public interface RentDAO {
 	
 	// 사용자 대시보드 - 반출 승인
 	public int getApprovalRent(@Param("userId") int userId);
-		
+	
+	// Asset_return 요청
+	public boolean insertAssetReturn(AssetReturnDTO assetReturnDTO);
+	
+	// assetReturn 찾기
+	public List<AssetReturnDTO> findAssetReturn();
+	
+	// 반납 자산 찾기 
+	public AssetReturnDTO findReturnAsset(int id);
+	
+	// Asset_return 확인
+	public boolean updateAssetReturn(@Param("id")int id, @Param("approverId")int approverId, @Param("returnDate")Date returnDate);
+	
+	// 반납 완료 Asset 업데이트
+	public boolean updateAsset(int assetId);
+	
+	
+	
 }

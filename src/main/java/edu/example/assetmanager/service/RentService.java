@@ -1,6 +1,8 @@
 package edu.example.assetmanager.service;
 
+import java.time.LocalDate;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import edu.example.assetmanager.dao.UserDAO;
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
+import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.AssetReturnDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
@@ -25,6 +29,7 @@ public class RentService {
 	private final ApprovalDAO approvalDAO;
 	private final UserDAO userDAO;
 	private final AssetDAO assetDAO;
+	private final AssetService assetService;
 
 	// dept가 경영지원팀인 user 가지고 오기
 	public List<UserInfoDTO> findByAdminUser() {
@@ -201,4 +206,52 @@ public class RentService {
 		return rentDAO.getApprovalRent(userId);
 	}
 	
+	// return 요청
+	public boolean assetReturn(AssetReturnDTO assetReturnDTO) {
+		return rentDAO.insertAssetReturn(assetReturnDTO);
+	}
+	
+	// returnList 찾기
+	public List<AssetReturnDTO> assetReturn(){	
+		List<AssetReturnDTO> adminReturnList = rentDAO.findAssetReturn();
+		System.out.println("adminReturnList여기기기 "+adminReturnList.toString());		
+		return adminReturnList ;
+	}
+	
+	// returnAsset 정보 찾기
+	public AssetReturnDTO getReturnAsset(int id) { 
+		AssetReturnDTO assetReturnDTO = rentDAO.findReturnAsset(id);
+		System.out.println("assetReturnDTO 여기야?? " +assetReturnDTO);
+		return assetReturnDTO;
+	}
+	
+	// 반납 테이블 업데이트
+	public boolean updateAssetReturn(int id, int approverId, Date returnDate) {
+		return rentDAO.updateAssetReturn(id,approverId, returnDate);
+	}
+	
+	// (반납)자산 테이블 업데이트
+	public boolean updateAsset(int assetId) {
+		return rentDAO.updateAsset(assetId);
+	}
+	
+	public boolean adminReturnConfirm(AssetReturnDTO assetReturnDTO) {
+		if(updateAssetReturn(assetReturnDTO.getId(),assetReturnDTO.getUserId(), new Date())) {
+			
+			if(updateAsset(assetReturnDTO.getAssetId())) {
+				AssetHistoryDTO historyDTO = new AssetHistoryDTO();
+				historyDTO.setAssetId(assetReturnDTO.getAssetId());
+				historyDTO.setUserId(assetReturnDTO.getUserId());
+				if (assetService.insertAssetHistory(historyDTO, "return")) {
+					return true;
+				} else {
+					return false;
+				}				
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 }

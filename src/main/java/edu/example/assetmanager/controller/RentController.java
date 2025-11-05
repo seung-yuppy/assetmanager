@@ -21,6 +21,7 @@ import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.AssetReturnDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
@@ -142,6 +143,24 @@ public class RentController {
 			response.put("msg", "요청 취소가 완료되었습니다.");
 		else
 			response.put("msg", "요청 취소에 실패하였습니다.");
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/return", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> rentReturn(@RequestBody AssetReturnDTO assetReturnDTO, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+			response.put("msg", "로그인 후 진행해주세요.");
+		
+		assetReturnDTO.setUserId(userId);
+		
+		if(rentService.assetReturn(assetReturnDTO))
+			response.put("msg", "반납에 성공하였습니다.");
+		else
+			response.put("msg", "반납에 실패하였습니다.");
 		
 		return ResponseEntity.ok(response);
 	}

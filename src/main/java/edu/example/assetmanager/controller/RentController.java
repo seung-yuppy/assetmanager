@@ -73,6 +73,7 @@ public class RentController {
 		if(userId==null) {
 			return "redirect:/login"; 
 		} else {
+			rentDTO.setUserId(userId);
 			if(rentService.insertApproval(approvalDTO,rentDTO,userId)) {
 				// 요청 성공	
 				return "redirect:/rent/list";

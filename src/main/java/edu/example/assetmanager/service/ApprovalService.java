@@ -63,7 +63,7 @@ public class ApprovalService{
 		return isSucceed;
 	}
 	
-	private boolean insertNotification(ApprovalDTO approvalDTO, boolean isApproved) {
+	private boolean insertNotification(ApprovalDTO approvalDTO, boolean isApproved){
 		int approvalId = approvalDTO.getId().intValue();
 		OrderDTO orderDTO =  orderService.getOrderByApprovalId(approvalId);
 		NotificationDTO notificationDTO = new NotificationDTO();

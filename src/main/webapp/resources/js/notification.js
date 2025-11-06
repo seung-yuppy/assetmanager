@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 종 아이콘 이미지 클릭 이벤트 리스너
 	bellImage.addEventListener('click', (event) => {
+		if(!isLoggedIn){
+			alert("로그인이 필요합니다.");
+			location.href = "/assetmanager/login";
+		}
 	    event.stopPropagation(); // 버튼 클릭이 body 클릭으로 전파되는 것을 방지
 	    toggleDropdown();
 	    initNotifications();
@@ -89,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 	
+	// 알림 더보기 버튼 이벤트 리스너
 	getMoreBtn.addEventListener('click', () =>  getNotifications(notificationOffset));
 });
 
@@ -138,6 +143,21 @@ function getNotifications(offset){
 	fetch(`/assetmanager/notification/list?offset=${offset}`)
     .then(res => res.json())
     .then(list => {
+    	const getMoreBtn =  document.querySelector('.dropdown-footer');
+    	// 새로 불러온 알림이 없고, offset이 0이면 -> 처음부터 없음
+        if (list.length === 0 && offset === 0) {
+            container.innerHTML = '<div class="no-notification">알림이 없습니다.</div>';
+            getMoreBtn.style.display = 'none';
+            return;
+        }
+
+        // 10개 미만이면 더보기 버튼 숨기기
+        if (list.length < 10) {
+            getMoreBtn.style.display = 'none';
+        } else {
+            getMoreBtn.style.display = 'block';
+        }
+    	
     	list.forEach((e) => {
     		const time = timeAgo(e.createDate);
     		let readClass;

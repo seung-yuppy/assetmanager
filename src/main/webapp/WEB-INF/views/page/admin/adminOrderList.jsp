@@ -50,16 +50,25 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="item" items="${response.content}">
-								<tr data-id="${item.id}">
-									<td><a href="detail/${item.id}">${item.title}</a></td>
-									<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
-									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username} ${item.position}</a></td>
-									<td>${item.deptName}</td>
-									<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
-									<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty response.content}">
+									<tr>
+                                        <td colspan="4" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
+                                    </tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="item" items="${response.content}">
+										<tr data-id="${item.id}">
+											<td><a href="detail/${item.id}">${item.title}</a></td>
+											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
+											<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username} ${item.position}</a></td>
+											<td>${item.deptName}</td>
+											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
+											<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 					<c:if test="${response.totalPages > 0 }">

@@ -11,6 +11,7 @@
 		select *
 		from notification n
 		where n.user_id = #{userId}
+			  and n.create_date >= SYSDATE - 7
 		order by n.create_date DESC
 		offset #{offset} rows
 		fetch next 10 rows only

@@ -15,6 +15,8 @@ import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
+import edu.example.assetmanager.domain.NotificationDTO;
+import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
@@ -31,6 +33,7 @@ public class RentService {
 	private final UserDAO userDAO;
 	private final AssetDAO assetDAO;
 	private final AssetService assetService;
+	private final NotificationService notificationService;
 	
 	private PageResponseDTO<RentListDTO> paging(RentParamDTO rentParamDTO, int totalCount){
 		final int PAGE_SIZE = 10;
@@ -49,6 +52,18 @@ public class RentService {
 		boolean hasNext = totalBlocks > block ? true : false;
 		
 		return new PageResponseDTO<RentListDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
+	}
+	
+	private boolean insertNotification(ApprovalDTO approvalDTO, RentDTO rentDTO) {
+		String targetType = "rent";
+		NotificationDTO notificationDTO = new NotificationDTO();
+		notificationDTO.setTargetId(rentDTO.getId().intValue());
+		notificationDTO.setTargetType(targetType);
+		notificationDTO.setUserId(approvalDTO.getApproverId());
+		UserInfoDTO userInfo = userDAO.getUserInfo(rentDTO.getUserId());
+		String msg = String.format("새 반출 요청(%s %s) : %s", userInfo.getUsername(), userInfo.getPosition(), rentDTO.getTitle());
+		notificationDTO.setMessage(msg);
+		return notificationService.insert(notificationDTO);
 	}
 
 	// dept가 경영지원팀인 user 가지고 오기
@@ -129,6 +144,7 @@ public class RentService {
 					rentDAO.insertRentContent(dto);
 				}
 			}
+			insertNotification(approvalDTO, rentDTO);
 			return true;
 		} else {
 			return false;

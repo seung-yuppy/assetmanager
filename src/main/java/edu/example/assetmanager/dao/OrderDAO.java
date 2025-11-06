@@ -22,13 +22,13 @@ public interface OrderDAO {
 	public List<OrderDTO> listAllForManager(OrderParamDTO orderParamDTO);
 	
 	//Order
-    public int insertOrder(OrderFormDTO orderFormDTO); 
+    public boolean insertOrder(OrderFormDTO orderFormDTO); 
     public OrderDTO getOrderById(int id);
     public OrderDTO getOrderByApprovalId(int id);
     public boolean cancelOrder(int id);
     
     //OrderContent
-    public int insertOrderContent(OrderContentDTO content);
+    public boolean insertOrderContent(OrderContentDTO content);
     public List<OrderContentDTO> getContentsByOrderId(int id);
     public boolean updateContentRegisterCount(int id);
 

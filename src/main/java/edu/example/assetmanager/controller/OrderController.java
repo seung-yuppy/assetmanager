@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
@@ -65,14 +66,19 @@ public class OrderController {
 	}
 	
 	@PostMapping("/form")
-	public String newOrder(HttpSession httpSession, OrderFormDTO orderFormDTO) {
+	public String newOrder(HttpSession httpSession, OrderFormDTO orderFormDTO, RedirectAttributes redirectAttributes){
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo != null) {
 			orderFormDTO.setUserId(userInfo.getId());
+			orderFormDTO.setUsername(userInfo.getUsername());
+			orderFormDTO.setPosition(userInfo.getPosition());
 		}
-		orderService.save(orderFormDTO);
-		
-		return "redirect:/order/list";
+		if(orderService.save(orderFormDTO)) {
+			return "redirect:/order/list";
+		}else {
+	        redirectAttributes.addFlashAttribute("error", "등록 중 오류가 발생했습니다.");
+			return "redirect:/form";
+		}
 	}
 	
 	@GetMapping("/form/standard")

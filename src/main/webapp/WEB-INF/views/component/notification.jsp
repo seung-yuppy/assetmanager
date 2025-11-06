@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-
+<link href="/assetmanager/resources/css/notification.css" rel="stylesheet">
 <!-- 알림 토글 영역 (position: relative를 위해 wrapper 사용) -->
 <div id="notification-toggle" class="notification-toggle">
     

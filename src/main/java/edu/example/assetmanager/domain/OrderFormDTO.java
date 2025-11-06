@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class OrderFormDTO {
 	private Long id;
 	private int userId;
+	private String username;
+	private String position;
 	private int approverId;
 	private int managerId;
 	private Long approvalId;

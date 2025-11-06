@@ -10,6 +10,7 @@ import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.NotificationDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderDetailRESP;
@@ -26,6 +27,7 @@ public class OrderService {
 	private final ApprovalDAO approvalDAO;
 	private final UserService userService;
 	private final AssetService assetService;
+	private final NotificationService notificationService;
 	
 	public OrderDTO getOrderById(int id) {
 		return orderDAO.getOrderById(id);
@@ -78,22 +80,44 @@ public class OrderService {
 		return new PageResponseDTO<OrderDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
 	
-	public void save(OrderFormDTO orderFormDTO) {
+	public boolean save(OrderFormDTO orderFormDTO) {
 		// 결재 정보 저장
 		ApprovalDTO approvalDTO = new ApprovalDTO();
 		approvalDTO.setApproverId(orderFormDTO.getApproverId());
 		approvalDTO.setManagerId(orderFormDTO.getManagerId());
-		approvalDAO.insertApproval(approvalDTO);
+		boolean isApprovalInserted = approvalDAO.insertApproval(approvalDTO);
 		orderFormDTO.setApprovalId(approvalDTO.getId());
 
 		// 구매 정보 저장
-		orderDAO.insertOrder(orderFormDTO);
-		for (OrderContentDTO content : orderFormDTO.getProducts()) {
-			content.setOrderId(orderFormDTO.getId());
-			orderDAO.insertOrderContent(content);
+		if(isApprovalInserted) {
+			boolean isOrderInserted = orderDAO.insertOrder(orderFormDTO);
+			for (OrderContentDTO content : orderFormDTO.getProducts()) {
+				content.setOrderId(orderFormDTO.getId());
+				if(!orderDAO.insertOrderContent(content)){
+					return false;
+				}
+			}
+			// 알림 생성
+			if(isOrderInserted) {
+				return insertNotification(orderFormDTO);
+			}else {
+				return isOrderInserted;
+			}
 		}
+		return isApprovalInserted;
 	}
-
+	
+	private boolean insertNotification(OrderFormDTO orderFormDTO) {
+		String targetType = "order";
+		NotificationDTO notificationDTO = new NotificationDTO();
+		notificationDTO.setTargetId(orderFormDTO.getId().intValue());
+		notificationDTO.setTargetType(targetType);
+		notificationDTO.setUserId(orderFormDTO.getApproverId());
+		String msg = String.format("새 구매 요청(%s %s) : %s", orderFormDTO.getUsername(), orderFormDTO.getPosition(), orderFormDTO.getTitle());
+		notificationDTO.setMessage(msg);
+		return notificationService.insert(notificationDTO);
+	}
+	
 	public OrderDetailRESP getOrderDetail(int id) {
 		// 주문 정보
 		OrderDTO orderDTO = getOrderById(id);

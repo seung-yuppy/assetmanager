@@ -7,7 +7,6 @@
 	<title>헤더</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/header.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/notification.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -41,7 +40,7 @@
 		    deptName: "${sessionScope.userInfo != null ? sessionScope.userInfo.deptName : ''}",
 		    role: "${sessionScope.userInfo != null ? sessionScope.userInfo.role : ''}"
 		  };
-		  const isLoggedIn = ${sessionScope.loginUser != null ? "true" : "false"};
+		  const isLoggedIn = ${sessionScope.userInfo != null ? true : false};
 	</script>
 </body>
 </html>

@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				            },
 				            body : JSON.stringify(data)
 						});
+				    	if (res)
+				    		location.reload();
 					}
 				})	
 			});

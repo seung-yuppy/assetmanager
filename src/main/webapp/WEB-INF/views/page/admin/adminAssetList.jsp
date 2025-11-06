@@ -121,6 +121,5 @@
 	</div>
 	
 	<script src="/assetmanager/resources/js/pageFilter.js"></script>
-	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetDisposalParamDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 import edu.example.assetmanager.domain.AssetModifyDTO;
 import edu.example.assetmanager.domain.AssetParamDTO;
@@ -106,27 +106,9 @@ public class AdminAssetController {
 	
 	// 불용 자산 목록
 	@GetMapping("/asset/disposal")
-	public String disposalList(Model model, @RequestParam(defaultValue = "1") int page) {
-		List<AssetDisposalDTO> list = service.getPagedDisposalList(page);
-		int totalPages = service.getDisposalTotalPages();
-		
-		int pageBlockSize = 3;
-		
-	    int currentBlock = (int) Math.ceil((double) page / pageBlockSize);
-	    int startPage = (currentBlock - 1) * pageBlockSize + 1;
-	    int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
-	    
-	    boolean hasPrev = startPage > 1;
-	    boolean hasNext = endPage < totalPages;
-		
-		model.addAttribute("list", list);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		
-		model.addAttribute("startPage", startPage);
-	    model.addAttribute("endPage", endPage);
-	    model.addAttribute("hasPrev", hasPrev);
-	    model.addAttribute("hasNext", hasNext);
+	public String disposalList(Model model, AssetDisposalParamDTO dto) {
+		PageResponseDTO<AssetDisposalDTO> list = service.listDisposalAll(dto);
+		model.addAttribute("response", list);
 		return "/admin/adminDisposalList";
 	}
 }

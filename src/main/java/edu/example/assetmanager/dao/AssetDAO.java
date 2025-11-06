@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetDisposalParamDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 import edu.example.assetmanager.domain.AssetParamDTO;
@@ -33,10 +34,10 @@ public interface AssetDAO {
 	public boolean deleteAssetDisposal(@Param("asset") AssetDisposalDTO dto);
 	
 	// 페이징을 위한 모든 불용 자산 개수
-	public int countDisposal();
+	public int countDisposal(AssetDisposalParamDTO dto);
 	
 	// 자산 불용 리스트
-	public List<AssetDisposalDTO> listDisposal(@Param("start") int start, @Param("end") int end);
+	public List<AssetDisposalDTO> listDisposal(AssetDisposalParamDTO dto);
 	
 	// 관리자 대시보드
 	// 총 자산 개수
@@ -73,4 +74,7 @@ public interface AssetDAO {
 	public int findUserIdByAsset(@Param("assetId") int assetId);  
 	
 	public boolean insertAsset(AssetDTO assetDTO);
+	
+	// 반납버튼 눌렀는지 체크하기
+	public int isReturnBtnClick(@Param("userId") int userId, @Param("assetId") int assetId);
 }

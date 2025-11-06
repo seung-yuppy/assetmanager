@@ -43,21 +43,41 @@
 	<select id="countDisposal">
 		SELECT COUNT(*)
 		FROM Asset_Disposal
+		INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
+		INNER JOIN Category ON Asset.category_id = Category.id
+		<where>
+			<if test="categoryId != 0 and categoryId != ''">
+				Asset.category_id = #{categoryId}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				Asset.asset_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where> 
 	</select>
 	
 	<select id="listDisposal">
 		SELECT *
 		FROM (
-			SELECT ROWNUM AS rnum, a.*
+			SELECT ROWNUM AS rnum, k.*
 			FROM (
 				SELECT *
 				FROM Asset_Disposal
-					INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
-					INNER JOIN "User" ON Asset_Disposal.approver_id = "User".id
-					INNER JOIN Category ON Asset.category_id = Category.id
-			) a
+				INNER JOIN Asset ON Asset_Disposal.asset_id = Asset.id
+				INNER JOIN Category ON Asset.category_id = Category.id
+				INNER JOIN "User" ON Asset_Disposal.approver_id = "User".id
+				<where>
+					<if test="categoryId != 0 and categoryId != ''">
+						Asset.category_id = #{categoryId}
+					</if>
+					<if test="keyword != null and keyword != ''">
+						Asset.asset_name LIKE '%' || #{keyword} || '%'
+					</if>
+				</where>
+				ORDER BY Asset_Disposal.disposal_date DESC				
+			) k
 		)
-		WHERE rnum BETWEEN #{start} AND #{end}
+		OFFSET #{offset} ROWS
+		FETCH NEXT #{size} ROWS ONLY
 	</select>
 	
 	<select id="assetDetail" resultType="AssetDTO">
@@ -284,4 +304,11 @@
 	    insert into asset (user_id, category_id, asset_name, spec, SERIAL_NUMBER)
 		values (#{userId}, #{categoryId}, #{assetName}, #{spec}, #{serialNumber})
     </insert>
+    
+    <select id="isReturnBtnClick">
+    	SELECT COUNT(id)
+		FROM Asset_Return
+		WHERE user_id = #{userId}
+		AND asset_id = #{assetId}
+    </select>
 </mapper>

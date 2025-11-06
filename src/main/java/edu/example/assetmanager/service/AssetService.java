@@ -10,6 +10,7 @@ import edu.example.assetmanager.dao.AssetDAO;
 import edu.example.assetmanager.dao.RentDAO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetDisposalDTO;
+import edu.example.assetmanager.domain.AssetDisposalParamDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
@@ -24,6 +25,7 @@ public class AssetService {
 	private final AssetDAO dao;
 	private final RentDAO rentDAO;
 	
+	// 관리자 전체 자산(사용&대기) 목록
 	private PageResponseDTO<AssetDTO> paging(AssetParamDTO dto, int totalCount) {
 		final int PAGE_SIZE = 10;
 		final int BLOCK_SIZE = 5;
@@ -55,6 +57,39 @@ public class AssetService {
 		response.setContent(list);
 		return response;
 	}
+	
+	// 관리자 불용 자산 목록
+	private PageResponseDTO<AssetDisposalDTO> disposalPaging(AssetDisposalParamDTO dto, int totalCount) {
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
+		int page = dto.getPage();
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		dto.setOffset(offset);
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
+		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
+		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
+		if (totalBlocks < 0)
+			totalBlocks = 0;
+		int blockStart = (block - 1) * BLOCK_SIZE + 1;
+		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
+		boolean hasPrev = block > 1 ? true : false;
+		boolean hasNext = totalBlocks > block ? true : false;
+		return new PageResponseDTO<AssetDisposalDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
+	}
+	
+	public int getDisposalTotalPages(AssetDisposalParamDTO dto) {
+		int pageSize = 10;
+		int totalItems = dao.countDisposal(dto);
+		return (int) Math.ceil((double) totalItems / pageSize);
+	}
+	
+	public PageResponseDTO<AssetDisposalDTO> listDisposalAll(AssetDisposalParamDTO dto) {
+		int totalCount = dao.countDisposal(dto);
+		PageResponseDTO<AssetDisposalDTO> response = disposalPaging(dto, totalCount);
+		List<AssetDisposalDTO> list = dao.listDisposal(dto);
+		response.setContent(list);
+		return response;
+	}
 
 	// 자산 상세 가져오기
 	public AssetDTO getAsset(int id) {
@@ -71,7 +106,6 @@ public class AssetService {
 	}
 	
 	// 자산 불용 처리하기
-	@Transactional
 	public boolean deleteAsset(AssetDisposalDTO dto) {
 		if (dao.deleteAsset(dto)) {
 			if (dao.deleteAssetDisposal(dto)) 
@@ -83,25 +117,18 @@ public class AssetService {
 		}
 	}
 	
-	// 불용 자산 목록
-	public List<AssetDisposalDTO> getPagedDisposalList(int page) {
-		int pageSize = 10;
-		int start = (page - 1) * pageSize + 1;
-		int end = start + pageSize - 1;
-		List<AssetDisposalDTO> list = dao.listDisposal(start, end);
-		return list;
-	}
-	
-	// 불용 자산 총 페이지 수를 계산하는 메서드
-	public int getDisposalTotalPages() {
-		int pageSize = 10;
-		int totalItems = dao.countDisposal();
-		return (int)Math.ceil((double) totalItems / pageSize);
-	}
-	
 	// 사용자 자산 - 내 (사용중인) 자산
 	public List<AssetHistoryDTO> getMyUsingAsset(int userId) {
-		return dao.myUsingAsset(userId);
+		List<AssetHistoryDTO> list = dao.myUsingAsset(userId);
+		
+		for (AssetHistoryDTO dto : list) {
+			if (dao.isReturnBtnClick(userId, dto.getAssetId()) != 0)
+				dto.setActiveBtn(true);
+			else
+				dto.setActiveBtn(false);
+		}
+		
+		return list;
 	}
 	
 	// 사용자 자산 - 내 부서 자산

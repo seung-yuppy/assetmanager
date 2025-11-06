@@ -22,4 +22,5 @@ public class AssetHistoryDTO {
 	private Date createDate;
 	private Date returnDate;
 	private String status;
+	private boolean activeBtn = false;
 }

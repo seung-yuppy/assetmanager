@@ -99,14 +99,11 @@ public class RentController {
 	@GetMapping("/detail/{id}") 
 	public String rentList(@PathVariable Long id, HttpSession session, Model model) {
 		Integer userId =(Integer)session.getAttribute("userId");
-		System.out.println("userid는 " +userId);
 		ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
 		RentShowDTO rentDTO = rentService.getRentDetail(id);
 		List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
 		RentDTO dto = rentService.getRentDTO(userId, id);
 		ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
-		System.out.println(dto.getId());
-		System.out.println(dto.getUserId());
 		
 		model.addAttribute("empInfo", approverInfoDTO);
 		model.addAttribute("rent", rentDTO);

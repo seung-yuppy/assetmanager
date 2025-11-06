@@ -152,47 +152,6 @@ function showExcelContent(event) {
     reader.readAsArrayBuffer(file);
 }
 
-function setRowIndex() {
-    const container = document.querySelector("#formInputArea");
-    
-    if (!container) {
-        console.error("Error: #formInputArea container not found.");
-        return; 
-    }
-    container.querySelectorAll('.form-row').forEach((row, idx) => {
-        // 1. categoryId 검증 및 처리
-        const categoryInput = row.querySelector('[name*="categoryId"]');
-        if (categoryInput) {
-            categoryInput.name = `products[${idx}].categoryId`;
-        }
-
-        // 2. itemName 검증 및 처리
-        const itemNameInput = row.querySelector('[name*="itemName"]');
-        if (itemNameInput) {
-            itemNameInput.name = `products[${idx}].itemName`;
-        }
-
-        // 3. price 검증 및 처리
-        const priceInput = row.querySelector('[name*="price"]');
-        if (priceInput) {
-            priceInput.name = `products[${idx}].price`;
-        }
-
-        // 4. count 검증 및 처리
-        const countInput = row.querySelector('[name*="count"]');
-        if (countInput) {
-            countInput.name = `products[${idx}].count`;
-        }
-
-        // 5. totalPrice 검증 및 처리
-        const totalPriceInput = row.querySelector('[name*="totalPrice"]');
-        if (totalPriceInput) {
-            totalPriceInput.name = `products[${idx}].totalPrice`;
-        }
-    });
-}
-
-
 function setTitle(e){
     e.preventDefault(); // 폼 제출 막기
     const radio = document.querySelector('.radio-input-group input:checked');

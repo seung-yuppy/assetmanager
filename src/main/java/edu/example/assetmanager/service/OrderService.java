@@ -99,9 +99,7 @@ public class OrderService {
 			}
 			// 알림 생성
 			if(isOrderInserted) {
-				return insertNotification(orderFormDTO);
-			}else {
-				return isOrderInserted;
+				insertNotification(orderFormDTO);
 			}
 		}
 		return isApprovalInserted;

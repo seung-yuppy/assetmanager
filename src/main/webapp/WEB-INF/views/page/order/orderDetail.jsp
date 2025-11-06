@@ -49,6 +49,7 @@
 												<label for="productNameSelect">제품명</label>
 												<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
 											</div>
+											<input name="spec" value="${product.spec}" style="display:none;">
 											<div class="form-group fixed-width-med">
 												<label for="price">단가 (원)</label>
 												<div class="last-input-group">
@@ -70,6 +71,7 @@
 											<label for="productNameSelect">제품명</label>
 											<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
 										</div>
+										<input name="spec" value="${product.spec}" style="display:none;">
 										<div class="form-group fixed-width-med">
 											<label for="price">단가 (원)</label>
 											<div class="last-input-group">
@@ -121,6 +123,7 @@
 					<label for="modalProductName">제품명</label>
 					<input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
+				<input id="modalSpec" style="display:none;">
 				<div class="form-group">
 					<label for="application-date">등록 일자</label> 
 					<input id="application-date" value="${currentDate}" class="form-input" readonly>

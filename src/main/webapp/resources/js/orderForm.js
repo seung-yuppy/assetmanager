@@ -59,7 +59,51 @@ function calculateTotalPrice(el){
 	targetEl.value = price * quantity;
 }
 
-let productRowIndex  = 0;
+function setRowIndex() {
+    const container = document.querySelector("#formInputArea");
+    
+    if (!container) {
+        console.error("Error: #formInputArea container not found.");
+        return; 
+    }
+    container.querySelectorAll('.form-row').forEach((row, idx) => {
+        // 1. categoryId 검증 및 처리
+        const categoryInput = row.querySelector('[name*="categoryId"]');
+        if (categoryInput) {
+            categoryInput.name = `products[${idx}].categoryId`;
+        }
+
+        // 2. itemName 검증 및 처리
+        const itemNameInput = row.querySelector('[name*="itemName"]');
+        if (itemNameInput) {
+            itemNameInput.name = `products[${idx}].itemName`;
+        }
+        
+        const specInput = row.querySelector('[name*="spec"]');
+        if (specInput) {
+        	specInput.name = `products[${idx}].spec`;
+        }
+
+        // 3. price 검증 및 처리
+        const priceInput = row.querySelector('[name*="price"]');
+        if (priceInput) {
+            priceInput.name = `products[${idx}].price`;
+        }
+
+        // 4. count 검증 및 처리
+        const countInput = row.querySelector('[name*="count"]');
+        if (countInput) {
+            countInput.name = `products[${idx}].count`;
+        }
+
+        // 5. totalPrice 검증 및 처리
+        const totalPriceInput = row.querySelector('[name*="totalPrice"]');
+        if (totalPriceInput) {
+            totalPriceInput.name = `products[${idx}].totalPrice`;
+        }
+    });
+}
+
 //구매 요청할 제품 추가하는 함수 
 function addProduct(){
 	if (!checkProductCnt()){
@@ -82,6 +126,9 @@ function addProduct(){
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
 							        <select name="itemName"></select>
+								</div>
+								<div style="display:none;">
+									<input type="text" name="spec">
 								</div>
 								<div class="form-group fixed-width-med">
 									<input type="number" name="price" value="0" min="0" required>
@@ -129,6 +176,9 @@ function renderFormFromExcel(json, purchase_reason) {
 	          ${itemNameLabel}
 	          <input type="text" name="products[${i}].itemName" value="${row.제품명 || ''}" readonly>
 	        </div>
+			<div style="display:none;">
+				<input type="text" name="products[${i}].spec">
+			</div>
 	        <div class="form-group fixed-width-med">
 	          ${priceLabel}
 	          <input type="number" name="products[${i}].price" value="${row.단가 || 0}" min="0" readonly>
@@ -221,7 +271,9 @@ function init_select2(parent){
     // 5. 선택 변경 이벤트 핸들러
     $select.on('select2:select', function(e) {
         const selectedData = e.params.data; // 선택된 Select2 내부 객체
-        const $priceInput = $(this).closest('.form-row').find('[name*="price"]');
+        const $formRow = $(this).closest('.form-row');
+        const $priceInput = $formRow.find('[name*="price"]');
+        const $specInput = $formRow.find('[name*="spec"]');
         
         // 가격 반영
         if (selectedData.price !== undefined) {
@@ -231,6 +283,11 @@ function init_select2(parent){
         } else {
             $priceInput.val('');
             $priceInput.removeAttr('readonly');
+        }
+        
+        // 스펙 저장
+        if(selectedData.spec !== undefined){
+        	$specInput.val(selectedData.spec);
         }
 
         // 화면에 선택 정보 표시

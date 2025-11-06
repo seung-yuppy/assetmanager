@@ -9,6 +9,7 @@ public class OrderContentDTO {
 	private Long categoryId;
 	private String categoryName;
 	private String itemName;
+	private String spec;
 	private int price;
 	private int count;
 	private int registerCount;

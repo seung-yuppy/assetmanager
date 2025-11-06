@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const closeModalBtn = registerModal.querySelector('.modal-close-btn');      
         const modalProductName = document.getElementById('modalProductName');
         const modalSerialNumber = document.getElementById('modalSerialNumber'); 
+        const modalSpec = document.getElementById('modalSpec');
         const cancelBtn = document.getElementById('cancelBtn');
         const registerBtn = document.getElementById('registerBtn');
         
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         	const formRow = btn.closest('.form-row');
         	if (formRow){
         		modalProductName.value = formRow.querySelector("[name='productNameSelect']").value;
+        		modalSpec.value = formRow.querySelector("[name='spec']").value;
+        		
         		modalProductName.setAttribute('data-category-id', formRow.querySelector("[name*='category']").getAttribute('data-id'));  
         		modalProductName.setAttribute('data-content-id', formRow.getAttribute('data-content-id'));  
         	}
@@ -34,12 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if(registerBtn) registerBtn.addEventListener('click', (e) =>{
         	const serialNum = modalSerialNumber.value.trim();
         	const assetName = modalProductName.value;
+        	const spec = modalSpec.value;
         	const categoryId = modalProductName.getAttribute('data-category-id');
         	const orderContentId = modalProductName.getAttribute('data-content-id');
+        	
         	const data = {
         			categoryId: categoryId, 
         			assetName: assetName , 
-        			serialNumber: serialNum
+        			serialNumber: serialNum,
+        			spec : spec
                 };
         	fetch(`/assetmanager/order/register/${orderContentId}`, {
         		  method: 'POST',
@@ -50,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 	return response.json();
                 })
                 .then(data => {
-                	console.log(data);
                     if(data.msg==='일련번호가 일치하지 않거나 오류가 발생했습니다.'){
                     		 Swal.fire('처리 실패', data.msg, 'error');
                     } else {
@@ -90,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //요청 취소
 const cancelBtn = document.querySelector("#cancel-btn");
-console.log("cancelBtn: " + cancelBtn);
 
 cancelBtn.addEventListener("click", async () => {
 	const container = document.querySelector('.section-card');

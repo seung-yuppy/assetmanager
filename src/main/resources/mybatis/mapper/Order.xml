@@ -159,8 +159,8 @@
 	</insert>
 
     <insert id="insertOrderContent" parameterType="OrderContentDTO">
-        INSERT INTO Order_Content (order_id, category_id, item_name, price , count)
-        VALUES (#{orderId}, #{categoryId}, #{itemName}, #{price}, #{count})
+        INSERT INTO Order_Content (order_id, category_id, item_name, price , count , spec)
+        VALUES (#{orderId}, #{categoryId}, #{itemName}, #{price}, #{count} , #{spec})
     </insert>
     
     <select id="getOrderById" parameterType="int">

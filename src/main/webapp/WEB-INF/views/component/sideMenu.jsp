@@ -12,7 +12,7 @@
 	<nav class="sidebar">
 		<!-- 홈 로고 시작 -->
 		<div>
-			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
+			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager' || userInfo.role == 'department'}">
 				<a href="/assetmanager/home" class="logo-box">
 					<img class="menu-head-item" src="/assetmanager/resources/image/icon_main_dark.svg" />
 					<h2 class="logo-title">AMS</h2>
@@ -29,7 +29,7 @@
 		<ul class="menu-list">
 			<!-- 대시보드 시작 -->
 			<li class="menu-item">
-				<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
+				<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager' || userInfo.role == 'department'}">
 					<a href="/assetmanager/home">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dashboard.svg" />
 						<span>대시보드</span>
@@ -69,6 +69,14 @@
 					</ul> 
 				</li>
 			</c:if>
+			<c:if test="${userInfo.role == 'department'}">
+                <li class="menu-item">
+                    <a href="/assetmanager/myasset/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
+						<span>자산</span> 
+                    </a>
+                </li>			
+			</c:if>
 			<c:if test="${userInfo.role == 'admin'}">
                 <li class="menu-item menu-sub">
 					<div class="menu-arrow">
@@ -103,7 +111,7 @@
 			</c:if>
 			<!-- 상품메뉴 끝 -->
 			<!-- 반출메뉴 시작 -->
-			<c:if test="${userInfo.role == 'employee'}">
+			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
 				<li class="menu-item menu-sub">
 					<div class="menu-arrow">
 						<div class="menu-link">
@@ -135,7 +143,7 @@
 			</c:if>
 			<c:if test="${userInfo.role == 'manager'}">
 				<li class="menu-item">
-	            	<a href="/assetmanager/manager/rent/list?status=FIRST_APPROVAL">
+	            	<a href="/assetmanager/manager/rent/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_rent.svg"  />
 		                <span>반출</span>
 		            </a>          
@@ -143,7 +151,7 @@
 			</c:if>
 			<!-- 반출메뉴 끝 -->
 			<!-- 구입메뉴 시작 -->
-			<c:if test="${userInfo.role == 'employee'}">
+			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
 				<li class="menu-item menu-sub">
 					<div class="menu-arrow">
 						<div class="menu-link">
@@ -160,7 +168,7 @@
 			</c:if>
 			<c:if test="${userInfo.role == 'admin'}">
 				<li class="menu-item">
-	            	<a href="/assetmanager/admin/order/list?status=PENDING">
+	            	<a href="/assetmanager/admin/order/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
 		                <span>구입</span>
 		            </a>          
@@ -168,7 +176,7 @@
 			</c:if>
 			<c:if test="${userInfo.role == 'manager'}">
 				<li class="menu-item">
-	            	<a href="/assetmanager/manager/order/list?status=FIRST_APPROVAL">
+	            	<a href="/assetmanager/manager/order/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
 		                <span>구입</span>
 		            </a>          

@@ -38,15 +38,6 @@ public interface AssetDAO {
 	// 자산 불용 리스트
 	public List<AssetDisposalDTO> listDisposal(@Param("start") int start, @Param("end") int end);
 	
-	// 사용자 내 자산 개수
-	public int countMyAsset(@Param("userId") int userId);
-	
-	// 사용자 내 부서 자산 개수
-	public int countMyDeptAsset(@Param("userId") int userId);
-	
-	// 사용자 내 자산 확인
-	public List<AssetHistoryDTO> listHistory(@Param("start") int start, @Param("end") int end, @Param("userId") int userId);
-	
 	// 관리자 대시보드
 	// 총 자산 개수
 	public int totalAsset();
@@ -82,7 +73,4 @@ public interface AssetDAO {
 	public int findUserIdByAsset(@Param("assetId") int assetId);  
 	
 	public boolean insertAsset(AssetDTO assetDTO);
-	
-	// 사용자 대시보드 - 내 자산 3개만 리스트 나오기
-	public List<AssetHistoryDTO> myUsingAssetTop3(@Param("userId") int userId);
 }

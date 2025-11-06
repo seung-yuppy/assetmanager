@@ -10,179 +10,209 @@
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-<div class="app-layout">
-	<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
-	<div class="main-content">
-		<%@ include file="/WEB-INF/views/component/header.jsp" %>
-		<div class="dashboard-container">
-			<div class="home-head">
-				<span>${userInfo.deptName}</span>
-				<h1>${userInfo.username} ${userInfo.position}님, 안녕하세요!</h1>
-			</div>
-			
-			<div class="metric-grid">
-                <div class="metric-card border-green">
-					<div class="card-header">
-                		<p class="card-title">내 자산</p>   
-                		<div class="card-logo-box back-green">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
-                		</div>
-                	</div>                    
-                    <p class="card-value">${usingCount}개</p>
-                </div>
-                <div class="metric-card border-blue">
-					<div class="card-header">
-                		<p class="card-title">구매 대기</p>   
-                		<div class="card-logo-box back-blue">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
-                		</div>
-                	</div>                    
-                    <p class="card-value">${pendingOrder}건</p>
-                </div>
-                <div class="metric-card border-blue">
-					<div class="card-header">
-                		<p class="card-title">구매 승인</p> 
-                		<div class="card-logo-box back-blue">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
-                		</div>
-                	</div>                    
-                    <p class="card-value">${approvalOrder}건</p>
-                </div>
-                <div class="metric-card border-purple">
-					<div class="card-header">
-						<p class="card-title">반출 대기</p>
-                		<div class="card-logo-box back-purple">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
-                		</div>
-                	</div>   
-                    <p class="card-value">${pendingRent}건</p>
-                </div>
-                <div class="metric-card border-purple">
-					<div class="card-header">
-						<p class="card-title">반출 등록</p>
-                		<div class="card-logo-box back-purple">
-                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
-                		</div>
-                	</div>   
-                    <p class="card-value">${approvalRent}건</p>
-                </div>
-            </div>
-            
-	        <!-- 1. 내 자산 섹션 (상태 컬럼 제거됨) -->
-	        <div class="section-card">
-	            <h2>내 자산</h2> 
-	            <table class="data-table">
-	                <thead>
-	                    <tr>
-	                        <th>자산명</th>
-	                        <th>카테고리</th>
-	                        <th>일련번호</th>
-	                        <th>취득일</th>
-	                        <th>반납예정일</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                	<c:choose>
-	                		<c:when test="${empty list}">
-			                	<tr>
-			                		<td colspan="5" style="text-align: center;">
-			               				<p>사용 중인 내 자산이 존재하지 않습니다.</p>
-		                			</td>
-		                		</tr>	                	
-                			</c:when>
-                			<c:otherwise>
-			                	<c:forEach var="asset" items="${list}">
-			                		<tr>
-			                			<td>${asset.assetName}</td>
-			                			<td>${asset.categoryName}</td>
-			                			<td>${asset.serialNumber}</td>
-			                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
-			                			<c:if test="${asset.returnDate != null}">
-											<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-										</c:if>
-										<c:if test="${asset.returnDate == null}">
-											<td>-</td>
-										</c:if>
-			                		</tr>
-			                	</c:forEach>                			
-                			</c:otherwise>
-	                	</c:choose>
-
-	                </tbody>
-	            </table>
-	        </div>
-	
-	        <div class="request-grid">
-	            <div class="section-card">
-	                <h3>구매 요청</h3>
-	                <table class="data-table">
-	                    <thead>
-	                        <tr>
-	                            <th>자산명</th>
-	                            <th>요청일</th>
-	                            <th>상태</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:choose>
-	                    		<c:when test="${empty orderList}">
-		                    		<tr>
-				                		<td colspan="3" style="text-align: center;">
-				               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
-			                			</td>
-			                		</tr>
-	                    		</c:when>     	
-		                    	<c:otherwise>
-		                    		<c:forEach var="order" items="${orderList}">
-		                    			<tr>
-		                    				<td>${order.title}</td>
-		                    				<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></td>
-		                    				<td><span class="status-badge status-${order.status.badgeType}">${order.status.koreanName}</span></td>
-		                    			</tr>
-		                    		</c:forEach>
-		                    	</c:otherwise>
-	                    	</c:choose>
-	                    </tbody>
-	                </table>
+	<div class="app-layout">
+		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/component/header.jsp" %>
+			<div class="dashboard-container">
+				<div class="home-head">
+					<span>${userInfo.deptName}</span>
+					<h1>${userInfo.username} ${userInfo.position}님, 안녕하세요!</h1>
+				</div>
+				
+				<div class="metric-grid">
+	                <div class="metric-card border-green">
+						<div class="card-header">
+							<c:if test="${userInfo.role == 'employee'}">
+								<p class="card-title">내 자산</p>  
+							</c:if>
+							<c:if test="${userInfo.role == 'manager' || userInfo.role == 'department'}">
+								<p class="card-title">부서 자산</p>
+							</c:if>
+	                		<div class="card-logo-box back-green">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
+	                		</div>
+	                	</div>                    
+	                    <p class="card-value">${usingCount}개</p>
+	                </div>
+	                <div class="metric-card border-blue">
+						<div class="card-header">
+							<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                			<p class="card-title">구매 대기</p>
+	                		</c:if> 
+							<c:if test="${userInfo.role == 'manager'}">
+	                			<p class="card-title">구매 합의</p>
+	                		</c:if>	                		
+	                		<div class="card-logo-box back-blue">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
+	                		</div>
+	                	</div>
+	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                		<p class="card-value">${pendingOrder}건</p>
+	                	</c:if>
+	                	<c:if test="${userInfo.role == 'manager'}">
+	                		<p class="card-value">${firstOrder}건</p>
+	                	</c:if>        
+	                </div>
+	                <div class="metric-card border-blue">
+						<div class="card-header">
+	                		<p class="card-title">구매 승인</p> 
+	                		<div class="card-logo-box back-blue">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+	                		</div>
+	                	</div>                    
+	                    <p class="card-value">${finalOrder}건</p>
+	                </div>
+	                <div class="metric-card border-purple">
+						<div class="card-header">
+							<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                			<p class="card-title">반출 대기</p>
+	                		</c:if> 
+							<c:if test="${userInfo.role == 'manager'}">
+	                			<p class="card-title">반출 합의</p>
+	                		</c:if>	  						
+	                		<div class="card-logo-box back-purple">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
+	                		</div>
+	                	</div>
+	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                		<p class="card-value">${pendingRent}건</p>
+	                	</c:if>
+	                	<c:if test="${userInfo.role == 'manager'}">
+	                		<p class="card-value">${firstRent}건</p>
+	                	</c:if>   
+	                </div>
+	                <div class="metric-card border-purple">
+						<div class="card-header">
+							<p class="card-title">반출 승인</p>
+	                		<div class="card-logo-box back-purple">
+	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+	                		</div>
+	                	</div>   
+	                    <p class="card-value">${finalRent}건</p>
+	                </div>
 	            </div>
-	
-	            <div class="section-card">
-	                <h3>반출 요청</h3>
-	                <table class="data-table">
-	                    <thead>
-	                        <tr>
-	                            <th>자산명</th>
-	                            <th>요청일</th>
-	                            <th>상태</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:choose>
-	                    		<c:when test="${empty rentList}">
-		                    		<tr>
-				                		<td colspan="3" style="text-align: center;">
-				               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
+	            
+		        <!-- 1. 내 자산 섹션 (상태 컬럼 제거됨) -->
+		        <div class="section-card">
+        			<c:if test="${userInfo.role == 'employee'}">
+						<h2>내 자산</h2>  
+					</c:if>
+					<c:if test="${userInfo.role == 'manager' || userInfo.role == 'department'}">
+						<h2>부서 자산</h2> 
+					</c:if>
+		            <table class="data-table">
+		                <thead>
+		                    <tr>
+		                        <th>자산명</th>
+		                        <th>카테고리</th>
+		                        <th>일련번호</th>
+		                        <th>취득일</th>
+		                        <th>반납예정일</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                	<c:choose>
+		                		<c:when test="${empty list}">
+				                	<tr>
+				                		<td colspan="5" style="text-align: center;">
+				               				<p>사용 중인 내 자산이 존재하지 않습니다.</p>
 			                			</td>
-			                		</tr>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<c:forEach var="rent" items="${rentList}">
-	                    				<tr>
-	                    					<td>${rent.title}</td>
-	                    					<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/></td>
-	                    					<td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
-	                    				</tr>
-	                    			</c:forEach>
-	                    		</c:otherwise>
-	                    	</c:choose>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </div>
+			                		</tr>	                	
+	                			</c:when>
+	                			<c:otherwise>
+				                	<c:forEach var="asset" items="${list}">
+				                		<tr>
+				                			<td>${asset.assetName}</td>
+				                			<td>${asset.categoryName}</td>
+				                			<td>${asset.serialNumber}</td>
+				                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
+				                			<c:if test="${asset.returnDate != null}">
+												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td>-</td>
+											</c:if>
+				                		</tr>
+				                	</c:forEach>                			
+	                			</c:otherwise>
+		                	</c:choose>
+	
+		                </tbody>
+		            </table>
+		        </div>
+		
+		        <div class="request-grid">
+		            <div class="section-card">
+		                <h3>구매 요청</h3>
+		                <table class="data-table">
+		                    <thead>
+		                        <tr>
+		                            <th>자산명</th>
+		                            <th>요청일</th>
+		                            <th>상태</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	<c:choose>
+		                    		<c:when test="${empty orderList}">
+			                    		<tr>
+					                		<td colspan="3" style="text-align: center;">
+					               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
+				                			</td>
+				                		</tr>
+		                    		</c:when>     	
+			                    	<c:otherwise>
+			                    		<c:forEach var="order" items="${orderList}">
+			                    			<tr>
+			                    				<td>${order.title}</td>
+			                    				<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></td>
+			                    				<td><span class="status-badge status-${order.status.badgeType}">${order.status.koreanName}</span></td>
+			                    			</tr>
+			                    		</c:forEach>
+			                    	</c:otherwise>
+		                    	</c:choose>
+		                    </tbody>
+		                </table>
+		            </div>
+		
+		            <div class="section-card">
+		                <h3>반출 요청</h3>
+		                <table class="data-table">
+		                    <thead>
+		                        <tr>
+		                            <th>자산명</th>
+		                            <th>요청일</th>
+		                            <th>상태</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	<c:choose>
+		                    		<c:when test="${empty rentList}">
+			                    		<tr>
+					                		<td colspan="3" style="text-align: center;">
+					               				<p>구매 요청 중인 자산이 존재하지 않습니다.</p>
+				                			</td>
+				                		</tr>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<c:forEach var="rent" items="${rentList}">
+		                    				<tr>
+		                    					<td>${rent.title}</td>
+		                    					<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/></td>
+		                    					<td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
+		                    				</tr>
+		                    			</c:forEach>
+		                    		</c:otherwise>
+		                    	</c:choose>
+		                    </tbody>
+		                </table>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 	</div>
-</div>
-
-<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
+	
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
 </body>
 </html>

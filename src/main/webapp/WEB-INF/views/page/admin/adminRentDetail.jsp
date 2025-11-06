@@ -147,5 +147,6 @@
 	<script src="/assetmanager/resources/js/requestForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>
 	<script src="/assetmanager/resources/js/adminRentDetail.js"></script>
+	<script src="/assetmanager/resources/js/notice.js"></script>	
 </body>
 </html>

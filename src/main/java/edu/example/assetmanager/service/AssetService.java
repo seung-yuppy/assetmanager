@@ -100,22 +100,6 @@ public class AssetService {
 		return (int)Math.ceil((double) totalItems / pageSize);
 	}
 	
-	// 사용 중인 내 자산 수 
-	public int totalUsingAssets(int userId) {
-		return dao.countMyAsset(userId);
-	}
-	
-	// 사용 중인 내 부서 자산 수
-	public int totalDeptAssets(int userId) {
-		return dao.countMyDeptAsset(userId);
-	}
-	
-	// 사용자 대시보드에서 내 자산 5개 보여주기 
-	public List<AssetHistoryDTO> getUserDashAsset(int userId) {
-		List<AssetHistoryDTO> list = dao.listHistory(1 ,5, userId);
-		return list;
-	}
-	
 	// 사용자 자산 - 내 (사용중인) 자산
 	public List<AssetHistoryDTO> getMyUsingAsset(int userId) {
 		return dao.myUsingAsset(userId);
@@ -243,10 +227,6 @@ public class AssetService {
 	// 자산 추가
 	public boolean insertAsset(AssetDTO assetDTO) {
 		return dao.insertAsset(assetDTO);
-	}
-	
-	public List<AssetHistoryDTO> getMyUsingAssetTop3(int userId) {
-		return dao.myUsingAssetTop3(userId);
 	}
 
 }

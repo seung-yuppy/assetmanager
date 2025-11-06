@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					.then(response => response.json())
 					.then(result => {
 							sessionStorage.setItem('showToastMessage', '승인 처리가 완료되었습니다.');
-							location.href = '/assetmanager/admin/rent/list';
+							location.reload();
 						})
 						.catch(error => {
 						console.error('Error:', error);
@@ -99,7 +99,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 					.then(response => response.json())
 					.then(result => {					
 						sessionStorage.setItem('showToastMessage', '거절 처리가 완료되었습니다.');
-						location.href = '/assetmanager/manager/rent/list';
+						location.reload();
 					})
 					.catch(error => {
 						console.error('Error:', error);

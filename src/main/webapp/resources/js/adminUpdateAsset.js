@@ -138,7 +138,6 @@ deleteBtn.addEventListener("click", async () => {
 	    		    assetId: assetId,
 	    		    disposalReason: input.value
 	    	};
-	    	console.log(resultObject);
 	    	const res = await fetch("/assetmanager/admin/asset/delete", {
 	    		method: "POST",
 	    		headers: {
@@ -156,7 +155,7 @@ deleteBtn.addEventListener("click", async () => {
 	                confirmButtonColor: "#a5dc86",
 	                confirmButtonText: "확인",
 	            }).then(() =>{
-	            	location.href = "/assetmanager/admin/asset/list";
+	            	location.href = "/assetmanager/admin/asset/disposal";
 	            });
 	    	} else {
 	            Swal.fire({

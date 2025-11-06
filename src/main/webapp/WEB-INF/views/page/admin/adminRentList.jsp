@@ -32,20 +32,20 @@
 								<label for="statusFilter">상태:</label>
 				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
 				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
-								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+				                    <c:if test="${userInfo.role == 'admin'}">
+				                    	<option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+				                    </c:if>				
 								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
 								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
 								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>
 							</div>
 							<div class="search-box">
-								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
-								<button><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
-							</div>
+				                <input type="text" id="assetSearch" placeholder="요청자" class="search-field">
+				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
+				            </div>
 						</div>
 					</div>
-
-
 					<table class="data-table">
 						<thead>
 							<tr>
@@ -57,12 +57,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:if test="${empty adminList}">
+							<c:if test="${empty response.content}">
 						        <tr>
 						            <td colspan="5" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
 						        </tr>
 						    </c:if>
-							<c:forEach var="item" items="${adminList}">
+							<c:forEach var="item" items="${response.content}">
 								<tr data-id="${item.id}">
 									<td><a href="detail/${item.id}">${item.title}</a></td>
 									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
@@ -73,25 +73,43 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<nav class="pagination-container">
-						<ul class="pagination-list">
-							<li class="page-item prev"><a class="page-link" href="#">&lt; 이전</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item next"><a class="page-link" href="#">다음 &gt;</a></li>
-						</ul>
-					</nav>
-<!-- 					<div class="action-buttons">
-						<button id="rejectBtn" class="btn btn-reject" disabled>거부</button>
-						<button id="approveBtn" class="btn btn-approve" disabled>승인</button>
-					</div> -->
+					<c:if test="${response.totalPages > 0 }">
+						<nav class="pagination-container">
+							<ul class="pagination-list">
+								<c:if test="${response.hasPrev}">
+									<li class="page-item prev"><a class="page-link"
+										onclick="setBoardParam('page', ${response.start - response.blockSize})"
+										style="cursor: pointer;"> Previous </a></li>
+								</c:if>				
+								<c:forEach var="num" begin="${response.start}" end="${response.end}">
+									<c:choose>
+										<c:when test="${num == response.page}">
+											<li class="page-item active"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												onclick="setBoardParam('page', ${num})" style="cursor: pointer;">
+													${num} </a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+				
+								<c:if test="${response.hasNext}">
+									<li class="page-item next"><a class="page-link"
+										onclick="setBoardParam('page', ${response.end + 1})"
+										style="cursor: pointer;"> Next </a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</c:if>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script src="/assetmanager/resources/js/notice.js"></script>
-	<script src="/assetmanager/resources/js/rentList.js"></script>
+	<script src="/assetmanager/resources/js/pageFilter.js"></script>
 </body>
 </html>

@@ -73,7 +73,6 @@ public class RentController {
 		if(userId==null) {
 			return "redirect:/login"; 
 		} else {
-			rentDTO.setUserId(userId);
 			if(rentService.insertApproval(approvalDTO,rentDTO,userId)) {
 				// 요청 성공	
 				return "redirect:/rent/list";
@@ -91,7 +90,7 @@ public class RentController {
 			return "redirect:/login"; 
 		}
 		PageResponseDTO.setUserId(userId);
-		PageResponseDTO<RentListDTO> rentList = rentService.findRentListByUserId(PageResponseDTO);
+		PageResponseDTO<RentListDTO> rentList = rentService.findRentList(PageResponseDTO);
 		model.addAttribute("response",rentList);
 		
 		return "/rent/rentList";

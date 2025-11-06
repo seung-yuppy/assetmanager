@@ -58,7 +58,7 @@
 		FETCH FIRST #{count} ROWS ONLY			
 	</select>
 	
-	<select id="findRentListByUserId" parameterType="RentParamDTO" resultType="RentListDTO">
+	<select id="findRentList" parameterType="RentParamDTO" resultType="RentListDTO">
 	    SELECT
 	        R.id,
 	        R.title,
@@ -70,12 +70,13 @@
 	    JOIN
 	    	Approval A ON R.approval_id = A.id
 	    <where>
-	    	R.user_id = #{userId} AND R.is_valid = 1
+	    	R.user_id = #{userId} 
+	    		AND R.is_valid = 1
 	       	<if test="keyword != null and keyword != ''">
-	    		and (R.title like '%' || #{keyword} || '%')
+	    		AND (R.title like '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
-	    		and (upper(A.status) like upper('%' || #{status} || '%'))
+	    		AND (upper(A.status) like upper('%' || #{status} || '%'))
 	    	</if>
 	    </where>
 	    ORDER BY 
@@ -84,26 +85,111 @@
     		fetch next #{size} rows only
 	</select>
 	
+	<select id="findAdminList" parameterType="RentParamDTO" resultType="RentListDTO">
+	    SELECT R.id
+	         , R.title
+	         , R.rent_date rentDate
+	         , A.status status
+	         , U.username username
+	         , D.dept_name deptName
+	         , R.user_id
+	    FROM Rent R
+	    JOIN Approval A ON A.id = R.approval_id
+	    LEFT JOIN "User" U ON U.id = R.user_id
+	    LEFT JOIN Department D ON D.id = U.department_id
+	    <where>
+	    	A.approver_id = #{userId} 
+	    		AND R.is_valid = 1
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	ORDER BY R.rent_date DESC
+	    offset #{offset} rows
+    	fetch next #{size} rows only    
+	</select>
+	
+	<select id="findManagerList" parameterType="RentParamDTO" resultType="RentListDTO">
+	    SELECT R.id
+	         , R.title
+	         , R.rent_date rentDate
+	         , A.status status
+	         , U.username username
+	         , D.dept_name deptName
+	         , R.user_id
+	    FROM Rent R
+	    JOIN Approval A ON A.id = R.approval_id
+	    LEFT JOIN "User" U ON U.id = R.user_id
+	    LEFT JOIN Department D ON D.id = U.department_id
+	    <where>
+	    	A.manager_id = #{userId} 
+	    		AND R.is_valid = 1
+	    		AND A.status NOT IN ('pending')
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	ORDER BY R.rent_date DESC
+	    offset #{offset} rows
+    	fetch next #{size} rows only    
+	</select>
+	
 	<select id="countAll" parameterType="RentParamDTO" resultType="int">
 		SELECT count(*) 
 		FROM Rent R
 		left JOIN approval A ON R.approval_id = A.id
 	    <where>
-		    R.user_id = #{userId} and R.is_valid = 1
+		    R.user_id = #{userId} 
+		    	AND R.is_valid = 1
 	       	<if test="keyword != null and keyword != ''">
-	    		and (R.title like '%' || #{keyword} || '%')
+	    		AND (R.title LIKE '%' || #{keyword} || '%')
 	    	</if>
 	       	<if test="status != null and status != ''">
-	    		and (upper(A.status) like upper('%' || #{status} || '%'))
+	    		AND (upper(A.status) LIKE upper('%' || #{status} || '%'))
 	    	</if>
 	    </where>
 	</select>
 	
+	<select id="countAllForAdmin" parameterType="RentParamDTO" resultType="int">
+		SELECT count(*) 
+		FROM Rent R
+		LEFT JOIN Approval A ON R.approval_id = A.id
+		JOIN "User" U ON R.user_id = U.id
+	    <where>
+		    A.approver_id = #{userId} 
+		    	AND R.is_valid = 1
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) LIKE upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
 	
-	
-	
-	
-	
+	<select id="countAllForManager" parameterType="RentParamDTO" resultType="int">
+		SELECT count(*) 
+		FROM Rent R
+		LEFT JOIN Approval A ON R.approval_id = A.id
+		JOIN "User" U ON R.user_id = U.id
+	    <where>
+		    A.manager_id = #{userId} 
+		    	AND R.is_valid = 1
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) LIKE upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+
 	<select id="getRentApprovalId" resultType="RentDTO">
 		SELECT id
 			   ,approval_id 
@@ -132,37 +218,7 @@
 		JOIN Category C ON C.id = A.category_id
 		WHERE RC.rent_id = #{rentId}
 	</select>
-	
-	<select id="findAdminListByUserId" resultType="RentListDTO">
-	    SELECT R.id
-	         , R.title
-	         , R.rent_date rentDate
-	         , A.status status
-	         , U.username username
-	         , D.dept_name deptName
-	         , R.user_id
-	    FROM Rent R
-	    JOIN Approval A ON A.id = R.approval_id
-	    LEFT JOIN "User" U ON U.id = R.user_id
-	    LEFT JOIN Department D ON D.id = U.department_id
-	    <where>
-	        (A.approver_id = #{userId} OR A.manager_id = #{userId})
-	        
-	        <if test="status != null and status != ''">
-	            <choose>
-	                <when test="status == 'REJECT'">
-	                    AND (UPPER(A.status) = 'FIRST_REJECT' OR UPPER(A.status) = 'FINAL_REJECT')
-	                </when>
-	                
-	                <otherwise>
-	                    AND UPPER(A.status) = #{status}
-	                </otherwise>
-	            </choose>
-	        </if>
-	    </where>
-	    ORDER BY R.rent_date DESC
-	</select>
-	
+
 	<select id="getDeptAddressByUserId" resultType="String">
         SELECT D.dept_address
         FROM "User" U

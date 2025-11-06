@@ -36,9 +36,17 @@ public interface RentDAO {
 	
 	// 페이징
 	public int countAll(RentParamDTO rentParamDTO);
+	public int countAllForAdmin(RentParamDTO rentParamDTO);
+	public int countAllForManager(RentParamDTO rentParamDTO);
 	
 	// RentList 찾기  
-	public List<RentListDTO> findRentListByUserId(RentParamDTO rentParamDTO);
+	public List<RentListDTO> findRentList(RentParamDTO rentParamDTO);
+	
+	// adminRentList 찾기 
+	public List<RentListDTO> findAdminList(RentParamDTO rentParamDTO);
+	
+	// managerRentList 찾기 
+	public List<RentListDTO> findManagerList(RentParamDTO rentParamDTO);
 	
 	// rentId로 rentApprovalId 가져오기 
 	public RentDTO getRentApprovalId(Long id);
@@ -48,9 +56,6 @@ public interface RentDAO {
 	
 	// rentId로 rentContent 가져오기
 	public List<RentContentDTO> getRentContent(@Param("rentId") Long id);
-	
-	// userId와 approverId와 같은  admin 리스트 불러오기 
-	public List<RentListDTO> findAdminListByUserId(@Param("userId") int userId, @Param("status") String status);
 	
 	// user_id로 부서 주소 찾기
 	public String getDeptAddressByUserId(@Param("userId") int userId);

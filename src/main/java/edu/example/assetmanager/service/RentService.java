@@ -15,8 +15,6 @@ import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
-import edu.example.assetmanager.domain.NotificationDTO;
-import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
@@ -33,7 +31,6 @@ public class RentService {
 	private final UserDAO userDAO;
 	private final AssetDAO assetDAO;
 	private final AssetService assetService;
-	private final NotificationService notificationService;
 	
 	private PageResponseDTO<RentListDTO> paging(RentParamDTO rentParamDTO, int totalCount){
 		final int PAGE_SIZE = 10;
@@ -52,18 +49,6 @@ public class RentService {
 		boolean hasNext = totalBlocks > block ? true : false;
 		
 		return new PageResponseDTO<RentListDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
-	}
-	
-	private boolean insertNotification(ApprovalDTO approvalDTO, RentDTO rentDTO) {
-		String targetType = "rent";
-		NotificationDTO notificationDTO = new NotificationDTO();
-		notificationDTO.setTargetId(rentDTO.getId().intValue());
-		notificationDTO.setTargetType(targetType);
-		notificationDTO.setUserId(approvalDTO.getApproverId());
-		UserInfoDTO userInfo = userDAO.getUserInfo(rentDTO.getUserId());
-		String msg = String.format("새 반출 요청(%s %s) : %s", userInfo.getUsername(), userInfo.getPosition(), rentDTO.getTitle());
-		notificationDTO.setMessage(msg);
-		return notificationService.insert(notificationDTO);
 	}
 
 	// dept가 경영지원팀인 user 가지고 오기
@@ -144,18 +129,35 @@ public class RentService {
 					rentDAO.insertRentContent(dto);
 				}
 			}
-			insertNotification(approvalDTO, rentDTO);
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	// userId로 RentList 찾기
-	public PageResponseDTO<RentListDTO> findRentListByUserId(RentParamDTO rentParamDTO){
+	// 사용자 RentList 찾기
+	public PageResponseDTO<RentListDTO> findRentList(RentParamDTO rentParamDTO){
 		int totalCount = rentDAO.countAll(rentParamDTO);
 		PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
-		List<RentListDTO> list = rentDAO.findRentListByUserId(rentParamDTO);
+		List<RentListDTO> list = rentDAO.findRentList(rentParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
+	// adminRentList 찾기
+	public PageResponseDTO<RentListDTO> adminList(RentParamDTO rentParamDTO){ 
+		int totalCount = rentDAO.countAllForAdmin(rentParamDTO);
+		PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
+		List<RentListDTO> list = rentDAO.findAdminList(rentParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
+	// managerRentList 찾기
+	public PageResponseDTO<RentListDTO> managerList(RentParamDTO rentParamDTO){ 
+		int totalCount = rentDAO.countAllForManager(rentParamDTO);
+		PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
+		List<RentListDTO> list = rentDAO.findManagerList(rentParamDTO);
 		response.setContent(list);
 		return response;
 	}
@@ -196,12 +198,6 @@ public class RentService {
 		}
 		
 		return rentContentDTO;
-	}
-	
-	// approverId가 userId인 adminList 찾기
-	public List<RentListDTO> adminList(int userId, String status){ 
-		List<RentListDTO> adminRentList = rentDAO.findAdminListByUserId(userId, status);
-		return adminRentList;
 	}
 	
 	// rentId로 ApprovalDTO 정보 가져오기

@@ -9,12 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.ApproverInfoDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentParamDTO;
 import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.service.RentService;
 import lombok.RequiredArgsConstructor;
@@ -26,17 +27,17 @@ public class ManagerRentController {
 	private final RentService rentService;  
 	
 	@GetMapping("/rent/list")
-	public String adminList(HttpSession session,@RequestParam(value = "status", required = false) String status, Model model) {
+	public String managerList(HttpSession session, RentParamDTO rentParamDTO, Model model) {
 		System.out.println("session 들어와??"+session);
 		Integer userId = (Integer) session.getAttribute("userId");	
 		System.out.println("approverId 몇번이야???" + userId);
         if (userId == null) { 
             return "redirect:/login";    
         }
-        List<RentListDTO> adminList = rentService.adminList(userId, status);
-        System.out.println("adminList 나와??"+adminList);
-        model.addAttribute("adminList", adminList);
-        model.addAttribute("status", status);
+        rentParamDTO.setUserId(userId);
+        PageResponseDTO<RentListDTO> managerList = rentService.managerList(rentParamDTO);
+        System.out.println("managerList 나와??"+managerList);
+        model.addAttribute("response", managerList);
         
         return "admin/adminRentList";
     }

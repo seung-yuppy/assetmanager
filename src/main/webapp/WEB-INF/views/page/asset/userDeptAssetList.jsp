@@ -52,7 +52,7 @@
 								<c:when test="${empty list}">
 				                	<tr>
 				                		<td colspan="5" style="text-align: center;">
-				               				<p>사용 중인 내 부서자산이 존재하지 않습니다.</p>
+				               				<p>데이터가 없습니다.</p>
 			                			</td>
 			                		</tr>	                	
 	                			</c:when>

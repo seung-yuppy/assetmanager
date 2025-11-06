@@ -59,12 +59,12 @@
 						<tbody>
 							<c:if test="${empty adminList}">
 						        <tr>
-						            <td colspan="5" style="text-align: center; padding: 20px;">결재 요청이 존재하지 않습니다.</td>
+						            <td colspan="5" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
 						        </tr>
 						    </c:if>
 							<c:forEach var="item" items="${adminList}">
 								<tr data-id="${item.id}">
-									<td><a href="/assetmanager/admin/rent/detail/${item.id}">${item.title}</a></td>
+									<td><a href="detail/${item.id}">${item.title}</a></td>
 									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
 									<td>${item.deptName}</td>									
 									<td><fmt:formatDate value="${item.rentDate}" pattern="yyyy-MM-dd" /></td>

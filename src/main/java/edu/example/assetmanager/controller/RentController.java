@@ -22,9 +22,11 @@ import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentParamDTO;
 import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
@@ -82,13 +84,14 @@ public class RentController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(Model model, HttpSession session, RentParamDTO PageResponseDTO) {
 		Integer userId = (Integer) session.getAttribute("userId");	
 		if(userId==null) {
 			return "redirect:/login"; 
 		}
-		List<RentListDTO> rentList = rentService.findRentListByUserId(userId);
-		model.addAttribute("rentList",rentList);
+		PageResponseDTO.setUserId(userId);
+		PageResponseDTO<RentListDTO> rentList = rentService.findRentListByUserId(PageResponseDTO);
+		model.addAttribute("response",rentList);
 		
 		return "/rent/rentList";
 	}

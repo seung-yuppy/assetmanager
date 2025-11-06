@@ -58,7 +58,7 @@
 		FETCH FIRST #{count} ROWS ONLY			
 	</select>
 	
-	<select id="findRentListByUserId" parameterType="int" resultType="RentListDTO">
+	<select id="findRentListByUserId" parameterType="RentParamDTO" resultType="RentListDTO">
 	    SELECT
 	        R.id,
 	        R.title,
@@ -67,14 +67,42 @@
 	        A.status status
 	    FROM 
 	        Rent R
-	    JOIN 
-	        Approval A ON R.approval_id = A.id
-	    WHERE 
-	        R.user_id = #{userId}
-	    AND R.is_valid = 1
+	    JOIN
+	    	Approval A ON R.approval_id = A.id
+	    <where>
+	    	R.user_id = #{userId} AND R.is_valid = 1
+	       	<if test="keyword != null and keyword != ''">
+	    		and (R.title like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
 	    ORDER BY 
 	        R.rent_date DESC
+	        offset #{offset} rows
+    		fetch next #{size} rows only
 	</select>
+	
+	<select id="countAll" parameterType="RentParamDTO" resultType="int">
+		SELECT count(*) 
+		FROM Rent R
+		left JOIN approval A ON R.approval_id = A.id
+	    <where>
+		    R.user_id = #{userId} and R.is_valid = 1
+	       	<if test="keyword != null and keyword != ''">
+	    		and (R.title like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		and (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+	
+	
+	
+	
+	
 	
 	<select id="getRentApprovalId" resultType="RentDTO">
 		SELECT id

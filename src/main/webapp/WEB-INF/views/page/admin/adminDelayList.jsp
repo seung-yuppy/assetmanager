@@ -59,7 +59,7 @@
 						<tbody>
 							<c:if test="${empty adminList}">
 						        <tr>
-						            <td colspan="5" style="text-align: center; padding: 20px;">결재 요청이 존재하지 않습니다.</td>
+						            <td colspan="5" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
 						        </tr>
 						    </c:if>
 							<c:forEach var="item" items="${adminList}">

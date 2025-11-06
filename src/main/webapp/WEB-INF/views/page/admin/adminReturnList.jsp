@@ -60,7 +60,7 @@
 						<c:choose>
 							<c:when test="${empty returnList}">
 						        <tr>
-						            <td colspan="5" style="text-align: center; padding: 20px;">반납 요청이 존재하지 않습니다.</td>
+						            <td colspan="5" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
 						        </tr>
 						    </c:when>
 						    <c:otherwise>

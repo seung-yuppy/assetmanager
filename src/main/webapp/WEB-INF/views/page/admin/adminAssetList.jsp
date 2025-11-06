@@ -58,7 +58,7 @@
 								<c:when test="${empty response.content}">
 									<tr>
 										<td colspan="5" style="text-align: center;">
-											<p>자산이 존재하지 않습니다.</p>
+											<p>데이터가 없습니다.</p>
 										</td>
 									</tr>
 								</c:when>

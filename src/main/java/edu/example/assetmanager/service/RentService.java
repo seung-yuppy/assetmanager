@@ -15,9 +15,11 @@ import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
 import edu.example.assetmanager.domain.RentListDTO;
+import edu.example.assetmanager.domain.RentParamDTO;
 import edu.example.assetmanager.domain.RentShowDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,25 @@ public class RentService {
 	private final UserDAO userDAO;
 	private final AssetDAO assetDAO;
 	private final AssetService assetService;
+	
+	private PageResponseDTO<RentListDTO> paging(RentParamDTO rentParamDTO, int totalCount){
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
+		int page = rentParamDTO.getPage();
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		rentParamDTO.setOffset(offset);
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
+		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
+		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
+		if (totalBlocks < 0)
+			totalBlocks = 0;
+		int blockStart = (block - 1) * BLOCK_SIZE + 1;
+		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
+		boolean hasPrev = block > 1 ? true : false;
+		boolean hasNext = totalBlocks > block ? true : false;
+		
+		return new PageResponseDTO<RentListDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
+	}
 
 	// dept가 경영지원팀인 user 가지고 오기
 	public List<UserInfoDTO> findByAdminUser() {
@@ -115,8 +136,12 @@ public class RentService {
 	}
 	
 	// userId로 RentList 찾기
-	public List<RentListDTO> findRentListByUserId(int userId){
-		return rentDAO.findRentListByUserId(userId);
+	public PageResponseDTO<RentListDTO> findRentListByUserId(RentParamDTO rentParamDTO){
+		int totalCount = rentDAO.countAll(rentParamDTO);
+		PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
+		List<RentListDTO> list = rentDAO.findRentListByUserId(rentParamDTO);
+		response.setContent(list);
+		return response;
 	}
 	
 	// rentId로 detail 결재 정보 불러오기 

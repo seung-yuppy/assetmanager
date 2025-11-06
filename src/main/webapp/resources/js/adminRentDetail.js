@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
 						id: approvalId,
 						status: currentStatus
 					};
-
 					fetch('/assetmanager/approval/approve', {
 						method: 'POST',
 						headers: {
@@ -75,7 +74,6 @@ const rejectBtn = document.querySelector(".reject-btn");
 					input: 'custom-swal-input'
 				}
 			}).then((result) => {
-				console.log(result+" 승인 결과 나와???")
 				if (result.isConfirmed) {
 					const rejectReason = result.value;
 									
@@ -89,7 +87,6 @@ const rejectBtn = document.querySelector(".reject-btn");
 						status: currentStatus,
 						rejectReason: rejectReason
 					};
-					console.log(data)
 
 					fetch('/assetmanager/approval/reject', {
 						method: 'POST',
@@ -102,7 +99,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 					.then(response => response.json())
 					.then(result => {					
 						sessionStorage.setItem('showToastMessage', '거절 처리가 완료되었습니다.');
-						location.href = '/assetmanager/admin/rent/list';
+						location.href = '/assetmanager/manager/rent/list';
 					})
 					.catch(error => {
 						console.error('Error:', error);

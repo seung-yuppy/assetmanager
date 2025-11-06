@@ -84,7 +84,7 @@
 				                		<c:when test="${empty list}">
 						                	<tr>
 						                		<td colspan="6" style="text-align: center;">
-						               				<p>내 자산 내역이 존재하지 않습니다.</p>
+						               				<p>데이터가 없습니다.</p>
 					                			</td>
 					                		</tr>	                	
 			                			</c:when>

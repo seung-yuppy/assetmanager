@@ -274,4 +274,9 @@
             iua.acquisition_date DESC
             FETCH FIRST 3 ROWS ONLY	
 	</select>
+	
+	<select id="countItem">
+		SELECT COUNT(*)
+		FROM Standard_Item
+	</select>
 </mapper>

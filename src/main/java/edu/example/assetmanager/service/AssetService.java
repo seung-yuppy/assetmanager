@@ -56,7 +56,6 @@ public class AssetService {
 		return response;
 	}
 
-
 	// 자산 상세 가져오기
 	public AssetDTO getAsset(int id) {
 		AssetDTO dto = dao.assetDetail(id);

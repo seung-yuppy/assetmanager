@@ -4,20 +4,38 @@
 
 	<select id="countAll">
 		SELECT COUNT(*)
-		FROM Standard_Item
+		FROM Standard_Item s
+		<where>
+			<if test="categoryId != 0 and categoryId != ''">
+				category_id = #{categoryId}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				item_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
 	</select>
 	
 	<select id="listAll">
 		SELECT *
 		FROM (
-			SELECT ROWNUM AS rnum, a.*
-			FROM (
-				SELECT *
-				FROM Standard_Item
-				ORDER BY id DESC
-			) a
-		)
-		WHERE rnum BETWEEN #{start} AND #{end}
+            SELECT ROWNUM rnum, si.*
+            FROM (
+                SELECT *
+                FROM Standard_Item
+                JOIN Category ON Standard_Item.category_id = Category.id
+                <where>
+					<if test="categoryId != 0 and categoryId != ''">
+						category_id = #{categoryId}
+					</if>
+					<if test="keyword != null and keyword != ''">
+						item_name LIKE '%' || #{keyword} || '%'
+					</if>
+				</where>
+                ORDER BY Standard_Item.id
+            ) si
+        )
+        OFFSET #{offset} ROWS
+        FETCH NEXT #{size} ROWS ONLY
 	</select>
 	
 	<insert id="addItem">

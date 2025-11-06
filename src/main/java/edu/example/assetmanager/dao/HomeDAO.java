@@ -42,4 +42,8 @@ public interface HomeDAO {
 	// 사용 중인 내 자산 3개 목록
 	public List<AssetHistoryDTO> listUsingTop3(int userId);
 	
+	// admin 대시보드
+	// 권장 제품 개수
+	public int countItem();
+	
 }

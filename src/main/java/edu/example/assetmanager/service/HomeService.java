@@ -54,4 +54,8 @@ public class HomeService {
 	public List<AssetHistoryDTO> getListUsingTop3(int userId) {
 		return homeDAO.listUsingTop3(userId);
 	}
+	
+	public int getCountItem() {
+		return homeDAO.countItem();
+	}
 }

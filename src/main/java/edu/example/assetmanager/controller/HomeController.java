@@ -18,7 +18,6 @@ import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.HomeService;
-import edu.example.assetmanager.service.ItemService;
 import edu.example.assetmanager.service.OrderService;
 import edu.example.assetmanager.service.RentService;
 import edu.example.assetmanager.service.UserService;
@@ -29,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class HomeController {
 	private final UserService service;
 	private final AssetService assetService;
-	private final ItemService itemService;
 	private final OrderService orderService;
 	private final RentService rentService;
 	private final HomeService homeService;
@@ -63,7 +61,7 @@ public class HomeController {
 			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);
 			
-			switch(dto.getRole()) {
+			switch (dto.getRole()) {
 				case "department":
 				case "employee":
 					model.addAttribute("usingCount", usingCount);
@@ -102,7 +100,7 @@ public class HomeController {
 			int usingAsset = assetService.getUsingAsset();
 			int pendingAsset = assetService.getPendingAsset();
 			int invalidAsset = assetService.getInvalidAsset();
-			int totalItem = itemService.getTotalItem();
+			int totalItem = homeService.getCountItem();
 			
 			session.setMaxInactiveInterval(18000); 
 			session.setAttribute("userInfo", dto);

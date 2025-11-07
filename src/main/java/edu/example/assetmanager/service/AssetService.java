@@ -65,10 +65,16 @@ public class AssetService {
 	}
 	
 	// 내가 사용중 자산 목록
-	public PageResponseDTO<AssetHistoryDTO> listMyUsingAll(AssetUsingParamDTO dto) {
+	public PageResponseDTO<AssetHistoryDTO> listMyUsingAll(AssetUsingParamDTO dto, int userId) {
 		int totalCount = dao.countMyUsing(dto);
 		PageResponseDTO<AssetHistoryDTO> response = paging(dto, totalCount);
 		List<AssetHistoryDTO> list = dao.listMyUsing(dto);
+		for (AssetHistoryDTO asset : list) {
+			if (dao.isReturnBtnClick(userId, asset.getAssetId()) != 0)
+				asset.setActiveBtn(true);
+			else
+				asset.setActiveBtn(false);
+		}
 		response.setContent(list);
 		return response;
 	}

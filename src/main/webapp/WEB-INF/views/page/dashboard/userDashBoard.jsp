@@ -8,6 +8,7 @@
     <title>사원 대시보드</title>
     <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/userChart.css" rel="stylesheet">
 </head>
 <body>
 	<div class="app-layout">
@@ -106,9 +107,8 @@
 		                    <tr>
 		                        <th>자산명</th>
 		                        <th>카테고리</th>
-		                        <th>일련번호</th>
-		                        <th>취득일</th>
 		                        <th>반납예정일</th>
+		                        <th>사용 진행도</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -123,21 +123,34 @@
 	                			<c:otherwise>
 				                	<c:forEach var="asset" items="${list}">
 				                		<tr>
-				                			<td>${asset.assetName}</td>
-				                			<td>${asset.categoryName}</td>
-				                			<td>${asset.serialNumber}</td>
-				                			<td><fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/></td>
 				                			<c:if test="${asset.returnDate != null}">
-												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-											</c:if>
-											<c:if test="${asset.returnDate == null}">
-												<td>-</td>
+				                				<td>${asset.assetName}</td>
+					                			<td>${asset.categoryName}</td>
+												<td>
+												    <div class="detail-item">
+												        <span class="d-day-label detail-value total-days"></span>
+												    </div>
+												</td>
+				                				<td class="asset-date" data-rent="${asset.createDate}" data-return="${asset.returnDate}">
+													<div class="progress-section">
+											            <div class="progress-bar-bg">
+											                <div class="progress-bar-inner"></div>
+											            </div>
+											           	<div class="date-labels">
+										                    <span>
+										                    	<fmt:formatDate value="${asset.createDate}" pattern="yyyy-MM-dd"/>
+										                    </span>
+										                    <span>
+										                    	<fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/>
+										                    </span>										                    
+											            </div>
+											        </div>				                				
+				                				</td>
 											</c:if>
 				                		</tr>
 				                	</c:forEach>                			
 	                			</c:otherwise>
 		                	</c:choose>
-	
 		                </tbody>
 		            </table>
 		        </div>
@@ -200,7 +213,7 @@
 		                    				<tr>
 		                    					<td>${rent.title}</td>
 		                    					<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/></td>
-		                    					<td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
+		                    			        <td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
 		                    				</tr>
 		                    			</c:forEach>
 		                    		</c:otherwise>
@@ -214,5 +227,7 @@
 	</div>
 	
 	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
+	
+	<script src="/assetmanager/resources/js/userDashBoardChart.js"></script>
 </body>
 </html>

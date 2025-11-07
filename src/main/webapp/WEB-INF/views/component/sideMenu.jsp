@@ -54,7 +54,7 @@
 			</c:if>
 			<!-- 사용자 메뉴 끝 -->
 			<!-- 자산메뉴 시작 -->
-			<c:if test="${userInfo.role == 'employee' || userInfo.role == 'manager'}">
+			<c:if test="${userInfo.role == 'employee'}">
 				<li class="menu-item menu-sub">
 					<div class="menu-arrow">
 						<div class="menu-link">
@@ -72,6 +72,14 @@
 			<c:if test="${userInfo.role == 'department'}">
                 <li class="menu-item">
                     <a href="/assetmanager/myasset/list">
+						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
+						<span>자산</span> 
+                    </a>
+                </li>			
+			</c:if>
+			<c:if test="${userInfo.role == 'manager'}">
+                <li class="menu-item">
+                    <a href="/assetmanager/deptasset/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_asset.svg" />
 						<span>자산</span> 
                     </a>

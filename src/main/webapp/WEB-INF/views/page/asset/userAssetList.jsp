@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>내 자산 목록</title>
+	<title>자산 목록</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/adminList.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
@@ -16,8 +16,14 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>사용중인 내 자산 목록</h1>
-				<span>사용중인 나의 모든 자산 목록을 확인하고 관리합니다.</span>
+				<c:if test="${userInfo.role == 'employee'}">
+					<h1>사용중인 내 자산 목록</h1>		
+					<span>사용중인 나의 모든 자산 목록을 확인하고 관리합니다.</span>
+				</c:if>
+				<c:if test="${userInfo.role == 'department'}">
+					<h1>사용중인 내 부서 자산 목록</h1>		
+					<span>사용중인 나의 모든 부서 자산 목록을 확인하고 관리합니다.</span>
+				</c:if>
 				<div class="section-card">
 					<div class="search-card">
 						<div class="filter-controls">

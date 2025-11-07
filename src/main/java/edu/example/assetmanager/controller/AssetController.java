@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetUsingParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
+import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +21,13 @@ public class AssetController {
 
 	@GetMapping("/myasset/list")
 	public String assetList(Model model, HttpSession session, AssetUsingParamDTO dto) {
-		Integer userId = (Integer) session.getAttribute("userId");
-		if (userId == null) 
+		UserInfoDTO userInfo = (UserInfoDTO) session.getAttribute("userInfo");
+		if (userInfo == null || (Integer)userInfo.getId() == null) 
 			return "redirect:/login";
-		dto.setUserId(userId);
-		PageResponseDTO<AssetHistoryDTO> list = service.listMyUsingAll(dto);
+		dto.setUserId(userInfo.getId());
+		PageResponseDTO<AssetHistoryDTO> list = service.listMyUsingAll(dto, dto.getUserId());
 		model.addAttribute("response", list);
+		model.addAttribute("userInfo", userInfo);
 		return "/asset/userAssetList";
 	}
 	

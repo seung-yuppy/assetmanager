@@ -17,6 +17,7 @@ public class AssetReturnDTO {
 	private int id;
 	private int userId;
 	private int approvalId;
+	private int approverId;
 	private int assetId;
 	private Date requestDate;
 	private Date returnDate;

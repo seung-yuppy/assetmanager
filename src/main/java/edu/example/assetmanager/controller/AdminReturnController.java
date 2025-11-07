@@ -59,9 +59,8 @@ public class AdminReturnController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 			response.put("msg", "로그인 후 진행해주세요.");
-		
-		assetReturnDTO.setUserId(userId);
-		
+		assetReturnDTO = rentService.getReturnAsset(assetReturnDTO.getId());
+		assetReturnDTO.setApproverId(userId);
 		if(rentService.adminReturnConfirm(assetReturnDTO))
 			response.put("msg", "반납에 성공하였습니다.");
 		else

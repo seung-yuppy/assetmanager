@@ -17,7 +17,7 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1>${returnDetail.username}반납 상세</h1>
+				<h1>${returnDetail.assetName} 반납 상세</h1>
 				<div class="detail-header">
 					<span>반납 요청의 상세 정보를 확인하고 관리 합니다.</span>
 					<div class="button-container">

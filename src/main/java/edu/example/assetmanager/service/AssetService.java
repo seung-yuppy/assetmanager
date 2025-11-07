@@ -148,6 +148,13 @@ public class AssetService {
 				showDTO.setCategoryName(current.getCategoryName());
 				showDTO.setSerialNumber(current.getSerialNumber());
 				showDTO.setRentDate(current.getCreateDate());
+				showDTO.setUsername(current.getUsername());
+				showDTO.setEmpNo(current.getEmpNo());
+				showDTO.setDeptName(current.getDeptName());
+				switch(current.getRole()) {
+					case "manager": showDTO.setRole("부장"); break;
+					case "employee": showDTO.setRole("사원");	 break;
+				}
 				if ((i + 1 < list.size()) && 
 						(list.get(i + 1).getAssetId() == current.getAssetId()) && 
 						(list.get(i + 1).getStatus().equalsIgnoreCase("return"))) {

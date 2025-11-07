@@ -4,8 +4,6 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
@@ -18,7 +16,6 @@ import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
 import edu.example.assetmanager.domain.NotificationDTO;
-import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
@@ -295,7 +292,7 @@ public class RentService {
 	}
 	
 	public boolean adminReturnConfirm(AssetReturnDTO assetReturnDTO) {
-		if(updateAssetReturn(assetReturnDTO.getId(),assetReturnDTO.getUserId(), new Date())) {
+		if(updateAssetReturn(assetReturnDTO.getId(),assetReturnDTO.getApproverId(), new Date())) {
 			if(updateAsset(assetReturnDTO.getAssetId())) {
 				AssetHistoryDTO historyDTO = new AssetHistoryDTO();
 				historyDTO.setAssetId(assetReturnDTO.getAssetId());

@@ -4,6 +4,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
@@ -15,6 +17,8 @@ import edu.example.assetmanager.domain.ApproverInfoDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
+import edu.example.assetmanager.domain.NotificationDTO;
+import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
 import edu.example.assetmanager.domain.RentDTO;
@@ -31,6 +35,8 @@ public class RentService {
 	private final UserDAO userDAO;
 	private final AssetDAO assetDAO;
 	private final AssetService assetService;
+	private final NotificationService notificationService;
+	private final UserService userService;
 	
 	private PageResponseDTO<RentListDTO> paging(RentParamDTO rentParamDTO, int totalCount){
 		final int PAGE_SIZE = 10;
@@ -129,11 +135,27 @@ public class RentService {
 					rentDAO.insertRentContent(dto);
 				}
 			}
+			insertRentNotification(approvalDTO, rentDTO, userId);
 			return true;
 		} else {
 			return false;
 		}
 	}
+	private boolean insertRentNotification(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
+		String targetType = "rent";
+		NotificationDTO notificationDTO = new NotificationDTO();
+		notificationDTO.setTargetId(rentDTO.getId().intValue());
+		notificationDTO.setTargetType(targetType);
+		notificationDTO.setUserId(approvalDTO.getApproverId());
+		System.out.println("rentDTO.getUserId() : " + rentDTO.getUserId());
+		UserInfoDTO user = userService.getUser(userId);
+		System.out.println("user : " + user);
+		System.out.println("username " + user.getUsername());
+		String msg = String.format("새 반출 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentDTO.getTitle());
+		notificationDTO.setMessage(msg);
+		return notificationService.insert(notificationDTO);
+	}
+	
 	
 	// 사용자 RentList 찾기
 	public PageResponseDTO<RentListDTO> findRentList(RentParamDTO rentParamDTO){
@@ -232,7 +254,22 @@ public class RentService {
 	
 	// return 요청
 	public boolean assetReturn(AssetReturnDTO assetReturnDTO) {
-		return rentDAO.insertAssetReturn(assetReturnDTO);
+		boolean isInserted = rentDAO.insertAssetReturn(assetReturnDTO);
+		if (isInserted)
+			insertReturnNotification(assetReturnDTO);
+		return isInserted;
+	}
+	
+	private void insertReturnNotification(AssetReturnDTO assetReturnDTO) {
+		String targetType = "return";
+		UserInfoDTO user = userService.getUser(assetReturnDTO.getUserId());
+		String msg = String.format("새 반납 요청(%s %s)", user.getUsername(), user.getPosition());
+		List<UserInfoDTO> admins = userService.getUsersByRole("admin");
+		for(int i = 0; i < admins.size(); i++) {
+			NotificationDTO notificationDTO = new NotificationDTO(targetType, assetReturnDTO.getId(), msg);
+			notificationDTO.setUserId(admins.get(i).getId());
+			notificationService.insert(notificationDTO);
+		}
 	}
 	
 	// returnList 찾기

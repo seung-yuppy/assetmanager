@@ -182,13 +182,6 @@
     	where o.order_id = #{id}
     </select>
     
-    <select id="getContentById" parameterType="int" resultType="OrderContentDTO">
-    	select *
-    	from order_content o
-    		join category c on o.category_id = c.id
-   		where o.id = #{id}
-    </select>
-    
     <update id="cancelOrder">
     	update orders
     	set is_valid = 0

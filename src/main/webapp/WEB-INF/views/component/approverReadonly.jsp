@@ -37,7 +37,7 @@
     </c:if>
 	<h2 class="form-section-title" >결재 정보</h2>
 	<!-- 결재라인 전체 컨테이너 -->
-	<div id="approval-line-container" data-approvalId= "${approval.id}" data-status="${approval.status}">
+	<div id="approval-line-container" data-approvalId= "${approval.id}" data-status="${approval.status}" data-manager-id="${approval.managerId}" data-approver-id="${approval.approverId}">
 		<!-- 첫 번째 : 신청자 -->
 		<fieldset class="approver-wrapper">
 			<legend class="approver-title" align="center">요청</legend>

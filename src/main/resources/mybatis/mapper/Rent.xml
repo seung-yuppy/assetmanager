@@ -256,7 +256,7 @@
 		AND r.is_valid = 1
 	</select>
 	
-	<insert id="insertAssetReturn">
+	<insert id="insertAssetReturn" parameterType="AssetReturnDTO" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
 		INSERT INTO Asset_Return (user_id, asset_id,is_return)
 		VALUES (#{userId}, #{assetId}, 0)
 	</insert>

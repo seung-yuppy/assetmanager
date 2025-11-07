@@ -78,6 +78,8 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 		const container = document.getElementById('approval-line-container');
 		const id = container.getAttribute('data-approvalId');
 		const status = container.getAttribute('data-status');
+		const managerId = container.getAttribute('data-manager-id');
+		const approverId = container.getAttribute('data-approver-id');
 		
 		Swal.fire({
 			title:"승인하시겠습니까?",
@@ -96,7 +98,9 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 			preConfirm: async () => { 
 				const resultObject = {
 						id: id,
-						status: status
+						status: status,
+						managerId: managerId,
+						approverId: approverId
 				};
 				const res = await fetch("/assetmanager/approval/approve", {
 					method: "POST",

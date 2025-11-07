@@ -73,9 +73,10 @@ public class OrderController {
 			orderFormDTO.setUsername(userInfo.getUsername());
 			orderFormDTO.setPosition(userInfo.getPosition());
 		}
-		if(orderService.save(orderFormDTO)) {
+		try {
+			orderService.save(orderFormDTO);
 			return "redirect:/order/list";
-		}else {
+		}catch(Exception e) {
 	        redirectAttributes.addFlashAttribute("error", "등록 중 오류가 발생했습니다.");
 			return "redirect:/form";
 		}
@@ -105,7 +106,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/detail/{id}")
-	public String orderDetail(@PathVariable int id, Model model, HttpSession session) {
+	public String orderDetail(@PathVariable int id, Model model, HttpSession session){
 		OrderDetailRESP response = orderService.getOrderDetail(id);
 		OrderDTO orderDTO =  response.getOrderDto();
 		ApprovalDTO approvalDTO = response.getApprovalDTO();

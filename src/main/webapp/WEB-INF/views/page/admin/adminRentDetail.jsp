@@ -123,7 +123,10 @@
 					<div class="form-actions" 
 						 id="approval-data-provider"
 						 data-approval-id="${approval.id}"
-						 data-approval-status="${approval.status}">
+						 data-approval-status="${approval.status}"
+						 data-approver-id="${approval.approverId}"
+						 data-manager-id="${approval.managerId}"
+						 >
 						
 						<c:if test="${sessionScope.userInfo.role == 'admin'}">
 							<c:if test="${approval.status == 'PENDING'}">

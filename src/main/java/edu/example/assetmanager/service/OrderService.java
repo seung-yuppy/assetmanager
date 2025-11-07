@@ -2,6 +2,8 @@ package edu.example.assetmanager.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
@@ -80,29 +82,23 @@ public class OrderService {
 		return new PageResponseDTO<OrderDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
 	
-	public boolean save(OrderFormDTO orderFormDTO) {
+	@Transactional
+	public void save(OrderFormDTO orderFormDTO) {
 		// 결재 정보 저장
 		ApprovalDTO approvalDTO = new ApprovalDTO();
 		approvalDTO.setApproverId(orderFormDTO.getApproverId());
 		approvalDTO.setManagerId(orderFormDTO.getManagerId());
-		boolean isApprovalInserted = approvalDAO.insertApproval(approvalDTO);
+		approvalDAO.insertApproval(approvalDTO);
 		orderFormDTO.setApprovalId(approvalDTO.getId());
 
 		// 구매 정보 저장
-		if(isApprovalInserted) {
-			boolean isOrderInserted = orderDAO.insertOrder(orderFormDTO);
-			for (OrderContentDTO content : orderFormDTO.getProducts()) {
-				content.setOrderId(orderFormDTO.getId());
-				if(!orderDAO.insertOrderContent(content)){
-					return false;
-				}
-			}
-			// 알림 생성
-			if(isOrderInserted) {
-				insertNotification(orderFormDTO);
-			}
+		orderDAO.insertOrder(orderFormDTO);
+		for (OrderContentDTO content : orderFormDTO.getProducts()) {
+			content.setOrderId(orderFormDTO.getId());
+			orderDAO.insertOrderContent(content);
 		}
-		return isApprovalInserted;
+		// 알림 생성
+		insertNotification(orderFormDTO);
 	}
 	
 	private boolean insertNotification(OrderFormDTO orderFormDTO) {
@@ -111,6 +107,7 @@ public class OrderService {
 		notificationDTO.setTargetId(orderFormDTO.getId().intValue());
 		notificationDTO.setTargetType(targetType);
 		notificationDTO.setUserId(orderFormDTO.getApproverId());
+		System.out.println("새 요청시 admin 아이디 : " + orderFormDTO.getApproverId());
 		String msg = String.format("새 구매 요청(%s %s) : %s", orderFormDTO.getUsername(), orderFormDTO.getPosition(), orderFormDTO.getTitle());
 		notificationDTO.setMessage(msg);
 		return notificationService.insert(notificationDTO);
@@ -131,6 +128,7 @@ public class OrderService {
 	}
 	
 	// 구매 자산 등록
+	@Transactional
 	public boolean registerAsset(AssetDTO assetDTO, int orderContentId) {
 		boolean isAssetInserted =  assetService.insertAsset(assetDTO);
 		boolean isContentUpdated = updateContentRegisterCount(orderContentId);

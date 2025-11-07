@@ -25,4 +25,5 @@
         <div class="dropdown-footer">더 보기</div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/assetmanager/resources/js/notification.js"></script>

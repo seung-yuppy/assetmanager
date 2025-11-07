@@ -78,8 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			const targetId = item.getAttribute("data-target-id");
 			const targetType = item.getAttribute("data-target-type");
 			
-			if(item.classList.contains('unread-notification')){
-				read(item); // db 읽음 처리
+			if(item.classList.contains('unread-notification')){ // 안읽은 아이템 클릭 시
+				read(item); 
+			}else{ // 읽은 아이템 클릭시
+				if(targetType=="return"){
+					Swal.fire('오류', '이미 반납 확인이 완료됐습니다.', 'warning');
+					return;
+				}
 			}
 			// 하이퍼링크 설정 및 이동
 			let user_path;
@@ -89,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				user_path="";
 			}
 			let path = `/assetmanager${user_path}/${targetType}/detail/${targetId}`; 
+			
 			location.href = path;
 		}
 	});

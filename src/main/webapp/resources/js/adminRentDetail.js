@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	const approvalId = dataProvider.dataset.approvalId;
 	const currentStatus = dataProvider.dataset.approvalStatus; 
+	const approverId = dataProvider.dataset.approverId; 
+	const managerId = dataProvider.dataset.managerId; 
 
 	if (!approvalId || !currentStatus) {
 		return;
@@ -30,7 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				if (result.isConfirmed) {
 					const data = {
 						id: approvalId,
-						status: currentStatus
+						status: currentStatus,
+						approverId: approverId,
+						managerId: managerId
 					};
 					fetch('/assetmanager/approval/approve', {
 						method: 'POST',

@@ -118,7 +118,7 @@
 			<legend class="approver-title" align="center">결재</legend>
 			<div class="approver-container">
 				<div class="approver-image-container">
-					<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="결재자">
+					<img class="approver-image" src="data:image/png;base64,${empInfo.managerInfo.base64ProfileImage}" alt="결재자">
 					<c:if test="${fn:contains('FINAL_APPROVAL, FINAL_REJECT', approval.status)}">
 						<div class="approval-badge">
 							<c:if test="${approval.status == 'FINAL_APPROVAL'}">

@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AssetParamDTO extends PageParamDTO {
+public class AssetUsingParamDTO extends PageParamDTO {
 	private int categoryId;
 	private String keyword;
+	private int userId;
 }

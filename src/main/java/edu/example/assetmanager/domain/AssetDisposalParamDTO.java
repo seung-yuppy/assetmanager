@@ -5,10 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AssetDisposalParamDTO {
-	private int page = 1;
-	private int size = 10;
-	private int offset;
+public class AssetDisposalParamDTO extends PageParamDTO {
 	private int categoryId;
 	private String keyword;
 }

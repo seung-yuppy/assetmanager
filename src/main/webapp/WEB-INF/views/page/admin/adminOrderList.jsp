@@ -53,7 +53,7 @@
 							<c:choose>
 								<c:when test="${empty response.content}">
 									<tr>
-                                        <td colspan="4" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
+                                        <td colspan="6" style="text-align: center; padding: 20px;">데이터가 없습니다.</td>
                                     </tr>
 								</c:when>
 								<c:otherwise>

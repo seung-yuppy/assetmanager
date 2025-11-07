@@ -10,6 +10,7 @@ import edu.example.assetmanager.domain.AssetDisposalDTO;
 import edu.example.assetmanager.domain.AssetDisposalParamDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
+import edu.example.assetmanager.domain.AssetUsingParamDTO;
 import edu.example.assetmanager.domain.AssetParamDTO;
 
 @Mapper
@@ -58,11 +59,17 @@ public interface AssetDAO {
 	// 관리자 자산 상세 페이지에서 자산 내역
 	public List<AssetHistoryUserDTO> getAssetAssetHistory(int assetId);
 	
-	// 사용자 내 사용 중인 자산 확인
-	public List<AssetHistoryDTO> myUsingAsset(@Param("userId") int userId);
+	// 사용자 내 사용 중인 자산 개수
+	public int countMyUsing(AssetUsingParamDTO dto);
 	
-	// 사용자 내 부서 자산 확인
-	public List<AssetHistoryDTO> myDeptAsset(@Param("userId") int userId);
+	// 사용자 내 사용 중인 자산 목록
+	public List<AssetHistoryDTO> listMyUsing(AssetUsingParamDTO dto);
+	
+	// 사용자 내 부서 자산 개수
+	public int countMyDept(AssetUsingParamDTO dto);
+	
+	// 사용자 내 부서 자산 목록
+	public List<AssetHistoryDTO> listMyDept(AssetUsingParamDTO dto);
 	
 	// user_id, sefial_number, location 자산테이블 업데이트
 	public boolean updateAsset(@Param("userId") int userId, @Param("serialNumber") String serialNumber, @Param("location") String location, @Param("assetId") int assetId);

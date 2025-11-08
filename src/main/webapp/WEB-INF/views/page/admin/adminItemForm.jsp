@@ -18,7 +18,7 @@
 				<h1 class="content-title">권장 제품 추가</h1>
 				<span>권장 제품 추가를 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="/assetmanager/admin/item/add" method="post">
+					<form action="/assetmanager/admin/item/add" method="post" onsubmit="reindexInputsBeforeSubmit()">
 						<div id="formInputArea" class ="inputArea">
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
@@ -64,17 +64,15 @@
 								<button type="button" class="add-product-button admin-item" onclick="addProduct();">+</button>
 							</div>
 						</div>
-					<div class="button-container">
-						<button type="submit" class="edit-button">등록</button>
-					</div>
-					
+						<div class="button-container">
+							<button type="submit" class="edit-button">등록</button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<script src="/assetmanager/resources/js/modal.js"></script>
 	<script src="/assetmanager/resources/js/adminItemForm.js"></script>
 </body>
 </html>

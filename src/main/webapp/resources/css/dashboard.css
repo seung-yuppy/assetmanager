@@ -49,10 +49,10 @@
         	padding: 20px;
         	border-radius: var(--border-radius);
         	box-shadow: var(--card-shadow);
-        	transition: scale 0.3s;
+        	transition: transform 0.3s;
         	
         	&:hover {
-        		scale: 1.05;
+        		transform: translateY(-3px);
         	}
         }
         

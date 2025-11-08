@@ -36,10 +36,12 @@
 									<option value="9" ${param.categoryId == '9' ? 'selected' : ''}>기타</option>
 								</select>
 							</div>
-							<div class="search-box">
-								<input type="text" id="assetSearch" placeholder="품목명 검색" class="search-field">
-								<button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg" alt="검색"></button>
-							</div>
+				            <form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">
+								<div class="search-box">
+									<input type="text" name="keyword" id="assetSearch" placeholder="요청 내용" class="search-field" value="${param.keyword}">
+								    <button type="submit"><img src="/assetmanager/resources/image/icon_search.svg"></button>
+								</div>
+							</form>
 						</div>
 					</div>
 				

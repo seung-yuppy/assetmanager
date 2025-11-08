@@ -1,3 +1,27 @@
+function reindexInputsBeforeSubmit() {
+    // 1. 모든 제품 행(row)을 가져옵니다.
+    const allRows = document.querySelectorAll("#formInputArea .form-row");
+
+    // 2. 각 행을 순회하면서 인덱스를 0부터 새로 부여합니다.
+    allRows.forEach((row, index) => {
+        
+        // 3. 현재 행(row) 안에 있는 모든 input과 select 요소를 찾습니다.
+        const inputs = row.querySelectorAll("input, select");
+
+        // 4. 각 input/select 요소의 name 속성을 변경합니다.
+        inputs.forEach((input) => {
+            const currentName = input.name; // 예: "items[2].categoryId"
+            
+            // 5. 정규표현식을 사용해 name 속성의 인덱스 부분을 현재 루프의 index로 변경합니다.
+            //    "items[숫자]" 부분을 "items[index]"로 치환합니다.
+            const newName = currentName.replace(/\[\d+\]/, `[${index}]`);
+            
+            input.name = newName; // 예: "items[0].categoryId"
+        });
+    });
+    // return true; (혹은 아무것도 반환하지 않음)를 통해 폼 전송을 계속 진행합니다.
+}
+
 let productRowIndex  = 0;
 
 function removeProduct(btn){

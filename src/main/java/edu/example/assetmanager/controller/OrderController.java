@@ -75,6 +75,7 @@ public class OrderController {
 		}
 		try {
 			orderService.save(orderFormDTO);
+			redirectAttributes.addFlashAttribute("toastMsg", "구매 요청이 완료되었습니다.");
 			return "redirect:/order/list";
 		}catch(Exception e) {
 	        redirectAttributes.addFlashAttribute("error", "등록 중 오류가 발생했습니다.");

@@ -53,6 +53,16 @@ public class NotificationController {
 		return notificationService.readById(id);
 	}
 	
+	@GetMapping("/readall")
+	@ResponseBody
+	public boolean readAll(HttpSession httpSession) {
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+		if (userInfo == null) {
+			return false;
+		}
+		return notificationService.readAll(userInfo.getId());
+	}
+	
 	@GetMapping("/return/check/{targetId}")
 	@ResponseBody
 	public boolean isReturned(@PathVariable("targetId") int id) {

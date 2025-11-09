@@ -31,4 +31,9 @@ public class NotificationService {
 		return notificationDAO.readById(id);
 	}
 	
+	public boolean readAll(int userId) {
+		return notificationDAO.readAll(userId);
+		
+	}
+	
 }

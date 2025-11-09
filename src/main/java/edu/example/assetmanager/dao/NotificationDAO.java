@@ -13,4 +13,5 @@ public interface NotificationDAO {
 	public List<NotificationDTO> getListByUserId(@Param("userId") int id, @Param("offset") int offset);
 	public int getUnreadCountByUserId(int id);
 	public boolean readById(int id);
+	public boolean readAll(int userId);
 }

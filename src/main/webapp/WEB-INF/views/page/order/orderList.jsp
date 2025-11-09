@@ -106,6 +106,18 @@
 			</div>
 		</div>
 	</div>
+<c:if test="${not empty toastMsg}">
+	<script>
+	    Swal.fire({
+	        toast: true,
+	        position: 'bottom-end',
+	        icon: 'success',
+	        title: '${toastMsg}',
+	        showConfirmButton: false,
+	        timer: 3000
+	    });
+	</script>
+</c:if>
 <script src="/assetmanager/resources/js/toDetail.js"></script>
 <script src="/assetmanager/resources/js/pageFilter.js"></script>
 </body>

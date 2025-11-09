@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const bellWrapper = document.getElementById('notification-toggle');
 	const notificationSection = document.querySelector('.notification-list');
 	const getMoreBtn =  document.querySelector('.dropdown-footer');
+	const readAllBtn = document.querySelector('.mark-all-read-button');
 	
 	// 안읽은 알림 갯수 구하기
 	getUnreadCount();
@@ -78,8 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			const targetId = item.getAttribute("data-target-id");
 			const targetType = item.getAttribute("data-target-type");
 			
-			if(item.classList.contains('unread-notification')) // 안읽은 아이템 클릭 시
+			if(item.classList.contains('unread-notification')){ // 안읽은 아이템 클릭 시
 				read(item);
+			} 
 			// 이미 반납된 건은 페이지 이동 대신 모달경고.
 			if (targetType == "return") {
 			    try {
@@ -108,16 +110,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 	
+	readAllBtn.addEventListener('click', function(){
+		fetch('/assetmanager/notification/readall')
+			.then(res => res.json())
+			.then(data =>{
+				if(data === true){
+					getUnreadCount();
+					document.querySelectorAll(".notification-item").forEach((item)=> toReadUi(item));
+				}
+			})
+			.catch(err => console.error("모두 읽기 중 오류 발생 : " + err));
+	})
+	
 	// 알림 더보기 버튼 이벤트 리스너
 	getMoreBtn.addEventListener('click', () =>  getNotifications(notificationOffset));
 });
 
 //읽은 알림의 표시 변화
 function toReadUi(el){
+	const unreadItem = el.querySelector(".unread-dot");
 	el.classList.remove("unread-notification");
 	el.classList.add("read-notification");
-	el.querySelector(".unread-dot").classList.add("spacer");
-	el.querySelector(".unread-dot").classList.remove("unread-dot");
+	if(unreadItem){
+		unreadItem.classList.add("spacer");
+		unreadItem.classList.remove("unread-dot");
+	}
 }
 
 function read(el){

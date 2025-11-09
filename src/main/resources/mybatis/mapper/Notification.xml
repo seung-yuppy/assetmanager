@@ -28,4 +28,10 @@
 		set is_read = 1
 		where id = #{id}
 	</update>
+	
+	<update id="readAll">
+		update notification
+		set is_read = 1
+		where user_id = #{userId}
+	</update>
 </mapper>

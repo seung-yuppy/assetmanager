@@ -238,5 +238,9 @@ public class AssetService {
 	public boolean insertAsset(AssetDTO assetDTO) {
 		return dao.insertAsset(assetDTO);
 	}
+	
+	public boolean isReturnedByReturnId(int id) {
+		return dao.isReturnedByReturnId(id);
+	}
 
 }

@@ -72,20 +72,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 	
 	// 알림 항목 클릭 -> 알림 읽기 처리
-	notificationSection.addEventListener('click', (e) => {
+	notificationSection.addEventListener('click', async (e) => {
 		const item = e.target.closest('.notification-item');
 		if (item){
 			const targetId = item.getAttribute("data-target-id");
 			const targetType = item.getAttribute("data-target-type");
 			
-			if(item.classList.contains('unread-notification')){ // 안읽은 아이템 클릭 시
-				read(item); 
-			}else{ // 읽은 아이템 클릭시
-				if(targetType=="return"){
-					Swal.fire('오류', '이미 반납 확인이 완료됐습니다.', 'warning');
-					return;
-				}
+			if(item.classList.contains('unread-notification')) // 안읽은 아이템 클릭 시
+				read(item);
+			// 이미 반납된 건은 페이지 이동 대신 모달경고.
+			if (targetType == "return") {
+			    try {
+			        const res = await fetch(`/assetmanager/notification/return/check/${targetId}`);
+			        const data = await res.json();
+
+			        if (data) {
+			            await Swal.fire('오류', '이미 반납 확인이 완료됐습니다.', 'warning');
+			            return;
+			        }
+			    } catch (err) {
+			        console.error("알림 읽기 실패:", err);
+			    }
 			}
+			
 			// 하이퍼링크 설정 및 이동
 			let user_path;
 			if(loginUser.role!=="employee"){

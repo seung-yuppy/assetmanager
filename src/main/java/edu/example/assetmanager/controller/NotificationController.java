@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.NotificationDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 
@@ -20,11 +21,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/notification")
 public class NotificationController {
 	private final NotificationService notificationService;
+	private final AssetService assetService;
 	
 	@GetMapping("/list")
 	@ResponseBody
 	public List<NotificationDTO> listAll(HttpSession httpSession, int offset){
-		System.out.println("알림 listAll offset : " + offset);
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo != null) {
 			List<NotificationDTO> list = notificationService.getListByUserId(userInfo.getId(), offset);
@@ -51,4 +52,11 @@ public class NotificationController {
 	public boolean readById(@PathVariable int id) {
 		return notificationService.readById(id);
 	}
+	
+	@GetMapping("/return/check/{targetId}")
+	@ResponseBody
+	public boolean isReturned(@PathVariable("targetId") int id) {
+		return assetService.isReturnedByReturnId(id);
+	}
+	
 }

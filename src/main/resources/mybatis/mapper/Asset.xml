@@ -449,4 +449,11 @@
 		WHERE user_id = #{userId}
 		AND asset_id = #{assetId}
     </select>
+    
+    <select id="isReturnedByReturnId">
+    	select count(*)
+    	from Asset_Return r
+    		join asset a on r.asset_id = a.id 
+    	where r.id = #{id} and a.user_id is null
+    </select>
 </mapper>

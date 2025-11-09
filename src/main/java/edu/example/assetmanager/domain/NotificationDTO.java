@@ -16,7 +16,7 @@ public class NotificationDTO {
 	private Date createDate;
 	private boolean isRead;
 	
-	public NotificationDTO(String targetType,  int targetId, String message) {
+	public NotificationDTO(String targetType, int targetId, String message) {
 		this.targetId = targetId;
 		this.targetType = targetType;
 		this.message = message;

@@ -282,9 +282,11 @@
 	
 	<select id="listDeptCount">
 		SELECT d.dept_name, COUNT(a.id) AS dept_count
-		FROM Asset a
-		INNER JOIN "User" u ON a.user_id = u.id
-		INNER JOIN Department d ON d.id = u.department_id
+		FROM Department d
+		LEFT JOIN "User" u ON d.id = u.department_id
+		LEFT JOIN Asset a ON u.id = a.user_id
 		GROUP BY d.dept_name
+		HAVING d.dept_name NOT IN ('경영지원팀')
+		ORDER BY d.dept_name
 	</select>
 </mapper>

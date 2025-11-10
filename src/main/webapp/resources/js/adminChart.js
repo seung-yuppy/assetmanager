@@ -15,22 +15,28 @@ async function getDeptData() {
 		method: "GET",
 	});
 	const data = await res.json();
-	console.log(data);
-	return data;
+	return data.result;
 }
-
-getDeptData();
 
 // Chart.js 렌더링 함수
 async function renderCharts() {
     // 1. 부서별 자산 현황 (막대 차트)
     const departmentCtx = document.getElementById('departmentChart');
+    
+    const deptAssets = await getDeptData();
+    const deptNames = [];
+    const deptCount = [];
+    
+    deptAssets.map((deptAsset) => {
+    	deptNames.push(deptAsset.deptName);
+    	deptCount.push(deptAsset.deptCount);
+    });
 
     const departmentData = {
-        labels: ['공공사업1팀', '공공사업2팀', '공공사업3팀', '공공사업4팀', '전략사업1팀', '전략사업2팀', '영업팀'],
+        labels: deptNames,
         datasets: [{
             label: '보유 자산 (수량)',
-            data: [30, 40, 67, 21, 14, 19, 24],
+            data: deptCount,
             backgroundColor: [
             	getColor('--primary-color'),
             	getColor('--primary-color'),
@@ -81,7 +87,8 @@ async function renderCharts() {
                     ticks: {
                         callback: function(value) {
                             return value.toLocaleString() + '개';
-                        }
+                        },
+                        stepSize: 1 // <-- 이 속성을 추가합니다.
                     },
                     grid: {
                         color: getColor('--white-color')

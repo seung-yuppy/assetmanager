@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.HomeDAO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.DeptAssetDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 import lombok.RequiredArgsConstructor;
@@ -57,5 +58,9 @@ public class HomeService {
 	
 	public int getCountItem() {
 		return homeDAO.countItem();
+	}
+	
+	public List<DeptAssetDTO> getListDept() {
+		return homeDAO.listDeptCount();
 	}
 }

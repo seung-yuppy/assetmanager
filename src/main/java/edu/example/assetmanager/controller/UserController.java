@@ -88,13 +88,11 @@ public class UserController {
 			if (userId != null) {
 				UserInfoDTO dto = service.getUser(userId);
 				String role = dto.getRole();
-				if (role.equals("admin")) {
-					rattr.addFlashAttribute("loginAdminSuccess", "로그인에 성공하였습니다.");
-					return "redirect:/login";
-				} else {
-					rattr.addFlashAttribute("loginUserSuccess", "로그인에 성공하였습니다.");
-					return "redirect:/login";
-				}		
+				if (role.equals("admin"))
+					return "redirect:/admin/home";
+				else 
+					return "redirect:/home";
+						
 			} else {
 				rattr.addFlashAttribute("loginError", "로그인 세션 정보를 가져오는데 오류가 발생했습니다.");
 				return "redirect:/login";

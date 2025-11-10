@@ -47,10 +47,6 @@ public class AdminAssetController {
 		AssetDTO dto = service.getAsset(id);
 		List<AssetHistoryUserShowDTO> assetList = service.getAssetAssetHistory(id);
 		
-		for (AssetHistoryUserShowDTO asset : assetList) {
-			System.out.println(asset.getAssetName() + "는 " + asset.getReturnDate());
-		}
-		
 		model.addAttribute("asset", dto);
 		model.addAttribute("assetHistory", assetList);
 		

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.DeptAssetDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -129,6 +130,17 @@ public class HomeController {
 		response.put("usingAsset", usingAsset);
 		response.put("pendingAsset", pendingAsset);
 		response.put("invalidAsset", invalidAsset);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	// 부서별 자산 보유 개수 
+	@ResponseBody
+	@GetMapping(value = "/asset/dept", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> h4() {
+		Map<String, Object> response = new HashMap<>();
+		List<DeptAssetDTO> list = homeService.getListDept();
+		response.put("result", list);
 		
 		return ResponseEntity.ok(response);
 	}

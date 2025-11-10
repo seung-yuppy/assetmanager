@@ -117,6 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         
-        sessionStorage.setItem('showToastMessage', '회원가입이 완료되었습니다.');
+        sessionStorage.setItem('joinToastMessage', '회원가입이 완료되었습니다.');
     });    
 });

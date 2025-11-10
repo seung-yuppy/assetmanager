@@ -147,7 +147,7 @@
 	<select id="getUserAssetHistory">
 		SELECT ah.id, a.asset_name, c.category_name, a.serial_number, 
 				ah.create_date, ah.status, ah.asset_id,
-		 		u.username, u.emp_no, u.role, d.dept_name
+		 		u.username, u.emp_no, u.role, d.dept_name, u.position
 		FROM Asset_History ah
 			INNER JOIN Asset a ON ah.asset_id = a.id
 			INNER JOIN Category c ON a.category_id = c.id
@@ -160,7 +160,7 @@
 	<select id="getAssetAssetHistory">
 		SELECT ah.id, a.asset_name, c.category_name, a.serial_number, 
 				ah.create_date, ah.status, ah.asset_id,
-		 		u.username, u.emp_no, u.role, d.dept_name
+		 		u.username, u.emp_no, u.role, d.dept_name, u.position
 		FROM Asset_History ah
 			INNER JOIN Asset a ON ah.asset_id = a.id
 			INNER JOIN Category c ON a.category_id = c.id

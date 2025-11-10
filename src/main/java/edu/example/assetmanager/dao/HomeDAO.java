@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.DeptAssetDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 
@@ -45,5 +46,8 @@ public interface HomeDAO {
 	// admin 대시보드
 	// 권장 제품 개수
 	public int countItem();
+	
+	// 부서 개수
+	public List<DeptAssetDTO> listDeptCount();
 	
 }

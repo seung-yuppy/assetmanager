@@ -178,5 +178,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>	
 	<script src="/assetmanager/resources/js/adminChart.js"></script>
+	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

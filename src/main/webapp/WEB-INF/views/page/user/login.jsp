@@ -56,34 +56,9 @@
     </div>
         
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="resources/js/user.js"></script>
-	<script src="resources/js/userNotice.js"></script>
-	
-	<c:if test="${not empty loginAdminSuccess}">
-    	<script>
-	    	Swal.fire({
-	            icon: 'success',
-	            title: '로그인 성공',
-	            text: '${loginAdminSuccess}',
-	            preConfirm: () => {
-	            	location.href = '/assetmanager/admin/home'
-	            }
-	        });    	
-    	</script>
-    </c:if>
-    
-    <c:if test="${not empty loginUserSuccess}">
-    	<script>
-	    	Swal.fire({
-	            icon: 'success',
-	            title: '로그인 성공',
-	            text: '${loginUserSuccess}',
-	            preConfirm: function() {
-	            	location.href = '/assetmanager/home';
-	            }
-	        });    	
-    	</script>    
-    </c:if>
+	<script src="/assetmanager/resources/js/user.js"></script>
+	<script src="/assetmanager/resources/js/userNotice.js"></script>
+
 	
     <c:if test="${not empty loginError}">
     	<script>
@@ -94,6 +69,12 @@
 	        });    	
     	</script>
     </c:if>
-</body>
+    
+    <c:if test="${empty loginError}">
+    	<script>
+    		sessionStorage.setItem('showToastMessage', '로그인을 성공하였습니다.');
+    	</script>
+    </c:if>
+    
 </body>
 </html>

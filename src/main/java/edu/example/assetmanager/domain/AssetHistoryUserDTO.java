@@ -23,4 +23,5 @@ public class AssetHistoryUserDTO {
 	private String serialNumber;
 	private Date createDate;
 	private String status;
+	private String position;
 }

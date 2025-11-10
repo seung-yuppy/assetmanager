@@ -10,18 +10,28 @@ async function getData() {
 	return data;
 }
 
+async function getDeptData() {
+	const res = await fetch("/assetmanager/asset/dept", {
+		method: "GET",
+	});
+	const data = await res.json();
+	console.log(data);
+	return data;
+}
+
+getDeptData();
+
 // Chart.js 렌더링 함수
 async function renderCharts() {
     // 1. 부서별 자산 현황 (막대 차트)
     const departmentCtx = document.getElementById('departmentChart');
 
     const departmentData = {
-        labels: ['공공사업1팀', '공공사업2팀', '공공사업3팀', '공공사업4팀', '전략사업1팀', '전략사업2팀', '경영지원팀', '영업팀'],
+        labels: ['공공사업1팀', '공공사업2팀', '공공사업3팀', '공공사업4팀', '전략사업1팀', '전략사업2팀', '영업팀'],
         datasets: [{
             label: '보유 자산 (수량)',
-            data: [30, 40, 67, 21, 14, 19, 24, 19],
+            data: [30, 40, 67, 21, 14, 19, 24],
             backgroundColor: [
-            	getColor('--primary-color'),
             	getColor('--primary-color'),
             	getColor('--primary-color'),
             	getColor('--primary-color'),

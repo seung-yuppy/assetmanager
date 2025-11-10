@@ -279,4 +279,12 @@
 		SELECT COUNT(*)
 		FROM Standard_Item
 	</select>
+	
+	<select id="listDeptCount">
+		SELECT d.dept_name, COUNT(a.id) AS dept_count
+		FROM Asset a
+		INNER JOIN "User" u ON a.user_id = u.id
+		INNER JOIN Department d ON d.id = u.department_id
+		GROUP BY d.dept_name
+	</select>
 </mapper>

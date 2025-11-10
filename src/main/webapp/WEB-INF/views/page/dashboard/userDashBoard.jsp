@@ -229,5 +229,6 @@
 	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
 	
 	<script src="/assetmanager/resources/js/userDashBoardChart.js"></script>
+	<script src="/assetmanager/resources/js/notice.js"></script>
 </body>
 </html>

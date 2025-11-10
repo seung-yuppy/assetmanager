@@ -22,4 +22,5 @@ public class AssetHistoryUserShowDTO {
 	private String serialNumber;
 	private Date rentDate;
 	private Date returnDate;
+	private String position;
 }

@@ -160,7 +160,7 @@
 											<td>${asset.empNo}</td>
 											<td>${asset.username}</td>
 											<td>${asset.deptName}</td>
-											<td>${asset.role}</td>
+											<td>${asset.position}</td>
 											<c:if test="${asset.returnDate != null}">
 												<td><span class="status-badge status-rejected">반납됨</span></td>
 											</c:if>

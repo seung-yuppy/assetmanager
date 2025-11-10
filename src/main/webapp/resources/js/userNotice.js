@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. sessionStorage에서 토스트 메시지 가져오기
-    const toastMessage = sessionStorage.getItem('showToastMessage');
+    const toastMessage = sessionStorage.getItem('joinToastMessage');
 
     // 2. 메시지가 있는지 확인
     if (toastMessage) {
@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'success',
             title: toastMessage,
             showConfirmButton: false,
-            timer: 5000,
+            timer: 2000,
             timerProgressBar: true,
             customClass: {
                 popup: 'custom-swal-toast'
             }
         });
 
-        sessionStorage.removeItem('showToastMessage');
+        sessionStorage.removeItem('joinToastMessage');
     }
 });

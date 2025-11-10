@@ -184,6 +184,5 @@ function setTitle(e){
 		content += " 등 " + length + "개"
 	}
 	document.getElementById('requestTitle').value = content;
-	e.target.submit();
 }
 

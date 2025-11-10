@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				if(data === true){
 					getUnreadCount();
 					document.querySelectorAll(".notification-item").forEach((item)=> toReadUi(item));
+					toggleDropdown();
 				}
 			})
 			.catch(err => console.error("모두 읽기 중 오류 발생 : " + err));

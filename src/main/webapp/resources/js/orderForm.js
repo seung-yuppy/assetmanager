@@ -48,7 +48,22 @@ inputArea.addEventListener('change',function(e){
 
 //이벤트 부착 : 제목 추가용 
 const requestForm = document.getElementById('requestForm');
-requestForm.addEventListener('submit', setTitle);
+requestForm.addEventListener('submit', openSubmitModal);
+
+// 체출 확인 모달
+function openSubmitModal(e){
+    e.preventDefault(); // 폼 제출 막기
+    Swal.fire({
+		title: "성공",
+		text: "구매 요청이 완료되었습니다.",
+		icon: "success",
+		confirmButtonColor: "#a5dc86",
+		confirmButtonText: "확인",
+	}).then(() =>{
+		setTitle(e);
+		e.target.submit();
+	});
+}
 
 function calculateTotalPrice(el){
 	const row = el.closest('.form-row');

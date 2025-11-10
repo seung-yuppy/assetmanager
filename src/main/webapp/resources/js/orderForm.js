@@ -41,10 +41,19 @@ inputArea.addEventListener('change',function(e){
 			    }));
 				setRowIndex();
 				init_select2(parentRow);
+				cleanInputs(parentRow);
 				calculateTotalPrice(e.target);
 			});
 	}
 });
+
+function cleanInputs(container){
+	console.log("cleanInputs");
+	const $price = $(container).find('[name*="price"]');
+	const $count = $(container).find('[name*="count"]');
+	if($price) $price.val(0);
+	if($count) $count.val(1);
+}
 
 //이벤트 부착 : 제목 추가용 
 const requestForm = document.getElementById('requestForm');

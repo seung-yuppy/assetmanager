@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			// 하이퍼링크 설정 및 이동
 			let user_path;
-			if(loginUser.role!=="employee"){
+			if(!["employee", "department"].includes(loginUser.role)){
 				user_path = "/" + loginUser.role; 
 			}else{
 				user_path="";

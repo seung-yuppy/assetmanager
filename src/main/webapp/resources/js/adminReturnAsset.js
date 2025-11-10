@@ -28,8 +28,27 @@ document.addEventListener("DOMContentLoaded", function() {
 		            body : JSON.stringify(data)
 				})
 				.then(result => {					
-					sessionStorage.setItem('showToastMessage', '반납 처리가 완료되었습니다.');
-					location.href = "/assetmanager/admin/return/list";
+					if (result) {
+						Swal.fire({
+							title: "성공",
+							text: "반납되었습니다.",
+							icon: "success",
+							confirmButtonColor: "#a5dc86",
+							confirmButtonText: "확인",
+						}).then(() =>{
+							location.href = "/assetmanager/admin/return/list";
+						});
+					} else {
+						Swal.fire({
+							title: "실패",
+							text: "반납에 실패하였습니다.",
+							icon: "error",
+							confirmButtonColor: "#d33",
+							confirmButtonText: "확인",
+						}).then(()=>{
+							location.reload();
+							})
+						}
 				})
 			}
 		})

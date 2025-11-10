@@ -19,7 +19,7 @@ function checkProductCnt(){
 //반출 요청할 제품 추가하는 함수 
 function addProduct(){
 	if (!checkProductCnt()){
-		alert("요청 품목은 10개까지만 가능합니다.");
+		Swal.fire('입력 초과', '최대 10개까지 입력가능합니다.', 'warning');
 		return;
 	}
 	const currentIndex = ++productRowIndex;
@@ -28,7 +28,7 @@ function addProduct(){
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label> 
-									<select id="category" name="category" required>
+									<select class="category" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
@@ -48,7 +48,7 @@ function addProduct(){
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" id="quantity" name="items[${currentIndex}].count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
+										<input type="number" id="quantity" name="items[${currentIndex}].count"  class="numberSelect" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>							
 							</div>  
@@ -74,5 +74,22 @@ function updateCharCount(textarea, maxLength) {
     }
 }
 
+//이벤트 부착 : 제목 추가용 
+const requestForm = document.getElementById('requestForm');
+requestForm.addEventListener('submit', openSubmitModal);
+
+// 체출 확인 모달
+function openSubmitModal(e){
+    e.preventDefault(); // 폼 제출 막기
+    Swal.fire({
+      title: "성공",
+      text: "반출 요청이 완료되었습니다.",
+      icon: "success",
+      confirmButtonColor: "#a5dc86",
+      confirmButtonText: "확인",
+   }).then(() =>{
+      e.target.submit();
+   });
+}
 
 

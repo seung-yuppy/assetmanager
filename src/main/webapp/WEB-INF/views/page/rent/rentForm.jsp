@@ -12,7 +12,7 @@
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetListModal.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/approver.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
 <body>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -25,7 +25,7 @@
 				<h1 class="content-title">반출 신청서</h1>
 				<span class="page-description">새로운 반출 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
-					<form action="/assetmanager/rent/approval" method="post">
+					<form id="requestForm" action="/assetmanager/rent/approval" method="post">
 						<div class="form-section">
 							<!-- 결재라인 불러오기 -->
 							<jsp:include page="/WEB-INF/views/component/approver.jsp">
@@ -56,7 +56,8 @@
 							</div>
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 <span class="required">*</span></label> <select id="category" name="category" required>
+									<label for="category">카테고리 <span class="required">*</span></label> 
+									<select class="category" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
@@ -70,13 +71,15 @@
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label>제품명<span class="required">*</span></label> <input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택 " data-target="product-modal" required>
+									<label>제품명<span class="required">*</span></label> 
+									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
 									<input type="hidden" name="items[0].assetId" value="" />
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label>수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" name="items[0].count" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
+										<input type="number" class="numberSelect" name="items[0].count" min="1" value="1" required> 
+										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
 								</div>
 							</div>

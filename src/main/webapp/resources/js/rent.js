@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const dataset = btn.dataset;
 
         modalAssetId.value = dataset.assetId;
-        console.log("자산 id가져와???", modalAssetId.value);
         modalRentId.value = dataset.rentId;
         modalProductName.value = dataset.assetName;
         modalReturnDate.value = dataset.returnDate;
@@ -48,8 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const assetId = modalAssetId.value;
         const serialNumber = modalSerialNumber.value.trim();
-        console.log("자산 Id 뭐야?? "+ assetId)
-        console.log("시리얼 넘버 뭔데?? "+ serialNumber)
         if (!serialNumber) {
             Swal.fire('입력 오류', '일련번호를 입력해주세요.', 'warning');
             return;
@@ -59,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             assetId: assetId,
             serialNumber: serialNumber
         };
-        console.log("data 나와?? "+ assetId, serialNumber);
         fetch('/assetmanager/rent/register/item', {
             method: 'POST',
             headers: {
@@ -72,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         	return response.json();
         })
         .then(data => {
-        	console.log(data);
             if(data.msg==='일련번호가 일치하지 않거나 오류가 발생했습니다.'){
             		 Swal.fire('처리 실패', data.msg, 'error');
             } else {
@@ -91,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            console.error('Error:', error);
             Swal.fire('처리 실패' , '일련번호 등록에 실패했습니다.', 'error');
         });
     });

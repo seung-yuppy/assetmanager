@@ -46,8 +46,27 @@ document.addEventListener("DOMContentLoaded", function() {
 					})
 					.then(response => response.json())
 					.then(result => {
-							sessionStorage.setItem('showToastMessage', '승인 처리가 완료되었습니다.');
-							location.reload();
+						if (result) {
+							Swal.fire({
+								title: "성공",
+								text: "승인되었습니다.",
+								icon: "success",
+								confirmButtonColor: "#a5dc86",
+								confirmButtonText: "확인",
+							}).then(() =>{
+								location.reload();
+							});
+						} else {
+							Swal.fire({
+								title: "실패",
+								text: "승인 실패하였습니다.",
+								icon: "error",
+								confirmButtonColor: "#d33",
+								confirmButtonText: "확인",
+							}).then(()=>{
+									location.reload();
+								})
+							}							
 						})
 						.catch(error => {
 						console.error('Error:', error);
@@ -102,9 +121,28 @@ const rejectBtn = document.querySelector(".reject-btn");
 					})
 					.then(response => response.json())
 					.then(result => {					
-						sessionStorage.setItem('showToastMessage', '거절 처리가 완료되었습니다.');
-						location.reload();
-					})
+						if (result) {
+							Swal.fire({
+								title: "성공",
+								text: "반려되었습니다.",
+								icon: "success",
+								confirmButtonColor: "#a5dc86",
+								confirmButtonText: "확인",
+							}).then(() =>{
+								location.reload();
+							});
+						} else {
+							Swal.fire({
+								title: "실패",
+								text: "반려 실패하였습니다.",
+								icon: "error",
+								confirmButtonColor: "#d33",
+								confirmButtonText: "확인",
+							}).then(()=>{
+									location.reload();
+								})
+							}							
+						})
 					.catch(error => {
 						console.error('Error:', error);
 						Swal.fire('오류', '반려 처리 중 오류가 발생했습니다.', 'error');

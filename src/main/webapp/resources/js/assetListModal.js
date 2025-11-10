@@ -1,5 +1,70 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const productModal = document.querySelector('#product-modal');  
+	
+	const addBtn = document.querySelector('.add-product-button');
+	const category = document.querySelector('.category');
+    const productNameSelect = document.querySelector('.productSelect');
+    const numberSelect = document.querySelector('.numberSelect');
+    
+    function initCat() {
+        if (category.value === '' || category.value === null) { 
+            productNameSelect.disabled = true;    
+        } else {
+            productNameSelect.disabled = false;
+        }
+    }
+    
+    initCat();
+
+    function checkCategory() {
+    	productNameSelect.value = '';
+    	numberSelect.value = 1;
+        if (category.value === '' || category.value === null) {
+            productNameSelect.disabled = true;    
+        } else {
+            productNameSelect.disabled = false;
+      
+        }
+    }
+    category.addEventListener('change', checkCategory);
+    
+	
+	addBtn.addEventListener('click', () => {
+		const categories = document.querySelectorAll('.category');
+	    const productNameSelects = document.querySelectorAll('.productSelect');
+	    const numberSelects = document.querySelectorAll('.numberSelect');
+	    
+	    function initCategory(category, productNameSelect) {
+	        if (category.value === '' || category.value === null) { 
+	            productNameSelect.disabled = true;    
+	        } else {
+	            productNameSelect.disabled = false;
+	        }
+	    }
+
+	    function checkCategoryValue(category,productNameSelect, numberSelect) {
+	    	productNameSelect.value = '';
+	    	numberSelect.value = 1;
+	        if (category.value === '' || category.value === null) {
+	            productNameSelect.disabled = true;    
+	        } else {
+	            productNameSelect.disabled = false;
+	        }
+	    }
+	    
+	    categories.forEach((category, index)=> {
+	    	const productName = productNameSelects[index];
+	    	const selectNumber = numberSelects[index];
+	    	
+	    	category.addEventListener('change', () => {
+	    		checkCategoryValue(category, productName, selectNumber)
+	    	});
+	    	initCategory(category, productName);
+	    });
+	})
+	
+    
+    
 
 	// 모달이 이 페이지에 없으면, JS가 더 이상 실행되지 않도록 막음
 	if (!productModal) {
@@ -113,12 +178,9 @@ document.addEventListener("DOMContentLoaded", function() {
             listBody.appendChild(tr);
         });
 	};
-		console.log(formInputArea);
         if (formInputArea) {
             formInputArea.addEventListener('click', (e) => {
                 if (e.target.classList.contains('productSelect')) {
-                    
-                	console.log(e.target);
      
                     // 클릭한 입력창 저장
                     activeProductNameInput = e.target;
@@ -128,8 +190,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     // select 찾기
                     const categorySelect = parentRow.querySelector('select[name="category"]');
-             
-                    console.log(categorySelect);
                     
     				if (!categorySelect) {
     					return;
@@ -137,9 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
     				
     				// 현재 category 값 찾기
                     const selectedCategory = categorySelect.value;
-                    
-                    console.log(selectedCategory);
-                    
+
                     // 카테고리 값
                     let categoryId = 0;
                     switch (selectedCategory) {

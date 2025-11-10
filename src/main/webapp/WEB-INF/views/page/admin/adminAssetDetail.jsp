@@ -141,27 +141,37 @@
 		                    </tr>
 		                </thead>
 		                <tbody>
-		                	<c:forEach var="asset" items="${assetHistory}">
-		                		<tr>
-		                			<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
-		                			<c:if test="${asset.returnDate != null}">
-										<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
-									</c:if>
-									<c:if test="${asset.returnDate == null}">
-										<td>-</td>
-									</c:if>
-									<td>${asset.empNo}</td>
-									<td>${asset.username}</td>
-									<td>${asset.deptName}</td>
-									<td>${asset.role}</td>
-									<c:if test="${asset.returnDate != null}">
-										<td><span class="status-badge status-rejected">반납됨</span></td>
-									</c:if>
-									<c:if test="${asset.returnDate == null}">
-										<td><span class="status-badge status-used">사용중</span></td>
-									</c:if>
-		                		</tr>		                	
-		                	</c:forEach>
+		                	<c:choose>
+		                		<c:when test="${empty assetHistory}">
+		                			<tr>
+		                				<td colspan="7" style="text-align: center;">데이터가 없습니다.</td>
+		                			</tr>
+		                		</c:when>
+		                		<c:otherwise>
+				                	<c:forEach var="asset" items="${assetHistory}">
+				                		<tr>
+				                			<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
+				                			<c:if test="${asset.returnDate != null}">
+												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td>-</td>
+											</c:if>
+											<td>${asset.empNo}</td>
+											<td>${asset.username}</td>
+											<td>${asset.deptName}</td>
+											<td>${asset.role}</td>
+											<c:if test="${asset.returnDate != null}">
+												<td><span class="status-badge status-rejected">반납됨</span></td>
+											</c:if>
+											<c:if test="${asset.returnDate == null}">
+												<td><span class="status-badge status-used">사용중</span></td>
+											</c:if>
+				                		</tr>		                	
+				                	</c:forEach>		                		
+		                		</c:otherwise>
+		                	</c:choose>
+
 		                </tbody>
 		            </table>
 		        </div>

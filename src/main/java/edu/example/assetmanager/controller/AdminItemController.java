@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.example.assetmanager.domain.ItemDTO;
 import edu.example.assetmanager.domain.ItemListDTO;
@@ -41,8 +42,10 @@ public class AdminItemController {
 	}
 	
 	@PostMapping("/item/remove")
-	public String i5(int id) {
-		service.removeItem(id);
+	public String i5(int id, RedirectAttributes rattr) {
+		if (service.removeItem(id)) 
+			rattr.addFlashAttribute("success", "권장 제품이 삭제 되었습니다.");
+		
 		return "redirect:/admin/item/list";
 	}
 }

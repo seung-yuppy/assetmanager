@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,10 +54,46 @@
             </div>
         </div>
     </div>
-    
+        
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="resources/js/user.js"></script>
 	<script src="resources/js/userNotice.js"></script>
+	
+	<c:if test="${not empty loginAdminSuccess}">
+    	<script>
+	    	Swal.fire({
+	            icon: 'success',
+	            title: '로그인 성공',
+	            text: '${loginAdminSuccess}',
+	            preConfirm: () => {
+	            	location.href = '/assetmanager/admin/home'
+	            }
+	        });    	
+    	</script>
+    </c:if>
+    
+    <c:if test="${not empty loginUserSuccess}">
+    	<script>
+	    	Swal.fire({
+	            icon: 'success',
+	            title: '로그인 성공',
+	            text: '${loginUserSuccess}',
+	            preConfirm: function() {
+	            	location.href = '/assetmanager/home';
+	            }
+	        });    	
+    	</script>    
+    </c:if>
+	
+    <c:if test="${not empty loginError}">
+    	<script>
+	    	Swal.fire({
+	            icon: 'error',
+	            title: '로그인 실패',
+	            text: '${loginError}'
+	        });    	
+    	</script>
+    </c:if>
 </body>
 </body>
 </html>

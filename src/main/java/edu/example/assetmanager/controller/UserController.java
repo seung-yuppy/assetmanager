@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
 import edu.example.assetmanager.domain.UserDTO;
@@ -81,20 +82,25 @@ public class UserController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String userJoin(String empNo, String password, HttpSession session) {
+	public String userJoin(String empNo, String password, HttpSession session, RedirectAttributes rattr) {
 		if (service.login(empNo, password, session)) {
 			Integer userId = (Integer) session.getAttribute("userId");
 			if (userId != null) {
 				UserInfoDTO dto = service.getUser(userId);
 				String role = dto.getRole();
-				if (role.equals("admin")) 
-					return "redirect:/admin/home";
-				else 
-					return "redirect:/home";
+				if (role.equals("admin")) {
+					rattr.addFlashAttribute("loginAdminSuccess", "로그인에 성공하였습니다.");
+					return "redirect:/login";
+				} else {
+					rattr.addFlashAttribute("loginUserSuccess", "로그인에 성공하였습니다.");
+					return "redirect:/login";
+				}		
 			} else {
+				rattr.addFlashAttribute("loginError", "로그인 세션 정보를 가져오는데 오류가 발생했습니다.");
 				return "redirect:/login";
 			}
 		} else {
+			rattr.addFlashAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			return "redirect:/login";
 		}
 	}

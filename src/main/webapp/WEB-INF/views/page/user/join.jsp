@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="resources/js/user.js"></script>
 </body>

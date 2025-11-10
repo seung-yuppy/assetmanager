@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (dDayLabel) { // dDayLabel이 존재하는지 확인
             if (remainingDays < 0) {
-                dDayLabel.textContent = `D+${Math.abs(remainingDays)}`;
+                dDayLabel.textContent = `D + ${Math.abs(remainingDays)}`;
                 dDayLabel.classList.add('over');
             } else if (remainingDays === 0) {
-                dDayLabel.textContent = 'D-DAY';
+                dDayLabel.textContent = 'D - DAY';
             } else {
-                dDayLabel.textContent = `D-${remainingDays}`;
+                dDayLabel.textContent = `D - ${remainingDays}`;
             }
         }
 

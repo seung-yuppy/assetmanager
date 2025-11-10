@@ -128,6 +128,16 @@
 		</div>
 	</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/pageFilter.js"></script>
+	<c:if test="${!empty success}">
+		<script>
+	    	Swal.fire({
+	            icon: 'success',
+	            title: '삭제 완료',
+	            text: '${success}'
+	        });    	
+    	</script>
+	</c:if>
 </body>
 </html>

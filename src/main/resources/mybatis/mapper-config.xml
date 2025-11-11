@@ -8,5 +8,6 @@
 	
 	<typeAliases>
 		<package name="edu.example.assetmanager.domain"/>
+		<package name="edu.example.assetmanager.domain.stats"/>
 	</typeAliases>
 </configuration>

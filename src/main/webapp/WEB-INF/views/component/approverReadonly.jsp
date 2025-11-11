@@ -17,15 +17,22 @@
 	<c:set var="isRequester" value="${sessionScope.userInfo.id == empInfo.userInfo.id}"/>
     <c:set var="rejecter" value="${approval.status == 'FIRST_REJECT' ? empInfo.approverInfo.username : empInfo.managerInfo.username}"/>
     <c:set var="rejecterDept" value="${approval.status == 'FIRST_REJECT' ? empInfo.approverInfo.deptName : empInfo.managerInfo.deptName}"/>
-    <c:if test="${approval.status.koreanName == '승인됨' && isRequester}">
+    <c:if test="${approval.status.koreanName == '승인됨'}">
 	    <div class="status-banner-approved">
 	        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
 	                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 	       	</svg>
-	        <p>[승인됨] 요청이 승인되었습니다. 물품 수령 후 자산 등록해주세요.</p>
+	       	<c:choose>
+	       		<c:when test="${isRequester}">
+			        <p>[승인됨] 요청이 승인되었습니다. 물품 수령 후 자산 등록해주세요.</p>
+	       		</c:when>
+	       		<c:otherwise>
+	       			<p>[승인됨] 요청이 승인되었습니다.</p>
+	       		</c:otherwise>
+	       	</c:choose>
 	    </div>
     </c:if>
-    <c:if test="${approval.status.koreanName == '반려됨' && isRequester}">
+    <c:if test="${approval.status.koreanName == '반려됨'}">
 	    <div class="status-banner">
 	        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
 	            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />

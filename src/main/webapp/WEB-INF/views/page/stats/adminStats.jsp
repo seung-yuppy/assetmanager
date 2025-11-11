@@ -2,226 +2,226 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>자산 통계</title>
-	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
-	<style>
-		/* 차트와 테이블을 담는 컨테이너 스타일 */
-		.chart-table-container {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구매 통계 대시보드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2canvas CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+    <style>
+ 	     /* 공통 섹션 스타일 */
+		.dashboard-container h1 {
+			font-size: 30px;
+		    font-weight: 700; 
+		    margin: 0 0 5px 0;
+		}
+
+		.dashboard-container span {
+		    color: var(--gray-color);
+		}
+		
+		.section-card h2 {
+		    font-size: 1.5rem;
+		    font-weight: 600;
+		    margin-bottom: 15px;
+		}
+		
+		/* 대시보드 레이아웃 */
+		.dashboard-container {
 			display: flex;
-			flex-wrap: wrap; /* 모바일 화면 등에서 줄바꿈 지원 */
-			gap: 24px; /* 컴포넌트 사이 간격 */
-			width: 100%;
+			flex-direction: column;
+		  	margin: 0 auto;
 		}
 		
-		/* 차트와 테이블이 동일한 비율을 갖도록 설정 */
-		.chart-container,
-		.table-container {
-			flex: 1;
-			min-width: 300px; /* 최소 너비 보장 */
+		      /* 공통 섹션 스타일 */
+		.section-card {
+		    background-color: var(--white-color); /* 흰색 카드 배경 */
+		    padding: 20px;
+		    border-radius: 12px;
+		    box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
+		    margin-top: 25px;
 		}
-		
-		/* 차트 컨테이너는 position: relative가 필수 */
-		.chart-container {
-			position: relative;
-			/* 레이아웃 시프트를 막기 위해 고정 높이를 주거나,
-			  JS에서 maintainAspectRatio: false 를 설정해야 합니다.
-			  여기서는 JS에서 설정하는 방식을 택합니다.
-			*/
-		}
-
-		/* 여러 섹션 카드를 보기 좋게 배치하기 위한 그리드 (선택 사항) */
-		.dashboard-grid {
-			display: grid;
-			grid-template-columns: 1fr; /* 기본 1열 */
-			gap: 24px;
-		}
-
-		/* 더 큰 화면에서는 2열로 배치 */
-		@media (min-width: 1024px) {
-			.dashboard-grid {
-				/* 두 개의 카드가 나란히 배치되도록 수정 */
-				grid-template-columns: 1fr 1fr;
-			}
-			/* 1열 전체를 사용하는 카드를 위한 클래스 */
-			.full-width-card {
-				grid-column: 1 / -1;
-			}
-		}
-
-		/* 새로운 컨트롤 영역 스타일 */
-		.dashboard-header-controls {
-			display: flex;
-			justify-content: space-between; /* 양 끝 정렬 */
-			align-items: center;
-			margin-bottom: 20px; /* 아래쪽 여백 */
-		}
-		
-		.year-selector {
-			display: flex;
-			align-items: center;
-		}
-
-		.year-selector label {
-			font-weight: 600;
-			color: #333;
-			margin-right: 8px;
-		}
-		
-		.styled-select {
-			padding: 8px 12px;
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			font-size: 14px;
-			cursor: pointer;
-			transition: border-color 0.2s;
-		}
-		
-		.styled-select:focus {
-			border-color: #4CAF50; /* 예시 색상, 실제 CSS 변수 사용 권장 */
-			outline: none;
-		}
-		
-		.report-action-area {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		
-		.primary-button {
-			padding: 8px 16px;
-			background-color: #007bff; /* 예시 색상 */
-			color: white;
-			border: none;
-			border-radius: 8px;
-			cursor: pointer;
-			font-weight: 500;
-			transition: background-color 0.2s;
-			white-space: nowrap; /* 버튼 내용이 줄바꿈되지 않도록 */
-		}
-		
-		.primary-button:hover {
-			background-color: #0056b3;
-		}
-		
-		/* 보고서 생성 상태 메시지 스타일 */
-		#reportStatusMessage {
-			font-size: 14px;
-			color: #007bff;
-			opacity: 0;
-			transition: opacity 0.3s ease-in-out;
-		}
-
-	</style>
+    	
+        /* Inter 폰트 (Tailwind 기본 폰트) 적용 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* PDF 생성 시 로더 스타일 */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none; /* 기본 숨김 */
+        }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* 인쇄/PDF 생성 시 불필요한 요소 숨기기 */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #report-content, #report-content * {
+                visibility: visible;
+            }
+            #report-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
-			
-			<!-- 대시보드 컨테이너 -->
-			<div class="dashboard-container">
-				<h1 class="content-title" style="font-size:30px;">구매 통계</h1>
-				<!-- 새로운 컨트롤 영역: 년도 선택 및 보고서 생성 버튼 -->
-				<div class="dashboard-header-controls">
-					<div class="year-selector">
-						<label for="yearSelect">년도 선택:</label>
-						<select id="yearSelect" class="styled-select">
-							<option value="2025">2025년</option>
-							<option value="2024" selected>2024년</option>
-							<option value="2023">2023년</option>
-						</select>
-					</div>
-					<div class="report-action-area">
-						<span id="reportStatusMessage"></span>
-						<button id="reportGenerateBtn" class="primary-button">보고서 생성</button>
-					</div>
-				</div>
-				<!-- 기존 섹션: 분기별 구매 추이 (전체 너비 사용) -->
-				<div class="section-card full-width-card">
-					<h2>분기별 구매 추이</h2>
-					<div class="chart-table-container">
-						<!-- 차트 컨테이너 (Layout Shift 방지: position: relative) -->
-						<div class="chart-container">
-							<canvas id="totalPurchaseLineChart"></canvas>
-						</div>
-						<!-- 테이블 컨테이너 -->
-						<div class="table-container">
-				            <table class="data-table" id="purchaseTable">
-								<thead>
-									<tr>
-										<th>자산명</th>
-										<th>카테고리</th>
-										<th>반납예정일</th>
-										<th>사용 진행도</th>
-									</tr>
-								</thead>
-								<tbody></tbody>	
-							</table>
-						</div>
-					</div>
-		        </div>
-
-				<!-- 새로운 섹션들을 담을 그리드 -->
-				<div class="dashboard-grid">
-					
-					<!-- 새로운 섹션 1: 자산 유형별 현황 (Doughnut Chart) -->
-					<div class="section-card">
-						<h2>자산 유형별 현황</h2>
-						<div class="chart-table-container">
-							<!-- 차트 컨테이너 -->
-							<div class="chart-container">
-								<canvas id="assetTypeDoughnutChart"></canvas>
-							</div>
-							<!-- 테이블 컨테이너 -->
-							<div class="table-container">
-								<table class="data-table" id="assetTypeTable">
-									<thead>
-										<tr> <th>유형</th> <th>수량</th> <th>비율</th> </tr>
-									</thead>
-									<tbody>
-										<!-- 데이터는 statsChart.js에서 동적으로 채워집니다. -->
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<!-- 새로운 섹션 2: 월별 자산 변동 (Bar Chart) -->
-					<div class="section-card">
-						<h2>월별 자산 변동</h2>
-						<div class="chart-table-container">
-							<!-- 차트 컨테이너 -->
-							<div class="chart-container">
-								<canvas id="monthlyFluctuationBarChart"></canvas>
-							</div>
-							<!-- 테이블 컨테이너 -->
-							<div class="table-container">
-								<table class="data-table" id="monthlyFluctuationTable">
-									<thead>
-										<tr> <th>월</th> <th>입고</th> <th>폐기</th> <th>순증</th> </tr>
-									</thead>
-									<tbody>
-										<!-- 데이터는 statsChart.js에서 동적으로 채워집니다. -->
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-				</div> <!-- .dashboard-grid 끝 -->
-
-		    </div> <!-- .dashboard-container 끝 -->
-		</div>
+		    <!-- PDF 생성 시 로더 -->
+		    <div id="loader">
+		        <div class="spinner"></div>
+		        <span class="text-white text-xl ml-4">PDF 보고서를 생성 중입니다...</span>
+		    </div>
+		
+		    <div class="dashboard-container">
+		        <!-- 보고서 콘텐츠 영역 (이 부분이 PDF로 변환됨) -->
+		        <div class="flex justify-between">
+			        <div>
+				    	<h1>구매 통계 대시보드</h1>
+			            <span>구매 통계와 보고서를 확인합니다.</span>
+			        </div>
+			        <div class="flex flex-col justify-end items-center">
+			            <div class="flex items-center space-x-2 mt-4 sm:mt-0">
+			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 생성
+			                </button>
+			            </div>
+			        </div>
+		        </div>
+		        
+		        <main id="report-content" class="section-card">
+		            
+		            <!-- 보고서 헤더 (참고 이미지 2 기반) -->
+		            <div class="border-b pb-4 mb-8">
+	   			         <select class="no-print rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+		                    <option>2025년</option>
+		                    <option>2024년</option>
+		                </select>
+<!-- 		                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 text-sm text-gray-700">
+		                    <div><strong>보고 기간:</strong> 2025.07.01 - 2025.09.30</div>
+		                    <div><strong>보고 기준:</strong> 구매 검토 데이터 기준</div>
+		                    <div><strong>작성일:</strong> 2025.10.01</div>
+		                    <div><strong>작성자:</strong> 시스템 자동 생성</div>
+		                </div> -->
+		                <h2 class="text-4xl font-bold text-center text-gray-900">구매 리포트</h2>
+		                <p class="text-center text-lg text-gray-600 mt-2">2025년 3분기 구매 리포트</p>
+		                
+		            </div>
+		
+		            <section class="mb-12">
+		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">구매 금액 추이</h3>
+		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+		                    <!-- 차트 -->
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner">
+		                        <canvas id="annualLineChart"></canvas>
+		                    </div>
+		                    <!-- 표 -->
+		                    <div class="lg:col-span-2">
+		                        <table class="min-w-full divide-y divide-gray-200">
+		                            <thead class="bg-gray-100">
+		                                <tr>
+		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">년</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">전년 대비</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="annualTableBody" class="bg-white divide-y divide-gray-200">
+		                                <!-- JS로 데이터 채우기 -->
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                </div>
+		            </section>
+		            <section>
+		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">카테고리별 구매 총액</h3>
+		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+		                    <!-- 차트 -->
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center items-center" style="max-height: 400px;">
+		                        <canvas id="categoryDonutChart"></canvas>
+		                    </div>
+		                    <!-- 표 -->
+		                    <div class="lg:col-span-2">
+		                        <table class="min-w-full divide-y divide-gray-200">
+		                            <thead class="bg-gray-100">
+		                                <tr>
+		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">카테고리</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="categoryTableBody" class="bg-white divide-y divide-gray-200">
+		                                <!-- JS로 데이터 채우기 -->
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                </div>
+		            </section>
+		            <section class="mb-12">
+		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">부서별 구매 금액</h3>
+		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+		                    <!-- 차트 -->
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner">
+		                        <canvas id="deptBarChart"></canvas>
+		                    </div>
+		                    <!-- 표 -->
+		                    <div class="lg:col-span-2">
+		                        <table class="min-w-full divide-y divide-gray-200">
+		                            <thead class="bg-gray-100">
+		                                <tr>
+		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">부서</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="deptTableBody" class="bg-white divide-y divide-gray-200">
+		                                <!-- JS로 데이터 채우기 -->
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                </div>
+		            </section>
+		        </main>
+		    </div>
+	    </div>
 	</div>
-	
-	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
-	
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>	
-	<script src="/assetmanager/resources/js/statsChart.js"></script>
+ <script src="/assetmanager/resources/js/statsChart2.js"></script>
 </body>
 </html>

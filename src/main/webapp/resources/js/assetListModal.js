@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const assetName = asset.assetName;
             let availableCount = asset.count;
             const requested = requestedCounts.get(assetName) || 0;
+            const existed = requestedCounts.has(assetName); // 중복 확인
             
             // 총 재고
             availableCount = availableCount - requested;
@@ -134,12 +135,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const tr = document.createElement('tr');
 
 			// 0 이면 선택 불가능
-			if (AssetCount === 0) {
+			if (AssetCount === 0 || existed) {
 			    tr.classList.add('disabled-asset');
 			}
             tr.innerHTML = `<td>${assetName}</td><td>${asset.spec || ''}</td><td>${AssetCount || '0'}</td>`;
             
-			if (AssetCount > 0) {
+			if (AssetCount > 0 && !existed) {
 	            tr.addEventListener('click', () => {
 	            	const assetId = asset.id; 
 	                const assetName = asset.assetName;

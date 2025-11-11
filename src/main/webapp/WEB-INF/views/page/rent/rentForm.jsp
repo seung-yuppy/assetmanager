@@ -51,7 +51,8 @@
 									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 								</div>
 								<div class="form-return-date">
-									<label for="return-date">반납 예정일 <span class="required">*</span></label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" required>
+									<label for="return-date">반납 예정일 <span class="required">*</span></label> 
+									<input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" min="${currentDate}" required>
 								</div>
 							</div>
 							<div class="form-row">
@@ -71,7 +72,7 @@
 									</select>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label>제품명<span class="required">*</span></label> 
+									<label>제품명 <span class="required">*</span></label> 
 									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
 									<input type="hidden" name="items[0].assetId" value="" />
 								</div>
@@ -110,7 +111,6 @@
 						<div class="form-actions">
 							<button type="submit" class="primary-action">제출</button>
 						</div>
-
 					</form>
 				</div>
 			</div>

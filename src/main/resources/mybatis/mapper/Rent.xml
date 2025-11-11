@@ -274,34 +274,51 @@
 	</select>
 	
 	<select id="findReturnAsset">
-		SELECT U.username
-			  ,U.email
-			  ,U.phone
-			  ,U.position
-			  ,D.dept_name
-			  ,D.dept_address
-			  ,A.asset_name
-			  ,A.serial_number
-			  ,A.spec
-			  ,A.location
-			  ,A.register_date
-			  ,C.category_name
-			  ,AR.id
-			  ,AR.asset_id
-			  ,AR.is_return
-			  ,AR.user_id
-			  ,R.return_date  
-			  ,AH.create_date
-			  ,TRUNC(R.return_date) - TRUNC(SYSDATE) as deadLine
-		FROM Asset_Return AR
-        JOIN "User" U ON U.id = AR.user_id
-        JOIN Department D ON D.id = U.department_id
-        JOIN Asset A ON A.id = AR.asset_id
-        JOIN Category C ON C.id = A.category_id
-        LEFT OUTER JOIN Rent_Content RC ON RC.asset_id = A.id
-        LEFT OUTER JOIN Rent R ON R.id = RC.rent_id
-        JOIN Asset_History AH ON AH.asset_id = A.id  
-        WHERE AR.id = #{id}
+		WITH LatestRentData AS (
+		    SELECT 
+		        RC.asset_id,
+		        R.return_date,
+		        ROW_NUMBER() OVER(PARTITION BY RC.asset_id ORDER BY R.rent_date DESC) as RN
+		    FROM Rent R
+		    JOIN Rent_Content RC ON R.id = RC.rent_id
+		),
+		LatestHistoryData AS (
+		    SELECT 
+		        AH.asset_id,
+		        AH.create_date,
+		        ROW_NUMBER() OVER(PARTITION BY AH.asset_id ORDER BY AH.create_date DESC) as RN
+		    FROM Asset_History AH
+		)
+		SELECT 
+		    U.username,
+		    U.email,
+		    U.phone,
+		    U.position,
+		    D.dept_name,
+		    D.dept_address,
+		    A.asset_name,
+		    A.serial_number,
+		    A.spec,
+		    A.location,
+		    A.register_date,
+		    C.category_name,
+		    AR.id,
+		    AR.asset_id,
+		    AR.is_return,
+		    AR.user_id,
+		    LR.return_date,  
+		    LH.create_date,  
+		    TRUNC(LR.return_date) - TRUNC(SYSDATE) as deadLine
+		FROM 
+		    Asset_Return AR
+		JOIN "User" U ON U.id = AR.user_id
+		JOIN Department D ON D.id = U.department_id
+		JOIN Asset A ON A.id = AR.asset_id
+		JOIN Category C ON C.id = A.category_id
+		LEFT OUTER JOIN LatestRentData LR ON LR.asset_id = A.id AND LR.RN = 1
+		LEFT OUTER JOIN LatestHistoryData LH ON LH.asset_id = A.id AND LH.RN = 1
+		WHERE 
+		    AR.id = #{id}
 	</select>
 	
 	<update id="updateAssetReturn">

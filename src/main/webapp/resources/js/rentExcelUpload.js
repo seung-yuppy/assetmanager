@@ -21,6 +21,9 @@ function showInputForm(method) {
         formArea.style.display = 'block';
         excelArea.style.display = 'none';
         
+        // 엑셀 폼 리셋
+        resetExcelArea(excelArea);
+        
         // 폼 직접 입력 필드 required 설정 (필수 입력으로)
         formInputs.forEach(input => input.setAttribute('required', 'required'));
         // 엑셀 파일 필드 required 해제
@@ -42,6 +45,9 @@ function showInputForm(method) {
         // 엑셀 파일 업로드 선택 시: 폼 영역 숨김, 엑셀 영역 표시
         formArea.style.display = 'none';
         excelArea.style.display = 'block';
+        
+        // 폼 리셋
+        resetFormInputArea(formArea);
 
         // 폼 직접 입력 필드 required 해제
         formInputs.forEach(input => input.removeAttribute('required'));
@@ -205,3 +211,57 @@ function renderFormFromExcel(json, rent_reason, return_date) {
 	   
 	  
 	}
+
+// 폼 직접 입력 리셋
+function resetFormInputArea(areaElement) {
+    areaElement.querySelectorAll('input, select, textarea').forEach(field => {
+        if (field.id === 'application-date') {
+            return;
+        } else if (field.type === 'date' || field.type === 'text' || field.tagName === 'TEXTAREA') {
+            field.value = ''; 
+        } else if (field.type === 'number') {
+            field.value = '1'; 
+        } else if (field.tagName === 'SELECT') {
+            field.selectedIndex = 0; 
+        }
+    });
+    
+    // 추가 행 제거
+    const allFormRows = areaElement.querySelectorAll('.form-row');
+    
+    // 첫 번째 행을 제외한 나머지 행 제거
+    for (let i = 1; i < allFormRows.length; i++) {
+        allFormRows[i].remove();
+    }
+    
+    // 첫 번째 행의 상태 리셋
+    if (allFormRows.length > 0) {
+        allFormRows[0].querySelector('.productSelect').value = ''; 
+        allFormRows[0].querySelector('.numberSelect').value = '1'; 
+        const removeIcon = allFormRows[0].querySelector('.form-icon');
+        if (removeIcon) {
+            removeIcon.style.visibility = 'hidden';
+        }
+    }
+    
+    // 사유 리셋
+    const currentLengthSpan = document.getElementById('currentLength');
+    if (currentLengthSpan) {
+        currentLengthSpan.textContent = '0';
+    }
+}
+
+// 엑셀 폼 리셋
+function resetExcelArea(areaElement) {
+    // 파일 input 초기화
+    const excelFileInput = document.getElementById('excelFile');
+    if (excelFileInput) {
+        excelFileInput.value = ''; 
+    }
+
+    // 데이터 미리보기 영역 비우기
+    const dataDisplayArea = document.getElementById('data-display-area');
+    if (dataDisplayArea) {
+        dataDisplayArea.innerHTML = ''; 
+    }
+}

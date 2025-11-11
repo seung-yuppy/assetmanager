@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.StatsDAO;
 import edu.example.assetmanager.domain.stats.CategoryData;
+import edu.example.assetmanager.domain.stats.DeptAmountData;
+import edu.example.assetmanager.domain.stats.TotalPurchaseData;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,5 +19,15 @@ public class StatsService {
 		LocalDate start = LocalDate.of(year, 1, 1);
 	    LocalDate end = start.plusYears(1);
 		return statsDAO.getCategoryData(java.sql.Date.valueOf(start), java.sql.Date.valueOf(end));
+	}
+	
+	public List<TotalPurchaseData> getTotalPurchaseData(int year) {
+	    return statsDAO.getTotalPurchaseData(year);
+	}
+	
+	public List<DeptAmountData> getAmountGroupByDept(int year) {
+		LocalDate start = LocalDate.of(year, 1, 1);
+		LocalDate end = start.plusYears(1);
+		return statsDAO.getAmountGroupByDept(java.sql.Date.valueOf(start), java.sql.Date.valueOf(end));
 	}
 }

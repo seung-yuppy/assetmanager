@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>구매 통계 대시보드</title>
+    <title>구매 리포트</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
@@ -116,7 +116,7 @@
 		        <!-- 보고서 콘텐츠 영역 (이 부분이 PDF로 변환됨) -->
 		        <div class="flex justify-between">
 			        <div>
-				    	<h1>구매 통계 대시보드</h1>
+				    	<h1>구매 리포트</h1>
 			            <span>구매 통계와 보고서를 확인합니다.</span>
 			        </div>
 			        <div class="flex flex-col justify-end items-center">
@@ -131,9 +131,10 @@
 		            
 		            <!-- 보고서 헤더 (참고 이미지 2 기반) -->
 		            <div class="border-b pb-4 mb-8">
-	   			         <select class="no-print rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-		                    <option>2025년</option>
-		                    <option>2024년</option>
+	   			         <select onchange="setBoardParam('year', this.value)" class="no-print rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+		                    <option value="2025" ${empty param.year ? 'selected' : ''}>2025년</option>
+		                    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
+		                    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
 		                </select>
 <!-- 		                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 text-sm text-gray-700">
 		                    <div><strong>보고 기간:</strong> 2025.07.01 - 2025.09.30</div>
@@ -147,7 +148,7 @@
 		            </div>
 		
 		            <section class="mb-12">
-		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">구매 금액 추이</h3>
+		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">연간 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
 		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner">
@@ -171,7 +172,7 @@
 		                </div>
 		            </section>
 		            <section>
-		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">카테고리별 구매 총액</h3>
+		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">카테고리별 구매 비율</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
 		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center items-center" style="max-height: 400px;">
@@ -222,6 +223,8 @@
 		    </div>
 	    </div>
 	</div>
- <script src="/assetmanager/resources/js/statsChart2.js"></script>
+ <script src="/assetmanager/resources/js/statsChart.js"></script>
+ <script src="/assetmanager/resources/js/pageFilter.js"></script>
+ 
 </body>
 </html>

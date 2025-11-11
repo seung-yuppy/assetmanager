@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.example.assetmanager.dao.StatsDAO">
+	<select id ="getTotalPurchaseData">
+		SELECT
+		    TO_CHAR(o.order_date, 'YYYY') AS year,
+		    SUM(oc.price * oc.count) AS amount
+		FROM order_content oc
+		JOIN orders o ON oc.order_id = o.id
+		JOIN approval a ON o.approval_id = a.id
+		WHERE o.is_valid = 1
+		  AND a.status = 'FINAL_APPROVAL'
+		  AND TO_CHAR(o.order_date, 'YYYY') IN (to_char(#{year}-2), to_char(#{year}-1), to_char(#{year}))
+		GROUP BY TO_CHAR(o.order_date, 'YYYY')
+		ORDER BY year
+	</select>
 	<select id="getCategoryData">
 		SELECT
 		    c.category_name,
@@ -17,10 +30,23 @@
 		            JOIN orders   o ON oc.order_id = o.id
 		        WHERE
 		        		o.is_valid = 1 
-		            AND o.order_date &gt;= TO_DATE('2025-01-01', 'YYYY-MM-DD')
-		            AND o.order_date &lt; TO_DATE('2026-01-01', 'YYYY-MM-DD')
+		            AND o.order_date &gt;= #{startDate}
+		            AND o.order_date &lt; #{endDate}
 		        GROUP BY
 		            category_id
 		    ) p ON c.id = p.category_id
+	</select>
+	<select id="getAmountGroupByDept">
+		SELECT d.DEPT_NAME,
+		       SUM(oc.price * oc.count) AS amount
+		FROM order_content oc
+		JOIN orders o ON oc.order_id = o.id
+		JOIN approval a ON o.approval_id = a.id
+		JOIN "User" u ON o.USER_ID = u.ID
+		JOIN DEPARTMENT d ON u.DEPARTMENT_ID = d.ID 
+		WHERE o.is_valid = 1
+		  AND a.status = 'FINAL_APPROVAL'
+		  AND o.order_date &gt;= #{startDate} AND o.order_date &lt; #{endDate}
+		GROUP BY d.DEPT_NAME
 	</select>
 </mapper>

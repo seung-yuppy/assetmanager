@@ -71,10 +71,15 @@ public class AssetService {
 		PageResponseDTO<AssetHistoryDTO> response = paging(dto, totalCount);
 		List<AssetHistoryDTO> list = dao.listMyUsing(dto);
 		for (AssetHistoryDTO asset : list) {
-			if (dao.isReturnBtnClick(userId, asset.getAssetId()) != 0)
-				asset.setActiveBtn(true);
-			else
+			if (dao.isReturnBtnClick(userId, asset.getAssetId()) != 0) {
+				if (dao.isDupReturnBtnClick(userId, asset.getAssetId()).getReturning() == 1) {
+					asset.setActiveBtn(false);
+				} else {
+					asset.setActiveBtn(true);
+				}
+			} else {
 				asset.setActiveBtn(false);
+			}	
 		}
 		response.setContent(list);
 		return response;

@@ -85,5 +85,8 @@ public interface AssetDAO {
 	// 반납버튼 눌렀는지 체크하기
 	public int isReturnBtnClick(@Param("userId") int userId, @Param("assetId") int assetId);
 	
+	// 재반출을 위한 체크
+	public AssetHistoryDTO isDupReturnBtnClick(@Param("userId") int userId, @Param("assetId") int assetId);
+	
 	public boolean isReturnedByReturnId(int id);
 }

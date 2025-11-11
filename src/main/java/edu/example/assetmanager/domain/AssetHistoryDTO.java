@@ -23,4 +23,5 @@ public class AssetHistoryDTO {
 	private Date returnDate;
 	private String status;
 	private boolean activeBtn = false;
+	private int returning;
 }

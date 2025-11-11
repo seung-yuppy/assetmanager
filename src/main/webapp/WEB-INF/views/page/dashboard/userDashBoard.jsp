@@ -23,74 +23,109 @@
 				
 				<div class="metric-grid">
 	                <div class="metric-card border-green">
-						<div class="card-header">
-							<c:if test="${userInfo.role == 'employee'}">
-								<p class="card-title">내 자산</p>  
-							</c:if>
-							<c:if test="${userInfo.role == 'manager' || userInfo.role == 'department'}">
-								<p class="card-title">부서 자산</p>
-							</c:if>
-	                		<div class="card-logo-box back-green">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
-	                		</div>
-	                	</div>                    
-	                    <p class="card-value">${usingCount}개</p>
-	                </div>
-	                <div class="metric-card border-blue">
-						<div class="card-header">
-							<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-	                			<p class="card-title">구매 대기</p>
-	                		</c:if> 
-							<c:if test="${userInfo.role == 'manager'}">
-	                			<p class="card-title">구매 합의</p>
-	                		</c:if>	                		
-	                		<div class="card-logo-box back-blue">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
-	                		</div>
-	                	</div>
-	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-	                		<p class="card-value">${pendingOrder}건</p>
+	                	<c:if test="${userInfo.role == 'employee'|| userInfo.role == 'department'}">
+	                		<a href="/assetmanager/myasset/list">
 	                	</c:if>
 	                	<c:if test="${userInfo.role == 'manager'}">
-	                		<p class="card-value">${firstOrder}건</p>
-	                	</c:if>        
+	                		<a href="/assetmanager/deptasset/list">
+	                	</c:if>
+							<div class="card-header">
+								<c:if test="${userInfo.role == 'employee'}">
+									<p class="card-title">내 자산</p>  
+								</c:if>
+								<c:if test="${userInfo.role == 'manager' || userInfo.role == 'department'}">
+									<p class="card-title">부서 자산</p>
+								</c:if>
+		                		<div class="card-logo-box back-green">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_asset.svg">
+		                		</div>
+		                	</div>                    
+		                    <p class="card-value">${usingCount}개</p>
+	                    </a>
 	                </div>
 	                <div class="metric-card border-blue">
-						<div class="card-header">
-	                		<p class="card-title">구매 승인</p> 
-	                		<div class="card-logo-box back-blue">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
-	                		</div>
-	                	</div>                    
-	                    <p class="card-value">${finalOrder}건</p>
-	                </div>
-	                <div class="metric-card border-purple">
-						<div class="card-header">
-							<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-	                			<p class="card-title">반출 대기</p>
-	                		</c:if> 
-							<c:if test="${userInfo.role == 'manager'}">
-	                			<p class="card-title">반출 합의</p>
-	                		</c:if>	  						
-	                		<div class="card-logo-box back-purple">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
-	                		</div>
-	                	</div>
 	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-	                		<p class="card-value">${pendingRent}건</p>
+							<a href="/assetmanager/order/list?status=PENDING">
+						</c:if>
+						<c:if test="${userInfo.role == 'manager'}">
+							<a href="/assetmanager/manager/order/list?status=FIRST_APPROVAL">
+						</c:if>
+							<div class="card-header">
+								<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+		                			<p class="card-title">구매 대기</p>
+		                		</c:if> 
+								<c:if test="${userInfo.role == 'manager'}">
+		                			<p class="card-title">구매 합의</p>
+		                		</c:if>	                		
+		                		<div class="card-logo-box back-blue">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
+		                		</div>
+		                	</div>
+		                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+		                		<p class="card-value">${pendingOrder}건</p>
+		                	</c:if>
+		                	<c:if test="${userInfo.role == 'manager'}">
+		                		<p class="card-value">${firstOrder}건</p>
+		                	</c:if>
+		                </a>        
+	                </div>
+	                <div class="metric-card border-blue">
+	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                		<a href="/assetmanager/order/list?status=FINAL_APPROVAL">	
 	                	</c:if>
 	                	<c:if test="${userInfo.role == 'manager'}">
-	                		<p class="card-value">${firstRent}건</p>
-	                	</c:if>   
+	                		<a href="/assetmanager/manager/order/list?status=FINAL_APPROVAL">	                	
+	                	</c:if>
+							<div class="card-header">
+		                		<p class="card-title">구매 승인</p> 
+		                		<div class="card-logo-box back-blue">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+		                		</div>
+		                	</div>                    
+		                    <p class="card-value">${finalOrder}건</p>
+		            	</a>
 	                </div>
 	                <div class="metric-card border-purple">
-						<div class="card-header">
-							<p class="card-title">반출 승인</p>
-	                		<div class="card-logo-box back-purple">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
-	                		</div>
-	                	</div>   
-	                    <p class="card-value">${finalRent}건</p>
+	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                		<a href="/assetmanager/rent/list?status=PENDING">	                	
+	                	</c:if>
+	                	<c:if test="${userInfo.role == 'manager'}">
+	                		<a href="/assetmanager/manager/rent/list?status=FIRST_APPROVAL">
+	                	</c:if>
+							<div class="card-header">
+								<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+		                			<p class="card-title">반출 대기</p>
+		                		</c:if> 
+								<c:if test="${userInfo.role == 'manager'}">
+		                			<p class="card-title">반출 합의</p>
+		                		</c:if>	  						
+		                		<div class="card-logo-box back-purple">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
+		                		</div>
+		                	</div>
+		                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+		                		<p class="card-value">${pendingRent}건</p>
+		                	</c:if>
+		                	<c:if test="${userInfo.role == 'manager'}">
+		                		<p class="card-value">${firstRent}건</p>
+		                	</c:if>
+		                </a>
+	                </div>
+	                <div class="metric-card border-purple">
+	                	<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
+	                		<a href="/assetmanager/rent/list?status=FINAL_APPROVAL">	
+	                	</c:if>
+	                	<c:if test="${userInfo.role == 'manager'}">
+	                		<a href="/assetmanager/manager/rent/list?status=FINAL_APPROVAL">	                	
+	                	</c:if>
+							<div class="card-header">
+								<p class="card-title">반출 승인</p>
+		                		<div class="card-logo-box back-purple">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+		                		</div>
+		                	</div>   
+		                    <p class="card-value">${finalRent}건</p>
+		                </a>
 	                </div>
 	            </div>
 	            

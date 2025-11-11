@@ -20,8 +20,8 @@
 					<div class="search-card">
 						<div class="filter-controls">
 							<div class="status-filter">
-								<label for="statusFilter">부서</label>
-								<select id="statusFilter"  onchange="setBoardParam('deptId', this.value)">
+								<label for="statusFilter">부서:</label>
+								<select id="statusFilter" onchange="setBoardParam('deptId', this.value)">
 									<option value="0" ${empty param.deptId ? 'selected' : ''}>전체</option>
 									<option value="2" ${param.deptId == '2' ? 'selected' : ''}>공공사업1팀</option>
 									<option value="3" ${param.deptId == '3' ? 'selected' : ''}>공공사업2팀</option>
@@ -34,7 +34,7 @@
 							</div>
 				            <form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">
 								<div class="search-box">
-									<input type="text" name="keyword" id="assetSearch" placeholder="요청 내용" class="search-field" value="${param.keyword}">
+									<input type="text" name="keyword" id="assetSearch" placeholder="사용자명" class="search-field" value="${param.keyword}">
 								    <button type="submit"><img src="/assetmanager/resources/image/icon_search.svg"></button>
 								</div>
 							</form>

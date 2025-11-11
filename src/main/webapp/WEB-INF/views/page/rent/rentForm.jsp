@@ -90,7 +90,7 @@
 
 							<div class="form-group">
 								<label for="reason">반출 요청 사유 <span class="required">*</span></label>
-								<textarea id="reason" name="requestMsg" rows="5" required placeholder="반출 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+								<textarea id="reason" name="requestMsg" rows="5" required placeholder="반출 요청이 필요한 구체적인 사유를 입력해주세요." cols="81" maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
 								<div class="char-count-display text-align-right">
 									(<span id="currentLength">0</span> / 200)
 								</div>

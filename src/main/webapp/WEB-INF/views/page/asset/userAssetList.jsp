@@ -88,7 +88,7 @@
 					                        	<div class="table-button-container">
 					                        		<c:if test="${asset.activeBtn == false}">
 						                        		<c:if test="${asset.returnDate != null}">
-						                       				<button class="delay-button" onclick="location.href='/assetmanager/asset/extension/form'">연장</button>
+						                       				<button class="delay-button" onclick="location.href='/assetmanager/delay/form?id=${asset.assetId}'">연장</button>
 						                       			</c:if>
 						                       			<button class="return-button">반납</button>					                        		
 					                        		</c:if>

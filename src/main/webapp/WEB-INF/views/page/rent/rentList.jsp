@@ -40,7 +40,7 @@
 							</div>
 							<form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">
 								<div class="search-box">
-									<input type="text" name="keyword" id="assetSearch" placeholder="품목명 검색" class="search-field" value="${param.keyword}">
+									<input type="text" name="keyword" id="assetSearch" placeholder="요청 내용" class="search-field" value="${param.keyword}">
 									<button>
 										<img src="/assetmanager/resources/image/icon_search.svg" alt="검색">
 									</button>

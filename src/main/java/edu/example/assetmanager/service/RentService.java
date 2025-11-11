@@ -4,6 +4,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import edu.example.assetmanager.dao.ApprovalDAO;
@@ -152,7 +154,6 @@ public class RentService {
 		notificationDTO.setMessage(msg);
 		return notificationService.insert(notificationDTO);
 	}
-	
 	
 	// 사용자 RentList 찾기
 	public PageResponseDTO<RentListDTO> findRentList(RentParamDTO rentParamDTO){
@@ -319,4 +320,26 @@ public class RentService {
 	public RentListDTO getRentByApprovalId(int approvalId) {
 		return rentDAO.getRentByApprovalId(approvalId);
 	}
+	
+	@Transactional
+	public boolean insertDelayForm(ApprovalDTO approvalDTO, RentDTO rentDTO, RentContentDTO rentContentDTO, int userId) {
+		if(approvalDAO.insertApproval(approvalDTO)) {
+			rentDTO.setApprovalId(approvalDTO.getId());
+			String title = rentContentDTO.getAssetName(); 
+			rentDTO.setTitle(title);
+			if(rentDAO.insertRent(rentDTO, userId)) {
+				rentContentDTO.setRentId(rentDTO.getId());
+				if(rentDAO.insertRentContent(rentContentDTO)) {
+					
+					return true;
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}	
 }

@@ -289,4 +289,31 @@
 		HAVING d.dept_name NOT IN ('경영지원팀')
 		ORDER BY d.dept_name
 	</select>
+	
+	<select id="listCategoryCount">
+		SELECT c.category_name, COUNT(*) AS category_count
+		FROM Asset a
+		INNER JOIN Category c ON a.category_id = c.id
+		GROUP BY c.category_name
+	</select>
+	
+	<select id="countOrder">
+		SELECT COUNT(*)
+		FROM Orders o
+		INNER JOIN Approval a ON o.approval_id = a.id
+		WHERE a.approver_id = #{userId} AND a.status = 'pending'
+	</select>
+	
+	<select id="countRent">	
+		SELECT COUNT(*)
+		FROM Rent r
+		INNER JOIN Approval a ON r.approval_id = a.id
+		WHERE a.approver_id = #{userId} AND a.status = 'pending'	
+	</select>
+	
+	<select id="countReturn">
+		SELECT COUNT(*)
+		FROM Asset_Return
+		WHERE is_return = 0		
+	</select>
 </mapper>

@@ -12,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.example.assetmanager.domain.ApprovalAssetDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
+import edu.example.assetmanager.domain.CategoryAssetDTO;
 import edu.example.assetmanager.domain.DeptAssetDTO;
+import edu.example.assetmanager.domain.InventoryAssetDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.RentListDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
@@ -116,20 +119,13 @@ public class HomeController {
 		}
 	}
 	
-	// 창고 자산 보유 현황을 위한 차트
+	// 창고 자산 보유 개수
 	@ResponseBody
 	@GetMapping(value = "/asset/value", produces = "application/json; charset=utf-8")
 	public ResponseEntity<Map<String, Object>> h3() {
 		Map<String, Object> response = new HashMap<>();
-		int totalAsset = assetService.getTotalAsset();
-		int usingAsset = assetService.getUsingAsset();
-		int pendingAsset = assetService.getPendingAsset();
-		int invalidAsset = assetService.getInvalidAsset();
-		
-		response.put("totalAsset", totalAsset);
-		response.put("usingAsset", usingAsset);
-		response.put("pendingAsset", pendingAsset);
-		response.put("invalidAsset", invalidAsset);
+		List<InventoryAssetDTO> list = assetService.getListInventory();	
+		response.put("result", list);
 		
 		return ResponseEntity.ok(response);
 	}
@@ -140,6 +136,29 @@ public class HomeController {
 	public ResponseEntity<Map<String, Object>> h4() {
 		Map<String, Object> response = new HashMap<>();
 		List<DeptAssetDTO> list = homeService.getListDept();
+		response.put("result", list);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	// 카테고리별 자산 보유 개수
+	@ResponseBody
+	@GetMapping(value = "/asset/category", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> h5() {
+		Map<String, Object> response = new HashMap<>();
+		List<CategoryAssetDTO> list = homeService.getListCategory();
+		response.put("result", list);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	// 관리자 승인 현황 개수
+	@ResponseBody
+	@GetMapping(value = "/asset/approval", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> h6(HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		int userId = (Integer) session.getAttribute("userId");
+		List<ApprovalAssetDTO> list = homeService.getListApproval(userId);
 		response.put("result", list);
 		
 		return ResponseEntity.ok(response);

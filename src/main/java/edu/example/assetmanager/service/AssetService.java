@@ -14,8 +14,9 @@ import edu.example.assetmanager.domain.AssetDisposalParamDTO;
 import edu.example.assetmanager.domain.AssetHistoryDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserDTO;
 import edu.example.assetmanager.domain.AssetHistoryUserShowDTO;
-import edu.example.assetmanager.domain.AssetUsingParamDTO;
 import edu.example.assetmanager.domain.AssetParamDTO;
+import edu.example.assetmanager.domain.AssetUsingParamDTO;
+import edu.example.assetmanager.domain.InventoryAssetDTO;
 import edu.example.assetmanager.domain.PageParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -235,6 +236,28 @@ public class AssetService {
 	
 	public boolean isReturnedByReturnId(int id) {
 		return dao.isReturnedByReturnId(id);
+	}
+	
+	public List<InventoryAssetDTO> getListInventory() {
+		int usingAsset = dao.usingAsset();
+		int pendingAsset = dao.pendingAsset();
+		int invalidAsset = dao.invalidAsset();
+		
+		String usingName = "사용 중 자산 수";
+		String pendingName = "대기 중 자산 수";
+		String invalidName = "불용 자산 수";
+		
+		InventoryAssetDTO a2 = new InventoryAssetDTO(usingName, usingAsset);
+		InventoryAssetDTO a3 = new InventoryAssetDTO(pendingName, pendingAsset);
+		InventoryAssetDTO a4 = new InventoryAssetDTO(invalidName, invalidAsset);
+		
+		List<InventoryAssetDTO> list = new ArrayList<>();
+		
+		list.add(a2);
+		list.add(a3);
+		list.add(a4);
+		
+		return list;
 	}
 
 }

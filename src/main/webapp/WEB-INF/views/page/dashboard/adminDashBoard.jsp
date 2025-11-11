@@ -66,109 +66,41 @@
 	                    <p class="card-value">${totalItem}개</p>
 	                </div>
 	            </div>
-            
-	            <!-- 2. 요청 리스트 section -->
-		        <div class="request-grid">
-		        	<!-- 2-1. 반출 요청 -->
+				
+				<div class="request-grid">
+					<div class="section-card">
+						<h3>카테고리별 자산 보유 현황</h3>
+						<div class="chart-container" style="height: 300px;">
+		                    <canvas id="categoryChart"></canvas>
+		                </div>
+					</div>
 		            <div class="section-card">
-		                <h3>반출 요청</h3>
-		                <table class="data-table">
-		                    <thead>
-		                        <tr>
-		                            <th>자산명</th>
-		                            <th>요청일</th>
-		                            <th>상태</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr>
-		                            <td>iPad Pro</td>
-		                            <td>2024-06-10</td>
-		                            <td><span class="status-badge status-waited">대기중</span></td>
-		                        </tr>
-		                        <tr>
-		                            <td>웹캠 C920</td>
-		                            <td>2024-05-20</td>
-		                            <td><span class="status-badge status-rejected">거절됨</span></td>
-		                        </tr>
-		                        <tr>
-		                            <td>외장 SSD</td>
-		                            <td>2024-05-05</td>
-		                            <td><span class="status-badge status-approved">승인됨</span></td>
-		                        </tr>
-		                    </tbody>
-		                </table>
-		            </div>
-	
-		            <!-- 2-2. 구매 요청 -->
-		            <div class="section-card">
-		                <h3>구매 요청</h3>
-		                <table class="data-table">
-		                    <thead>
-		                        <tr>
-		                            <th>자산명</th>
-		                            <th>요청일</th>
-		                            <th>상태</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr>
-		                            <td>에르고 휴먼 의자</td>
-		                            <td>2024-06-12</td>
-		                            <td><span class="status-badge status-waited">대기중</span></td>
-		                        </tr>
-		                        <tr>
-		                            <td>Adobe Creative Cloud</td>
-		                            <td>2024-05-25</td>
-		                            <td><span class="status-badge status-rejected">거절됨</span></td>
-		                        </tr>
-		                        <tr>
-		                            <td>초고속 무선 마우스</td>
-		                            <td>2024-05-15</td>
-		                            <td><span class="status-badge status-approved">승인됨</span></td>
-		                        </tr>
-		                    </tbody>
-		                </table>
-		            </div>
-	        	</div>
+		                <h3>회사 자산 보유 현황</h3>
+		                <div class="doughnut-layout">
+		                    <div class="chart-container doughnut-chart-container" style="height: 300px;">
+		                        <canvas id="inventoryChart"></canvas>
+		                    </div>
+		                    <div class="doughnut-summary-container">
+		                        <div id="inventory-summary" class="summary-data"></div>
+		                        <div id="custom-legend" class="legend-container"></div>
+		                    </div>
+		                </div>
+		            </div> 
+				</div>
 
-	            <!-- 3. 통계 자료 section -->
 	            <div class="request-grid">
-		            <!-- 부서별 자산 현황 - Bar Chart (Chart.js) -->
 		            <div class="section-card">
 		                <h3>부서별 자산 보유 현황</h3>
 		                <div class="chart-container">
-		                    <!-- 캔버스 ID: departmentChart -->
 		                    <canvas id="departmentChart"></canvas>
 		                </div>         
 		            </div>
-		            
-			        <!-- 창고 자산 유무 - Donut Chart (Chart.js) -->
 		            <div class="section-card">
-		                <h3>창고 자산 보유 현황</h3>
-		                <div class="chart-legend-wrapper">
-		                    <!-- 캔버스 ID: inventoryChart -->
-		                    <div style="position: relative; width: 10rem; height: 10rem;">
-		                        <canvas id="inventoryChart"></canvas>
-		                    </div>
-		
-		                    <!-- 범례 (Legend) - Chart.js 범례를 덮어쓰기 위해 수동 구현 -->
-		                    <div style="margin-top: 1rem; margin-left: 2rem;">
-		                        <div class="legend-item">
-		                            <span class="legend-color back-green"></span>
-		                            <span>사용 가능 자산</span>
-		                        </div>
-		                        <div class="legend-item">
-		                            <span class="legend-color back-blue"></span>
-		                            <span>사용 중인 자산</span>
-		                        </div>
-		                        <div class="legend-item">
-		                            <span class="legend-color back-red"></span>
-		                            <span>불용 처리 자산	</span>
-		                        </div>  
-		                    </div>
-		                </div>
-		            </div>         
+				    	<h3>관리자 승인 대기 현황</h3>
+				    	<div class="chart-container">
+				    		<canvas id="approvalHorizontalBarChart"></canvas>
+				    	</div>
+					</div>         
 	            </div>	        	
 	        	            
             </div>			

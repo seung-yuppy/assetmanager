@@ -7,7 +7,7 @@ async function getData() {
 		method: "GET",
 	}); 
 	const data = await res.json();
-	return data;
+	return data.result;
 }
 
 async function getDeptData() {
@@ -18,9 +18,88 @@ async function getDeptData() {
 	return data.result;
 }
 
+async function getCategoryData() {
+	const res = await fetch("/assetmanager/asset/category", {
+		method: "GET"
+	});
+	const data = await res.json();
+	return data.result;
+}
+
+async function getApprovalData() {
+	const res = await fetch("/assetmanager/asset/approval", {
+		method: "GET"
+	});
+	const data = await res.json();
+	return data.result;
+}
+
+
 // Chart.js 렌더링 함수
 async function renderCharts() {
-    // 1. 부서별 자산 현황 (막대 차트)
+	// 1. 카테고리별 자산 현황
+	const categoryCtx = document.querySelector('#categoryChart');
+	const categoryAssets = await getCategoryData();
+	const categoryNames = [];
+	const categoryCounts = [];
+	
+	categoryAssets.map((categoryAsset) => {
+		categoryNames.push(categoryAsset.categoryName);
+		categoryCounts.push(categoryAsset.categoryCount);
+	});
+	
+    const categoryData = {
+            labels: categoryNames,
+            datasets: [{
+                label: '보유 자산 (수량)',
+                data: categoryCounts,
+                backgroundColor: '#3b82f6',
+                borderColor: '#3b82f6',
+                borderRadius: 5,
+            }]
+        };
+
+        new Chart(categoryCtx, {
+            type: 'bar', // 가로 막대 차트는 'bar' 타입을 유지
+            data: categoryData,
+            options: {
+                indexAxis: 'y', // 이 옵션이 가로 막대 차트를 만듭니다.
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            // 툴팁에서 x축(개수)이 표시되도록 수정
+                            label: (context) => `${context.dataset.label || ''}: ${context.parsed.x.toLocaleString()}개`
+                        }
+                    }
+                },
+                scales: {
+                    x: { // x축이 이제 개수 축이 됨
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '개수',
+                            color: getColor('--dark-color'),
+                        },
+                        ticks: {
+                            callback: (value) => `${value.toLocaleString()}개`,
+                            stepSize: 10
+                        },
+                        grid: {
+                            color: getColor('--white-color')
+                        }
+                    },
+                    y: { // y축이 이제 카테고리 축이 됨
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+	
+	
+    // 2. 부서별 자산 현황 (막대 차트)
     const departmentCtx = document.getElementById('departmentChart');
     
     const deptAssets = await getDeptData();
@@ -38,16 +117,13 @@ async function renderCharts() {
             label: '보유 자산 (수량)',
             data: deptCount,
             backgroundColor: [
-            	getColor('--primary-color'),
-            	getColor('--primary-color'),
-            	getColor('--primary-color'),
-            	getColor('--primary-color'),
-            	getColor('--primary-color'),
-            	getColor('--primary-color'),
-            	getColor('--primary-color')
+            	'#3b82f6',
+            	'#3b82f6',
+            	'#3b82f6'
             ],
             borderColor: getColor('--primary-color'),
             borderRadius: 5,
+            barThickness: 40
         }]
     };
 
@@ -103,45 +179,151 @@ async function renderCharts() {
         }
     });
 
-    // 2. 창고 자산 유무 (도넛 차트)
+    // 3. 창고 자산 유무 (도넛 차트)
     const inventoryCtx = document.getElementById('inventoryChart');
     
-    const assetData = await getData();
-    const totalAsset = assetData.totalAsset;
-    const usingAsset = assetData.usingAsset;
-    const pendingAsset = assetData.pendingAsset;
-    const invalidAsset = assetData.invalidAsset;
+    const assetDatas = await getData();
+    const assetNames = [];
+    const assetCounts = [];
     
-    const pendingPercentage = Math.round(((pendingAsset / totalAsset) * 100) * 100) / 100;
-    const usingPercentage = Math.round(((usingAsset / totalAsset) * 100) * 100) / 100;
-    const invalidPercentage = Math.round(((invalidAsset / totalAsset) * 100) * 100) / 100;
+    assetDatas.map((asset) => {
+    	assetNames.push(asset.inventoryName);
+    	assetCounts.push(asset.inventoryCount);
+    });
+
+    const totalAssets = assetDatas.reduce((sum, asset) => sum + asset.inventoryCount, 0);
+    const assetPercentages = assetDatas.map(d => (d.inventoryCount / totalAssets) * 100);
+
     
-    const inventoryData = {
-        labels: ['사용 가능 재고', '사용 중인 재고', '불용 처리 재고'],
-        datasets: [{
-            data: [pendingPercentage, usingPercentage, invalidPercentage], // 백분율 데이터
-            backgroundColor: [
-                getColor('--green-color'),
-                getColor('--blue-color'),  
-                getColor('--red-color')   
-            ],
-            hoverOffset: 4,
-        }]
-    };
+    const assetDatass = {
+    		labels: assetNames,
+            datasets: [{
+                data: assetPercentages,
+                backgroundColor: [
+                	getColor('--green-color'),
+                	'#9ca3af',
+                	'#ef4444'
+                ],
+                hoverOffset: 3,
+            }]
+        };
 
     new Chart(inventoryCtx, {
-        type: 'doughnut',
-        data: inventoryData,
+        type: 'pie', // <--- 타입 변경
+        data: assetDatass,
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '70%', // 도넛 두께
+            radius: '75%',
             plugins: {
                 legend: {
-                    display: false // 수동으로 범례를 구현했으므로 숨김
+                    position: 'right', // 범례를 오른쪽에 표시
+                    labels: {
+                        boxWidth: 20, 
+                        padding: 15, 
+                        color: getColor('--dark-color'), 
+                        font: {
+                            size: 14
+                        },
+                        generateLabels: (chart) => {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                const dataset = data.datasets[0];
+                                return data.labels.map((label, i) => {
+                                    const value = dataset.data[i];
+                                    const backgroundColor = dataset.backgroundColor[i];
+                                    const borderColor = dataset.borderColor;
+                                    const borderWidth = dataset.borderWidth;
+
+                                    return {
+                                        text: `${label}: ${value.toFixed(1)}%`,
+                                        fillStyle: backgroundColor,
+                                        lineWidth: borderWidth,
+                                        hidden: !chart.isDatasetVisible(0), 
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
+                        }
+                    }
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => {
+                            const label = context.label || '';
+                            const value = context.parsed;
+                            return `${label}: ${value.toFixed(1)}%`; // 비율 표시
+                        }
+                    }
+                }
             }
         },
+    });
+    
+    // 4. 가로형 막대 그래프 (관리자 승인 대기 현황)
+    const ctxApprovalBar = document.getElementById('approvalHorizontalBarChart');
+    
+    const approvalDatas = await getApprovalData();
+    const approvalNames = [];
+    const approvalCounts = [];
+    
+    approvalDatas.map((approval) => {
+    	approvalNames.push(approval.approvalName);
+    	approvalCounts.push(approval.approvalCount);
+    });
+    
+    const approvalAssetData = {
+            labels: approvalNames,
+            datasets: [{
+                label: '보유 자산 (수량)',
+                data: approvalCounts,
+                backgroundColor: [
+                	'#3b82f6',
+                	'#3b82f6',
+                	'#3b82f6'
+                ],
+                borderColor: getColor('--primary-color'),
+                borderRadius: 5,
+            }]
+        };
+    
+    new Chart(ctxApprovalBar, {
+        type: 'bar',
+        data: approvalAssetData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '개수',
+                        color: getColor('--dark-color'),
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString() + '개';
+                        },
+                        stepSize: 1
+                    },
+                    grid: {
+                        color: getColor('--white-color')
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
     });
 }
 

@@ -28,6 +28,9 @@
 		    color: var(--gray-color);
 		}
 		
+		section{
+	    	margin-bottom: 4rem;
+		}
 		.section-card h2 {
 		    font-size: 1.5rem;
 		    font-weight: 600;
@@ -49,12 +52,6 @@
 		    box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
 		    margin-top: 25px;
 		}
-    	
-        /* Inter 폰트 (Tailwind 기본 폰트) 적용 */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
         /* PDF 생성 시 로더 스타일 */
         #loader {
             position: fixed;
@@ -143,11 +140,11 @@
 		                    <div><strong>작성자:</strong> 시스템 자동 생성</div>
 		                </div> -->
 		                <h2 class="text-4xl font-bold text-center text-gray-900">구매 리포트</h2>
-		                <p class="text-center text-lg text-gray-600 mt-2">2025년 3분기 구매 리포트</p>
+		                <p class="text-center text-lg text-gray-600 mt-2">${empty param.year ? '2025' : param.year}년</p>
 		                
 		            </div>
 		
-		            <section class="mb-12">
+		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">연간 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
@@ -195,7 +192,7 @@
 		                    </div>
 		                </div>
 		            </section>
-		            <section class="mb-12">
+		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">부서별 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
@@ -225,6 +222,5 @@
 	</div>
  <script src="/assetmanager/resources/js/statsChart.js"></script>
  <script src="/assetmanager/resources/js/pageFilter.js"></script>
- 
 </body>
 </html>

@@ -11,15 +11,19 @@ let annualChart, categoryChart, deptChart; // 전역 변수로 차트 인스턴�
 let annualData, categoryData,deptData;
 
 async function getData(){
-	const res1 = await fetch(`/assetmanager/admin/stats/total?year=2025`);
+	const params = new URLSearchParams(window.location.search);
+	const yearParam = params.get("year");
+	const year = yearParam ? `?year=${yearParam}` : "";
+	
+	const res1 = await fetch(`/assetmanager/admin/stats/total${year}`);
 	const data1 = await res1.json();
 	annualData = data1;
 	
-	const res2 = await fetch(`/assetmanager/admin/stats/category?year=2025`);
+	const res2 = await fetch(`/assetmanager/admin/stats/category${year}`);
 	const data2 = await res2.json();
 	categoryData = data2;
 	
-	const res3 = await fetch(`/assetmanager/admin/stats/dept?year=2025`);
+	const res3 = await fetch(`/assetmanager/admin/stats/dept${year}`);
 	const data3 = await res3.json();
 	deptData = data3;
 	
@@ -30,17 +34,17 @@ async function getData(){
 // --- 헬퍼 함수 ---
 // 통화 형식 (예: 123,456,789 원)
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('ko-KR').format(amount) + ' 원';
+    return new Intl.NumberFormat('ko-KR').format(amount);
 }
 
 // 백분율 계산
 function getPercentage(part, total) {
-    return total > 0 ? ((part / total) * 100).toFixed(1) + ' %' : '0 %';
+    return total > 0 ? ((part / total) * 100).toFixed(1) : '0';
 }
 
 // 증감률 계산
 function getChangeRate(current, previous) {
-    if (previous === 0) return current > 0 ? 'N/A' : '0.0 %';
+    if (previous === 0) return current > 0 ? ' - ' : '0.0 %';
     const rate = ((current - previous) / previous) * 100;
     const sign = rate > 0 ? '▲' : (rate < 0 ? '▼' : '');
     return `${sign} ${Math.abs(rate).toFixed(1)} %`;
@@ -54,123 +58,185 @@ function renderCharts() {
 	
 	// 전체 구매 금액 (꺾은선 차트)
     const annualCtx = document.getElementById('annualLineChart').getContext('2d');
-    annualChart = new Chart(annualCtx, {
-        type: 'line',
-        data: {
-            labels: annualData.map(d => d.year),
-            datasets: [{
-                label: '연간 구매 금액',
-                data: annualData.map(d => d.amount > 0 ? d.amount : null), // 0인 데이터는 차트에서 제외
-                fill: true,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return (value / 1000000) + '백만';
-                        }
-                    }
-                }
-            }
-        }
-    });
-    // 3. 카테고리별 구매 총액 (도넛 차트)
+    
+    //빈 데이터 처리
+    const noDataPlugin = {
+    	    id: 'noData',
+    	    afterDraw: (chart) => {
+    	        const dataset = chart.data.datasets[0];
+    	        const hasData = dataset && dataset.data.some(value => value !== null && value !== 0);
+
+    	        if (!hasData) {
+    	            const { ctx, chartArea } = chart;
+    	            ctx.save();
+    	            ctx.textAlign = 'center';
+    	            ctx.textBaseline = 'middle';
+    	            ctx.font = '16px Arial';
+    	            ctx.fillStyle = '#999';
+    	            ctx.fillText('데이터가 없습니다.', chartArea.left + chartArea.width / 2, chartArea.top + chartArea.height / 2);
+    	            ctx.restore();
+    	        }
+    	    }
+    	};
+    //금액 단위 처리
+    const unitPlugin = {
+    	    id: 'unitLabel',
+    	    beforeDraw: (chart) => {
+    	        const ctx = chart.ctx;
+    	        ctx.save();
+    	        ctx.font = '14px Arial';
+    	        ctx.fillStyle = '#999';
+    	        ctx.textAlign = 'right';
+    	        ctx.fillText('단위: 백만 원', chart.chartArea.left + 40, chart.chartArea.bottom + 50);
+    	        ctx.restore();
+    	    }
+    	};
+    // 연간 구매 차트
+	annualChart = new Chart(annualCtx, {
+	    type: 'line',
+	    data: {
+	        labels: annualData.map(d => d.year),
+	        datasets: [{
+	            label: '연간 구매 금액',
+	            data: annualData.map(d => d.amount > 0 ? d.amount : null), // 0인 데이터 제외
+	            fill: false,
+	            backgroundColor: 'rgba(255, 80, 80, 0.2)',
+	            borderColor: 'rgba(255, 80, 80, 1)',
+	            tension: 0.1
+	        }]
+	    },
+	    options: {
+	        responsive: true,
+	        maintainAspectRatio: false,
+	        plugins: {
+	            legend: { display: false }
+	        },
+			layout: {
+		        padding: {
+		            top: 30,   // 상단 여백
+		            bottom: 30,
+		            left: 10,
+		            right: 10
+		        }
+		    },
+	        scales: {
+	            y: {
+	                beginAtZero: true,
+	                ticks: {
+	                    callback: function(value) {
+	                    	if(value > 1){
+	                    		return (value / 1000000);
+	                    	}else{
+	                    		return value;
+	                    	}
+	                    }
+	                }
+	            }
+	        }
+	    },
+	    plugins: [noDataPlugin, unitPlugin] // 여기서 플러그인 등록
+	});
+    // 카테고리별 구매 총액 (도넛 차트)
     const categoryCtx = document.getElementById('categoryDonutChart').getContext('2d');
-    categoryChart = new Chart(categoryCtx, {
-        type: 'doughnut',
-        data: {
-            labels: categoryData.map(d => d.categoryName),
-            datasets: [{
-                data: categoryData.map(d => d.amount),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',   // red
-                    'rgba(54, 162, 235, 0.7)',   // blue
-                    'rgba(255, 206, 86, 0.7)',   // yellow
-                    'rgba(75, 192, 192, 0.7)',   // teal
-                    'rgba(153, 102, 255, 0.7)',  // purple
-                    'rgba(255, 159, 64, 0.7)',   // orange
-                    'rgba(255, 99, 71, 0.7)',    // tomato-ish red
-                    'rgba(100, 181, 246, 0.7)',  // light blue
-                    'rgba(144, 238, 144, 0.7)'   // light green
-                ],
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '60%', // 도넛 중앙 빈 공간
-            plugins: {
-                legend: {
-                    position: 'right', // 범례 위치
-                }
-            }
-        }
-    });
+	categoryChart = new Chart(categoryCtx, {
+		type: 'doughnut',
+		data: {
+			labels: categoryData.map(d => d.categoryName),
+			datasets: [{
+				data: categoryData.map(d => d.amount),
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.7)',   // red
+					'rgba(54, 162, 235, 0.7)',   // blue
+					'rgba(255, 206, 86, 0.7)',   // yellow
+					'rgba(75, 192, 192, 0.7)',   // teal
+					'rgba(153, 102, 255, 0.7)',  // purple
+					'rgba(255, 159, 64, 0.7)',   // orange
+					'rgba(255, 99, 71, 0.7)',    // tomato-ish red
+					'rgba(100, 181, 246, 0.7)',  // light blue
+					'rgba(144, 238, 144, 0.7)'   // light green
+					],
+					hoverOffset: 4
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			cutout: '60%', // 도넛 중앙 빈 공간
+			plugins: {
+				legend: {
+					position: 'right', // 범례 위치
+				}
+			}
+		},
+		plugins: [noDataPlugin] // 여기서 플러그인 등록
+	});
 	
-    // 1. 부서별 구매 금액 (막대 차트)
+    // 부서별 구매 금액 (막대 차트)
     const deptCtx = document.getElementById('deptBarChart').getContext('2d');
-    deptChart = new Chart(deptCtx, {
-        type: 'bar',
-        data: {
-            labels: deptData.map(d => d.deptName),
-            datasets: [{
-                label: '구매 금액',
-                data: deptData.map(d => d.amount),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',   // red
-                    'rgba(54, 162, 235, 0.7)',   // blue
-                    'rgba(255, 206, 86, 0.7)',   // yellow
-                    'rgba(75, 192, 192, 0.7)',   // teal
-                    'rgba(153, 102, 255, 0.7)',  // purple
-                    'rgba(255, 159, 64, 0.7)',   // orange
-                    'rgba(255, 99, 71, 0.7)',    // tomato-ish red
-                    'rgba(100, 181, 246, 0.7)',  // light blue
-                    'rgba(144, 238, 144, 0.7)'   // light green
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',   // red
-                    'rgba(54, 162, 235, 1)',   // blue
-                    'rgba(255, 206, 86, 1)',   // yellow
-                    'rgba(75, 192, 192, 1)',   // teal
-                    'rgba(153, 102, 255, 1)',  // purple
-                    'rgba(255, 159, 64, 1)',   // orange
-                    'rgba(255, 99, 71, 1)',    // tomato-ish red
-                    'rgba(100, 181, 246, 1)',  // light blue
-                    'rgba(144, 238, 144, 1)'   // light green
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return (value / 1000000) + '백만'; // Y축 레이블 포맷
-                        }
-                    }
-                }
-            }
-        }
-    });
+	deptChart = new Chart(deptCtx, {
+		type: 'bar',
+		data: {
+			labels: deptData.map(d => d.deptName),
+			datasets: [{
+				label: '구매 금액',
+				data: deptData.map(d => d.amount),
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.7)',   // red
+					'rgba(54, 162, 235, 0.7)',   // blue
+					'rgba(255, 206, 86, 0.7)',   // yellow
+					'rgba(75, 192, 192, 0.7)',   // teal
+					'rgba(153, 102, 255, 0.7)',  // purple
+					'rgba(255, 159, 64, 0.7)',   // orange
+					'rgba(255, 99, 71, 0.7)',    // tomato-ish red
+					'rgba(100, 181, 246, 0.7)',  // light blue
+					'rgba(144, 238, 144, 0.7)'   // light green
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',   // red
+						'rgba(54, 162, 235, 1)',   // blue
+						'rgba(255, 206, 86, 1)',   // yellow
+						'rgba(75, 192, 192, 1)',   // teal
+						'rgba(153, 102, 255, 1)',  // purple
+						'rgba(255, 159, 64, 1)',   // orange
+						'rgba(255, 99, 71, 1)',    // tomato-ish red
+						'rgba(100, 181, 246, 1)',  // light blue
+						'rgba(144, 238, 144, 1)'   // light green
+						],
+						borderWidth: 1,
+						maxBarThickness: 60
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			plugins: {
+				legend: { display: false }
+			},
+			layout: {
+		        padding: {
+		            top: 30,   // 상단 여백
+		            bottom: 30,
+		            left: 10,
+		            right: 10
+		        }
+		    },
+			scales: {
+				y: {
+					beginAtZero: true,
+					ticks: {
+						callback: function(value) {
+	                    	if(value > 1){
+	                    		return (value / 1000000);
+	                    	}else{
+	                    		return value;
+	                    	}
+						}
+					}
+				}
+			}
+		},
+		plugins: [noDataPlugin, unitPlugin] // 여기서 플러그인 등록
+	});
 }
 
 // --- 테이블 렌더링 ---
@@ -186,49 +252,61 @@ function renderTables() {
     const totalDeptAmount = deptData.reduce((sum, d) => sum + d.amount, 0);
     const totalCategoryAmount = categoryData.reduce((sum, d) => sum + d.amount, 0);
 
-    //  연간 테이블
-    for(let i = 0; i < annualData.length; i++) {
-        const d = annualData[i];
-        if (d.amount === 0) continue; // 0원인 달은 표시 안함
-
-        const prevAmount = (i > 0) ? annualData[i-1].amount : 0;
-        const change = getChangeRate(d.amount, prevAmount);
-        const changeColor = change.includes('▲') ? 'text-red-600' : (change.includes('▼') ? 'text-blue-600' : 'text-gray-600');
-        
-        const row = `
-            <tr class="hover:bg-gray-50">
-                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.year}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm ${changeColor} text-right">${change}</td>
-            </tr>
-        `;
-        annualTableBody.innerHTML += row;
+    // 연간 테이블
+    if(annualData.length > 0){
+    	for(let i = 0; i < annualData.length; i++) {
+    		const d = annualData[i];
+    		if (d.amount === 0) continue; // 0원인 달은 표시 안함
+    		
+    		const prevAmount = (i > 0) ? annualData[i-1].amount : 0;
+    		const change = getChangeRate(d.amount, prevAmount);
+    		const changeColor = change.includes('▲') ? 'text-red-600' : (change.includes('▼') ? 'text-blue-600' : 'text-gray-600');
+    		
+    		const row = `
+    			<tr class="hover:bg-gray-50">
+    			<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.year}</td>
+    			<td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
+    			<td class="px-4 py-3 whitespace-nowrap text-sm ${changeColor} text-right">${change}</td>
+    			</tr>
+    			`;
+    		annualTableBody.innerHTML += row;
+    	}
+    }else{
+    	annualTableBody.innerHTML += '<td colspan="3" style="text-align: center; padding: 20px; color: gray;">데이터가 없습니다.</td>';
     }
 
+    // 카테고리별 테이블
+    if(categoryData.length > 0){
+        categoryData.forEach(d => {
+            const row = `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.categoryName}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${getPercentage(d.amount, totalCategoryAmount)}</td>
+                </tr>
+            `;
+            categoryTableBody.innerHTML += row;
+        });
+    }else{
+    	categoryTableBody.innerHTML += '<td colspan="3" style="text-align: center; padding: 20px; color: gray;">데이터가 없습니다.</td>';
+    }
 
-    //  카테고리별 테이블
-    categoryData.forEach(d => {
-        const row = `
-            <tr class="hover:bg-gray-50">
-                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.categoryName}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${getPercentage(d.amount, totalCategoryAmount)}</td>
-            </tr>
-        `;
-        categoryTableBody.innerHTML += row;
-    });
-    
     // 부서별 테이블
-    deptData.forEach(d => {
-        const row = `
-            <tr class="hover:bg-gray-50">
-                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.deptName}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
-                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${getPercentage(d.amount, totalDeptAmount)}</td>
-            </tr>
-        `;
-        deptTableBody.innerHTML += row;
-    });
+    if(deptData.length > 0){
+        deptData.forEach(d => {
+            const row = `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${d.deptName}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${formatCurrency(d.amount)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600 text-right">${getPercentage(d.amount, totalDeptAmount)}</td>
+                </tr>
+            `;
+            deptTableBody.innerHTML += row;
+        });
+    }else{
+    	deptTableBody.innerHTML += '<td colspan="3" style="text-align: center; padding: 20px; color: gray;">데이터가 없습니다.</td>';
+    }
+    
 }
 
 // --- PDF 내보내기 ---

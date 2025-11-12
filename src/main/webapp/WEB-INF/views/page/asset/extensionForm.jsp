@@ -36,7 +36,8 @@
 								<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 							</div>
 							<div class="form-return-date">
-									<label for="return-date">반납 예정일 <span class="required">*</span></label> <input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" required>
+									<label for="return-date">반납 예정일 <span class="required">*</span></label> 
+									<input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" min="${currentDate}" required>
 							</div>
 						</div>
 							<div class="form-row">

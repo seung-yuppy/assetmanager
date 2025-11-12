@@ -55,6 +55,25 @@ public class RentService {
 		
 		return new PageResponseDTO<RentListDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
 	}
+	
+	private PageResponseDTO<AssetReturnDTO> returnPaging(RentParamDTO rentParamDTO, int totalCount){
+		final int PAGE_SIZE = 10;
+		final int BLOCK_SIZE = 5;
+		int page = rentParamDTO.getPage();
+		int offset = page > 0 ? (page - 1) * PAGE_SIZE : 0;
+		rentParamDTO.setOffset(offset);
+		int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
+		int totalBlocks = (int) Math.ceil((double) totalPages / BLOCK_SIZE);
+		int block = (int) Math.ceil((double) page / BLOCK_SIZE);
+		if (totalBlocks < 0)
+			totalBlocks = 0;
+		int blockStart = (block - 1) * BLOCK_SIZE + 1;
+		int blockEnd = block < totalBlocks ? block * BLOCK_SIZE : totalPages;
+		boolean hasPrev = block > 1 ? true : false;
+		boolean hasNext = totalBlocks > block ? true : false;
+		
+		return new PageResponseDTO<AssetReturnDTO>(page, totalCount, totalPages, hasPrev, hasNext, blockStart, blockEnd);
+	}
 
 	// dept가 경영지원팀인 user 가지고 오기
 	public List<UserInfoDTO> findByAdminUser() {
@@ -115,6 +134,7 @@ public class RentService {
             title += " 외 " + (items.size() - 1) + "건";
         }
         rentDTO.setTitle(title);
+        rentDTO.setIsDelay(0);
 			
 		// rent 테이블 insert
 		if (rentDAO.insertRent(rentDTO, userId)) {	
@@ -172,6 +192,15 @@ public class RentService {
 		response.setContent(list);
 		return response;
 	}
+	
+	// adminDelayList 찾기
+		public PageResponseDTO<RentListDTO> adminDelayList(RentParamDTO rentParamDTO){ 
+			int totalCount = rentDAO.countAllForAdminDelay(rentParamDTO);
+			PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
+			List<RentListDTO> list = rentDAO.findAdminDelayList(rentParamDTO);
+			response.setContent(list);
+			return response;
+		}
 	
 	// managerRentList 찾기
 	public PageResponseDTO<RentListDTO> managerList(RentParamDTO rentParamDTO){ 
@@ -272,9 +301,12 @@ public class RentService {
 	}
 	
 	// returnList 찾기
-	public List<AssetReturnDTO> assetReturn(){	
-		List<AssetReturnDTO> adminReturnList = rentDAO.findAssetReturn();
-		return adminReturnList ;
+	public PageResponseDTO<AssetReturnDTO> assetReturn(RentParamDTO rentParamDTO){	
+		int totalCount = rentDAO.countAssetReturn(rentParamDTO);
+		PageResponseDTO<AssetReturnDTO> response = returnPaging(rentParamDTO, totalCount);
+		List<AssetReturnDTO> list = rentDAO.findAssetReturn(rentParamDTO);
+		response.setContent(list);
+		return response;
 	}
 	
 	// returnAsset 정보 찾기
@@ -326,7 +358,8 @@ public class RentService {
 		if(approvalDAO.insertApproval(approvalDTO)) {
 			rentDTO.setApprovalId(approvalDTO.getId());
 			String title = rentContentDTO.getAssetName(); 
-			rentDTO.setTitle(title);
+			rentDTO.setTitle(title);	
+			rentDTO.setIsDelay(1);
 			if(rentDAO.insertRent(rentDTO, userId)) {
 				rentContentDTO.setRentId(rentDTO.getId());
 				if(rentDAO.insertRentContent(rentContentDTO)) {

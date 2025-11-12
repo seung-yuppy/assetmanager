@@ -38,6 +38,8 @@ public interface RentDAO {
 	public int countAll(RentParamDTO rentParamDTO);
 	public int countAllForAdmin(RentParamDTO rentParamDTO);
 	public int countAllForManager(RentParamDTO rentParamDTO);
+	public int countAssetReturn(RentParamDTO rentParamDTO);
+	public int countAllForAdminDelay(RentParamDTO rentParamDTO);
 	
 	// RentList 찾기  
 	public List<RentListDTO> findRentList(RentParamDTO rentParamDTO);
@@ -76,7 +78,7 @@ public interface RentDAO {
 	public boolean insertAssetReturn(AssetReturnDTO assetReturnDTO);
 	
 	// assetReturn 찾기
-	public List<AssetReturnDTO> findAssetReturn();
+	public List<AssetReturnDTO> findAssetReturn(RentParamDTO rentParamDTO);
 	
 	// 반납 자산 찾기 
 	public AssetReturnDTO findReturnAsset(int id);
@@ -92,5 +94,8 @@ public interface RentDAO {
 	
 	// approvalId로 Rent 찾기 
 	public RentListDTO getRentByApprovalId(int approvalId);
+	
+	// delay 찾기
+	public List<RentListDTO> findAdminDelayList(RentParamDTO rentParamDTO);
 	
 }

@@ -36,4 +36,9 @@ public class AssetReturnDTO {
 	private String deptAddress;
 	private Date createDate;
 	private Long deadLine;
+	private ApprovalStatus status;
+	
+	public void setStatus(String status) {
+		this.status = ApprovalStatus.from(status);
+	}
 }

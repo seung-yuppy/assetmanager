@@ -19,4 +19,5 @@ public class RentShowDTO {
 	private Date rentDate;
 	private Date returnDate;
 	private String requestMsg;
+	private int isDelay;
 }

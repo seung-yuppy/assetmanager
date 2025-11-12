@@ -1,7 +1,6 @@
 package edu.example.assetmanager.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.example.assetmanager.domain.AssetReturnDTO;
+import edu.example.assetmanager.domain.PageResponseDTO;
+import edu.example.assetmanager.domain.RentParamDTO;
 import edu.example.assetmanager.service.RentService;
 import lombok.RequiredArgsConstructor;
 
@@ -29,15 +30,15 @@ public class AdminReturnController {
 	
 
 	@GetMapping("/list")
-	public String adminReturnlist(Model model, HttpSession session) {
+	public String adminReturnlist(Model model, HttpSession session, RentParamDTO rentParamDTO) {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null) {
 			return "redirect:/login";
 		}
-		List<AssetReturnDTO> assetReturnDTO = rentService.assetReturn(); 
+		PageResponseDTO<AssetReturnDTO> assetReturnDTO = rentService.assetReturn(rentParamDTO); 
 		
 		System.out.println("assetReturnDTO 나오니??" +assetReturnDTO);
-		model.addAttribute("returnList",assetReturnDTO);
+		model.addAttribute("response",assetReturnDTO);
 		
 		return "/admin/adminReturnList";
 	}

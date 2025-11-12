@@ -35,17 +35,29 @@ public class AdminRentController {
 		System.out.println("session 들어와??"+session);
 		Integer userId = (Integer) session.getAttribute("userId");
 		UserInfoDTO userInfo = (UserInfoDTO) session.getAttribute("userInfo");
-		System.out.println("approverId 몇번이야???" + userId);
         if (userId == null) { 
             return "redirect:/login";    
         }
         rentParamDTO.setUserId(userId);
         PageResponseDTO<RentListDTO> adminList = rentService.adminList(rentParamDTO);
-        System.out.println("adminList 나와??"+adminList);
         model.addAttribute("response", adminList);
         model.addAttribute("userInfo", userInfo);
         
         return "admin/adminRentList";
+    }
+	
+	@GetMapping("/delay/list")
+	public String adminDelayList(HttpSession session, RentParamDTO rentParamDTO, Model model) { 
+		Integer userId = (Integer) session.getAttribute("userId");
+		UserInfoDTO userInfo = (UserInfoDTO) session.getAttribute("userInfo");
+        if (userId == null) { 
+            return "redirect:/login";    
+        }
+        rentParamDTO.setUserId(userId);
+        PageResponseDTO<RentListDTO> adminList = rentService.adminDelayList(rentParamDTO);
+        model.addAttribute("response", adminList);
+        model.addAttribute("userInfo", userInfo);
+        return "admin/adminDelayList";
     }
 	
 	@GetMapping("/rent/detail/{id}")
@@ -71,10 +83,5 @@ public class AdminRentController {
 	@GetMapping("rent/approve")
 	public String approve(int id) {
 		return "redirect:/admin/adminRentDetail";
-	}
-	
-	@GetMapping("/delay/list")
-	public String delayList(){
-		return "/admin/adminDelayList";
 	}
 }

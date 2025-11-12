@@ -21,4 +21,5 @@ public class RentDTO {
 	private String returnDate; 
 	private List<RentContentDTO> items;
 	private String title;
+	private int isDelay;
 }

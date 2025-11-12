@@ -32,9 +32,19 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1 class="content-title">반출 요청 상세</h1>
+				<c:if test="${rent.isDelay == 0}">
+					<h1 class="content-title">반출 요청 상세</h1>
+				</c:if>
+				<c:if test="${rent.isDelay == 1}">
+					<h1 class="content-title">연장 요청 상세</h1>
+				</c:if>
 				<div class="detail-header">
-					<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
+					<c:if test="${rent.isDelay == 0}">
+						<span class="page-description">반출 요청의 상세 내역을 확인하고 관리하세요.</span>
+					</c:if>
+					<c:if test="${rent.isDelay == 1}">
+						<span class="page-description">연장 요청의 상세 내역을 확인하고 관리하세요.</span>
+					</c:if>	
 				</div>
 				<div class="section-card">
 					<!-- 결재라인 불러오기 -->
@@ -76,7 +86,12 @@
 					<div id="formInputArea" class="inputArea">
 						<div class="form-date">
 							<div class="form-application-date">
-								<label for="application-date">반출 신청일</label> 
+								<c:if test="${rent.isDelay == 0}">
+									<label for="application-date">반출 신청일</label> 
+								</c:if>
+								<c:if test="${rent.isDelay == 1}">
+									<label for="application-date">연장 신청일</label>
+								</c:if>								
 								<input type="date"
 									   id="application-date" value="${rentDate}"
 									   class="locked-input" readonly>
@@ -112,7 +127,12 @@
 
 						<div class="form-group">
 							<div class="form-reason">
-								<label for="reason">반출 요청 사유 </label>
+								<c:if test="${rent.isDelay == 0}">
+									<label for="reason">반출 요청 사유 </label>
+								</c:if>
+								<c:if test="${rent.isDelay == 1}">
+									<label for="reason">연장 요청 사유 </label>
+								</c:if>
 								<textarea id="reason" name="reason" rows="6" cols="81" maxlength="200"
 									readonly>${rent.requestMsg}</textarea>
 								<div class="char-count-display text-align-right"></div>

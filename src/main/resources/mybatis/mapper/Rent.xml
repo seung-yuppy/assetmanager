@@ -40,8 +40,8 @@
 	</select>
 		
 	<insert id="insertRent" parameterType="RentDTO" useGeneratedKeys="true" keyProperty="rentDTO.id" keyColumn="id">
-		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg) 
-		VALUES (#{rentDTO.approvalId}, #{userId}, #{rentDTO.title}, TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg})
+		INSERT INTO Rent (approval_id, user_id, title, return_date, request_msg, is_delay) 
+		VALUES (#{rentDTO.approvalId}, #{userId}, #{rentDTO.title}, TO_TIMESTAMP(#{rentDTO.returnDate}, 'YYYY-MM-DD'), #{rentDTO.requestMsg}, #{rentDTO.isDelay})
 	</insert>
 	
 	<insert id="insertRentContent" parameterType="RentContentDTO">
@@ -100,6 +100,35 @@
 	    <where>
 	    	A.approver_id = #{userId} 
 	    		AND R.is_valid = 1
+	    		AND R.is_delay = 0
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	ORDER BY R.rent_date DESC
+	    offset #{offset} rows
+    	fetch next #{size} rows only    
+	</select>
+	
+	<select id="findAdminDelayList" parameterType="RentParamDTO" resultType="RentListDTO">
+	    SELECT R.id
+	         , R.title
+	         , R.rent_date rentDate
+	         , A.status status
+	         , U.username username
+	         , D.dept_name deptName
+	         , R.user_id
+	    FROM Rent R
+	    JOIN Approval A ON A.id = R.approval_id
+	    LEFT JOIN "User" U ON U.id = R.user_id
+	    LEFT JOIN Department D ON D.id = U.department_id
+	    <where>
+	    	A.approver_id = #{userId} 
+	    		AND R.is_valid = 1
+	    		AND R.is_delay = 1
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (U.username like '%' || #{keyword} || '%')
 	    	</if>
@@ -164,6 +193,25 @@
 	    <where>
 		    A.approver_id = #{userId} 
 		    	AND R.is_valid = 1
+		    	AND R.is_delay = 0
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) LIKE upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+	
+	<select id="countAllForAdminDelay" parameterType="RentParamDTO" resultType="int">
+		SELECT count(*) 
+		FROM Rent R
+		LEFT JOIN Approval A ON R.approval_id = A.id
+		JOIN "User" U ON R.user_id = U.id
+	    <where>
+		    A.approver_id = #{userId} 
+		    	AND R.is_valid = 1
+		    	AND R.is_delay = 1
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (U.username like '%' || #{keyword} || '%')
 	    	</if>
@@ -202,6 +250,7 @@
 		SELECT request_msg
 			  ,return_date
 			  ,rent_date
+			  ,is_delay
 		FROM Rent R
 		WHERE R.id = #{id}
 	</select>
@@ -270,7 +319,39 @@
 		JOIN "User" U ON U.id = AR.user_id
 		JOIN Department D ON D.id = U.department_id
 		JOIN Asset A ON A.id = AR.asset_id
-		WHERE U.id = AR.user_id
+		<where>
+	        <if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	        <if test="status == 'pending'">
+	    		AND is_Return = 0
+	    	</if>
+	    	<if test="status == 'FINAL_APPROVAL'">
+	    		AND is_Return = 1
+	    	</if>	        
+	    </where>
+	    ORDER BY AR.return_date DESC  
+	    OFFSET #{offset} ROWS
+	    FETCH NEXT #{size} ROWS ONLY
+	</select>
+	
+	<select id="countAssetReturn" parameterType="RentParamDTO" resultType="int">
+	    SELECT COUNT(*)
+	    FROM Asset_Return AR
+	    JOIN "User" U ON U.id = AR.user_id
+	    JOIN Department D ON D.id = U.department_id
+	    JOIN Asset A ON A.id = AR.asset_id
+	    <where>
+	        <if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	        <if test="status == 'pending'">
+	    		AND is_Return = 0
+	    	</if>
+	    	<if test="status == 'FINAL_APPROVAL'">
+	    		AND is_Return = 1
+	    	</if>
+	    </where>
 	</select>
 	
 	<select id="findReturnAsset">

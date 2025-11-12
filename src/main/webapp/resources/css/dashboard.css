@@ -91,7 +91,7 @@
         }
         
         .back-green {
-        	background-color: var(--green-color);
+        	background-color: #A5D6A7;
         }
         
         .back-gray {
@@ -99,39 +99,39 @@
         }
         
         .back-blue {
-        	background-color: var(--blue-color);
+        	background-color: #80CBC4;
         }
         
         .back-purple {
-        	background-color: var(--purple-color);
+        	background-color: #B39DDB;
         }
         
         .back-yellow {
-        	background-color: var(--yellow-color);
+        	background-color: #FFE0B2;
         }
         
         .back-red {
-        	background-color: var(--red-color);
+        	background-color: #FFAB91;
         }
         
         .border-green {
-        	border-top: 5px solid var(--green-color);
+        	border-top: 5px solid #A5D6A7;
         }
         
         .border-yellow {
-        	border-top: 5px solid var(--yellow-color);
+        	border-top: 5px solid #FFE0B2;
         }
         
         .border-purple {
-        	border-top: 5px solid var(--purple-color);
+        	border-top: 5px solid #B39DDB;
         }
         
         .border-blue {
-        	border-top: 5px solid var(--blue-color);
+        	border-top: 5px solid #80CBC4;
         }
         
         .border-red {
-        	border-top: 5px solid var(--red-color);
+        	border-top: 5px solid #FFAB91;
         }
         
         .border-gray {

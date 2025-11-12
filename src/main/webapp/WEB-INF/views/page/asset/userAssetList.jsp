@@ -95,7 +95,7 @@
 					                       		</div>
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.activeBtn == true}">
-						                        		반납처리중⌛          		
+						                        		반납중⌛          		
 					                        		</c:if>
 					                       		</div>
 					                        </td>

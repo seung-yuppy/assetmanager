@@ -13,6 +13,12 @@
 			<if test="keyword != null and keyword != ''">
 				AND asset_name LIKE '%' || #{keyword} || '%'
 			</if>
+			<if test="status == 'pending'">
+				AND user_id IS NULL
+			</if>
+			<if test="status == 'using'">
+				AND user_id IS NOT NULL
+			</if>			
 		</where> 
 	</select>
 	
@@ -31,6 +37,12 @@
 					</if>
 					<if test="keyword != null and keyword != ''">
 						AND asset_name LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="status == 'pending'">
+						AND user_id IS NULL
+					</if>
+					<if test="status == 'using'">
+						AND user_id IS NOT NULL
 					</if>
 				</where> 
 		        ORDER BY a.id

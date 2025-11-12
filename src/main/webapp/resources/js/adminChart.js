@@ -53,7 +53,16 @@ async function renderCharts() {
             datasets: [{
                 label: '보유 자산 (수량)',
                 data: categoryCounts,
-                backgroundColor: '#3b82f6',
+                backgroundColor: [
+                	'#9FA8DA',
+                	'#A5D6A7',
+                	'#FFE0B2',
+                	'#B39DDB',
+                	'#FFAB91',
+                	'#778DA9',
+                	'#80CBC4',
+                	'#FFF59D'
+                ],
                 borderColor: '#3b82f6',
                 borderRadius: 5,
             }]
@@ -101,6 +110,7 @@ async function renderCharts() {
 	
     // 2. 부서별 자산 현황 (막대 차트)
     const departmentCtx = document.getElementById('departmentChart');
+    departmentCtx.style.height = '280px';
     
     const deptAssets = await getDeptData();
     const deptNames = [];
@@ -116,14 +126,10 @@ async function renderCharts() {
         datasets: [{
             label: '보유 자산 (수량)',
             data: deptCount,
-            backgroundColor: [
-            	'#3b82f6',
-            	'#3b82f6',
-            	'#3b82f6'
-            ],
+            backgroundColor: '#80CBC4',
             borderColor: getColor('--primary-color'),
             borderRadius: 5,
-            barThickness: 40
+            barThickness: 50
         }]
     };
 
@@ -200,9 +206,9 @@ async function renderCharts() {
             datasets: [{
                 data: assetPercentages,
                 backgroundColor: [
-                	getColor('--green-color'),
-                	'#9ca3af',
-                	'#ef4444'
+                	'#A5D6A7',
+                	'#FFE0B2',
+                	'#FFAB91'
                 ],
                 hoverOffset: 3,
             }]
@@ -263,6 +269,7 @@ async function renderCharts() {
     
     // 4. 가로형 막대 그래프 (관리자 승인 대기 현황)
     const ctxApprovalBar = document.getElementById('approvalHorizontalBarChart');
+    ctxApprovalBar.style.height = '230px';
     
     const approvalDatas = await getApprovalData();
     const approvalNames = [];
@@ -279,12 +286,13 @@ async function renderCharts() {
                 label: '보유 자산 (수량)',
                 data: approvalCounts,
                 backgroundColor: [
-                	'#3b82f6',
-                	'#3b82f6',
-                	'#3b82f6'
+                	'#80CBC4',
+                	'#80CBC4',
+                	'#80CBC4'
                 ],
                 borderColor: getColor('--primary-color'),
                 borderRadius: 5,
+                barThickness: 50
             }]
         };
     

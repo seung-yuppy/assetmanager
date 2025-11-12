@@ -8,4 +8,5 @@ import lombok.Setter;
 public class AssetParamDTO extends PageParamDTO {
 	private int categoryId;
 	private String keyword;
+	private String status;
 }

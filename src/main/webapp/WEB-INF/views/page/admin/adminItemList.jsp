@@ -51,7 +51,7 @@
 								<th>제품명</th>
 								<th>카테고리</th>
 								<th>스펙</th>
-								<th>가격</th>
+								<th>가격(₩)</th>
 								<th>제조사</th>
 								<th>거래처</th>	
 								<th>삭제</th>				
@@ -72,7 +72,7 @@
 											<td>${item.itemName}</td>
 											<td>${item.categoryName}</td>
 											<td>${item.spec}</td> 
-				                            <td>₩ ${item.price}</td>
+				                            <td><fmt:formatNumber value="${item.price}" type="number"/></td>
 				                            <td>${item.maker}</td>
 				                            <td>${item.seller}</td>
 				                            <td>

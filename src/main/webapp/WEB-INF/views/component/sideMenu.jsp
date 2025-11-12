@@ -175,11 +175,18 @@
 				</li>			
 			</c:if>
 			<c:if test="${userInfo.role == 'admin'}">
-				<li class="menu-item">
-	            	<a href="/assetmanager/admin/order/list">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-		                <span>구입</span>
-		            </a>          
+				<li class="menu-item menu-sub">
+					<div class="menu-arrow">
+						<div class="menu-link">
+							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
+			                <span>구입</span>         
+						</div>
+						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
+					</div>
+					<ul class="sub-menu-list">
+						<li><a href="/assetmanager/admin/stats">구입 통계</a></li>
+						<li><a href="/assetmanager/admin/order/list">구입 목록</a></li>
+					</ul>      
 	            </li>
 			</c:if>
 			<c:if test="${userInfo.role == 'manager'}">

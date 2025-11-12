@@ -21,63 +21,73 @@
 				<!-- 1. 총 통계 section -->
 				<div class="metric-grid">
 	                <div class="metric-card border-yellow">
-	                	<div class="card-header">
-	                		<p class="card-title">총 자산 수</p>
-	                		<div class="card-logo-box back-yellow">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
-	                		</div>
-	                	</div>
-	                    <p class="card-value">${totalAsset}개</p>
+	                	<a href="/assetmanager/admin/asset/list">
+		                	<div class="card-header">
+		                		<p class="card-title">총 자산 수</p>
+		                		<div class="card-logo-box back-yellow">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
+		                		</div>
+		                	</div>
+		                    <p class="card-value">${totalAsset}개</p>
+		            	</a>
 	                </div>
 	                <div class="metric-card border-green">
-						<div class="card-header">
-	                		<p class="card-title">사용 중</p>   
-	                		<div class="card-logo-box back-green">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
-	                		</div>
-	                	</div>                    
-	                    <p class="card-value">${usingAsset}개</p>
+	                	<a href="/assetmanager/admin/asset/list?status=using">
+							<div class="card-header">
+		                		<p class="card-title">사용 중</p>   
+		                		<div class="card-logo-box back-green">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_using.svg">
+		                		</div>
+		                	</div>                    
+		                    <p class="card-value">${usingAsset}개</p>
+						</a>
 	                </div>
 	                <div class="metric-card border-gray">
-						<div class="card-header">
-	                		<p class="card-title">대기 중</p>  
-	                		<div class="card-logo-box back-gray">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
-	                		</div>
-	                	</div>    
-	                    <p class="card-value">${pendingAsset}개</p>
+	                	<a href="/assetmanager/admin/asset/list?status=pending">
+							<div class="card-header">
+		                		<p class="card-title">대기 중</p>  
+		                		<div class="card-logo-box back-gray">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_repair.svg">
+		                		</div>
+		                	</div>    
+		                    <p class="card-value">${pendingAsset}개</p>
+		            	</a>
 	                </div>
 					<div class="metric-card border-red">
-						<div class="card-header">
-	                		<p class="card-title">불용</p>
-	                		<div class="card-logo-box back-red">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
-	                		</div>
-	                	</div>
-	                    <p class="card-value">${invalidAsset}개</p>
+						<a href="/assetmanager/admin/asset/disposal">
+							<div class="card-header">
+		                		<p class="card-title">불용</p>
+		                		<div class="card-logo-box back-red">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_delete.svg">
+		                		</div>
+		                	</div>
+		                    <p class="card-value">${invalidAsset}개</p>
+		            	</a>
 	                </div>
 	                <div class="metric-card border-purple">
-						<div class="card-header">
-							<p class="card-title">추천 제품</p>
-	                		<div class="card-logo-box back-purple">
-	                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
-	                		</div>
-	                	</div>   
-	                    <p class="card-value">${totalItem}개</p>
+	                	<a href="/assetmanager/admin/item/list">
+							<div class="card-header">
+								<p class="card-title">권장 제품</p>
+		                		<div class="card-logo-box back-purple">
+		                			<img class="card-logo" src="/assetmanager/resources/image/icon_item.svg">
+		                		</div>
+		                	</div>   
+		                    <p class="card-value">${totalItem}개</p>	                	
+	                	</a>
 	                </div>
 	            </div>
 				
 				<div class="request-grid">
 					<div class="section-card">
-						<h3>카테고리별 자산 보유 현황</h3>
-						<div class="chart-container" style="height: 300px;">
-		                    <canvas id="categoryChart"></canvas>
-		                </div>
-					</div>
+				    	<h3>관리자 승인 대기 현황</h3>
+				    	<div class="chart-container">
+				    		<canvas id="approvalHorizontalBarChart"></canvas>
+				    	</div>
+					</div> 
 		            <div class="section-card">
 		                <h3>회사 자산 보유 현황</h3>
 		                <div class="doughnut-layout">
-		                    <div class="chart-container doughnut-chart-container" style="height: 300px;">
+		                    <div class="chart-container doughnut-chart-container" style="height: 250px;">
 		                        <canvas id="inventoryChart"></canvas>
 		                    </div>
 		                    <div class="doughnut-summary-container">
@@ -95,12 +105,12 @@
 		                    <canvas id="departmentChart"></canvas>
 		                </div>         
 		            </div>
-		            <div class="section-card">
-				    	<h3>관리자 승인 대기 현황</h3>
-				    	<div class="chart-container">
-				    		<canvas id="approvalHorizontalBarChart"></canvas>
-				    	</div>
-					</div>         
+        			<div class="section-card">
+						<h3>카테고리별 자산 보유 현황</h3>
+						<div class="chart-container" style="height: 300px;">
+		                    <canvas id="categoryChart"></canvas>
+		                </div>
+					</div>
 	            </div>	        	
 	        	            
             </div>			

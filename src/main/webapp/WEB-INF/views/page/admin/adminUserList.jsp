@@ -45,7 +45,7 @@
 						<thead>
 							<tr>
 								<th>사번</th>
-								<th>사용자 이름</th>
+								<th>사용자명</th>
 								<th>부서</th>
 								<th>직급</th>						
 							</tr>

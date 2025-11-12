@@ -96,7 +96,7 @@
                 	</div>
                 	<ul class="sub-menu-list">
 		            	<li><a href="/assetmanager/admin/asset/list">자산 목록</a></li>
-		            	<li><a href="/assetmanager/admin/asset/disposal">불용 자산</a></li>
+		            	<li><a href="/assetmanager/admin/asset/disposal">불용 목록</a></li>
 		            </ul>
                 </li>						
 			</c:if>
@@ -184,8 +184,8 @@
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/admin/stats">구입 통계</a></li>
 						<li><a href="/assetmanager/admin/order/list">구입 목록</a></li>
+						<li><a href="/assetmanager/admin/stats">구입 통계</a></li>
 					</ul>      
 	            </li>
 			</c:if>

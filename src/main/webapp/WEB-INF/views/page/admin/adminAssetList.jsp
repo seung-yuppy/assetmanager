@@ -16,7 +16,7 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>자산 전체  목록</h1>
+				<h1>자산 목록</h1>
 				<span>모든 자산의 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
 					<div class="search-card">
@@ -51,7 +51,7 @@
 								<th>자산명</th>
 								<th>카테고리</th>
 								<th>일련번호</th>
-								<th>등록일자</th>
+								<th>등록일</th>
 								<th>상태</th>						
 							</tr>
 						</thead>

@@ -98,4 +98,7 @@ public interface RentDAO {
 	// delay 찾기
 	public List<RentListDTO> findAdminDelayList(RentParamDTO rentParamDTO);
 	
+	// assetId로 Rent 찾기
+	public RentShowDTO getRentInfoByAssetId(@Param("assetId") int assetId);
+	
 }

@@ -51,7 +51,7 @@
 											</div>
 											<input name="spec" value="${product.spec}" style="display:none;">
 											<div class="form-group fixed-width-med">
-												<label for="price">단가 (원)</label>
+												<label for="price">단가(₩)</label>
 												<div class="last-input-group">
 													<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
 													<c:if test="${approval.status == 'FINAL_APPROVAL'}" >
@@ -73,7 +73,7 @@
 										</div>
 										<input name="spec" value="${product.spec}" style="display:none;">
 										<div class="form-group fixed-width-med">
-											<label for="price">단가 (원)</label>
+											<label for="price">단가(₩)</label>
 											<div class="last-input-group">
 												<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' class="locked-input" readonly>
 												<c:if test="${approval.status == 'FINAL_APPROVAL'}" >

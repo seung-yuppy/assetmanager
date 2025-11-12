@@ -22,7 +22,7 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp"%>
 			<div class="dashboard-container">
-				<h1 class="content-title">반출 신청서</h1>
+				<h1 class="content-title">반출 요청서</h1>
 				<span class="page-description">새로운 반출 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
 					<form id="requestForm" action="/assetmanager/rent/approval" method="post">
@@ -48,7 +48,7 @@
 						<div id="formInputArea" class="inputArea">
 							<div class="form-date">
 								<div class="form-application-date">
-									<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+									<label for="application-date">반출 요청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 								</div>
 								<div class="form-return-date">
 									<label for="return-date">반납 예정일 <span class="required">*</span></label> 

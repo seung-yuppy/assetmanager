@@ -36,7 +36,7 @@
 		                        <span class="info-value">${asset.assetName}</span>
 		                    </div>
 		                    <div class="info-item">
-		                        <span class="info-label">자산 카테고리</span>
+		                        <span class="info-label">카테고리</span>
 		                        <span class="info-value">${asset.categoryName}</span>
 		                    </div>
 		                    <div class="info-item">
@@ -48,11 +48,11 @@
 		                        <span class="info-value">${asset.spec}</span>
 		                    </div> 
 		                    <div class="info-item">
-		                        <span class="info-label">자산 위치</span>
+		                        <span class="info-label">위치</span>
 		                        <span class="info-value">${asset.location}</span>
 		                    </div> 
 		                    <div class="info-item">
-		                        <span class="info-label">등록일자</span>
+		                        <span class="info-label">등록일</span>
 		                        <span class="info-value"><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></span>
 		                    </div>
 		                </div>
@@ -63,13 +63,21 @@
 		                <div class="info-list">
 		                    <c:if test="${asset.userId != 0}">
 								<div class="info-item">
-			                        <span class="info-label">자산 상태</span>
+			                        <span class="info-label">상태</span>
 			                        <span class="info-value"><span class="status-badge status-used">사용중</span></span>
 			                    </div>		                    
 			                    <div class="info-item">
-			                        <span class="info-label">사용자 이름</span>
+			                        <span class="info-label">사용자명</span>
 			                        <span class="info-value">${asset.username}</span>
 			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">직급</span>
+			                        <span class="info-value">${asset.position}</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서</span>
+			                        <span class="info-value">${asset.deptName}</span>
+			                    </div>			                    
 			                    <div class="info-item">
 			                        <span class="info-label">이메일</span>
 			                        <span class="info-value">${asset.email}</span>
@@ -78,46 +86,30 @@
 			                        <span class="info-label">전화번호</span>
 			                        <span class="info-value">${asset.phone}</span>
 			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">직책</span>
-			                        <span class="info-value">${asset.position}</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">부서명</span>
-			                        <span class="info-value">${asset.deptName}</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">부서 주소</span>
-			                        <span class="info-value">${asset.deptAddress}</span>
-			                    </div>
 							</c:if>
 							<c:if test="${asset.userId == 0}">
 								<div class="info-item">
-			                        <span class="info-label">자산 상태</span>
+			                        <span class="info-label">상태</span>
 			                        <span class="info-value"><span class="status-badge status-waited">대기중</span></span>
 			                    </div>
 			                    <div class="info-item">
-			                        <span class="info-label">사용자 이름</span>
+			                        <span class="info-label">사용자명</span>
 			                        <span class="info-value">-</span>
 			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">직급</span>
+			                        <span class="info-value">-</span>
+			                    </div>
+			                    <div class="info-item">
+			                        <span class="info-label">부서</span>
+			                        <span class="info-value">-</span>
+			                    </div>			                    
 			                    <div class="info-item">
 			                        <span class="info-label">이메일</span>
 			                        <span class="info-value">-</span>
 			                    </div>
 			                    <div class="info-item">
 			                        <span class="info-label">전화번호</span>
-			                        <span class="info-value">-</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">직책</span>
-			                        <span class="info-value">-</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">부서명</span>
-			                        <span class="info-value">-</span>
-			                    </div>
-			                    <div class="info-item">
-			                        <span class="info-label">부서 주소</span>
 			                        <span class="info-value">-</span>
 			                    </div>
 							</c:if>
@@ -131,12 +123,12 @@
 		            <table class="data-table">
 		                <thead>
 		                    <tr>
-		                        <th>사용 시작일</th>
-		                        <th>사용 반납일</th>
 		                        <th>사번</th>
-		                        <th>사용자 이름</th>
+		                        <th>사용자명</th> 
+		                        <th>직급</th>		                        
 		                        <th>부서</th>
-		                        <th>직급</th>
+		                        <th>사용 시작일</th>
+		                        <th>반납일</th>
 		                        <th>상태</th>
 		                    </tr>
 		                </thead>
@@ -150,17 +142,17 @@
 		                		<c:otherwise>
 				                	<c:forEach var="asset" items="${assetHistory}">
 				                		<tr>
+											<td>${asset.empNo}</td>
+											<td>${asset.username}</td>
+											<td>${asset.position}</td>											
+											<td>${asset.deptName}</td>
 				                			<td><fmt:formatDate value="${asset.rentDate}" pattern="yyyy-MM-dd"/></td>
 				                			<c:if test="${asset.returnDate != null}">
 												<td><fmt:formatDate value="${asset.returnDate}" pattern="yyyy-MM-dd"/></td>
 											</c:if>
 											<c:if test="${asset.returnDate == null}">
 												<td>-</td>
-											</c:if>
-											<td>${asset.empNo}</td>
-											<td>${asset.username}</td>
-											<td>${asset.deptName}</td>
-											<td>${asset.position}</td>
+											</c:if>											
 											<c:if test="${asset.returnDate != null}">
 												<td><span class="status-badge status-rejected">반납됨</span></td>
 											</c:if>

@@ -51,10 +51,10 @@
 								<th>제품명</th>
 								<th>카테고리</th>
 								<th>스펙</th>
-								<th>가격(₩)</th>
+								<th>단가(₩)</th>
 								<th>제조사</th>
 								<th>거래처</th>	
-								<th>삭제</th>				
+								<th></th>				
 							</tr>
 						</thead>
 						<tbody>

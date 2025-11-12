@@ -45,8 +45,8 @@
 						<thead>
 							<tr>
 								<th>요청 내용</th>
-								<th>총액</th>
 								<th>요청일</th>
+								<th>총액(₩)</th>
 								<th>상태</th>
 							</tr>
 						</thead>
@@ -61,8 +61,8 @@
 									<c:forEach var="item" items="${response.content}">
 										<tr data-id="${item.id}">
 											<td>${item.title}</td>
-											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
 											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
+											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
 											<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
 										</tr>
 									</c:forEach>

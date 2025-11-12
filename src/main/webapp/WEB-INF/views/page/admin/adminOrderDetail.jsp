@@ -33,7 +33,7 @@
 					<!-- 신청자 정보 섹션 전체 컨테이너 -->
 					<div class="applicant-info-section">
 						<!-- 제목 -->
-						<h2 class="applicant-section-title">신청자 정보</h2>
+						<h2 class="applicant-section-title">요청자 정보</h2>
 						<!-- 내용 목록 -->
 						<div class="applicant-info-list">
 							<dl class="applicant-info-f-list">
@@ -42,13 +42,14 @@
 
 								<dt>이름</dt>
 								<dd>${empInfo.userInfo.username}</dd>
+								
+								<dt>직급</dt>
+								<dd>${empInfo.userInfo.position}</dd>
 
-								<dt>부서명</dt>
-								<dd>${empInfo.userInfo.deptName}</dd>
 							</dl>
 							<dl class="applicant-info-s-list">
-								<dt>직책</dt>
-								<dd>${empInfo.userInfo.position}</dd>
+								<dt>부서</dt>
+								<dd>${empInfo.userInfo.deptName}</dd>							
 
 								<dt>연락처</dt>
 								<dd>${empInfo.userInfo.phone}</dd>
@@ -78,7 +79,7 @@
 										<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${product.itemName}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-med">
-										<label for="price">단가 (원)</label>
+										<label for="price">단가(₩)</label>
 										<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-sm">
@@ -86,7 +87,7 @@
 										<input type="number" id="quantity" name="products[0].count" min="1" max="10" value="${product.count}" required>
 									</div>
 									<div class="form-group fixed-width-med">
-										<label for="totalPrice">총액 (원)</label>
+										<label for="totalPrice">총액(₩)</label>
 										<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
 										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>

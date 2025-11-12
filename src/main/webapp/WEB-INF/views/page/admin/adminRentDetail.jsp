@@ -55,23 +55,23 @@
 					<!-- 신청자 정보 섹션 전체 컨테이너 -->
 					<div class="applicant-info-section">
 						<!-- 제목 -->
-						<h2 class="applicant-section-title">신청자 정보</h2>
+						<h2 class="applicant-section-title">요청자 정보</h2>
 
 						<!-- 내용 목록  -->
 						<div class="applicant-info-list">
 							<dl class="applicant-info-f-list">
-								<dt>요청ID(사번)</dt>
+								<dt>사번</dt>
 								<dd>${empInfo.userInfo.empNo}</dd>
 
 								<dt>이름</dt>
 								<dd>${empInfo.userInfo.username}</dd>
-
-								<dt>부서명</dt>
-								<dd>${empInfo.userInfo.deptName}</dd>
+								
+								<dt>직급</dt>
+								<dd>${empInfo.userInfo.position}</dd>
 							</dl>
 							<dl class="applicant-info-s-list">
-								<dt>직책</dt>
-								<dd>${empInfo.userInfo.position}</dd>
+								<dt>부서</dt>
+								<dd>${empInfo.userInfo.deptName}</dd>
 
 								<dt>연락처</dt>
 								<dd>${empInfo.userInfo.phone}</dd>
@@ -87,10 +87,10 @@
 						<div class="form-date">
 							<div class="form-application-date">
 								<c:if test="${rent.isDelay == 0}">
-									<label for="application-date">반출 신청일</label> 
+									<label for="application-date">반출 요청일</label> 
 								</c:if>
 								<c:if test="${rent.isDelay == 1}">
-									<label for="application-date">연장 신청일</label>
+									<label for="application-date">연장 요청일</label>
 								</c:if>								
 								<input type="date"
 									   id="application-date" value="${rentDate}"

@@ -21,8 +21,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1 class="content-title">요청 정보</h1>
-				<span class="page-description">요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
+				<h1 class="content-title">연장 요청서</h1>
+				<span class="page-description">새로운 연장 요청을 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
 					<form action="/assetmanager/asset/extension/form" method="post">
 						<div class="form-section">
@@ -33,7 +33,7 @@
 					<div id="formInputArea" class="inputArea">
 						<div class="form-date">
 							<div class="form-application-date">
-								<label for="application-date">반출 신청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+								<label for="application-date">반출 요청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 							</div>
 							<div class="form-return-date">
 									<label for="return-date">반납 예정일 <span class="required">*</span></label> 
@@ -60,7 +60,7 @@
 
 						<div class="form-group">
 							<div class="form-reason">
-								<label for="reason">연장 요청 사유</label>
+								<label for="reason">연장 요청 사유 <span class="required">*</span></label>
 								<textarea id="reason" name="requestMsg" rows="5" cols="81" maxlength="200" placeholder="연장 요청이 필요한 구체적인 사유를 입력해주세요." required></textarea>
 								<div class="char-count-display text-align-right"></div>
 							</div>

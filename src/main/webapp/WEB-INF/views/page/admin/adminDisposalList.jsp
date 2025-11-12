@@ -16,8 +16,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>불용 처리 내역</h1>
-				<span>자산의 불용처리 내역을 확인합니다.</span>
+				<h1>불용 목록</h1>
+				<span>모든 불용 자산의 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
 					<div class="search-card">
 						<div class="filter-controls">
@@ -50,16 +50,17 @@
 								<th>카테고리</th>
 								<th>일련번호</th>
 								<th>불용 사유</th>
-								<th>처리자</th>
-								<th>등록일자</th>
-								<th>불용일자</th>
+								<th>결재자</th>
+								<th>직급</th>
+								<th>등록일</th>
+								<th>불용일</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:choose>
 								<c:when test="${empty response.content}">
 									<tr>
-										<td colspan="7" style="text-align: center;">
+										<td colspan="8" style="text-align: center;">
 											<p>데이터가 없습니다.</p>
 										</td>
 									</tr>								
@@ -72,6 +73,7 @@
 					                        <td>${asset.serialNumber}</td>
 					                        <td>${asset.disposalReason}</td>
 					                        <td>${asset.userName}</td>
+					                        <%-- <td>${asset.position}</td> --%>
 					                        <td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
 					                        <td><fmt:formatDate value="${asset.disposalDate}" pattern="yyyy-MM-dd"/></td>
 										</tr>							

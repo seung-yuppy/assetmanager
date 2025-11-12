@@ -42,10 +42,10 @@
 						<thead>
 							<tr>
 								<th>요청 내용</th>
-								<th>총액</th>
 								<th>요청자</th>
 								<th>부서</th>
 								<th>요청일</th>
+								<th>총액(₩)</th>
 								<th>상태</th>
 							</tr>
 						</thead>
@@ -60,10 +60,10 @@
 									<c:forEach var="item" items="${response.content}">
 										<tr data-id="${item.id}">
 											<td><a href="detail/${item.id}">${item.title}</a></td>
-											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
 											<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username} ${item.position}</a></td>
 											<td>${item.deptName}</td>
 											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
+											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>											
 											<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
 										</tr>
 									</c:forEach>

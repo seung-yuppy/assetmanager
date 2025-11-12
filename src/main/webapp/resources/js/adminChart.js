@@ -87,11 +87,6 @@ async function renderCharts() {
                 scales: {
                     x: { // x축이 이제 개수 축이 됨
                         beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: '개수',
-                            color: getColor('--dark-color'),
-                        },
                         ticks: {
                             callback: (value) => `${value.toLocaleString()}개`,
                             stepSize: 10
@@ -161,11 +156,6 @@ async function renderCharts() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: '개수',
-                        color: getColor('--dark-color'),
-                    },
                     ticks: {
                         callback: function(value) {
                             return value.toLocaleString() + '개';
@@ -310,11 +300,6 @@ async function renderCharts() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: '개수',
-                        color: getColor('--dark-color'),
-                    },
                     ticks: {
                         callback: function(value) {
                             return value.toLocaleString() + '개';

@@ -113,4 +113,16 @@
 	WHERE upper(u.role) = upper(#{role})
 	</select>
 	
+	<select id="getUsersByRoleAndDept" resultType="UserInfoDTO">
+	SELECT u.id
+		   ,u.username
+		   ,u.profile_image
+		   ,d.dept_name
+		   ,u.role
+		   ,u.position
+	FROM "User" u 
+	JOIN Department d ON u.department_id = d.id
+	WHERE upper(u.role) = upper(#{role}) and u.department_id = #{deptId}
+	</select>
+	
 </mapper>

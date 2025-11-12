@@ -166,4 +166,11 @@ public class UserService {
 	public List<UserInfoDTO> getUsersByRole(String role) {
 		return dao.getUsersByRole(role);
 	}
+	
+	// 특정 role을 가진 user 리스트 얻기
+	public List<UserInfoDTO> getUsersByRoleAndDept(String role, int deptId) {
+		return dao.getUsersByRoleAndDept(role, deptId);
+	}
+	
+	
 }

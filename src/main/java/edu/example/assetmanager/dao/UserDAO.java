@@ -40,4 +40,5 @@ public interface UserDAO {
 	public int countRent(@Param("userId") int userId);
 	
 	public List<UserInfoDTO> getUsersByRole(String role);
+	public List<UserInfoDTO> getUsersByRoleAndDept(@Param("role") String role, @Param("deptId")int deptId);
 }

@@ -1,8 +1,8 @@
 // --- 초기화 ---
 document.addEventListener('DOMContentLoaded', () => {
+	// PDF 내보내기 버튼 이벤트 리스너
+	document.getElementById('export-pdf-btn').addEventListener('click', exportPDF);
 	getData();
-    // PDF 내보내기 버튼 이벤트 리스너
-    document.getElementById('export-pdf-btn').addEventListener('click', exportPDF);
 });
 
 let annualChart, categoryChart, deptChart; // 전역 변수로 차트 인스턴스 저장
@@ -61,23 +61,23 @@ function renderCharts() {
     
     //빈 데이터 처리
     const noDataPlugin = {
-    	    id: 'noData',
-    	    afterDraw: (chart) => {
-    	        const dataset = chart.data.datasets[0];
-    	        const hasData = dataset && dataset.data.some(value => value !== null && value !== 0);
+	    id: 'noData',
+	    afterDraw: (chart) => {
+	        const dataset = chart.data.datasets[0];
+	        const hasData = dataset && dataset.data.some(value => value !== null && value !== 0);
 
-    	        if (!hasData) {
-    	            const { ctx, chartArea } = chart;
-    	            ctx.save();
-    	            ctx.textAlign = 'center';
-    	            ctx.textBaseline = 'middle';
-    	            ctx.font = '16px Arial';
-    	            ctx.fillStyle = '#999';
-    	            ctx.fillText('데이터가 없습니다.', chartArea.left + chartArea.width / 2, chartArea.top + chartArea.height / 2);
-    	            ctx.restore();
-    	        }
-    	    }
-    	};
+	        if (!hasData) {
+	            const { ctx, chartArea } = chart;
+	            ctx.save();
+	            ctx.textAlign = 'center';
+	            ctx.textBaseline = 'middle';
+	            ctx.font = '16px Arial';
+	            ctx.fillStyle = '#999';
+	            ctx.fillText('데이터가 없습니다.', chartArea.left + chartArea.width / 2, chartArea.top + chartArea.height / 2);
+	            ctx.restore();
+	        }
+	    }
+	};
     //금액 단위 처리
     const unitPlugin = {
     	    id: 'unitLabel',

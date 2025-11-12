@@ -21,6 +21,7 @@ public class UserInfoDTO {
 	private String role;
 	private byte[] profileImage;
 	private String base64ProfileImage;
+	private int departmentId;
 	private String deptName;
 	private String deptAddress;
 	private String position;

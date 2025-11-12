@@ -55,7 +55,8 @@ public class OrderController {
 			return "redirect:/login";
 		//결재자 정보
 		List<UserInfoDTO> admin = userService.getUsersByRole("admin");
-		List<UserInfoDTO> manager = userService.getUsersByRole("manager");
+		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
+		System.out.println("부서 id : " + userInfo.getDepartmentId());
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);
 		

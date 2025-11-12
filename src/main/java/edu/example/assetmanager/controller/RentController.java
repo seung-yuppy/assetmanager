@@ -51,7 +51,7 @@ public class RentController {
 		}
 		UserInfoDTO userInfo= userService.getUser(userId);
 		List<UserInfoDTO> admin = rentService.findByAdminUser();
-		List<UserInfoDTO> manager = rentService.findByManagerUser();
+		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);
 		session.setAttribute("user", userInfo);

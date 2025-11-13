@@ -211,6 +211,15 @@ public class RentService {
 		return response;
 	}
 	
+	// managerDelayList 찾기
+	public PageResponseDTO<RentListDTO> managerDelayList(RentParamDTO rentParamDTO){ 
+		int totalCount = rentDAO.countAllForManagerDelay(rentParamDTO);
+		PageResponseDTO<RentListDTO> response = paging(rentParamDTO, totalCount);
+		List<RentListDTO> list = rentDAO.findManagerDelayList(rentParamDTO);
+		response.setContent(list);
+		return response;
+	}
+	
 	// rentId로 detail 결재 정보 불러오기 
 	public ApproverInfoDTO getRentApprovalDetail(Long id) {
 		// rentId 로 rentApprovalId 가져오기 

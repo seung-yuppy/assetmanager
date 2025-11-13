@@ -40,6 +40,7 @@ public interface RentDAO {
 	public int countAllForManager(RentParamDTO rentParamDTO);
 	public int countAssetReturn(RentParamDTO rentParamDTO);
 	public int countAllForAdminDelay(RentParamDTO rentParamDTO);
+	public int countAllForManagerDelay(RentParamDTO rentParamDTO);
 	
 	// RentList 찾기  
 	public List<RentListDTO> findRentList(RentParamDTO rentParamDTO);
@@ -95,8 +96,11 @@ public interface RentDAO {
 	// approvalId로 Rent 찾기 
 	public RentListDTO getRentByApprovalId(int approvalId);
 	
-	// delay 찾기
+	// adminDelayList 찾기
 	public List<RentListDTO> findAdminDelayList(RentParamDTO rentParamDTO);
+	
+	// managerDelayList 찾기
+	public List<RentListDTO> findManagerDelayList(RentParamDTO rentParamDTO);
 	
 	// assetId로 Rent 찾기
 	public RentShowDTO getRentInfoByAssetId(@Param("assetId") int assetId);

@@ -156,6 +156,36 @@
 	    <where>
 	    	A.manager_id = #{userId} 
 	    		AND R.is_valid = 1
+	    		AND R.is_delay = 0
+	    		AND A.status NOT IN ('pending')
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) like upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+    	ORDER BY R.rent_date DESC
+	    offset #{offset} rows
+    	fetch next #{size} rows only    
+	</select>
+	
+	<select id="findManagerDelayList" parameterType="RentParamDTO" resultType="RentListDTO">
+	    SELECT R.id
+	         , R.title
+	         , R.rent_date rentDate
+	         , A.status status
+	         , U.username username
+	         , D.dept_name deptName
+	         , R.user_id
+	    FROM Rent R
+	    JOIN Approval A ON A.id = R.approval_id
+	    LEFT JOIN "User" U ON U.id = R.user_id
+	    LEFT JOIN Department D ON D.id = U.department_id
+	    <where>
+	    	A.manager_id = #{userId} 
+	    		AND R.is_valid = 1
+	    		AND R.is_delay = 1
 	    		AND A.status NOT IN ('pending')
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (U.username like '%' || #{keyword} || '%')
@@ -229,6 +259,25 @@
 	    <where>
 		    A.manager_id = #{userId} 
 		    	AND R.is_valid = 1
+		    	AND R.is_delay = 0
+	       	<if test="keyword != null and keyword != ''">
+	    		AND (U.username like '%' || #{keyword} || '%')
+	    	</if>
+	       	<if test="status != null and status != ''">
+	    		AND (upper(A.status) LIKE upper('%' || #{status} || '%'))
+	    	</if>
+	    </where>
+	</select>
+	
+	<select id="countAllForManagerDelay" parameterType="RentParamDTO" resultType="int">
+		SELECT count(*) 
+		FROM Rent R
+		LEFT JOIN Approval A ON R.approval_id = A.id
+		JOIN "User" U ON R.user_id = U.id
+	    <where>
+		    A.manager_id = #{userId} 
+		    	AND R.is_valid = 1
+		    	AND R.is_delay = 1
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (U.username like '%' || #{keyword} || '%')
 	    	</if>

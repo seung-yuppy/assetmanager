@@ -80,6 +80,26 @@ public class AdminRentController {
 		return "/admin/adminRentDetail";
 	}
 	
+	@GetMapping("/delay/detail/{id}")
+	public String adminDelayDetail(@PathVariable Long id, Model model, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
+        RentShowDTO rentDTO = rentService.getRentDetail(id);
+        List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
+        ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
+
+        model.addAttribute("empInfo", approverInfoDTO); 
+        model.addAttribute("rent", rentDTO);           
+        model.addAttribute("item", rentContentDTO);   
+        model.addAttribute("approval", approvalDTO);   
+		
+		return "/admin/adminRentDetail";
+	}
+	
 	@GetMapping("rent/approve")
 	public String approve(int id) {
 		return "redirect:/admin/adminRentDetail";

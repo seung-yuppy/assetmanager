@@ -61,5 +61,37 @@ public class ManagerRentController {
 		
 		return "/admin/adminRentDetail";
 	}
+	
+	@GetMapping("/delay/list")
+	public String managerDelayList(HttpSession session, RentParamDTO rentParamDTO, Model model) { 
+		Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) { 
+            return "redirect:/login";    
+        }
+        rentParamDTO.setUserId(userId);
+        PageResponseDTO<RentListDTO> managerList = rentService.managerDelayList(rentParamDTO);
+        model.addAttribute("response", managerList);
+        return "admin/adminDelayList";
+    }
+	
+	@GetMapping("/delay/detail/{id}")
+	public String adminDelayDetail(@PathVariable Long id, Model model, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        ApproverInfoDTO approverInfoDTO = rentService.getRentApprovalDetail(id);
+        RentShowDTO rentDTO = rentService.getRentDetail(id);
+        List<RentContentDTO> rentContentDTO = rentService.getRentContentDetail(id);
+        ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
+
+        model.addAttribute("empInfo", approverInfoDTO); 
+        model.addAttribute("rent", rentDTO);           
+        model.addAttribute("item", rentContentDTO);   
+        model.addAttribute("approval", approvalDTO);   
+		
+		return "/admin/adminRentDetail";
+	}
 
 }

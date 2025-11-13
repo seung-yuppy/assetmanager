@@ -37,13 +37,17 @@
 				                    </c:if>				
 								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
 								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
-								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
+								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>반려됨</option>
 				                </select>
 							</div>
-							<div class="search-box">
-				                <input type="text" id="assetSearch" placeholder="요청자" class="search-field">
-				                <button onclick="setBoardParam('keyword', document.getElementById('assetSearch').value)"><img src="/assetmanager/resources/image/icon_search.svg"></button>
-				            </div>
+							<form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">
+								<div class="search-box">
+									<input type="text" name="keyword" id="assetSearch" placeholder="요청자" class="search-field" value="${param.keyword}">
+									<button>
+										<img src="/assetmanager/resources/image/icon_search.svg" alt="검색">
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 					<table class="data-table">
@@ -64,7 +68,7 @@
 						    </c:if>
 							<c:forEach var="item" items="${response.content}">
 								<tr data-id="${item.id}">
-									<td><a href="/assetmanager/admin/rent/detail/${item.id}">${item.title}</a></td>
+									<td><a href="detail/${item.id}">${item.title}</a></td>
 									<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
 									<td>${item.deptName}</td>									
 									<td><fmt:formatDate value="${item.rentDate}" pattern="yyyy-MM-dd" /></td>

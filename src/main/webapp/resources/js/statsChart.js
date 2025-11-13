@@ -1,5 +1,23 @@
 // --- 초기화 ---
 document.addEventListener('DOMContentLoaded', () => {
+	// 코멘트 추가 버튼 이벤트 추가
+	document.querySelectorAll('.report-comment').forEach(btn => {
+		btn.addEventListener('click', function(e) {
+			const commentText = e.target.closest('.comment-area')
+				.querySelector('.report-comment-text');
+			const chartDiv = document.querySelector('#annualLineChart').closest('div'); // 차트 div 가져오기
+			// 현재 보이는 상태인지 확인
+			const isVisible = getComputedStyle(commentText).display !== 'none';
+			// 토글
+			commentText.style.display = isVisible ? 'none' : 'block';
+			
+			// 차트 부모 div의 실제 너비를 textarea에 적용
+			if (!isVisible) {
+				const chartWidth = chartDiv.offsetWidth;
+				commentText.style.width = chartWidth + 'px';
+			}
+		});
+	});
 	// PDF 내보내기 버튼 이벤트 리스너
 	document.getElementById('export-pdf-btn').addEventListener('click', exportPDF);
 	getData();
@@ -309,6 +327,10 @@ function renderTables() {
     
 }
 
+function hideBeforeExport(){
+	
+}
+
 // --- PDF 내보내기 ---
 async function exportPDF() {
     const { jsPDF } = window.jspdf;
@@ -316,6 +338,11 @@ async function exportPDF() {
     const loader = document.getElementById('loader');
     
     loader.style.display = 'flex'; // 로더 표시
+    
+    // 출력 안할 요소 제외
+    document.querySelectorAll('.no-pdf').forEach(el => {
+		el.style.display = 'none';
+	})
 
     try {
         // html2canvas로 #report-content 요소를 캡처
@@ -360,5 +387,8 @@ async function exportPDF() {
         alert("PDF 생성 중 오류가 발생했습니다.");
     } finally {
         loader.style.display = 'none'; // 로더 숨기기
+        document.querySelectorAll('.no-pdf').forEach(el => {
+    		el.style.display = 'inline-block';
+    	})
     }
 }

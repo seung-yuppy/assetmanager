@@ -78,23 +78,9 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* 인쇄/PDF 생성 시 불필요한 요소 숨기기 */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #report-content, #report-content * {
-                visibility: visible;
-            }
-            #report-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-            }
-            .no-print {
-                display: none;
-            }
+
+        .report-comment-text{
+        	display: none;
         }
     </style>
 </head>
@@ -167,6 +153,10 @@
 		                        </table>
 		                    </div>
 		                </div>
+		                <div class="comment-area">
+	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+		                </div>
 		            </section>
 		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">카테고리별 구매 비율</h3>
@@ -191,6 +181,10 @@
 		                        </table>
 		                    </div>
 		                </div>
+		                <div class="comment-area">
+	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+		                </div>
 		            </section>
 		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">부서별 구매 금액</h3>
@@ -214,6 +208,10 @@
 		                            </tbody>
 		                        </table>
 		                    </div>
+		                </div>
+		                <div class="comment-area">
+	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		        </main>

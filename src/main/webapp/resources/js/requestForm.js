@@ -86,7 +86,6 @@ function showInputForm(method) {
 }
 
 // 제품 추가/제거 관련
-
 function removeProduct(btn){
 	btn.closest(".form-row").remove();
 	setRowIndex();

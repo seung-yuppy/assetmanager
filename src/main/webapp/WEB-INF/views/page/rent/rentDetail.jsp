@@ -39,7 +39,7 @@
 
 					<h2 class="form-section-title">요청 정보</h2>
 					<div id="formInputArea" class="inputArea">
-						<div class="form-date">
+						<div class="form-date"> 
 							<div class="form-application-date">
 								<label for="application-date">반출 요청일</label> 
 								<input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>

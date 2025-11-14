@@ -63,7 +63,7 @@ public class AssetController {
 		}
 		UserInfoDTO userInfo= userService.getUser(userId);
 		List<UserInfoDTO> admin = rentService.findByAdminUser();
-		List<UserInfoDTO> manager = rentService.findByManagerUser();
+		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);	
 		model.addAttribute("asset", assetDTO);

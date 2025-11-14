@@ -1,25 +1,14 @@
 // --- 초기화 ---
 document.addEventListener('DOMContentLoaded', () => {
-	//인쇄
-	document.getElementById("print-pdf-btn").addEventListener("click", function() {
-	    window.print();
-	});
 	// 코멘트 추가 버튼 이벤트 추가
 	document.querySelectorAll('.report-comment').forEach(btn => {
 		btn.addEventListener('click', function(e) {
-			const commentText = e.target.closest('.comment-area')
-				.querySelector('.report-comment-text');
+			const commentText = e.target.closest('.comment-area').querySelector('.report-comment-text');
 			const chartDiv = document.querySelector('#annualLineChart').closest('div'); // 차트 div 가져오기
 			// 현재 보이는 상태인지 확인
 			const isVisible = getComputedStyle(commentText).display !== 'none';
 			// 토글
 			commentText.style.display = isVisible ? 'none' : 'block';
-			
-			// 차트 부모 div의 실제 너비를 textarea에 적용
-			if (!isVisible) {
-				const chartWidth = chartDiv.offsetWidth;
-				commentText.style.width = chartWidth + 'px';
-			}
 		});
 	});
 	// PDF 내보내기 버튼 이벤트 리스너
@@ -343,10 +332,24 @@ async function exportPDF() {
     
     loader.style.display = 'flex'; // 로더 표시
     
+    //pdf화를 위한 추가설명 textarea의 스타일 제거
+    const textAreas = document.querySelectorAll('.report-comment-text');
+    textAreas.forEach(textarea =>{
+    	textarea.classList.remove('border','focus:ring-2','shadow-sm');
+    });
+    
     // 출력 안할 요소 제외
-    document.querySelectorAll('.no-pdf').forEach(el => {
+    const pageELs = document.querySelectorAll('.no-pdf')
+    pageELs.forEach(el => {
 		el.style.display = 'none';
 	})
+	
+	// grid div 선택
+	const gridDivs = document.querySelectorAll('section > div.grid');
+    gridDivs.forEach(gridDiv => {
+    	gridDiv.classList.remove('lg:grid-cols-5');
+    	gridDiv.classList.add('lg:grid-cols-1');
+    });
 
     try {
         // html2canvas로 #report-content 요소를 캡처
@@ -397,8 +400,18 @@ async function exportPDF() {
     } finally {
         loader.style.display = 'none'; // 로더 숨기기
         // pdf 생성을 위해 숨겼던 요소들 복구
-        document.querySelectorAll('.no-pdf').forEach(el => {
+        pageELs.forEach(el => {
     		el.style.display = 'inline-block';
     	})
+    	
+    	textAreas.forEach(textarea =>{
+    		textarea.classList.add('border','focus:ring-2','shadow-sm');
+    	});
+    	
+    	gridDivs.forEach(gridDiv => {
+	    	gridDiv.classList.remove('lg:grid-cols-1');
+	    	gridDiv.classList.add('lg:grid-cols-5');
+	    });
+    	
     }
 }

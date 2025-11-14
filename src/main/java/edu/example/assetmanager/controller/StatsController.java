@@ -1,8 +1,13 @@
 package edu.example.assetmanager.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -49,6 +54,4 @@ public class StatsController {
 		int targetYear = (year != null) ? Integer.parseInt(year) : LocalDateTime.now().getYear();
 		return statsService.getAmountGroupByDept(targetYear);
 	}
-	
-	
 }

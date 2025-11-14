@@ -15,17 +15,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- html2canvas CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest" data-lucide-package="lucide"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+    
     <style>
  	     /* 공통 섹션 스타일 */
 		.dashboard-container h1 {
 			font-size: 30px;
 		    font-weight: 700; 
 		    margin: 0 0 5px 0;
-		}
-
-		.dashboard-container span {
-		    color: var(--gray-color);
 		}
 		
 		section{
@@ -78,6 +77,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        textarea{
+ 			resize: none;
+		}
 
         .report-comment-text{
         	display: none;
@@ -120,7 +123,12 @@
 		    .grid {
 		        display: block; /* grid 대신 block으로 변경 */
 		    }
+		    
+		    .page-description {
+    			color: var(--gray-color);
+			}
     	}
+
             
     </style>
 </head>
@@ -138,14 +146,13 @@
 		    <div class="dashboard-container">
 		        <!-- 보고서 콘텐츠 영역 (이 부분이 PDF로 변환됨) -->
 		        <div class="flex justify-between">
-			        <div>
+			        <div class="page-description">
 				    	<h1>구매 리포트</h1>
-			            <span>구매 통계와 보고서를 확인합니다.</span>
+			            <span >구매 통계를 확인하고 보고서를 생성합니다.</span>
 			        </div>
 			        <div class="flex flex-col justify-end items-center">
 			            <div class="flex items-center space-x-2 mt-4 sm:mt-0">
 			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 생성</button>
-			                <button id="print-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 인쇄</button>
 			            </div>
 			        </div>
 		        </div>
@@ -163,25 +170,23 @@
 						    <h1 class="text-8xl text-gray-900 tracking-tight">구매 리포트</h1>
 						</div>
 					    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-800 leading-relaxed">
-					
-					        <div class="bg-white p-3 rounded-md border">
-					            <strong class="block text-gray-600 text-base mb-1">통계 기간</strong>
-					            <span class="font-medium text-base">2025.07.01 - 2025.09.30</span>
-					        </div>
-					
-					        <div class="bg-white p-3 rounded-md border">
-					            <strong class="block text-gray-600 text-base mb-1">보고 기준</strong>
-					            <span class="font-medium text-base">구매 검토 데이터 기준</span>
-					        </div>
-					
-					        <div class="bg-white p-3 rounded-md border">
-					            <strong class="block text-gray-600 text-base mb-1">작성일</strong>
-					            <span class="font-medium text-base">2025.10.01</span>
-					        </div>
-					
 					        <div class="bg-white p-3 rounded-md border">
 					            <strong class="block text-gray-600 text-base mb-1">작성자</strong>
-					            <span class="font-medium text-base">시스템 자동 생성</span>
+					            <span class="font-medium text-base">${sessionScope.userInfo.username}</span>
+					        </div>
+					        <div class="bg-white p-3 rounded-md border">
+					        	<c:set var="now" value="<%= new java.util.Date() %>" />
+					            <strong class="block text-gray-600 text-base mb-1">작성일</strong>
+					            <span class="font-medium text-base"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></span>
+					        </div>
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">보고 대상 년도</strong>
+					            <fmt:formatDate value="${now}" pattern="yyyy" var="currentYear"/>
+					            <span class="font-medium text-base">${empty param.year ? currentYear: param.year}</span>
+					        </div>
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">보고 목적</strong>
+					            <span class="font-medium text-base">구매 통계 분석으로 예산 수립 지원</span>
 					        </div>
 					    </div>
 					</div>
@@ -189,7 +194,7 @@
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">연간 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
-		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner">
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center">
 		                        <canvas id="annualLineChart"></canvas>
 		                    </div>
 		                    <!-- 표 -->
@@ -209,9 +214,12 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-pdf no-print mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
-									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-pdf no-print flex items-center space-x-2 transition duration-150 p-2 rounded-lg -ml-2">
+	                    		<i class="bi bi-chevron-down text-blue-600"></i>
+	                    		<span class="ms-1 text-blue-600 font-medium hover:text-blue-700">설명 추가</span>
+                    		</button>
+	                    	<textarea class="report-comment-text text-base w-full border border-gray-300 rounded-md p-3 bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		            <section>
@@ -238,16 +246,19 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-pdf no-print mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
-									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-pdf no-print flex items-center space-x-2 transition duration-150 p-2 rounded-lg -ml-2">
+	                    		<i class="bi bi-chevron-down text-blue-600"></i>
+	                    		<span class="ms-1 text-blue-600 font-medium hover:text-blue-700">설명 추가</span>
+                    		</button>
+	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-base bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">부서별 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
-		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner">
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center">
 		                        <canvas id="deptBarChart"></canvas>
 		                    </div>
 		                    <!-- 표 -->
@@ -267,9 +278,12 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-print no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text w-full border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
-									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-pdf no-print flex items-center space-x-2 transition duration-150 p-2 rounded-lg -ml-2">
+	                    		<i class="bi bi-chevron-down text-blue-600"></i>
+	                    		<span class="ms-1 text-blue-600 font-medium hover:text-blue-700">설명 추가</span>
+                    		</button>
+	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-base bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		        </main>

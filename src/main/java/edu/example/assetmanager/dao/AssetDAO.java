@@ -71,7 +71,7 @@ public interface AssetDAO {
 	// 사용자 내 부서 자산 목록
 	public List<AssetHistoryDTO> listMyDept(AssetUsingParamDTO dto);
 	
-	// user_id, sefial_number, location 자산테이블 업데이트
+	// user_id, serial_number, location 자산테이블 업데이트
 	public boolean updateAsset(@Param("userId") int userId, @Param("serialNumber") String serialNumber, @Param("location") String location, @Param("assetId") int assetId);
 	
 	// Asset_History 테이블 insert 하기
@@ -89,4 +89,6 @@ public interface AssetDAO {
 	public AssetHistoryDTO isDupReturnBtnClick(@Param("userId") int userId, @Param("assetId") int assetId);
 	
 	public boolean isReturnedByReturnId(int id);
+	
+	public boolean requestAsset(int assetId);
 }

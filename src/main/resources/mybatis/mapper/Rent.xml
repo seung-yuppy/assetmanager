@@ -35,6 +35,7 @@
         </if>
         	AND is_valid = 1
         	AND user_id IS NULL
+        	AND is_request = 0
         </where>
         GROUP BY asset_name, spec
 	</select>
@@ -463,6 +464,7 @@
 		UPDATE Asset
 		SET user_id = null
 			,location = '서울특별시 구로구 디지털로26길 123, 1605호 (구로동, G+코오롱디지털타워)'
+			,is_request = 0
 		WHERE id = #{assetId}	
 	</update>
 

@@ -121,7 +121,7 @@ async function renderCharts() {
         datasets: [{
             label: '보유 자산',
             data: deptCount,
-            backgroundColor: '#1C4587',
+            backgroundColor: '#3B82F6',
             borderColor: getColor('--primary-color'),
             borderRadius: 5,
             barThickness: 50
@@ -275,7 +275,7 @@ async function renderCharts() {
             datasets: [{
                 label: '건수',
                 data: approvalCounts,
-                backgroundColor: '#1C4587',
+                backgroundColor: '#80CBC4',
                 borderColor: getColor('--primary-color'),
                 borderRadius: 5,
                 barThickness: 50

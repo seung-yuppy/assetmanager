@@ -241,10 +241,10 @@
 							</div>
 							<div id="data-display-area"></div>
 						</div>
-
+-->
 						<div class="form-actions">
 							<button type="submit" class="primary-action">제출</button>
-						</div> -->
+						</div> 
                         <div id="excelUploadArea" class="inputArea">
                             <div class="template-info-box">
                                 <span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>

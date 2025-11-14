@@ -20,11 +20,11 @@
 				</div>
 				<!-- 1. 총 통계 section -->
 				<div class="metric-grid">
-	                <div class="metric-card border-yellow">
+	                <div class="metric-card border-blue">
 	                	<a href="/assetmanager/admin/asset/list">
 		                	<div class="card-header">
 		                		<p class="card-title">총 자산 수</p>
-		                		<div class="card-logo-box back-yellow">
+		                		<div class="card-logo-box back-blue">
 		                			<img class="card-logo" src="/assetmanager/resources/image/icon_total.svg">
 		                		</div>
 		                	</div>

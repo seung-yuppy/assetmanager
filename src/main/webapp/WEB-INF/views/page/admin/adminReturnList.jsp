@@ -93,22 +93,26 @@
 						<nav class="pagination-container">
 							<ul class="pagination-list">
 								<c:if test="${response.hasPrev}">
-									<li class="page-item prev"><a class="page-link" onclick="setBoardParam('page', ${response.start - response.blockSize})" style="cursor: pointer;"> Previous </a></li>
+									<li class="page-item prev">
+									<a class="page-link" onclick="setBoardParam('page', ${response.start - response.blockSize})" style="cursor: pointer;"> ← </a></li>
 								</c:if>
 
 								<c:forEach var="num" begin="${response.start}" end="${response.end}">
 									<c:choose>
 										<c:when test="${num == response.page}">
-											<li class="page-item active"><a class="page-link" onclick="setBoardParam('page', ${num})" style="cursor: pointer;"> ${num} </a></li>
+											<li class="page-item active">
+											<a class="page-link" onclick="setBoardParam('page', ${num})" style="cursor: pointer;"> ${num} </a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" onclick="setBoardParam('page', ${num})" style="cursor: pointer;"> ${num} </a></li>
+											<li class="page-item">
+											<a class="page-link" onclick="setBoardParam('page', ${num})" style="cursor: pointer;"> ${num} </a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 
 								<c:if test="${response.hasNext}">
-									<li class="page-item next"><a class="page-link" onclick="setBoardParam('page', ${response.end + 1})" style="cursor: pointer;"> Next </a></li>
+									<li class="page-item next">
+									<a class="page-link" onclick="setBoardParam('page', ${response.end + 1})" style="cursor: pointer;"> → </a></li>
 								</c:if>
 							</ul>
 						</nav>

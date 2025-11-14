@@ -65,14 +65,14 @@
 	        R.title,
 	        R.rent_date AS rentDate,
 	        R.return_date AS returnDate,
-	        A.status status
+	        A.status status,
+	        R.is_valid
 	    FROM 
 	        Rent R
 	    JOIN
 	    	Approval A ON R.approval_id = A.id
 	    <where>
-	    	R.user_id = #{userId} 
-	    		AND R.is_valid = 1
+	    	R.user_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (R.title like '%' || #{keyword} || '%')
 	    	</if>
@@ -463,7 +463,7 @@
 	<update id="updateAsset">
 		UPDATE Asset
 		SET user_id = null
-			,location = '서울특별시 구로구 디지털로26길 123, 1605호 (구로동, G+코오롱디지털타워)'
+			,location = '서울특별시 구로구 디지털로26길 123, 1605호 코오롱디지털타워'
 			,is_request = 0
 		WHERE id = #{assetId}	
 	</update>

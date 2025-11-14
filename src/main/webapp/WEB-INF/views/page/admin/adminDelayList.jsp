@@ -87,6 +87,16 @@
 											<span class="status-badge status-approved">승인됨</span>
 										</td>
 									</c:if>
+									<c:if test="${userInfo.role == 'manager' && item.status == 'FIRST_REJECT'}">
+										<td>
+											<span class="status-badge status-rejected">반려됨</span>
+										</td>									
+									</c:if>
+									<c:if test="${userInfo.role == 'manager' && item.status == 'FINAL_REJECT'}">
+										<td>
+											<span class="status-badge status-rejected">반려됨</span>
+										</td>									
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -82,6 +82,16 @@
 											<span class="status-badge status-waited">대기중</span>
 										</td>
 									</c:if>
+									<c:if test="${userInfo.role == 'manager' && item.status == 'FIRST_REJECT'}">
+										<td>
+											<span class="status-badge status-rejected">거절됨</span>
+										</td>									
+									</c:if>
+									<c:if test="${userInfo.role == 'manager' && item.status == 'FINAL_REJECT'}">
+										<td>
+											<span class="status-badge status-rejected">거절됨</span>
+										</td>									
+									</c:if>
 									<c:if test="${userInfo.role == 'manager' && item.status == 'FINAL_APPROVAL'}">
 										<td>
 											<span class="status-badge status-approved">승인됨</span>

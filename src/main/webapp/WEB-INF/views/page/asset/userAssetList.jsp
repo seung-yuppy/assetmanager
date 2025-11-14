@@ -86,8 +86,8 @@
 											</c:if>				
 											<td>
 					                        	<div class="table-button-container">
-					                        		<c:if test="${asset.activeBtn == false}">
-						                        		<c:if test="${asset.returnDate != null}">
+					                        		<c:if test="${asset.activeBtn == false && asset.delaying != 2}">
+						                        		<c:if test="${asset.returnDate != null && asset.delaying != 1}">
 						                       				<button class="delay-button" onclick="location.href='/assetmanager/delay/form?id=${asset.assetId}'">연장</button>
 						                       			</c:if>
 						                       			<button class="return-button">반납</button>					                        		
@@ -96,6 +96,11 @@
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.activeBtn == true}">
 						                        		반납중⌛          		
+					                        		</c:if>
+					                       		</div>
+					                       		<div class="table-button-container">
+					                        		<c:if test="${asset.delaying == 2}">
+						                        		연장중⌛          		
 					                        		</c:if>
 					                       		</div>
 					                        </td>

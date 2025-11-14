@@ -54,14 +54,14 @@ async function renderCharts() {
                 label: '보유 자산',
                 data: categoryCounts,
                 backgroundColor: [
-                	'#6366f1',
-                    '#10b981', 
-                    '#FBBF24',
-                    '#a78bfa',                  
-                    '#EF4444',    
-                    '#475569',  
-                    '#14B8A6',                  
-                    '#84CC16'                   
+                	'#9FA8DA',
+                	'#A5D6A7',
+                	'#FFE0B2',
+                	'#B39DDB',
+                	'#FFAB91',
+                	'#778DA9',
+                	'#80CBC4',
+                	'#FFF59D'                
                 ],
                 borderColor: '#3b82f6',
                 borderRadius: 5,
@@ -121,7 +121,7 @@ async function renderCharts() {
         datasets: [{
             label: '보유 자산',
             data: deptCount,
-            backgroundColor: '#3B82F6',
+            backgroundColor: '#A5D6A7',
             borderColor: getColor('--primary-color'),
             borderRadius: 5,
             barThickness: 50
@@ -196,9 +196,9 @@ async function renderCharts() {
             datasets: [{
                 data: assetPercentages,
                 backgroundColor: [
-                	'#10b981',  // '#10b981'
-                	'#FBBF24', // '#FBBF24'
-                	'#EF4444'     // '#EF4444'
+                	'#A5D6A7',
+                	'#3fa1d6',
+                	'#FFAB91'
                 ],
                 hoverOffset: 3,
             }]
@@ -275,7 +275,7 @@ async function renderCharts() {
             datasets: [{
                 label: '건수',
                 data: approvalCounts,
-                backgroundColor: '#80CBC4',
+                backgroundColor: '#A5D6A7',
                 borderColor: getColor('--primary-color'),
                 borderRadius: 5,
                 barThickness: 50

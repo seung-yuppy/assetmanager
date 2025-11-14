@@ -22,7 +22,7 @@
     --slate-color: #475569;
     --blue-color-dark: #1e3a8a;
     --blue-dark: #0056b3;
-	--gradient-color: linear-gradient(to bottom, #3d6bb0 0%, #1c4587 40%, #0d1e3d 100%);
+	--gradient-color: linear-gradient(to bottom, #1c4587 0%, #0d1e3d 100%);
 	
 	--card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 	--border-radius: 12px;

@@ -23,6 +23,7 @@ public class RentListDTO {
     private String deptName;
     private int userId;
     private int isDelay;
+    private int isValid;
     
     public void setStatus(String status) {
 		this.status = ApprovalStatus.from(status);

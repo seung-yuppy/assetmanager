@@ -79,8 +79,40 @@ public class AssetService {
 				}
 			} else {
 				asset.setActiveBtn(false);
-			}	
+			}
 		}
+		
+		for(AssetHistoryDTO asset2 : list) {
+			int count1 = dao.isDelayBtnClick(userId, asset2.getAssetId()); // 연장 신청했는지 
+			int count2 = dao.isDelayComplete(userId, asset2.getAssetId()); // 연장 완료했는지 
+			int count3 = dao.isDelayReject(userId, asset2.getAssetId());   // 연장 중간에 반려했는지
+			
+			if (count1 == 0) {
+				if (count2 == 0) {
+					if (count3 == 0) {
+						// 연장 신청도 안하고 반려도 안하고 완료도 안한 상태(연장&반납 가능)
+						asset2.setDelaying(0);						
+					} else if (count3 == 1) {
+						// 연장 신청은 하고 완료는 안되었지만 중간에 반려된 상태(반납만 가능)
+						asset2.setDelaying(1);
+					}
+				} else if (count2 == 1) {
+					// 연장 신청은 0개지만 연장 완료는 한 상태(반납만 가능)
+					asset2.setDelaying(1);
+				}
+			} else if (count1 == 1) {
+				if (count2 == 0) {
+					if (count3 == 0) {
+						// 연장 신청은 하고 연장 완료는 안하고 반려도 안된 상태(연장중)
+						asset2.setDelaying(2);						
+					} else if (count3 == 1) {
+						// 연장 신청은 하고 완료는 안했지만 중간에 반려한 상태(반납만 가능)
+						asset2.setDelaying(1);
+					}
+				}
+			}
+		}
+		
 		response.setContent(list);
 		return response;
 	}

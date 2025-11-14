@@ -91,4 +91,13 @@ public interface AssetDAO {
 	public boolean isReturnedByReturnId(int id);
 	
 	public boolean requestAsset(int assetId);
+	
+	// 연장버튼 눌렀는지 체크하기 
+	public int isDelayBtnClick(@Param("userId") int userId, @Param("assetId") int assetId);
+	
+	// 연장버튼 완료후 연장이 완료되었는지
+	public int isDelayComplete(@Param("userId") int userId, @Param("assetId") int assetId);
+	
+	// 연장 중간에 반려한거 찾기
+	public int isDelayReject(@Param("userId") int userId, @Param("assetId") int assetId);
 }

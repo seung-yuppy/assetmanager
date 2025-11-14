@@ -214,6 +214,10 @@
 		        Rent_Content rc
 		    JOIN
 		        Rent r ON rc.rent_id = r.id
+		    JOIN
+		        Approval ap ON r.approval_id = ap.id
+		    WHERE
+		        ap.status = 'FINAL_APPROVAL'
 		)
 		SELECT
 			COUNT(*)
@@ -269,6 +273,10 @@
 		        Rent_Content rc
 		    JOIN
 		        Rent r ON rc.rent_id = r.id
+		    JOIN
+		        Approval ap ON r.approval_id = ap.id
+		    WHERE
+		        ap.status = 'FINAL_APPROVAL'
 		)
 		SELECT
 		    a.id AS asset_id,
@@ -486,4 +494,41 @@
     		join asset a on r.asset_id = a.id 
     	where r.id = #{id} and a.user_id is null
     </select>
+    
+    <select id="isDelayBtnClick">
+		SELECT COUNT(*)
+		FROM Asset a
+		INNER JOIN Rent_Content rc ON rc.asset_id = a.id
+		INNER JOIN Rent r ON rc.rent_id = r.id
+		INNER JOIN Approval ap ON r.approval_id = ap.id
+		WHERE r.is_delay = 1
+		AND r.user_id = #{userId}
+		AND rc.asset_id = #{assetId}
+		AND ap.status IN ('pending', 'FIRST_APPROVAL')
+    </select>
+    
+    <select id="isDelayComplete">
+ 		SELECT COUNT(*)
+		FROM Asset a
+		INNER JOIN Rent_Content rc ON rc.asset_id = a.id
+		INNER JOIN Rent r ON rc.rent_id = r.id
+		INNER JOIN Approval ap ON r.approval_id = ap.id
+		WHERE r.is_delay = 1
+		AND r.user_id = #{userId}
+		AND rc.asset_id = #{assetId}
+		AND ap.status = 'FINAL_APPROVAL'   
+    </select>
+    
+    <select id="isDelayReject">
+		SELECT COUNT(*)
+		FROM Asset a
+		INNER JOIN Rent_Content rc ON rc.asset_id = a.id
+		INNER JOIN Rent r ON rc.rent_id = r.id
+		INNER JOIN Approval ap ON r.approval_id = ap.id
+		WHERE r.is_delay = 1
+		AND r.user_id = #{userId}
+		AND rc.asset_id = #{assetId}
+		AND ap.status IN ('FIRST_REJECT', 'FINAL_REJECT')    
+    </select>
+    
 </mapper>

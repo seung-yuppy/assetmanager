@@ -71,7 +71,15 @@
 											<td>${rent.title}</td>
 											<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd" /></td>
 											<td><fmt:formatDate value="${rent.returnDate}" pattern="yyyy-MM-dd" /></td>
-											<td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
+											<td>
+												<c:if test="${rent.isValid == 1}">
+													<span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span>												
+												</c:if>
+												<c:if test="${rent.isValid == 0}">
+													<span class="status-badge status-rejected">취소됨</span>
+												</c:if>
+												
+											</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

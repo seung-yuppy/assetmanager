@@ -54,11 +54,8 @@ document.addEventListener("DOMContentLoaded", function() {
 								confirmButtonColor: "#a5dc86",
 								confirmButtonText: "확인",
 							}).then(() =>{
-								if(loginUser.role === 'admin'){
-									location.href = "/assetmanager/admin/rent/list";
-								}else if (loginUser.role === 'manager'){
-									location.href = "/assetmanager/manager/rent/list";
-								}
+								history.go(-1);
+								location.reload();
 							});
 						} else {
 							Swal.fire({
@@ -133,11 +130,8 @@ const rejectBtn = document.querySelector(".reject-btn");
 								confirmButtonColor: "#a5dc86",
 								confirmButtonText: "확인",
 							}).then(() =>{
-								if(loginUser.role === 'admin'){
-									location.href = "/assetmanager/admin/rent/list";
-								}else if (loginUser.role === 'manager'){
-									location.href = "/assetmanager/manager/rent/list";
-								}
+								history.go(-1);
+								location.reload();
 							});
 						} else {
 							Swal.fire({

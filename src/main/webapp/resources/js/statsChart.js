@@ -1,5 +1,9 @@
 // --- 초기화 ---
 document.addEventListener('DOMContentLoaded', () => {
+	//인쇄
+	document.getElementById("print-pdf-btn").addEventListener("click", function() {
+	    window.print();
+	});
 	// 코멘트 추가 버튼 이벤트 추가
 	document.querySelectorAll('.report-comment').forEach(btn => {
 		btn.addEventListener('click', function(e) {
@@ -327,15 +331,15 @@ function renderTables() {
     
 }
 
-function hideBeforeExport(){
-	
-}
-
-// --- PDF 내보내기 ---
+//--- PDF 내보내기 ---
 async function exportPDF() {
     const { jsPDF } = window.jspdf;
     const reportContent = document.getElementById('report-content');
     const loader = document.getElementById('loader');
+    
+    // 마진 설정 (단위: mm)
+    const MARGIN = 20;
+    const TOTAL_MARGIN_WIDTH = MARGIN * 2; // 좌우 마진 합계 (20mm + 20mm = 40mm)
     
     loader.style.display = 'flex'; // 로더 표시
     
@@ -355,28 +359,33 @@ async function exportPDF() {
         const imgData = canvas.toDataURL('image/png');
         
         const pdf = new jsPDF('p', 'mm', 'a4'); // A4 용지 (세로)
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const pdfWidth = pdf.internal.pageSize.getWidth(); // A4 너비 (약 210mm)
+        const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 높이 (약 297mm)
+        
+        // **마진이 적용된 이미지 출력 너비 계산**
+        const contentWidth = pdfWidth - TOTAL_MARGIN_WIDTH; // 210mm - 40mm = 170mm
         
         const imgProps = pdf.getImageProperties(imgData);
         const imgWidth = imgProps.width;
         const imgHeight = imgProps.height;
         
-        // 이미지 비율을 유지하면서 A4 너비에 맞춤
+        // 이미지 비율을 유지하면서 'contentWidth'에 맞게 높이 계산
         const ratio = imgHeight / imgWidth;
-        const reportHeight = pdfWidth * ratio;
-
+        const reportHeight = contentWidth * ratio; // 마진이 적용된 너비에 대한 이미지 높이
+        
         // 이미지가 A4 높이보다 클 경우 여러 페이지로 나누기
         let heightLeft = reportHeight;
-        let position = 0;
+        let position = 0; // 이미지의 Y 위치 (페이지를 넘길 때 조정됨)
 
-        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, reportHeight);
+        // **첫 페이지 이미지 추가: x 시작 위치는 MARGIN(20mm)으로, 너비는 contentWidth로 설정**
+        pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
         heightLeft -= pdfHeight;
 
         while (heightLeft > 0) {
-            position = heightLeft - reportHeight;
+            position = heightLeft - reportHeight; // 다음 페이지에서 시작할 Y 위치
             pdf.addPage();
-            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, reportHeight);
+            // **추가 페이지 이미지 추가: x 시작 위치는 MARGIN(20mm)으로 유지**
+            pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
             heightLeft -= pdfHeight;
         }
 
@@ -387,6 +396,7 @@ async function exportPDF() {
         alert("PDF 생성 중 오류가 발생했습니다.");
     } finally {
         loader.style.display = 'none'; // 로더 숨기기
+        // pdf 생성을 위해 숨겼던 요소들 복구
         document.querySelectorAll('.no-pdf').forEach(el => {
     		el.style.display = 'inline-block';
     	})

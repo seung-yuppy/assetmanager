@@ -82,6 +82,46 @@
         .report-comment-text{
         	display: none;
         }
+        
+		/*브라우저 인쇄 기능 활용시 적용됨 */
+         @media print {
+            body * {
+                visibility: hidden;
+            }
+            #report-content, #report-content * {
+                visibility: visible;
+            }
+            #report-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+            @page {
+        		margin: 10mm;
+    		}
+
+		    /* 전체 컨텐츠 크기 조정 */
+		    body {
+		        -webkit-print-color-adjust: exact;
+		        font-size: 12pt; /* 필요 시 조정 */
+		    }
+		
+		    /* 그리드/차트 등 overflow 방지 */
+		    .section-card, canvas, table {
+		        page-break-inside: avoid;
+		        break-inside: avoid;
+		    }
+		
+		    /* 큰 div를 한 페이지에 맞춤 */
+		    .grid {
+		        display: block; /* grid 대신 block으로 변경 */
+		    }
+    	}
+            
     </style>
 </head>
 <body>
@@ -104,32 +144,47 @@
 			        </div>
 			        <div class="flex flex-col justify-end items-center">
 			            <div class="flex items-center space-x-2 mt-4 sm:mt-0">
-			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 생성
-			                </button>
+			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 생성</button>
+			                <button id="print-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 인쇄</button>
 			            </div>
 			        </div>
 		        </div>
 		        
 		        <main id="report-content" class="section-card">
-		            
-		            <!-- 보고서 헤더 (참고 이미지 2 기반) -->
-		            <div class="border-b pb-4 mb-8">
-	   			         <select onchange="setBoardParam('year', this.value)" class="no-print rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-		                    <option value="2025" ${empty param.year ? 'selected' : ''}>2025년</option>
-		                    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
-		                    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
-		                </select>
-<!-- 		                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 text-sm text-gray-700">
-		                    <div><strong>보고 기간:</strong> 2025.07.01 - 2025.09.30</div>
-		                    <div><strong>보고 기준:</strong> 구매 검토 데이터 기준</div>
-		                    <div><strong>작성일:</strong> 2025.10.01</div>
-		                    <div><strong>작성자:</strong> 시스템 자동 생성</div>
-		                </div> -->
-		                <h2 class="text-4xl font-bold text-center text-gray-900">구매 리포트</h2>
-		                <p class="text-center text-lg text-gray-600 mt-2">${empty param.year ? '2025' : param.year}년</p>
-		                
-		            </div>
-		
+					<div class="border-b pb-6 mb-10 bg-gray-50 p-6 rounded-lg shadow-sm">
+						<select onchange="setBoardParam('year', this.value)"
+						    class="no-pdf rounded-md border-gray-300 bg-white shadow-sm px-3 py-2 text-sm
+						           focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+						    <option value="2025" ${empty param.year ? 'selected' : ''}>2025년</option>
+						    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
+						    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
+						</select>
+						<div class="flex justify-center items-center mb-6">
+						    <h1 class="text-8xl text-gray-900 tracking-tight">구매 리포트</h1>
+						</div>
+					    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-800 leading-relaxed">
+					
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">통계 기간</strong>
+					            <span class="font-medium text-base">2025.07.01 - 2025.09.30</span>
+					        </div>
+					
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">보고 기준</strong>
+					            <span class="font-medium text-base">구매 검토 데이터 기준</span>
+					        </div>
+					
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">작성일</strong>
+					            <span class="font-medium text-base">2025.10.01</span>
+					        </div>
+					
+					        <div class="bg-white p-3 rounded-md border">
+					            <strong class="block text-gray-600 text-base mb-1">작성자</strong>
+					            <span class="font-medium text-base">시스템 자동 생성</span>
+					        </div>
+					    </div>
+					</div>
 		            <section>
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">연간 구매 금액</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -154,8 +209,9 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-pdf no-print mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		            <section>
@@ -182,8 +238,9 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-pdf no-print mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text w-full border border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		            <section>
@@ -210,8 +267,9 @@
 		                    </div>
 		                </div>
 		                <div class="comment-area">
-	                    	<button class="report-comment no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
-	                    	<textarea class="report-comment-text" rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
+	                    	<button class="report-comment no-print no-pdf mt-3 mb-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200 text-sm">설명 추가</button>
+	                    	<textarea class="report-comment-text w-full border-gray-300 rounded-md p-3 text-sm bg-white shadow-sm focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition outline-none"
+									    rows="3" placeholder="해당 통계에 대한 설명을 추가할 수 있습니다." style="resize: none;"></textarea>
 		                </div>
 		            </section>
 		        </main>

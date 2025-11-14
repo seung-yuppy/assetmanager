@@ -83,8 +83,8 @@
 										<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-sm">
-										<label for="quantity">수량 <span class="required">*</span></label>
-										<input type="number" id="quantity" name="products[0].count" min="1" max="10" value="${product.count}" required>
+										<label for="quantity">수량 </label>
+										<input type="number" class="locked-input" id="quantity" name="products[0].count" min="1" max="10" value="${product.count}" disabled>
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="totalPrice">총액(₩)</label>

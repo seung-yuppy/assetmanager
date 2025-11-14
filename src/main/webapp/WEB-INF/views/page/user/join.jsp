@@ -84,7 +84,7 @@
 	                
 	                <div class="form-group">
 				    	<select name="position" required>
-				    		<option value="">직책을 선택하세요</option>
+				    		<option value="">직급을 선택하세요</option>
 				    		<option value="부장">부장</option>
 				    		<option value="차장">차장</option>
 				    		<option value="과장">과장</option>

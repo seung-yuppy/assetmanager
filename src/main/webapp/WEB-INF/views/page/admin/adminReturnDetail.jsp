@@ -34,7 +34,7 @@
 								<span class="info-label">자산명</span> <span class="info-value">${returnDetail.assetName}</span>
 							</div>
 							<div class="info-item">
-								<span class="info-label">자산 카테고리</span> <span class="info-value">${returnDetail.categoryName}</span>
+								<span class="info-label">카테고리</span> <span class="info-value">${returnDetail.categoryName}</span>
 							</div>
 							<div class="info-item">
 								<span class="info-label">일련번호</span> <span class="info-value">${returnDetail.serialNumber}</span>
@@ -43,10 +43,10 @@
 								<span class="info-label">스펙</span> <span class="info-value">${returnDetail.spec}</span>
 							</div>
 							<div class="info-item">
-								<span class="info-label">자산 위치</span> <span class="info-value">${returnDetail.location}</span>
+								<span class="info-label">위치</span> <span class="info-value">${returnDetail.location}</span>
 							</div>
 							<div class="info-item">
-								<span class="info-label">등록일자</span> <span class="info-value"><fmt:formatDate value="${returnDetail.registerDate}" pattern="yyyy-MM-dd" /></span>
+								<span class="info-label">등록일</span> <span class="info-value"><fmt:formatDate value="${returnDetail.registerDate}" pattern="yyyy-MM-dd" /></span>
 							</div>
 						</div>
 					</div>
@@ -55,26 +55,23 @@
 						<h2>현재 사용자 정보</h2>
 						<div class="info-list">
 							<div class="info-item">
-								<span class="info-label">자산 상태</span> <span class="info-value"><span class="status-badge status-used">사용중</span></span>
+								<span class="info-label">상태</span> <span class="info-value"><span class="status-badge status-used">사용중</span></span>
 							</div>
 							<div class="info-item">
-								<span class="info-label">사용자 이름</span> <span class="info-value">${returnDetail.username}</span>
+								<span class="info-label">사용자명</span> <span class="info-value">${returnDetail.username}</span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">직급</span> <span class="info-value">${returnDetail.position}</span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">부서</span> <span class="info-value">${returnDetail.deptName}</span>
 							</div>
 							<div class="info-item">
 								<span class="info-label">이메일</span> <span class="info-value">${returnDetail.email}</span>
 							</div>
 							<div class="info-item">
 								<span class="info-label">전화번호</span> <span class="info-value">${returnDetail.phone}</span>
-							</div>
-							<div class="info-item">
-								<span class="info-label">직책</span> <span class="info-value">${returnDetail.position}</span>
-							</div>
-							<div class="info-item">
-								<span class="info-label">부서명</span> <span class="info-value">${returnDetail.deptName}</span>
-							</div>
-							<div class="info-item">
-								<span class="info-label">부서 주소</span> <span class="info-value">${returnDetail.deptAddress}</span>
-							</div>
+							</div>							
 						</div>
 					</div>
 				</div>

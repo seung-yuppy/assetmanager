@@ -455,6 +455,12 @@
 		values (#{userId}, #{categoryId}, #{assetName}, #{spec}, #{serialNumber})
     </insert>
     
+    <update id="requestAsset">
+    	UPDATE Asset
+    	SET is_request = 1
+    	WHERE id = #{assetId}
+    </update>
+    
     <select id="isReturnBtnClick">
     	SELECT COUNT(id)
 		FROM Asset_Return

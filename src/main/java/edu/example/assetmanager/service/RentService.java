@@ -115,6 +115,7 @@ public class RentService {
 	}
 
 	// approvalId, managerId를 insert하기 ,rent insert 하기
+	@Transactional
 	public boolean insertApproval(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
 		// Approval 테이블 insert
 		approvalDAO.insertApproval(approvalDTO);
@@ -131,13 +132,14 @@ public class RentService {
         String title = itemName.getAssetName(); 
     
         if (items.size() > 1) {
-            title += " 외 " + (items.size() - 1) + "건";
+            title += " 등 " + (items.size()) + "개";
         }
         rentDTO.setTitle(title);
         rentDTO.setIsDelay(0);
 			
 		// rent 테이블 insert
 		if (rentDAO.insertRent(rentDTO, userId)) {	
+			
 			
 			// 제품 목록 가져오기
 			for (RentContentDTO item : items) {
@@ -152,6 +154,7 @@ public class RentService {
 				for (RentContentDTO dto : list) {
 					dto.setRentId(rentDTO.getId());
 					rentDAO.insertRentContent(dto);
+					assetDAO.requestAsset(dto.getAssetId());
 				}
 			}
 			insertRentNotification(approvalDTO, rentDTO, userId);

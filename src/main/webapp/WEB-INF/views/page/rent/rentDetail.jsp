@@ -39,12 +39,14 @@
 
 					<h2 class="form-section-title">요청 정보</h2>
 					<div id="formInputArea" class="inputArea">
-						<div class="form-date">
+						<div class="detail-date">
 							<div class="form-application-date">
-								<label for="application-date">반출 요청일</label> <input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
+								<label for="application-date">반출 요청일</label> 
+								<input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
 							</div>
 							<div class="form-return-date">
-								<label for="return-date">반납 예정일</label> <input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
+								<label for="return-date">반납 예정일</label> 
+								<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
 							</div>
 						</div>
 						<c:forEach var="item" items="${items}">

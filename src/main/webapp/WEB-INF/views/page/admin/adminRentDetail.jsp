@@ -84,7 +84,7 @@
 
 					<h2 class="form-section-title">요청 정보</h2>
 					<div id="formInputArea" class="inputArea">
-						<div class="form-date">
+						<div class="detail-date">
 							<div class="form-application-date">
 								<c:if test="${rent.isDelay == 0}">
 									<label for="application-date">반출 요청일</label> 

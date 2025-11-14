@@ -1,23 +1,35 @@
-	    function typeBotMessage(chatItems, text, speed = 40) {
-	        return new Promise(resolve => {
-	            const newBotLi = document.createElement('li');
-	            newBotLi.classList.add('bot-item');
-	            chatItems.append(newBotLi); // 1. 빈 <li> 요소를 먼저 추가
-	
-	            let i = 0;
-	            function typing() {
-	                if (i < text.length) {
-	                    newBotLi.textContent += text.charAt(i); // 2. 한 글자씩 추가
-	                    i++;
-	                    chatItems.scrollTop = chatItems.scrollHeight; // 스크롤
-	                    setTimeout(typing, speed); // 3. 다음 글자 
-	                } else {
-	                    resolve(); // 4. 타이핑 완료
-	                }
-	            }
-	            typing(); // 타이핑 시작
-	        });
-	    }
+// [수정된 typeBotMessage 함수]
+// 이 코드로 기존 함수를 완전히 덮어쓰세요.
+function typeBotMessage(chatItems, text, speed = 40) {
+    return new Promise(resolve => {
+        const newBotLi = document.createElement('li');
+        newBotLi.classList.add('bot-item');
+        chatItems.append(newBotLi); // 1. 빈 <li> 요소를 먼저 추가
+
+        let i = 0;
+        function typing() {
+            if (i < text.length) {
+                const char = text.charAt(i);
+
+                if (char === '\n') {
+                    // 2. 만약 문자가 '\n' (줄바꿈)이면, <br> 요소를 추가합니다.
+                    newBotLi.append(document.createElement('br'));
+                } else {
+                    // 3. 일반 문자라면, TextNode로 만들어서 안전하게 추가합니다.
+                    // (XSS 방지. innerHTML += char 보다 훨씬 안전합니다.)
+                    newBotLi.append(document.createTextNode(char));
+                }
+
+                i++;
+                chatItems.scrollTop = chatItems.scrollHeight; // 스크롤
+                setTimeout(typing, speed); // 4. 다음 글자
+            } else {
+                resolve(); // 5. 타이핑 완료
+            }
+        }
+        typing(); // 타이핑 시작
+    });
+}
 	
 	    // --- ✨ [추가] HTML을 포함한 봇 메시지를 추가하는 함수 ---
 	    // (링크/버튼을 표시하기 위해 필요)
@@ -47,11 +59,17 @@
 	    const chatItems = document.querySelector('.content-items');
 	    const botLi = document.createElement('li');
 	    botLi.classList.add('bot-item');
-	    botLi.textContent = '어떤걸 도와드릴까요? 1. 구매하는 방법  2. 반출하는 방법 ';
-	    chatItems.append(botLi);
+	    botLi.textContent = '어떤걸 도와드릴까요?';
+
+	    const botLi2 = document.createElement('li');
+	    botLi2.classList.add('bot-item');
+	    botLi2.textContent = '1. 구매 2. 반출 3. 반납 4.연장';
+
+	    chatItems.append(botLi, botLi2);
 	
 	    // --- ✨ [수정] menuText를 상단으로 이동 ---
-	    const menuText = `어떤걸 도와드릴까요? 1. 구매하는 방법  2. 반출하는 방법 `;
+	    const menuText1 = `어떤걸 도와드릴까요?`;
+	    const menuText2 = `1. 구매 2. 반출 3. 반납 4.연장`;
 	    const chatForm = document.querySelector('.chatbot-input');
 	
 	    // --- (기존 코드: 폼 전송 이벤트 리스너) ---
@@ -82,13 +100,20 @@
 	
 	            // --- ✨ [수정] 봇 답변 후 처리 로직 ---
 	            setTimeout(async () => {
-	                await typeBotMessage(chatItems, msg);
+	            	// 1. 서버에서 받은 msg
+	                // (이전 답변의 정규식은 \n (줄바꿈)을 처리 못할 수 있으니 \s (모든 공백)로 변경)
+	            	const msgHtml = msg.replace(/ (\d+(-\d+)?\.)/g, '<br> $1');
+
+	                // 2. [수정!] <br> 태그를 HTML로 해석하는 'appendBotHtmlMessage' 함수로 변경
+	                await typeBotMessage(chatItems, msgHtml);
+	            	
                     let addressLink = "#";
-                    if (userInput === "1") { 
+                    if (userInput === "1")
                         addressLink = "/assetmanager/order/form";
-                    } else if (userInput === "2") {
+                    else if (userInput === "2")
                         addressLink = "/assetmanager/rent/form";
-                    }
+                    else if (userInput === "3" || userInput === "4")
+                    	addressLink = "/assetmanager/myasset/list"
 
 	                const actionHtml = `
 	                    <div class="chatbot-actions">
@@ -101,7 +126,7 @@
 	                    </div>
 	                `;
 	                appendBotHtmlMessage(chatItems, actionHtml);
-	            }, 500);
+	            }, 300);
 	
 	        } catch (error) {
 	            console.error("Chat error:", error);
@@ -120,6 +145,7 @@
 	            e.target.textContent = '...';
 	
 	            // 2. 메뉴 텍스트를 타이핑 효과로 출력
-	            await typeBotMessage(chatItems, menuText);
+	            await typeBotMessage(chatItems, menuText1);
+	            await typeBotMessage(chatItems, menuText2);
 	        }
 	    });

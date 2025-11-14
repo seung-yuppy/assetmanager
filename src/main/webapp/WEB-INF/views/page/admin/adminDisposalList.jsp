@@ -73,7 +73,7 @@
 					                        <td>${asset.serialNumber}</td>
 					                        <td>${asset.disposalReason}</td>
 					                        <td>${asset.userName}</td>
-					                        <%-- <td>${asset.position}</td> --%>
+					                        <td>${asset.position}</td>
 					                        <td><fmt:formatDate value="${asset.registerDate}" pattern="yyyy-MM-dd"/></td>
 					                        <td><fmt:formatDate value="${asset.disposalDate}" pattern="yyyy-MM-dd"/></td>
 										</tr>							

@@ -67,7 +67,6 @@
 
 /* 3. 스플래시 패널 스타일 */
 .splash-panel {
-	/* background-color: var(--primary-color); */
 	background-image: var(--gradient-color);
 	color: #fff;
 	padding: 40px;

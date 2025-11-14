@@ -22,4 +22,5 @@ public class AssetDisposalDTO {
 	private Date registerDate;
 	private Date disposalDate;
 	private String disposalReason;
+	private String position;
 }

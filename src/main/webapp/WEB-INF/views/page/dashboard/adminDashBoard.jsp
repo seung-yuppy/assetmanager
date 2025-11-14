@@ -99,18 +99,18 @@
 				</div>
 
 	            <div class="request-grid">
+        			<div class="section-card">
+						<h3>카테고리별 자산 보유 현황</h3>
+						<div class="chart-container" style="height: 300px;">
+		                    <canvas id="categoryChart"></canvas>
+		                </div>
+					</div>		            
 		            <div class="section-card">
 		                <h3>부서별 자산 보유 현황</h3>
 		                <div class="chart-container">
 		                    <canvas id="departmentChart"></canvas>
 		                </div>         
 		            </div>
-        			<div class="section-card">
-						<h3>카테고리별 자산 보유 현황</h3>
-						<div class="chart-container" style="height: 300px;">
-		                    <canvas id="categoryChart"></canvas>
-		                </div>
-					</div>
 	            </div>	        	
 	        	            
             </div>			

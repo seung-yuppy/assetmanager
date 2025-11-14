@@ -132,10 +132,10 @@
 		        <!-- 1. 내 자산 섹션 (상태 컬럼 제거됨) -->
 		        <div class="section-card">
         			<c:if test="${userInfo.role == 'employee'}">
-						<h2>내 자산</h2>  
+						<h2>반출 자산</h2>  
 					</c:if>
 					<c:if test="${userInfo.role == 'manager' || userInfo.role == 'department'}">
-						<h2>부서 자산</h2> 
+						<h2>부서 반출 자산</h2> 
 					</c:if>
 		            <table class="data-table">
 		                <thead>

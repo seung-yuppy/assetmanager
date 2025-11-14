@@ -28,7 +28,7 @@ public class ChatController {
 		if (dto != null) 
 			response.put("msg", dto.getAnswer());
 		else
-			response.put("msg", "숫자를 다시 입력해주세요.(1 또는 2)");
+			response.put("msg", "숫자를 다시 입력해주세요.");
 		
 		return ResponseEntity.ok(response);
 	}

@@ -2,7 +2,8 @@
 
 /* 색상 지정  */
 :root {
-	--primary-color: #1c4587;
+	/* --primary-color: #1c4587; */
+	--primary-color: #0d1e3d;
 	--primary-hover: #163668;
 	--background-color: #f5f7fa;
 	--white-color: #ffffff;
@@ -22,7 +23,7 @@
     --blue-color-dark: #1e3a8a;
     --blue-dark: #0056b3;
     --gradient-color: linear-gradient(to bottom right, #0a1931, #183a6a, #4a4a8a, #301934);
-    /* --gradient-color: linear-gradient(to bottom, #3d6bb0 0%, #1c4587 40%, #0d1e3d 100%); 파란색 */
+   /*  --gradient-color: linear-gradient(to bottom, #3d6bb0 0%, #1c4587 40%, #0d1e3d 100%); */
 	
 	--card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 	--border-radius: 12px;
@@ -106,7 +107,7 @@ li {
 
 /* 전체 body 스타일  */
 body {
-	background-color: var(--background-color);
+	background-color: var(--white-color);
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -115,10 +116,12 @@ body {
 /* 홈 화면 레이아웃 */
 .app-layout {
 	display: flex;
+	background-color: var(--background-color);
 }
 
 .main-content {
 	width: 100vw;
+		background-color: var(--white-color);
 	padding-inline: 40px; /* 메인 콘텐츠 패딩 */
 	padding-bottom: 40px;
 }
@@ -127,14 +130,13 @@ body {
 .main-button {
 	width: 100%;
 	padding: 10px 15px;
-	/* background-color: var(--primary-color); */
 	background-image: var(--gradient-color);
 	color: #fff;
 	font-size: 1.1rem;
 	font-weight: 500;
 	border: none;
 	border-radius: 8px;
-	cursor: pointer;
+	cursor: pointer;`
 	transition: background-color 0.3s;
 	
 	&:hover {

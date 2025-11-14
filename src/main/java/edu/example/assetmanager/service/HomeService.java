@@ -77,18 +77,22 @@ public class HomeService {
 		String orderName = "구매 요청";
 		String rentName = "반출 요청";
 		String returnName = "반납 요청";
+		String delayName = "연장 요청";
 		
 		int countOrder = homeDAO.countOrder(userId);
 		int countRent = homeDAO.countRent(userId);
 		int countReturn = homeDAO.countReturn();
+		int countDelay = homeDAO.countDelay(userId);
 		
 		ApprovalAssetDTO a1 = new ApprovalAssetDTO(orderName, countOrder);
 		ApprovalAssetDTO a2 = new ApprovalAssetDTO(rentName, countRent);
 		ApprovalAssetDTO a3 = new ApprovalAssetDTO(returnName, countReturn);
+		ApprovalAssetDTO a4 = new ApprovalAssetDTO(delayName, countDelay);
 		
 		list.add(a1);
 		list.add(a2);
 		list.add(a3);
+		list.add(a4);
 		
 		return list;
 	}

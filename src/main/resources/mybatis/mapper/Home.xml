@@ -308,12 +308,19 @@
 		SELECT COUNT(*)
 		FROM Rent r
 		INNER JOIN Approval a ON r.approval_id = a.id
-		WHERE a.approver_id = #{userId} AND a.status = 'pending'	
+		WHERE a.approver_id = #{userId} AND a.status = 'pending'AND r.is_delay = 0
 	</select>
 	
 	<select id="countReturn">
 		SELECT COUNT(*)
 		FROM Asset_Return
 		WHERE is_return = 0		
+	</select>
+	
+	<select id="countDelay">
+		SELECT COUNT(*)
+		FROM Rent r
+		INNER JOIN Approval a ON r.approval_id = a.id
+		WHERE a.approver_id = #{userId} AND a.status = 'pending'AND r.is_delay = 1	
 	</select>
 </mapper>

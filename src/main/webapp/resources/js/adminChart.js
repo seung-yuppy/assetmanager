@@ -51,17 +51,17 @@ async function renderCharts() {
     const categoryData = {
             labels: categoryNames,
             datasets: [{
-                label: '보유 자산 (수량)',
+                label: '보유 자산',
                 data: categoryCounts,
                 backgroundColor: [
-                	'#9FA8DA',
-                	'#A5D6A7',
-                	'#FFE0B2',
-                	'#B39DDB',
-                	'#FFAB91',
-                	'#778DA9',
-                	'#80CBC4',
-                	'#FFF59D'
+                	'#6366f1',
+                    '#10b981', 
+                    '#FBBF24',
+                    '#a78bfa',                  
+                    '#EF4444',    
+                    '#475569',  
+                    '#14B8A6',                  
+                    '#84CC16'                   
                 ],
                 borderColor: '#3b82f6',
                 borderRadius: 5,
@@ -119,9 +119,9 @@ async function renderCharts() {
     const departmentData = {
         labels: deptNames,
         datasets: [{
-            label: '보유 자산 (수량)',
+            label: '보유 자산',
             data: deptCount,
-            backgroundColor: '#80CBC4',
+            backgroundColor: '#1C4587',
             borderColor: getColor('--primary-color'),
             borderRadius: 5,
             barThickness: 50
@@ -196,9 +196,9 @@ async function renderCharts() {
             datasets: [{
                 data: assetPercentages,
                 backgroundColor: [
-                	'#A5D6A7',
-                	'#FFE0B2',
-                	'#FFAB91'
+                	'#10b981',  // '#10b981'
+                	'#FBBF24', // '#FBBF24'
+                	'#EF4444'     // '#EF4444'
                 ],
                 hoverOffset: 3,
             }]
@@ -273,13 +273,9 @@ async function renderCharts() {
     const approvalAssetData = {
             labels: approvalNames,
             datasets: [{
-                label: '보유 자산 (수량)',
+                label: '건수',
                 data: approvalCounts,
-                backgroundColor: [
-                	'#80CBC4',
-                	'#80CBC4',
-                	'#80CBC4'
-                ],
+                backgroundColor: '#1C4587',
                 borderColor: getColor('--primary-color'),
                 borderRadius: 5,
                 barThickness: 50

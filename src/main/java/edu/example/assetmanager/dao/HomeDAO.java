@@ -62,4 +62,7 @@ public interface HomeDAO {
 	
 	// 반납 요청 개수 
 	public int countReturn();
+	
+	// 연장 요청 개수
+	public int countDelay(int userId);
 }

@@ -159,6 +159,7 @@
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
+						<li><a href="/assetmanager/rent/form">반출 요청</a></li>
 						<li><a href="/assetmanager/manager/rent/list">반출 목록</a></li>
 						<li><a href="/assetmanager/manager/delay/list">연장 목록</a></li>
 					</ul>                        
@@ -197,12 +198,19 @@
 	            </li>
 			</c:if>
 			<c:if test="${userInfo.role == 'manager'}">
-				<li class="menu-item">
-	            	<a href="/assetmanager/manager/order/list">
-						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-		                <span>구입</span>
-		            </a>          
-	            </li>
+				<li class="menu-item menu-sub">
+					<div class="menu-arrow">
+						<div class="menu-link">
+							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
+			                <span>구입</span>     
+						</div>
+						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
+					</div>
+					<ul class="sub-menu-list">
+						<li><a href="/assetmanager/order/form">구입 요청</a></li>
+						<li><a href="/assetmanager/manager/order/list">구입 목록</a></li>
+					</ul>      
+	            </li>			
 			</c:if>
 			<!-- 구입메뉴 끝 -->
 			<!-- 반납메뉴 시작 -->

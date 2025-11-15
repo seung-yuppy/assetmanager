@@ -188,13 +188,16 @@ function renderFormFromExcel(json, purchase_reason) {
 	    const itemNameLabel = (i === 0) ? '<label>제품명</label>' : '';
 	    const priceLabel = (i === 0) ? '<label>단가 (원)</label>' : '';
 	    const countLabel = (i === 0) ? '<label>수량</label>' : '';
-
+	    
+	    if(!categoryMap.get(row.카테고리)){
+	    	row.카테고리 = "기타";
+	    }
 	    const rowHtml = `
 	      <div class="form-row">
 	        <div class="form-group category-group fixed-width-med">
 	          ${categoryLabel}
 	          <input type="text" value="${row.카테고리 || ''}" readonly>
-	          <input type="text" name="products[${i}].categoryId" value="${categoryMap.get(row.카테고리 || '')}" style="display:none">
+	          <input type="text" name="products[${i}].categoryId" value="${categoryMap.get(row.카테고리)}" style="display:none">
 	        </div>
 	        <div class="form-group product-select-group fixed-width-lg">
 	          ${itemNameLabel}

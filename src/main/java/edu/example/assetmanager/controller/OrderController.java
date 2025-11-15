@@ -67,7 +67,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/form")
-	public String newOrder(HttpSession httpSession, OrderFormDTO orderFormDTO, RedirectAttributes redirectAttributes){
+	public String newOrder(HttpSession httpSession, OrderFormDTO orderFormDTO){
 		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
 		if (userInfo != null) {
 			orderFormDTO.setUserId(userInfo.getId());
@@ -76,10 +76,9 @@ public class OrderController {
 		}
 		try {
 			orderService.save(orderFormDTO);
-			redirectAttributes.addFlashAttribute("toastMsg", "구매 요청이 완료되었습니다.");
 			return "redirect:/order/list";
 		}catch(Exception e) {
-	        redirectAttributes.addFlashAttribute("error", "등록 중 오류가 발생했습니다.");
+			System.out.println("구매 요청 제출 중 에러 발생 : " + e);
 			return "redirect:/form";
 		}
 	}

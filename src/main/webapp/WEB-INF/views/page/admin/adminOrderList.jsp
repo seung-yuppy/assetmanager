@@ -60,7 +60,7 @@
 									<c:forEach var="item" items="${response.content}">
 										<tr data-id="${item.id}">
 											<td><a href="detail/${item.id}">${item.title}</a></td>
-											<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username} ${item.position}</a></td>
+											<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
 											<td>${item.deptName}</td>
 											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>											

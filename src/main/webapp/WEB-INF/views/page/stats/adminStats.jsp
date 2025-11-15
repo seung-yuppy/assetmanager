@@ -43,7 +43,7 @@
 		  	margin: 0 auto;
 		}
 		
-		      /* 공통 섹션 스타일 */
+	    /* 공통 섹션 스타일 */
 		.section-card {
 		    background-color: var(--white-color); /* 흰색 카드 배경 */
 		    padding: 20px;
@@ -128,7 +128,6 @@
     			color: var(--gray-color);
 			}
     	}
-
             
     </style>
 </head>
@@ -199,7 +198,7 @@
 		                    </div>
 		                    <!-- 표 -->
 		                    <div class="lg:col-span-2">
-		                        <table class="min-w-full divide-y divide-gray-200">
+		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
 		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">년</th>
@@ -231,7 +230,7 @@
 		                    </div>
 		                    <!-- 표 -->
 		                    <div class="lg:col-span-2">
-		                        <table class="min-w-full divide-y divide-gray-200">
+		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
 		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">카테고리</th>
@@ -263,7 +262,7 @@
 		                    </div>
 		                    <!-- 표 -->
 		                    <div class="lg:col-span-2">
-		                        <table class="min-w-full divide-y divide-gray-200">
+		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
 		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">부서</th>

@@ -12,7 +12,8 @@ const categoryMap = new Map();
 const categoryArr = ["카테고리","노트북","모니터","태블릿","스마트폰","복합기","데스크탑","TV","프로젝터","기타"];
 categoryArr.forEach((item, index) => {
 	categoryMap.set(item, index);
-})
+});
+console.log("맵 확인 : 1나와야 해 : " + categoryMap.get("노트북"));
 
 // 사유 영역의 글자수를 세고 표시를 업데이트하는 함수
 function updateCharCount(textarea, maxLength) {
@@ -185,3 +186,8 @@ function setTitle(e){
 	document.getElementById('requestTitle').value = content;
 }
 
+// 엑셀 파일의 이름 표시
+document.getElementById('excelFile').addEventListener('change', function () {
+    const fileName = this.files.length > 0 ? this.files[0].name : '';
+    document.getElementById('file-name-display').textContent = fileName;
+});

@@ -105,4 +105,7 @@ public interface RentDAO {
 	// assetId로 Rent 찾기
 	public RentShowDTO getRentInfoByAssetId(@Param("assetId") int assetId);
 	
+	// 요청 취소시 Approval테이블 cancel 상태 추가
+	public boolean cancelApproval(int id);
+	
 }

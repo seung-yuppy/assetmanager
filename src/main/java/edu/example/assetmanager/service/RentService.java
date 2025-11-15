@@ -279,7 +279,14 @@ public class RentService {
 	
 	// rentId로 요청 취소
 	public boolean cancelRent(int id) {
-		return rentDAO.cancelRent(id);
+		if (rentDAO.cancelRent(id)) {
+			if (rentDAO.cancelApproval(id))
+				return true;
+			else 
+				return false;
+		} else {
+			return false;
+		}
 	}
 	
 	// 사용자 대시보드 - 반출 대기 개수

@@ -482,5 +482,11 @@
 		FROM Rent
 		WHERE approval_id = #{approvalId}
 	</select>
+	
+	<update id="cancelApproval">
+		UPDATE Approval
+		SET status = 'CANCEL'
+		WHERE id IN (SELECT approval_id FROM Rent  WHERE id = #{id})
+	</update>
 
 </mapper>

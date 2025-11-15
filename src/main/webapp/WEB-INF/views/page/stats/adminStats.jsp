@@ -28,7 +28,7 @@
 		}
 		
 		section{
-	    	margin-bottom: 4rem;
+	    	margin-bottom: 3rem;
 		}
 		.section-card h2 {
 		    font-size: 1.5rem;
@@ -85,49 +85,6 @@
         .report-comment-text{
         	display: none;
         }
-        
-		/*브라우저 인쇄 기능 활용시 적용됨 */
-         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #report-content, #report-content * {
-                visibility: visible;
-            }
-            #report-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-            }
-            .no-print {
-                display: none;
-            }
-            @page {
-        		margin: 10mm;
-    		}
-
-		    /* 전체 컨텐츠 크기 조정 */
-		    body {
-		        -webkit-print-color-adjust: exact;
-		        font-size: 12pt; /* 필요 시 조정 */
-		    }
-		
-		    /* 그리드/차트 등 overflow 방지 */
-		    .section-card, canvas, table {
-		        page-break-inside: avoid;
-		        break-inside: avoid;
-		    }
-		
-		    /* 큰 div를 한 페이지에 맞춤 */
-		    .grid {
-		        display: block; /* grid 대신 block으로 변경 */
-		    }
-		    
-		    .page-description {
-    			color: var(--gray-color);
-			}
-    	}
             
     </style>
 </head>
@@ -165,7 +122,7 @@
 						    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
 						    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
 						</select>
-						<div class="flex justify-center items-center mb-6">
+						<div class="flex justify-center items-center mb-9">
 						    <h1 class="text-8xl text-gray-900 tracking-tight">구매 리포트</h1>
 						</div>
 					    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-800 leading-relaxed">
@@ -225,7 +182,7 @@
 		                <h3 class="text-2xl font-semibold text-gray-800 mb-4">카테고리별 구매 비율</h3>
 		                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 		                    <!-- 차트 -->
-		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center items-center" style="max-height: 400px;">
+		                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg shadow-inner flex justify-center items-center" style="max-height: 300px;">
 		                        <canvas id="categoryDonutChart"></canvas>
 		                    </div>
 		                    <!-- 표 -->

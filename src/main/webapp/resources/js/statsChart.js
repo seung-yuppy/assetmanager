@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			commentText.style.display = isVisible ? 'none' : 'block';
 		});
 	});
+	
 	// PDF 내보내기 버튼 이벤트 리스너
 	document.getElementById('export-pdf-btn').addEventListener('click', exportPDF);
 	getData();
@@ -325,93 +326,208 @@ async function exportPDF() {
     const { jsPDF } = window.jspdf;
     const reportContent = document.getElementById('report-content');
     const loader = document.getElementById('loader');
-    
+
     // 마진 설정 (단위: mm)
-    const MARGIN = 20;
-    const TOTAL_MARGIN_WIDTH = MARGIN * 2; // 좌우 마진 합계 (20mm + 20mm = 40mm)
-    
+    const MARGIN = 15; // 좌우 및 상단 마진으로 사용됩니다.
+    const TOTAL_MARGIN_WIDTH = MARGIN * 2;
+
     loader.style.display = 'flex'; // 로더 표시
     
-    //pdf화를 위한 추가설명 textarea의 스타일 제거
-    const textAreas = document.querySelectorAll('.report-comment-text');
-    textAreas.forEach(textarea =>{
-    	textarea.classList.remove('border','focus:ring-2','shadow-sm');
-    });
+    // 원본 스타일 저장 및 PDF용 스타일 적용
+    const originalStyle = {
+        width: reportContent.style.width,
+        maxWidth: reportContent.style.maxWidth,
+        margin: reportContent.style.margin
+    };
+
+    reportContent.style.width = "90%";
+    reportContent.style.maxWidth = "1300px";
+    reportContent.style.margin = "0 auto";
     
-    // 출력 안할 요소 제외
-    const pageELs = document.querySelectorAll('.no-pdf')
-    pageELs.forEach(el => {
-		el.style.display = 'none';
-	})
-	
-	// grid div 선택
-	const gridDivs = document.querySelectorAll('section > div.grid');
-    gridDivs.forEach(gridDiv => {
-    	gridDiv.classList.remove('lg:grid-cols-5');
-    	gridDiv.classList.add('lg:grid-cols-1');
+    const allSections = reportContent.querySelectorAll('section');
+    const contentBeforeThird = Array.from(allSections).slice(0, 2);
+    const targetSection = allSections.length > 2 ? allSections[2] : null; // 3번째 section만 선택
+
+    if (!targetSection) {
+        console.error("세 번째 section 요소를 찾을 수 없습니다.");
+        alert("PDF 생성 중 오류가 발생했습니다. 세 번째 섹션을 확인해주세요.");
+        loader.style.display = 'none';
+        return;
+    }
+
+    // PDF 내보내기 전에 targetSection을 임시로 숨깁니다.
+    targetSection.style.display = 'none';
+
+    // **2. textarea를 div로 잠시 대체**
+    const replaced = [];
+    const textAreas = reportContent.querySelectorAll('.report-comment-text');
+    textAreas.forEach(textarea => {
+        const div = document.createElement('div');
+        div.textContent = textarea.value;
+
+        const style = window.getComputedStyle(textarea);
+        div.style.display = 'block';
+        div.style.whiteSpace = 'pre-wrap';
+        div.style.wordBreak = 'break-word';
+        div.style.minHeight = textarea.scrollHeight + 'px';
+        div.style.padding = style.padding;
+        div.style.font = style.font;
+        div.style.color = style.color;
+        div.style.background = style.background;
+        div.style.width = style.width;
+
+        textarea.parentNode.insertBefore(div, textarea);
+        textarea.style.display = 'none';
+
+        replaced.push({ textarea, div });
     });
 
+    // **3. 출력 안 할 요소 제외 및 grid 클래스 변경**
+    const pageELs = reportContent.querySelectorAll('.no-pdf');
+    pageELs.forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    const gridDivsToChange = [];
+    contentBeforeThird.forEach(section => {
+        section.querySelectorAll('div.grid').forEach(gridDiv => {
+            gridDiv.classList.remove('lg:grid-cols-5');
+            gridDiv.classList.add('lg:grid-cols-1');
+            gridDivsToChange.push(gridDiv);
+        });
+    });
+    
     try {
-        // html2canvas로 #report-content 요소를 캡처
-        const canvas = await html2canvas(reportContent, {
-            scale: 2, // 해상도 2배로 높여 품질 개선
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const contentWidth = pdfWidth - TOTAL_MARGIN_WIDTH;
+
+        // --- 1단계: 세 번째 섹션 이전의 모든 내용 캡처 및 추가 ---
+        
+        let canvas = await html2canvas(reportContent, {
+            scale: 2,
             useCORS: true,
             logging: false
         });
-        
-        const imgData = canvas.toDataURL('image/png');
-        
-        const pdf = new jsPDF('p', 'mm', 'a4'); // A4 용지 (세로)
-        const pdfWidth = pdf.internal.pageSize.getWidth(); // A4 너비 (약 210mm)
-        const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 높이 (약 297mm)
-        
-        // **마진이 적용된 이미지 출력 너비 계산**
-        const contentWidth = pdfWidth - TOTAL_MARGIN_WIDTH; // 210mm - 40mm = 170mm
-        
-        const imgProps = pdf.getImageProperties(imgData);
-        const imgWidth = imgProps.width;
-        const imgHeight = imgProps.height;
-        
-        // 이미지 비율을 유지하면서 'contentWidth'에 맞게 높이 계산
-        const ratio = imgHeight / imgWidth;
-        const reportHeight = contentWidth * ratio; // 마진이 적용된 너비에 대한 이미지 높이
-        
-        // 이미지가 A4 높이보다 클 경우 여러 페이지로 나누기
-        let heightLeft = reportHeight;
-        let position = 0; // 이미지의 Y 위치 (페이지를 넘길 때 조정됨)
 
-        // **첫 페이지 이미지 추가: x 시작 위치는 MARGIN(20mm)으로, 너비는 contentWidth로 설정**
+        let imgData = canvas.toDataURL('image/png');
+        let imgProps = pdf.getImageProperties(imgData);
+        let imgWidth = imgProps.width;
+        let imgHeight = imgProps.height;
+        let ratio = imgHeight / imgWidth;
+        let reportHeight = contentWidth * ratio; 
+        
+        let heightLeft = reportHeight;
+        let position = MARGIN; // **첫 페이지 Y 시작 위치를 MARGIN으로 설정**
+
+        // 첫 페이지 이미지 추가 (Y 시작 위치: MARGIN)
         pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
-        heightLeft -= pdfHeight;
+        
+        // 첫 페이지에서 이미지 출력에 사용된 높이 (상단 MARGIN + 콘텐츠) 만큼 차감
+        heightLeft -= (pdfHeight - MARGIN); 
+        position -= reportHeight; // 다음 페이지에서 시작할 이미지의 Y 위치 계산
 
         while (heightLeft > 0) {
-            position = heightLeft - reportHeight; // 다음 페이지에서 시작할 Y 위치
+            // 다음 페이지는 MARGIN 없이 콘텐츠 상단이 PDF 페이지 상단에 맞닿도록 Y 위치 조정
             pdf.addPage();
-            // **추가 페이지 이미지 추가: x 시작 위치는 MARGIN(20mm)으로 유지**
+            // position은 음수입니다. 이 값이 커질수록 이미지가 위로 당겨져서 나타납니다.
             pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
             heightLeft -= pdfHeight;
+            position -= pdfHeight;
+        }
+        
+        // --- 2단계: 세 번째 섹션만 캡처 및 새로운 페이지에 추가 ---
+        
+        // 타겟 섹션만 보이게 하고 캡처
+        targetSection.style.display = '';
+        contentBeforeThird.forEach(section => section.style.display = 'none');
+        
+        // 세 번째 섹션에만 적용할 grid 클래스 변경
+        const targetGridDivs = targetSection.querySelectorAll('div.grid');
+        targetGridDivs.forEach(gridDiv => {
+            gridDiv.classList.remove('lg:grid-cols-5');
+            gridDiv.classList.add('lg:grid-cols-1');
+        });
+
+        canvas = await html2canvas(targetSection, {
+            scale: 2,
+            useCORS: true,
+            logging: false
+        });
+
+        imgData = canvas.toDataURL('image/png');
+        imgProps = pdf.getImageProperties(imgData);
+        imgWidth = imgProps.width;
+        imgHeight = imgProps.height;
+        ratio = imgHeight / imgWidth;
+        reportHeight = contentWidth * ratio;
+
+        pdf.addPage(); // **새로운 페이지 추가**
+
+        // 새로운 페이지에 세 번째 섹션 이미지 추가
+        position = MARGIN; // **새 페이지 Y 시작 위치를 MARGIN으로 설정**
+        heightLeft = reportHeight;
+        
+        // 첫 페이지 (세 번째 섹션의) 이미지 추가
+        pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
+        
+        // 첫 페이지에서 이미지 출력에 사용된 높이 (상단 MARGIN + 콘텐츠) 만큼 차감
+        heightLeft -= (pdfHeight - MARGIN);
+        position -= reportHeight;
+
+        while (heightLeft > 0) {
+            // 다음 페이지는 MARGIN 없이 콘텐츠 상단이 PDF 페이지 상단에 맞닿도록 Y 위치 조정
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', MARGIN, position, contentWidth, reportHeight);
+            heightLeft -= pdfHeight;
+            position -= pdfHeight;
         }
 
-        pdf.save('구매_리포트.pdf'); // PDF 파일 저장
+        pdf.save('구매_리포트.pdf');
 
     } catch (error) {
         console.error("PDF 생성 중 오류 발생:", error);
         alert("PDF 생성 중 오류가 발생했습니다.");
     } finally {
-        loader.style.display = 'none'; // 로더 숨기기
-        // pdf 생성을 위해 숨겼던 요소들 복구
+        loader.style.display = 'none';
+        
+        // --- 모든 요소 원상 복구 ---
+        
+        // 1. reportContent 스타일 복구
+        reportContent.style.width = originalStyle.width;
+        reportContent.style.maxWidth = originalStyle.maxWidth;
+        reportContent.style.margin = originalStyle.margin;
+        
+        // 2. 섹션 display 복구
+        contentBeforeThird.forEach(section => section.style.display = '');
+        targetSection.style.display = '';
+        
+        // 3. grid div 원상 복구 (첫 번째 부분)
+        gridDivsToChange.forEach(gridDiv => {
+            gridDiv.classList.remove('lg:grid-cols-1');
+            gridDiv.classList.add('lg:grid-cols-5');
+        });
+        
+        // 4. grid div 원상 복구 (세 번째 섹션)
+        targetSection.querySelectorAll('div.grid').forEach(gridDiv => {
+            gridDiv.classList.remove('lg:grid-cols-1');
+            gridDiv.classList.add('lg:grid-cols-5');
+        });
+        
+        // 5. .no-pdf 요소들 복구
         pageELs.forEach(el => {
-    		el.style.display = 'inline-block';
-    	})
-    	
-    	textAreas.forEach(textarea =>{
-    		textarea.classList.add('border','focus:ring-2','shadow-sm');
-    	});
-    	
-    	gridDivs.forEach(gridDiv => {
-	    	gridDiv.classList.remove('lg:grid-cols-1');
-	    	gridDiv.classList.add('lg:grid-cols-5');
-	    });
-    	
+            el.style.display = '';
+        });
+        
+        // 6. textarea 복구
+        replaced.forEach(({ textarea, div }) => {
+            div.remove();
+            if (textarea.value.trim() !== "") {
+                textarea.style.display = 'block';
+            } else {
+                textarea.style.display = '';
+            }
+        });
     }
 }

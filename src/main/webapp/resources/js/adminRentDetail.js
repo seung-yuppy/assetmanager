@@ -54,8 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
 								confirmButtonColor: "#a5dc86",
 								confirmButtonText: "확인",
 							}).then(() =>{
-								history.go(-1);
-								location.reload();
+								location.href = "../list";
 							});
 						} else {
 							Swal.fire({
@@ -130,8 +129,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 								confirmButtonColor: "#a5dc86",
 								confirmButtonText: "확인",
 							}).then(() =>{
-								history.go(-1);
-								location.reload();
+								location.href = "../list";
 							});
 						} else {
 							Swal.fire({

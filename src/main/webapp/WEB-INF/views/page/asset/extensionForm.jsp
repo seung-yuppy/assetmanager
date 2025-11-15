@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="currentDate" />
@@ -74,5 +74,30 @@
 			</div>
 		</div>
 	</div>
+	
+ 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+	<c:if test="${not empty delaySuccess}">
+    	<script>
+	    	Swal.fire({
+	            icon: 'success',
+	            title: '연장 성공',
+	            text: '${delaySuccess}',
+	            preConfirm: () => {
+	            	location.href = "/assetmanager/myasset/list";
+	            }
+	        });    	
+    	</script>
+    </c:if>
+    
+    <c:if test="${not empty delayFail}">
+    	<script>
+    	Swal.fire({
+            icon: 'error',
+            title: '연장 실패',
+            text: '${delayFail}'
+        });    
+    	</script>
+    </c:if>
+	
 </body>
 </html>

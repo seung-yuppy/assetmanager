@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
@@ -53,14 +55,13 @@ public class AssetController {
 		return "/asset/userDeptAssetList";
 	}
 	
-	@GetMapping("/delay/form")
-	public String requestForm(int id, Model model, HttpSession session) {
+	@GetMapping("/delay/form/{id}")
+	public String requestForm(@PathVariable int id, Model model, HttpSession session) {	
 		Integer userId = (Integer)session.getAttribute("userId");	
-		AssetDTO assetDTO = service.getAsset(id);
-		
-		if(userId==null) {
+		AssetDTO assetDTO = service.getAsset(id);		
+		if(userId == null) 
 			return "redirect:/login";
-		}
+		
 		UserInfoDTO userInfo= userService.getUser(userId);
 		List<UserInfoDTO> admin = rentService.findByAdminUser();
 		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
@@ -74,18 +75,21 @@ public class AssetController {
 	}
 	
 	@PostMapping("/asset/extension/form")
-	public String extensionForm(ApprovalDTO approvalDTO, RentDTO rentDTO,RentContentDTO rentContentDTO, HttpSession session) {
+	public String extensionForm(ApprovalDTO approvalDTO, RentDTO rentDTO, RentContentDTO rentContentDTO, HttpSession session, RedirectAttributes rattr) {
 		Integer userId =(Integer)session.getAttribute("userId");
-		System.out.println("userId 나와??" + userId);
-		if(userId==null) {
+		if (userId == null) {
 			return "redirect:/login"; 
 		} else {
-			if(rentService.insertDelayForm(approvalDTO,rentDTO,rentContentDTO, userId)) {
+			if (rentService.insertDelayForm(approvalDTO, rentDTO, rentContentDTO, userId)) {
 				// 요청 성공	
-				return "redirect:/myasset/list";
-			}else {
+				int assetId = rentContentDTO.getAssetId();
+				rattr.addFlashAttribute("delaySuccess", "연장 요청이 완료되었습니다.");
+				return "redirect:/delay/form/" + assetId;
+			} else {
 				// 요청 실패
-				return "redirect:/delay/form";
+				int assetId = rentContentDTO.getAssetId();
+				rattr.addFlashAttribute("delayFail", "연장 요청이 실패하였습니다.");
+				return "redirect:/delay/form/" + assetId;
 			}				
 		}
 	}

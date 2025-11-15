@@ -21,7 +21,7 @@
 		    orders o
 			    left JOIN approval      a ON o.approval_id = a.id
 	    <where>
-		    o.user_id = #{userId} and o.is_valid = 1
+		    o.user_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
@@ -112,7 +112,7 @@
 		from orders o
 			left JOIN approval      a ON o.approval_id = a.id
 	    <where>
-		    o.user_id = #{userId} and o.is_valid = 1
+		    o.user_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		and (o.title like '%' || #{keyword} || '%')
 	    	</if>
@@ -220,4 +220,10 @@
 		ORDER BY o.order_date DESC
 		FETCH FIRST 3 ROWS ONLY
     </select>
+    
+   	<update id="cancelApproval">
+		UPDATE Approval
+		SET status = 'CANCEL'
+		WHERE id IN (SELECT approval_id FROM orders  WHERE id = #{id})
+	</update>
 </mapper>

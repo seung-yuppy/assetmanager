@@ -205,8 +205,7 @@
 		FROM Rent R
 		left JOIN approval A ON R.approval_id = A.id
 	    <where>
-		    R.user_id = #{userId} 
-		    	AND R.is_valid = 1
+		    R.user_id = #{userId}
 	       	<if test="keyword != null and keyword != ''">
 	    		AND (R.title LIKE '%' || #{keyword} || '%')
 	    	</if>

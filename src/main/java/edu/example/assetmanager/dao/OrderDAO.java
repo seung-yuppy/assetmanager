@@ -36,4 +36,7 @@ public interface OrderDAO {
     public int getPendingOrder(@Param("userId") int userId);
     public int getApprovalOrder(@Param("userId") int userId);
     public List<OrderDTO> getOrderTop3(@Param("userId") int userId);
+    
+    //Approval
+	public boolean cancelApproval(int id);
 }

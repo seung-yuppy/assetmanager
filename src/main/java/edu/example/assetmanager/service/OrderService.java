@@ -147,7 +147,14 @@ public class OrderService {
 	
 	// 구매 요청 취소
 	public boolean cancelOrder(int id) {
-		return orderDAO.cancelOrder(id);
+		if (orderDAO.cancelOrder(id)) {
+			if (orderDAO.cancelApproval(id))
+				return true;
+			else 
+				return false;
+		} else {
+			return false;
+		}
 	}
 	
 	// 사용자 대시보드 - 구매 대기 개수

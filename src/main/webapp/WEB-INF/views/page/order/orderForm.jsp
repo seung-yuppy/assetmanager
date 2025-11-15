@@ -188,7 +188,7 @@
 								<div class="form-date">
 									<div class="form-application-date">
 										<label for="application-date">구매 요청일</label> 
-										<input type="date" id="application-date" value="${today}" class="form-input rent-input" disabled>
+										<input type="date" id="application-date" value="${today}" class="form-input rent-input" disabled style="width:192px;">
 									</div>
 								</div>
 							</div>

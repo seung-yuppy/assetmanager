@@ -10,7 +10,6 @@
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/assetEntry.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/formStyle.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -35,7 +34,9 @@
 							<div class="form-date">
 								<div class="form-application-date">
 									<label for="application-date">구매 요청일</label> 
-									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly>
+									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" 
+										   pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly
+										   style="width:285px;">
 								</div>
 							</div>
 							<c:forEach var="product" items="${products}">

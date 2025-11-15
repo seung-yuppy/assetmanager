@@ -54,7 +54,7 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
                         confirmButtonColor: "#a5dc86",
                         confirmButtonText: "확인",
                     }).then(() =>{
-                    	location.reload();
+                    	location.href = "../list";
                     });
                 } else {
                     Swal.fire({
@@ -119,7 +119,7 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 						confirmButtonColor: "#a5dc86",
 						confirmButtonText: "확인",
 					}).then(() =>{
-						location.reload();
+						location.href = "../list";
 					});
 				} else {
 					Swal.fire({

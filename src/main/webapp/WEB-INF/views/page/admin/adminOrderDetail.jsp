@@ -6,16 +6,13 @@
 <meta charset="UTF-8">
 <title>구매 요청 상세</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/requestForm.css"
-	rel="stylesheet">
-<link href="/assetmanager/resources/css/adminDetail.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
+<link href="/assetmanager/resources/css/adminDetail.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-	<script
-		src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<div class="app-layout">
 		<%@ include file="/WEB-INF/views/component/sideMenu.jsp"%>
 		<div class="main-content">
@@ -65,7 +62,8 @@
 							<div class="form-date">
 								<div class="form-application-date">
 									<label for="application-date">구매 요청일</label> 
-									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly>
+									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' 
+										   class="form-input rent-input locked-input" readonly style="width:192px;">
 								</div>
 							</div>
 							<c:forEach var="product" items="${products}">
@@ -89,7 +87,6 @@
 									<div class="form-group fixed-width-med">
 										<label for="totalPrice">총액(₩)</label>
 										<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
-										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
 									</div>
 								</div>
 							</c:forEach>
@@ -130,7 +127,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/adminOrderDetail.js"></script>
 </body>
 </html>

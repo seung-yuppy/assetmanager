@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const item = e.target.closest('.notification-item');
 		if (item){
 			const targetId = item.getAttribute("data-target-id");
-			const targetType = item.getAttribute("data-target-type");
+			let targetType = item.getAttribute("data-target-type");
 			
 			if(item.classList.contains('unread-notification')){ // 안읽은 아이템 클릭 시
 				read(item);
@@ -99,11 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			// 하이퍼링크 설정 및 이동
 			let user_path;
-			if(!["employee", "department"].includes(loginUser.role)){
+			if(!["employee", "department"].includes(loginUser.role)){ 
+				// admin, manager는 role 포함한 uri
 				user_path = "/" + loginUser.role; 
 			}else{
 				user_path="";
 			}
+			
+			// emp는 delay 경로가 없으므로 rent 경로로 변경
+			if(user_path=="" && targetType=="delay"){
+				targetType = "rent";
+			}
+			
 			let path = `/assetmanager${user_path}/${targetType}/detail/${targetId}`; 
 			
 			location.href = path;

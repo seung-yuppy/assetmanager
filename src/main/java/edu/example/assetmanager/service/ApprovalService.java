@@ -82,9 +82,21 @@ public class ApprovalService{
 		    notificationDTO.setMessage(buildMessage(targetType, orderDTO.getTitle(),isApproved));
 		    
 		} else { 
-			String targetType = "rent";
-		    RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
+			System.out.println("############ rent 관련");
+			RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
+			String targetType;
+			if(rentListDTO.getIsDelay()==1) {
+				System.out.println("##################연장 확인");
+				targetType = "delay";
+				if(isApproved) {
+					// 연장 승인 시 알림은 없음
+					return true;
+				}
+			}else{
+				targetType = "rent";
+			}
 		    notificationDTO.setTargetId(rentListDTO.getId().intValue());
+		    System.out.println("현재 타깃 타입 : " + targetType);
 		    notificationDTO.setTargetType(targetType);
 		    notificationDTO.setUserId(rentListDTO.getUserId());
 		    notificationDTO.setMessage(buildMessage(targetType, rentListDTO.getTitle(), isApproved));
@@ -105,15 +117,22 @@ public class ApprovalService{
 			String msg = String.format("새 구매 요청(%s %s) : %s", user.getUsername(), user.getPosition(), orderDTO.getTitle());
 		    notificationDTO.setMessage(msg);
 		    
-		} else { 
-			String targetType = "rent";
-		    RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
-		    UserInfoDTO user = userService.getUser(rentListDTO.getUserId());
-		    notificationDTO.setTargetId(rentListDTO.getId().intValue());
-		    notificationDTO.setTargetType(targetType);
-		    notificationDTO.setUserId(approvalDTO.getManagerId());
-			String msg = String.format("새 반출 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentListDTO.getTitle());
-		    notificationDTO.setMessage(msg);
+		} else { // rent 요청인 경우 
+			RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
+			String targetType;
+			String msg;
+			UserInfoDTO user = userService.getUser(rentListDTO.getUserId());
+		    if(rentListDTO.getIsDelay()==1) { // 연장
+		    	targetType = "delay";
+				msg = String.format("새 연장 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentListDTO.getTitle());
+		    }else { // 반출
+		    	targetType = "rent";
+		    	msg = String.format("새 반출 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentListDTO.getTitle());
+		    }
+	    	notificationDTO.setTargetId(rentListDTO.getId().intValue());
+	    	notificationDTO.setTargetType(targetType);
+	    	notificationDTO.setUserId(approvalDTO.getManagerId());
+	    	notificationDTO.setMessage(msg);
 		}
 		return notificationService.insert(notificationDTO);
 	}
@@ -128,6 +147,9 @@ public class ApprovalService{
 	        case "rent":
 	            action = "반출 요청";
 	            break;
+	        case "delay":
+	        	action = "연장 요청";
+	        	break;
 	        default:
 	            action = "요청";
 	    }

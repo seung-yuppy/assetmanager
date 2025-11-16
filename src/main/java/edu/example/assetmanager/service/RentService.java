@@ -169,10 +169,7 @@ public class RentService {
 		notificationDTO.setTargetId(rentDTO.getId().intValue());
 		notificationDTO.setTargetType(targetType);
 		notificationDTO.setUserId(approvalDTO.getApproverId());
-		System.out.println("rentDTO.getUserId() : " + rentDTO.getUserId());
 		UserInfoDTO user = userService.getUser(userId);
-		System.out.println("user : " + user);
-		System.out.println("username " + user.getUsername());
 		String msg = String.format("새 반출 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentDTO.getTitle());
 		notificationDTO.setMessage(msg);
 		return notificationService.insert(notificationDTO);
@@ -382,7 +379,9 @@ public class RentService {
 			if(rentDAO.insertRent(rentDTO, userId)) {
 				rentContentDTO.setRentId(rentDTO.getId());
 				if(rentDAO.insertRentContent(rentContentDTO)) {
-					
+					if(!insertDelayNotification(approvalDTO, rentDTO, userId)) {
+						System.out.println("관리자에게 연장 알림  추가 실패");
+					}
 					return true;
 				}else {
 					return false;
@@ -393,5 +392,17 @@ public class RentService {
 		}else {
 			return false;
 		}
-	}	
+	}
+	
+	private boolean insertDelayNotification(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
+		String targetType = "delay";
+		NotificationDTO notificationDTO = new NotificationDTO();
+		notificationDTO.setTargetId(rentDTO.getId().intValue());
+		notificationDTO.setTargetType(targetType);
+		notificationDTO.setUserId(approvalDTO.getApproverId());
+		UserInfoDTO user = userService.getUser(userId);
+		String msg = String.format("새 연장 요청(%s %s) : %s", user.getUsername(), user.getPosition(), rentDTO.getTitle());
+		notificationDTO.setMessage(msg);
+		return notificationService.insert(notificationDTO);
+	}
 }

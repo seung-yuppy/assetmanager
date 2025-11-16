@@ -275,7 +275,11 @@ input:focus, select:focus, textarea:focus {
 	
 }
 .form-icon{
-	width : 1.5rem;
+	width : 1.2rem;
+	cursor : pointer;
+}
+.form-icon:hover{
+	content: url("/assetmanager/resources/image/icon_delete_red.svg");
 }
 
 .last-input-group{
@@ -511,4 +515,33 @@ input:focus, select:focus, textarea:focus {
   display: none;
 }
 
-/* rentExcelUpload.js css*/
+.btn-remove-x {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+.btn-remove-x:hover {
+    background: #f3f3f3;
+}
+.btn-remove-x::before,
+.btn-remove-x::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background: #555;
+    transform-origin: center;
+}
+.btn-remove-x::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.btn-remove-x::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}

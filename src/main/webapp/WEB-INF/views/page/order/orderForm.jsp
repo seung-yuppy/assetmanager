@@ -221,7 +221,7 @@
 									<label for="totalPrice">총액 (원)</label>
 									<div class="last-input-group">
 										<input type="text" id="totalPrice" name="totalPrice" value="0" class="locked-input" readonly>
-										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>
 							</div>

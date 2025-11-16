@@ -164,7 +164,7 @@ function addProduct(){
 								<div class="form-group fixed-width-med">
 									<div class="last-input-group">
 										<input type="text" name="totalPrice" value="0" class="locked-input" readonly>
-										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>
 							</div>

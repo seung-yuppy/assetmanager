@@ -18,8 +18,8 @@
             height: 16px;
             padding: 0 4px;
             font-size: 0.75rem; /* text-xs */
-            font-weight: 700;
-            line-height: 1;
+            font-weight: 600;
+            line-height: 16px;
             color: white; /* text-red-100 대신 white 사용 */
             background-color: #dc2626; /* bg-red-600 */
             border-radius: 9999px; /* rounded-full */

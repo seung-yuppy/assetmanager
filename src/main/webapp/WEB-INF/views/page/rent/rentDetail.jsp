@@ -94,7 +94,7 @@
 	<div id="registerModal" class="modal-backdrop" style="display: none;">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2>물품 반출 등록</h2>
+				<h2>자산 등록</h2>
 				<button id="closeModalBtn" class="modal-close-btn">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -116,7 +116,7 @@
 			</div>
 			<div class="modal-footer">
 				<button id="cancelBtn" class="btn-secondary">취소</button>
-				<button class="btn-primary" id="submitBtn">반출 등록</button>
+				<button class="btn-primary" id="submitBtn">등록</button>
 			</div>
 		</div>
 	</div>

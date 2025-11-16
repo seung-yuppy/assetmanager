@@ -116,7 +116,7 @@
 		<fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
 	    <div class="modal-content">
 	        <div class="modal-header">
-	            <h3>일련번호 등록</h3>
+	            <h2>자산 등록</h2>
 	            <button id="closeModalBtn" class="modal-close-btn">&times;</button> 
 	        </div>
 	        <div class="modal-body">
@@ -136,7 +136,7 @@
 	        </div>
 	        <div class="modal-footer">
 	            <button id="cancelBtn" class="btn-secondary">취소</button>
-	            <button id="registerBtn" class="btn-primary">등록하기</button>
+	            <button id="registerBtn" class="btn-primary">등록</button>
 	        </div>
 	    </div>
 	</div>

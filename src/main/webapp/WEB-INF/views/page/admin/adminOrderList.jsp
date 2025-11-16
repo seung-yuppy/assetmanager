@@ -25,7 +25,10 @@
 				                <label for="statusFilter">상태:</label>
 				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
 				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
-								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>대기중</option>
+								    <c:if test="${userInfo.role != 'manager'}">
+									    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
+								    </c:if>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>${userInfo.role == 'manager' ? '대기중':'처리중'}</option>
 								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
 								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>

@@ -25,8 +25,7 @@
 				                <label for="statusFilter">상태:</label>
 				                <select id="statusFilter" onchange="setBoardParam('status', this.value)">
 				                    <option value="" ${empty param.status ? 'selected' : ''}>전체</option>
-								    <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>대기중</option>
-								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
+								    <option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>대기중</option>
 								    <option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
 								    <option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
 				                </select>
@@ -63,8 +62,8 @@
 											<td><a href="/assetmanager/admin/user/detail/${item.userId}">${item.username}</a></td>
 											<td>${item.deptName}</td>
 											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
-											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>											
-											<td><span class="status-badge status-${item.status.badgeType}">${item.status.koreanName}</span></td>
+											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
+											<td><span class="status-badge status-${item.status.badgeType}">${userInfo.role == 'manager' ? '대기중':item.status.koreanName}</span></td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

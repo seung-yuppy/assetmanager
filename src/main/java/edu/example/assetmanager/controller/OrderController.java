@@ -74,13 +74,9 @@ public class OrderController {
 			orderFormDTO.setUsername(userInfo.getUsername());
 			orderFormDTO.setPosition(userInfo.getPosition());
 		}
-		try {
-			orderService.save(orderFormDTO);
-			return "redirect:/order/list";
-		}catch(Exception e) {
-			System.out.println("구매 요청 제출 중 에러 발생 : " + e);
-			return "redirect:/form";
-		}
+		
+		orderService.save(orderFormDTO);
+		return "redirect:/order/list";
 	}
 	
 	@GetMapping("/form/standard")

@@ -42,25 +42,26 @@
 						<div class="form-date"> 
 							<div class="form-application-date">
 								<label for="application-date">반출 요청일</label> 
-								<input type="date" id="application-date" value="${rentDate}" class="form-input rent-input" readonly>
+								<input type="date" id="application-date" value="${rentDate}" class="form-input" readonly>
 							</div>
 							<div class="form-return-date">
 								<label for="return-date">반납 예정일</label> 
-								<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" readonly>
+								<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input" readonly>
 							</div>
 						</div>
 						<c:forEach var="item" items="${items}">
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
-									<label for="category">카테고리 </label> <input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input" readonly>
+									<label for="category">카테고리 </label> 
+									<input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input rent-input-width " readonly>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input" readonly>
+									<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input rent-input-width" readonly>
 								</div>
 								<div class="form-group">
 									<label for="spec">스펙</label>
 									<div class="last-input-group">
-										<input type="text" id="spec" value="${item.spec}" class="locked-input" readonly>
+										<input type="text" id="spec" value="${item.spec}" class="locked-input rent-input-width" readonly>
 										<c:if test="${approval.status == 'FINAL_APPROVAL'&& item.register==true}">
 											<button type="button" class="regist-button" data-target="registerModal" data-asset-name="${item.assetName}" data-return-date="${returnDate}" data-asset-id="${item.assetId}" data-rent-id="${item.rentId}">등록</button>
 										</c:if>

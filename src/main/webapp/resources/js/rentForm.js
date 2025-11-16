@@ -26,9 +26,9 @@ function addProduct(){
 	const targetEl = document.querySelector('#add-product-section'); 
 	const newFormRowHTML = `
 							<div class="form-row">
-								<div class="form-group category-group fixed-width-med">
+								<div class="form-group category-group fixed-width-sm">
 									<label for="category">카테고리 <span class="required">*</span></label> 
-									<select class="category" name="category" required>
+									<select class="category rent-input-width" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
@@ -41,14 +41,15 @@ function addProduct(){
 										<option value="other">기타</option>
 									</select>
 								</div>
-								<div class="form-group product-select-group fixed-width-lg">
+								<div class="form-group product-select-group fixed-width-sm">
 									<label>제품명<span class="required">*</span></label> 
-									<input list="productOptions" name="items[${currentIndex}].assetName" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
+									<input list="productOptions" name="items[${currentIndex}].assetName" class="productSelect rent-input-width" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label for="quantity">수량 <span class="required">*</span></label>
 									<div class="last-input-group">
-										<input type="number" id="quantity" name="items[${currentIndex}].count"  class="numberSelect" min="1" value="1" required> <img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
+										<input type="number" id="quantity" name="items[${currentIndex}].count"  class="numberSelect" min="1" value="1" required> 
+										<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)"></img>
 									</div>
 								</div>							
 							</div>  

@@ -36,6 +36,7 @@
 									<option value="FIRST_APPROVAL" ${param.status == 'FIRST_APPROVAL' ? 'selected' : ''}>처리중</option>
 									<option value="FINAL_APPROVAL" ${param.status == 'FINAL_APPROVAL' ? 'selected' : ''}>승인됨</option>
 									<option value="REJECT" ${param.status == 'REJECT' ? 'selected' : ''}>거절됨</option>
+									<option value="CANCEL" ${param.status == 'CANCEL' ? 'selected' : ''}>취소됨</option>
 								</select>
 							</div>
 							<form onsubmit="setBoardParam('keyword', this.keyword.value); return false;">

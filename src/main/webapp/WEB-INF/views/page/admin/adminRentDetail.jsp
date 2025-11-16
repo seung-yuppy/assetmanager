@@ -105,21 +105,38 @@
 						<c:forEach var="contentItem" items="${item}">
 						<div class="form-row">
 							<div class="form-group category-group fixed-width-med">
-								<label for="category">카테고리 </label> <input id="category"
-									name="category" type="text" value="${contentItem.categoryName}" class="locked-input"
-									readonly>
+								<label for="category">카테고리 </label> 
+								<input 
+									id="category"
+									name="category" 
+									type="text" 
+									value="${contentItem.categoryName}" 
+									class="locked-input rent-input-width"
+									readonly
+								>
 							</div>
 							<div class="form-group product-select-group fixed-width-lg">
-								<label for="productNameSelect">제품명</label> <input
-									list="productOptions" name="productNameSelect"
-									id="productNameSelect" type="text" value="${contentItem.assetName}"
-									class="locked-input" readonly>
+								<label for="productNameSelect">제품명</label> 
+								<input
+									list="productOptions" 
+									name="productNameSelect"
+									id="productNameSelect" 
+									type="text" 
+									value="${contentItem.assetName}"
+									class="locked-input rent-input-width" 
+									readonly
+								>
 							</div>
 							<div class="form-group">
 								<label for="spec">스펙</label>
 								<div class="last-input-group">
-									<input type="text" id="spec" value="${contentItem.spec}"
-										class="locked-input" readonly>
+									<input 
+										type="text" 
+										id="spec" 
+										value="${contentItem.spec}"
+										class="locked-input rent-input-width" 
+										readonly
+									>
 								</div>
 							</div>
 						</div>

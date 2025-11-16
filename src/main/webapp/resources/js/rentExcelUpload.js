@@ -265,3 +265,12 @@ function resetExcelArea(areaElement) {
         dataDisplayArea.innerHTML = ''; 
     }
 }
+
+//엑셀 파일의 이름 표시
+const excelFileInput = document.getElementById('excelFile');
+if(excelFileInput){
+	excelFileInput.addEventListener('change', function () {
+		const fileName = this.files.length > 0 ? this.files[0].name : '';
+		document.getElementById('file-name-display').textContent = fileName;
+	});
+}

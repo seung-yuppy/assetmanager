@@ -146,7 +146,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis; /* 파일명이 길 경우 ... 처리 */
-        }
+        }        
     </style>
 </head>
 <body>
@@ -191,9 +191,9 @@
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="form-group category-group fixed-width-med">
+								<div class="form-group category-group fixed-width-sm">
 									<label for="category">카테고리 <span class="required">*</span></label> 
-									<select class="category" name="category" required>
+									<select class="category rent-input-width" name="category" required>
 										<option value="" disabled selected>선택하세요</option>
 										<option value="notebook">노트북</option>
 										<option value="monitor">모니터</option>
@@ -206,16 +206,16 @@
 										<option value="other">기타</option>
 									</select>
 								</div>
-								<div class="form-group product-select-group fixed-width-lg">
+								<div class="form-group product-select-group fixed-width-sm">
 									<label>제품명 <span class="required">*</span></label> 
-									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
+									<input list="productOptions" name="items[0].assetName" id="productNameSelect" class="productSelect rent-input-width rent-input-width" placeholder="선택  또는 직접 입력" data-target="product-modal" required>
 									<input type="hidden" name="items[0].assetId" value="" />
 								</div>
 								<div class="form-group fixed-width-sm">
 									<label>수량 <span class="required">*</span></label>
 									<div class="last-input-group">
 										<input type="number" class="numberSelect" name="items[0].count" min="1" value="1" required> 
-										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)" style="visibility: hidden;"></img>
 									</div>
 								</div>
 							</div>
@@ -233,18 +233,6 @@
 							</div>
 						</div>
 
-<!-- 						<div id="excelUploadArea" class="inputArea">
-							<div class="form-group file-upload-group">
-								<span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
-								<button type="button" class="btn-template-download" style="margin-bottom: 20px;" onclick="downloadExcelTemplate()">⬇️ 템플릿 다운로드</button>
-								<label for="excelFile">엑셀 파일 선택 <span class="required">*</span></label> <input type="file" id="excelFile" name="excelFile" accept=".xlsx, .xls">
-							</div>
-							<div id="data-display-area"></div>
-						</div>
--->
-						<div class="form-actions">
-							<button type="submit" class="primary-action">제출</button>
-						</div> 
                         <div id="excelUploadArea" class="inputArea">
                             <div class="template-info-box">
                                 <span>다음 양식 파일을 다운로드하여 요청 세부 사항을 기입하고 업로드하세요.</span>
@@ -266,7 +254,10 @@
                             <div id="data-display-area" style="margin-top: 1rem;">
                                 <!-- 엑셀 미리보기 데이터가 여기에 표시됩니다. -->
                             </div>
-                        </div>						
+                        </div>	
+                        <div class="form-actions">
+							<button type="submit" class="primary-action">제출</button>
+						</div> 					
 					</form>
 				</div>
 			</div>

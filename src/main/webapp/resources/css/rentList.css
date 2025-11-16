@@ -122,6 +122,7 @@
 
 .data-table tbody tr:hover {
     background-color: var(--gray-color-light);
+    cursor:pointer;
 }
 
 /* --- 페이지네이션 --- */

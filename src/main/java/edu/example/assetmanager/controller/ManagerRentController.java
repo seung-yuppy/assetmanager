@@ -28,15 +28,11 @@ public class ManagerRentController {
 	
 	@GetMapping("/rent/list")
 	public String managerList(HttpSession session, RentParamDTO rentParamDTO, Model model) {
-		System.out.println("session 들어와??"+session);
 		Integer userId = (Integer) session.getAttribute("userId");	
-		System.out.println("approverId 몇번이야???" + userId);
-        if (userId == null) { 
+        if (userId == null) 
             return "redirect:/login";    
-        }
         rentParamDTO.setUserId(userId);
         PageResponseDTO<RentListDTO> managerList = rentService.managerList(rentParamDTO);
-        System.out.println("managerList 나와??"+managerList);
         model.addAttribute("response", managerList);
         
         return "admin/adminRentList";

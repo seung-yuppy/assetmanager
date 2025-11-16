@@ -308,7 +308,7 @@
 		SELECT COUNT(*)
 		FROM Rent r
 		INNER JOIN Approval a ON r.approval_id = a.id
-		WHERE a.approver_id = #{userId} AND a.status = 'pending'AND r.is_delay = 0
+		WHERE a.approver_id = #{userId} AND a.status = 'pending' AND r.is_delay = 0
 	</select>
 	
 	<select id="countReturn">

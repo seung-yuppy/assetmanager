@@ -215,7 +215,18 @@
 			                    			<tr>
 			                    				<td>${order.title}</td>
 			                    				<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/></td>
-			                    				<td><span class="status-badge status-${order.status.badgeType}">${order.status.koreanName}</span></td>
+			                    				<c:choose>									       
+											        <c:when test="${userInfo.role == 'manager' && order.status == 'FIRST_APPROVAL'}">
+											            <td>
+											            	<span class="status-badge status-waited">대기중</span>
+											        	</td>
+											        </c:when>
+											        <c:otherwise>
+											        	<td>
+											            	<span class="status-badge status-${order.status.badgeType}">${order.status.koreanName}</span>
+											        	</td>
+											        </c:otherwise>
+											    </c:choose>
 			                    			</tr>
 			                    		</c:forEach>
 			                    	</c:otherwise>
@@ -248,7 +259,18 @@
 		                    				<tr>
 		                    					<td>${rent.title}</td>
 		                    					<td><fmt:formatDate value="${rent.rentDate}" pattern="yyyy-MM-dd"/></td>
-		                    			        <td><span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span></td>
+												<c:choose>									       
+											        <c:when test="${userInfo.role == 'manager' && rent.status == 'FIRST_APPROVAL'}">
+											            <td>
+											            	<span class="status-badge status-waited">대기중</span>
+											        	</td>
+											        </c:when>
+											        <c:otherwise>
+											        	<td>
+											            	<span class="status-badge status-${rent.status.badgeType}">${rent.status.koreanName}</span>
+											        	</td>
+											        </c:otherwise>
+											    </c:choose>
 		                    				</tr>
 		                    			</c:forEach>
 		                    		</c:otherwise>

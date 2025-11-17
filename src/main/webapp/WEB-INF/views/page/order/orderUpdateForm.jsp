@@ -189,7 +189,8 @@
 								<div class="form-row">
 									<div class="form-group category-group fixed-width-med">
 										<label for="category">카테고리 </label>
-										<input id="category" name="products[${status.index}].categoryId" type="text" value="${product.categoryId}" class="locked-input" readonly>
+										<input type="text" value="${product.categoryName}" class="locked-input" readonly>
+										<input id="category" name="products[${status.index}].categoryId" type="text" value="${product.categoryId}" class="locked-input" readonly style="display:none;">
 									</div>
 									<div class="form-group product-select-group fixed-width-lg">
 										<label for="productNameSelect">제품명</label>
@@ -197,17 +198,17 @@
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="price">단가(₩)</label>
-										<input type="text" id="price" name="price" value='<fmt:formatNumber value="${product.price}" type="number"/>' data-value="${product.price}" class="locked-input" readonly>
+										<input type="text" id="price" name="price" value='${product.price}' data-value="${product.price}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-sm">
 										<label for="quantity">수량 </label>
-										<input type="number" class="locked-input" id="quantity" name="products[${status.index}].count" min="1" max="10" value="${product.count}" readonly>
+										<input type="number" id="quantity" name="products[${status.index}].count" min="1" max="10" value="${product.count}">
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="totalPrice">총액(₩)</label>
 										<div class="last-input-group">
 											<input type="text" id="totalPrice" name="totalPrice" value="${product.count * product.price}" class="locked-input" readonly>
-											<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)" style="visibility:hidden;"></img>
+											<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)"></img>
 										</div>	
 									</div>
 								</div>
@@ -217,7 +218,8 @@
 							</div>
 							<div class="form-group">
 								<label for="reason">구매 요청 사유 <span class="required">*</span></label>
-								<textarea id="reason" name="requestMsg" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." maxlength="200" onkeyup="updateCharCount(this, 200)"></textarea>
+								<textarea id="reason" name="requestMsg" rows="4" required placeholder="구매 요청이 필요한 구체적인 구체적인 사유를 입력해주세요." 
+										  maxlength="200" onkeyup="updateCharCount(this, 200)"> ${order.requestMsg}</textarea>
 								<div class="char-count-display text-align-right">
 									(<span id="currentLength">0</span> / 200)
 								</div>

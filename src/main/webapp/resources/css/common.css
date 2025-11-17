@@ -4,13 +4,17 @@
 :root {
 	--primary-color: #1c4587;
 	--primary-hover: #163668;
+	--primary-button-color:#315b9a;
+	--primary-button-hover:#1c4587;
 	--background-color: #f5f7fa;
 	--white-color: #ffffff;
 	--red-color: crimson;
-	--red-hover: #dc2626;
+	--red-hover: #C11236;
 	--border-white: #e5e7eb;
 	--dark-color: #18181b;
     --gray-color: gray; 
+    --cancel-gray : #888;
+    --cancel-gray-hover : #666;
     --gray-color-light: #f4f4f5;
     --green-color: #10b981;
     --yellow-color: #f59e0b;
@@ -157,13 +161,11 @@ body {
  	 
  	&:hover {
     	background-color: var(--red-hover); 
-        box-shadow: 0 8px 20px rgba(233, 30, 99, 0.5);
-        transform: translateY(-3px); 
  	}
 }
 
 .edit-button {
-    background-color: var(--blue-color);
+    background-color: var(--primary-button-color);
     color: var(--white-color);
     border: none;
 	padding: 7px 14px;
@@ -174,12 +176,10 @@ body {
     text-align: center;
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out, transform 0.1s ease-out;
- 	 
- 	&:hover {
-    	background-color: var(--blue-dark); 
-        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
-        transform: translateY(-3px); 
- 	}
+    
+    &:hover{
+    	background-color: var(--primary-button-hover); 
+    }
 }
 
 .adminReturn-button {

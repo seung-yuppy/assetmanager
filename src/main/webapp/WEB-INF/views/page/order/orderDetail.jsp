@@ -95,9 +95,7 @@
 						</div>
 						<div class="form-actions">
 							<c:if test="${approval.status == 'CANCEL'}">
-								
-								
-								<button id="update-btn" type="button" class="update-action" onclick="location.href='/assetmanager/order/update/162'">수정</button>
+								<button id="update-btn" type="button" class="update-action" onclick="location.href='/assetmanager/order/update/${order.id}'">수정</button>
 							</c:if>
 							<c:if test="${approval.status == 'PENDING'}">
 								<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>

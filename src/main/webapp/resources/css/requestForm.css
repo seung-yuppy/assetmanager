@@ -105,7 +105,7 @@
     font-size: 16px;
     font-weight: 600;
     color: #343a40;
-    margin-bottom:4px;
+    margin-bottom:7px;
 }
 
 .form-reason label {
@@ -113,7 +113,7 @@
     font-size: 16px;
     font-weight: 600;
     color: #343a40;
-    margin-bottom:4px;
+    margin-bottom:7px;
 }
 
 .form-date label {
@@ -121,7 +121,7 @@
     font-size: 16px;
     font-weight: 600;
     color: #343a40;
-    margin-bottom:4px;
+    margin-bottom:7px;
 }
 .form-date input[type="date"] {
     width: 330px;
@@ -162,7 +162,6 @@ input:focus, select:focus, textarea:focus {
     background-color: #f8f9fa; /* 밝은 회색으로 변경 */
     color: #495057;
     cursor: not-allowed;
-    font-weight: bold;
 }
 
 /* 체크박스 그룹 */
@@ -206,20 +205,26 @@ input:focus, select:focus, textarea:focus {
 }
 
 .primary-action {
-    background-color: #1c4587;
+    background-color: var(--primary-color);
     color: white;
 }
 .primary-action:hover {
-    background-color: #1a3c6e; /* 호버 시 색상 진하게 */
+    background-color: var(--primary-hover); /* 호버 시 색상 진하게 */
 }
 
+.cancel-action:hover{
+    background-color: var(--cancel-gray-hover);
+}
 .cancel-action{
-    background-color: var(--red-color);
+    background-color: var(--cancel-gray);
     color: white;  
 }
-
-.cancel-action:hover {
-    background-color: var(--red-hover); /* 호버 시 색상 진하게 */
+.update-action{
+	background-color: var(--primary-button-color);
+	color: white;
+}
+.update-action:hover{
+	background-color: var(--primary-button-hover);
 }
 
 .form-section {
@@ -418,16 +423,21 @@ input:focus, select:focus, textarea:focus {
 }
 
 .regist-button {
-	width: 46px;
+	font-size: medium;
+	width: 4rem;
     border: 0;
-    background-color: #1c4587;
+    background-color: var(--primary-button-color);
     border-radius: 6px;
     color: white;
     cursor: pointer;
 }
+.regist-button:hover {
+	background-color: var(--primary-button-hover);
+}
 
 .regist-button-save {
-	width: 46px;
+	font-size: medium;
+	width: 4rem;
     border: 0;
     background-color: lightslategray;
     border-radius: 6px;

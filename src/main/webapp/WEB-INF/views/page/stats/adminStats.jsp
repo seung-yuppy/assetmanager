@@ -85,6 +85,10 @@
         .report-comment-text{
         	display: none;
         }
+        
+        .page-description{
+        	color: var(--gray-color);
+        }
             
     </style>
 </head>
@@ -102,13 +106,14 @@
 		    <div class="dashboard-container">
 		        <!-- 보고서 콘텐츠 영역 (이 부분이 PDF로 변환됨) -->
 		        <div class="flex justify-between">
-			        <div class="page-description">
+			        <div>
 				    	<h1>구매 리포트</h1>
-			            <span >구매 통계를 확인하고 보고서를 생성합니다.</span>
+			            <span class="page-description">구매 통계를 확인하고 보고서를 생성합니다.</span>
 			        </div>
 			        <div class="flex flex-col justify-end items-center">
 			            <div class="flex items-center space-x-2 mt-4 sm:mt-0">
-			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200">보고서 생성</button>
+			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200"
+			                style="background-color: var(--primary-button-color);">보고서 생성</button>
 			            </div>
 			        </div>
 		        </div>
@@ -158,9 +163,9 @@
 		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
-		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">년</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">전년 대비</th>
+		                                    <th class="px-4 py-3 text-left text-sm font-bold text-gray-600 uppercase tracking-wider">년</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">전년 대비</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody id="annualTableBody" class="bg-white divide-y divide-gray-200">
@@ -190,9 +195,9 @@
 		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
-		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">카테고리</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
+		                                    <th class="px-4 py-3 text-left text-sm font-bold text-gray-600 uppercase tracking-wider">카테고리</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody id="categoryTableBody" class="bg-white divide-y divide-gray-200">
@@ -222,9 +227,9 @@
 		                        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
 		                            <thead class="bg-gray-100">
 		                                <tr>
-		                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">부서</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
-		                                    <th class="px-4 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
+		                                    <th class="px-4 py-3 text-left text-sm font-bold text-gray-600 uppercase tracking-wider">부서</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">구매 금액 (원)</th>
+		                                    <th class="px-4 py-3 text-right text-sm font-bold text-gray-600 uppercase tracking-wider">비율 (%)</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody id="deptTableBody" class="bg-white divide-y divide-gray-200">

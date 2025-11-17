@@ -45,7 +45,7 @@
 .data-table th, .data-table td {
     padding: 15px 10px;
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     border-bottom: 1px solid var(--border-white); /* 밝은 경계선 */
 }
 

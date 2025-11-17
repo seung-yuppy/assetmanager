@@ -202,7 +202,7 @@
 									<input type="text" name="products[0].spec" >
 								</div>
 								<div class="form-group fixed-width-med">
-									<label for="price">단가 (원) <span class="required">*</span></label>
+									<label for="price">단가 (₩) <span class="required">*</span></label>
 									<input type="number" id="price" name="products[0].price" value="0" min="0" required>
 								</div>
 								<div class="form-group fixed-width-sm">

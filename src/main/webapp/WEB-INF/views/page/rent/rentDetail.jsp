@@ -87,9 +87,7 @@
 							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
 						</c:if>
 						<c:if test="${approval.status == 'CANCEL'}">
-							<a href="/assetmanager/rent/update/form/${rentdto.id}" class="edit-button">
-								수정
-							</a>
+							<button id="update-btn" type="button" class="update-action" onclick="location.href='/assetmanager/rent/update/${rentdto.id}'">수정</button>
 						</c:if>
 					</div>
 				</div>

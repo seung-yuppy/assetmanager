@@ -56,7 +56,8 @@
 									<input id="category" name="categoryName" type="text" value="${item.categoryName}" class="locked-input rent-input-width " readonly>
 								</div>
 								<div class="form-group product-select-group fixed-width-lg">
-									<label for="productNameSelect">제품명</label> <input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input rent-input-width" readonly>
+									<label for="productNameSelect">제품명</label> 
+									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input rent-input-width" readonly>
 								</div>
 								<div class="form-group">
 									<label for="spec">스펙</label>
@@ -84,6 +85,11 @@
 					<div class="form-actions">
 						<c:if test="${approval.status == 'PENDING'}">
 							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
+						</c:if>
+						<c:if test="${approval.status == 'CANCEL'}">
+							<a href="/assetmanager/rent/update/form/${rentdto.id}" class="edit-button">
+								수정
+							</a>
 						</c:if>
 					</div>
 				</div>

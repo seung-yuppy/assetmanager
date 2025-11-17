@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.AssetDTO;
 import edu.example.assetmanager.domain.AssetReturnDTO;
 import edu.example.assetmanager.domain.RentContentDTO;
@@ -108,4 +109,15 @@ public interface RentDAO {
 	// 요청 취소시 Approval테이블 cancel 상태 추가
 	public boolean cancelApproval(int id);
 	
+	// RentId로 Rent_Content 삭제하기 
+	public boolean deleteRentContentByRentId(Long rentId);
+
+	// Rent 테이블 변경
+	public boolean updateRent(RentDTO rentDTO);
+
+	// Approval 테이블 변경
+	public boolean updateApproval(ApprovalDTO approvalDTO);
+	
+	// assetId로 Asset 테이블의 is_request 1 해제하기 
+	public boolean updateAssetRequest(@Param("assetId") int assetId);
 }

@@ -1,5 +1,5 @@
 // 제품 추가/제거 관련
-let productRowIndex  = 0;
+/*let productRowIndex  = 0;*/
 
 function removeProduct(btn){
 	btn.closest(".form-row").remove();

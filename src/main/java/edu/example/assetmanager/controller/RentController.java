@@ -165,4 +165,38 @@ public class RentController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@GetMapping("/update/form/{id}")
+	public String rentUpdate(@PathVariable("id") Long id, Model model, HttpSession session) {
+		Integer userId = (Integer)session.getAttribute("userId");	
+		if(userId == null) 
+			return "redirect:/login";
+		
+		RentShowDTO showDTO = rentService.getRentDetail(id);
+		List<RentContentDTO> showItems = rentService.getRentContentDetail(id);
+		UserInfoDTO userInfo= userService.getUser(userId);
+		List<UserInfoDTO> admin = rentService.findByAdminUser();
+		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
+		ApprovalDTO approvalDTO = rentService.getApprovalByRentId(id);
+		
+		model.addAttribute("admin", admin);
+		model.addAttribute("manager", manager);
+		session.setAttribute("user", userInfo);		
+		model.addAttribute("rentInfo", showDTO);
+		model.addAttribute("rentItems", showItems);
+		model.addAttribute("approval", approvalDTO);
+		
+		return "/rent/rentUpdateForm";
+	}
+	
+	@PostMapping("/update/approval")
+	public String rentUpdateApproval(ApprovalDTO approvalDTO, RentDTO rentDTO, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null)
+			return "redirect:/login";
+		
+		if (rentService.updateRentForm(approvalDTO, rentDTO, userId)) 
+			return "redirect:/rent/list";
+		else 
+			return "redirect:/rent/update/form/" + rentDTO.getId();	
+	}
 }

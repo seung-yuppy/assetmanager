@@ -405,4 +405,52 @@ public class RentService {
 		notificationDTO.setMessage(msg);
 		return notificationService.insert(notificationDTO);
 	}
+	
+	@Transactional
+	public boolean updateRentForm(ApprovalDTO approvalDTO, RentDTO rentDTO, int userId) {
+		List<RentContentDTO> assets = rentDAO.getRentContent(rentDTO.getId());
+		for (RentContentDTO asset : assets)
+			rentDAO.updateAssetRequest(asset.getAssetId());
+		
+		if (rentDAO.deleteRentContentByRentId(rentDTO.getId())) {	
+			// items 가지고 오기 
+			List<RentContentDTO> items = rentDTO.getItems();
+			if (rentDTO.getItems() == null || rentDTO.getItems().isEmpty()) 
+				return false;
+			
+			// items의 첫번째를 가지고 와서 title 만들기
+			RentContentDTO itemName = items.get(0);
+	        String title = itemName.getAssetName(); 
+	    
+	        if (items.size() > 1) {
+	            title += " 등 " + (items.size()) + "개";
+	        }
+	        rentDTO.setTitle(title);
+	        
+			if (rentDAO.updateRent(rentDTO) ) {
+				
+				approvalDTO.setId(rentDTO.getApprovalId());
+				if (rentDAO.updateApproval(approvalDTO)) {
+					// 제품 목록 가져오기
+					for (RentContentDTO item : items) {
+						String assetName = item.getAssetName();
+						int count = item.getCount();
+
+						// count해서 assetId 찾기
+						List<RentContentDTO> list = rentDAO.selectCount(assetName, count);		
+
+						// assetId를 RentContent에 insert
+						for (RentContentDTO dto : list) {
+							dto.setRentId(rentDTO.getId());
+							rentDAO.insertRentContent(dto);
+							assetDAO.requestAsset(dto.getAssetId());
+						}
+					}
+					insertRentNotification(approvalDTO, rentDTO, userId);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

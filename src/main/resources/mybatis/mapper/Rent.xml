@@ -487,5 +487,40 @@
 		SET status = 'CANCEL'
 		WHERE id IN (SELECT approval_id FROM Rent  WHERE id = #{id})
 	</update>
+	
+	<delete id="deleteRentContentByRentId">
+		DELETE FROM Rent_Content
+		WHERE rent_id = #{rentId}
+	</delete>
+	
+	<update id="updateRent">
+		UPDATE Rent
+		SET
+			is_valid = 1,
+			request_msg = #{requestMsg},
+			rent_date = SYSDATE,
+			return_date = #{returnDate},
+			title = #{title}
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<update id="updateApproval">
+		UPDATE Approval
+		SET
+			status = 'pending',
+			approver_id = #{approverId}, 
+			manager_id = #{managerId}
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<update id="updateAssetRequest">
+		UPDATE Asset
+		SET
+			is_request = 0
+		WHERE
+			id = #{assetId}
+	</update>
 
 </mapper>

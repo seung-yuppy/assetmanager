@@ -30,4 +30,12 @@
 			</trim>
 		where id = #{id}
 	</update>
+	
+	<update id="updateApproval">
+		update approval
+		set approver_id = #{approverId},
+			manager_id = #{managerId},
+			status = 'pending'
+		where id = #{id}
+	</update>
 </mapper>

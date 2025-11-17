@@ -144,6 +144,7 @@ public class OrderService {
 	}
 	
 	// 구매 요청 취소
+	@Transactional
 	public boolean cancelOrder(int id) {
 		if (orderDAO.cancelOrder(id)) {
 			if (orderDAO.cancelApproval(id))
@@ -167,5 +168,23 @@ public class OrderService {
 
 	public List<OrderDTO> getOrderTop3(int userId) {
 		return orderDAO.getOrderTop3(userId);
+	}
+	
+	@Transactional
+	public void updateOrder(OrderFormDTO orderFormDTO) {
+		// 결재 정보 수정
+		ApprovalDTO approvalDTO = approvalDAO.getApprovalById(orderFormDTO.getApprovalId().intValue());
+		approvalDAO.updateApproval(approvalDTO);
+		// 기존 주문 물품 삭제
+		orderDAO.deleteOrderContentsByOrderId(orderFormDTO.getId().intValue());
+		
+		// 새 구매 정보 저장
+		orderDAO.insertOrder(orderFormDTO);
+		for (OrderContentDTO content : orderFormDTO.getProducts()) {
+			content.setOrderId(orderFormDTO.getId());
+			orderDAO.insertOrderContent(content);
+		}
+		// 알림 생성
+		insertNotification(orderFormDTO);
 	}
 }

@@ -1,6 +1,6 @@
 // [수정된 typeBotMessage 함수]
 // 이 코드로 기존 함수를 완전히 덮어쓰세요.
-function typeBotMessage(chatItems, text, speed = 40) {
+function typeBotMessage(chatItems, text, speed = 30) {
     return new Promise(resolve => {
         const newBotLi = document.createElement('li');
         newBotLi.classList.add('bot-item');

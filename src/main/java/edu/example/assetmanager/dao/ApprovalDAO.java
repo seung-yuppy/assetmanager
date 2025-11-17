@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import edu.example.assetmanager.domain.ApprovalDTO;
 @Mapper
 public interface ApprovalDAO {
-	// Approval 요청
-	public boolean insertApproval(ApprovalDTO approvalDTO);
 	public ApprovalDTO getApprovalById(int id);
+	public boolean insertApproval(ApprovalDTO approvalDTO);
 	public boolean rejectApproval(ApprovalDTO approvalDTO);
 	public boolean approveApproval(ApprovalDTO approvalDTO);
+	public boolean updateApproval(ApprovalDTO approvalDTO);
 }

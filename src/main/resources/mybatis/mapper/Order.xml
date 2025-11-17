@@ -167,6 +167,11 @@
         VALUES (#{orderId}, #{categoryId}, #{itemName}, #{price}, #{count} , #{spec})
     </insert>
     
+    <delete id="deleteOrderContentsByOrderId">
+    	delete from order_content 
+		where order_id = #{id}
+    </delete>
+    
     <select id="getOrderById" parameterType="int">
     	select * 
     	from orders 

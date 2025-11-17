@@ -56,7 +56,6 @@ public class OrderController {
 		//결재자 정보
 		List<UserInfoDTO> admin = userService.getUsersByRole("admin");
 		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
-		System.out.println("부서 id : " + userInfo.getDepartmentId());
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);
 		
@@ -76,6 +75,50 @@ public class OrderController {
 		}
 		
 		orderService.save(orderFormDTO);
+		return "redirect:/order/list";
+	}
+	
+	@GetMapping("/update/{id}")
+	public String updateForm(@PathVariable int id, HttpSession httpSession, Model model) {
+		OrderDetailRESP response = orderService.getOrderDetail(id);
+		OrderDTO orderDTO =  response.getOrderDto();
+		ApprovalDTO approvalDTO = response.getApprovalDTO();
+		int userId = (int)httpSession.getAttribute("userId");
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+
+		
+		// 결재에 포함된 사용자만 조회 가능 
+		if((userId != orderDTO.getUserId()) && (userId != approvalDTO.getManagerId()) && (userId != approvalDTO.getApproverId())) 
+			return "redirect:/login";
+		
+		model.addAttribute("order", orderDTO);
+		model.addAttribute("approval", approvalDTO);
+		model.addAttribute("products", response.getProducts());
+		model.addAttribute("empInfo", response.getApproverInfoDTO());
+		
+		// 카테고리 목록
+		List<CategoryDTO> categories = categoryService.getCategories();
+		model.addAttribute("categories",categories);
+		
+		//결재자 정보
+		List<UserInfoDTO> admin = userService.getUsersByRole("admin");
+		List<UserInfoDTO> manager = userService.getUsersByRoleAndDept("manager", userInfo.getDepartmentId());
+		model.addAttribute("admin", admin);
+		model.addAttribute("manager", manager);
+		
+		return "/order/orderUpdateForm";
+	}
+	
+	@PostMapping("/update")
+	public String updateOrder(HttpSession httpSession, OrderFormDTO orderFormDTO){
+		UserInfoDTO userInfo = (UserInfoDTO) httpSession.getAttribute("userInfo");
+		if (userInfo != null) {
+			orderFormDTO.setUserId(userInfo.getId());
+			orderFormDTO.setUsername(userInfo.getUsername());
+			orderFormDTO.setPosition(userInfo.getPosition());
+		}
+		
+		orderService.updateOrder(orderFormDTO);
 		return "redirect:/order/list";
 	}
 	
@@ -151,5 +194,7 @@ public class OrderController {
 		}
 	    return ResponseEntity.ok(response);
 	}
+	
+	
 	
 }

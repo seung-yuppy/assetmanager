@@ -82,11 +82,9 @@ public class ApprovalService{
 		    notificationDTO.setMessage(buildMessage(targetType, orderDTO.getTitle(),isApproved));
 		    
 		} else { 
-			System.out.println("############ rent 관련");
 			RentListDTO rentListDTO = rentService.getRentByApprovalId(approvalId);
 			String targetType;
 			if(rentListDTO.getIsDelay()==1) {
-				System.out.println("##################연장 확인");
 				targetType = "delay";
 				if(isApproved) {
 					// 연장 승인 시 알림은 없음
@@ -159,6 +157,14 @@ public class ApprovalService{
 	    } else {
 	        return action + "(" + title + ")이 반려되었습니다.";
 	    }
+	}
+	
+	public ApprovalDTO getApprovalById(int id) {
+		return approvalDAO.getApprovalById(id);
+	}
+	
+	public boolean updateApproval(ApprovalDTO approvalDTO) {
+		return approvalDAO.updateApproval(approvalDTO);
 	}
 
 }

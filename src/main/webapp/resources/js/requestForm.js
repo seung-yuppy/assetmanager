@@ -161,6 +161,10 @@ function setTitle(e){
     	const select2 = container.querySelector('#select2-product-select-container');
         if (select2){
         	content = select2.textContent;
+        }else{
+        	console.log("select2 없음");
+        	const itemNameInput = container.querySelector("input[name*='itemName']");
+        	content = itemNameInput.value;
         }
     }else{ // 엑셀 업로드 상태
     	container = document.querySelector("#data-display-area");

@@ -41,8 +41,6 @@ public class AdminOrderController {
 		model.addAttribute("approval", response.getApprovalDTO());
 		model.addAttribute("products", response.getProducts());
 		model.addAttribute("empInfo", response.getApproverInfoDTO());
-		System.out.println("결재한 관리자 이름 : " + response.getApproverInfoDTO().getApproverInfo().getUsername());
-		System.out.println("결재한 부장 이름 : " + response.getApproverInfoDTO().getManagerInfo().getUsername());
 		return "/admin/adminOrderDetail";
 	}
 	

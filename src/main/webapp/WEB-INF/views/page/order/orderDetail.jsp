@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -93,6 +94,11 @@
 							<div id="data-display-area"></div>
 						</div>
 						<div class="form-actions">
+							<c:if test="${approval.status == 'CANCEL'}">
+								
+								
+								<button id="update-btn" type="button" class="update-action" onclick="location.href='/assetmanager/order/update/162'">수정</button>
+							</c:if>
 							<c:if test="${approval.status == 'PENDING'}">
 								<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
 							</c:if>

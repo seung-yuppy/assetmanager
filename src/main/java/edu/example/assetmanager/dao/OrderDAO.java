@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.example.assetmanager.domain.ApprovalDTO;
 import edu.example.assetmanager.domain.OrderContentDTO;
 import edu.example.assetmanager.domain.OrderDTO;
 import edu.example.assetmanager.domain.OrderFormDTO;
@@ -31,6 +32,7 @@ public interface OrderDAO {
     public boolean insertOrderContent(OrderContentDTO content);
     public List<OrderContentDTO> getContentsByOrderId(int id);
     public boolean updateContentRegisterCount(int id);
+    public boolean deleteOrderContentsByOrderId(int id);
 
     // User DashBoard
     public int getPendingOrder(@Param("userId") int userId);
@@ -39,4 +41,5 @@ public interface OrderDAO {
     
     //Approval
 	public boolean cancelApproval(int id);
+	public boolean updateApproval(ApprovalDTO approvalDTO);
 }

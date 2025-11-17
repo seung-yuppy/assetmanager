@@ -10,14 +10,13 @@
 .header-list {
 	display: flex;
 	align-items: center;
-	gap: 23px;
+	gap: 4px;
 }
 
 .header-profile-image {
     width: 35px;
     height: 35px;
 	border-radius: 50%;
-	margin-top: 8px
 }
 
 .header-bell {
@@ -29,7 +28,18 @@
 .header-item-profile {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	padding : 0;
+	width: 47px;
+	height: 47px;
+	border-radius: 50%; /* 원형으로 유지 */
 	gap: 10px;
+}
+
+.header-item-profile:hover {
+	background-color: rgba(100, 100, 100, 0.1); /* 연한 회색 틴트 사용 */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 미묘한 그림자 유지 */
+	transform: translateY(-1px); 
 }
 
 .logout-button {

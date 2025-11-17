@@ -66,7 +66,7 @@
 											<td>${item.deptName}</td>
 											<td><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd" /></td>
 											<td><fmt:formatNumber value="${item.totalPrice}" type="number"/></td>
-											<td><span class="status-badge status-${item.status.badgeType}">${userInfo.role == 'manager' ? '대기중':item.status.koreanName}</span></td>
+											<td><span class="status-badge status-${item.status.badgeType}">${userInfo.role == 'manager' and item.status.koreanName == '처리중' ? '대기중':item.status.koreanName}</span></td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

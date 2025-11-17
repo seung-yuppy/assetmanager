@@ -25,7 +25,7 @@
       /* 공통 섹션 스타일 */
 .section-card {
     background-color: var(--white-color); /* 흰색 카드 배경 */
-    padding: 20px;
+    padding: 24px;
     border-radius: 12px;
     box-shadow: var(--card-shadow); /* 밝은 배경에 맞는 옅은 그림자 */
     margin-top: 25px;
@@ -176,7 +176,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 15px; /* 요소 간 간격 */
-    padding: 10px 0;
 }
 
 /* 검색 박스 스타일 */

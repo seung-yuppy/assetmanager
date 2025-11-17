@@ -59,26 +59,66 @@
 
 						<!-- 내용 목록  -->
 						<div class="applicant-info-list">
-							<dl class="applicant-info-f-list">
-								<dt>사번</dt>
-								<dd>${empInfo.userInfo.empNo}</dd>
-
-								<dt>이름</dt>
-								<dd>${empInfo.userInfo.username}</dd>
-								
-								<dt>직급</dt>
-								<dd>${empInfo.userInfo.position}</dd>
-							</dl>
-							<dl class="applicant-info-s-list">
-								<dt>부서</dt>
-								<dd>${empInfo.userInfo.deptName}</dd>
-
-								<dt>연락처</dt>
-								<dd>${empInfo.userInfo.phone}</dd>
-
-								<dt>주소</dt>
-								<dd>${empInfo.userInfo.deptAddress}</dd>
-							</dl>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>사번</label> 
+									<input 
+										type="text"
+								   		value="${empInfo.userInfo.empNo}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>
+								<div class="form-group">
+									<label>이름</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.username}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>
+							</div>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>부서</label> 
+									<input 
+										type="text"
+								   		value="${empInfo.userInfo.deptName}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>							
+								<div class="form-group">
+									<label>직급</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.position}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>							
+							</div>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>연락처</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.phone}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>
+								<div class="form-group">
+									<label>주소</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.deptAddress}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>							
+							</div>
 						</div>
 					</div>
 
@@ -93,13 +133,20 @@
 									<label for="application-date">연장 요청일</label>
 								</c:if>								
 								<input type="date"
-									   id="application-date" value="${rentDate}"
-									   class="locked-input" readonly>
+									   id="application-date" 
+									   value="${rentDate}"
+									   class="locked-input" 
+									   readonly
+								>
 							</div>
 							<div class="form-return-date">
 								<label for="return-date">반납 예정일</label> 
 								<input type="date"
-									   id="return-date" value="${returnDate}" class="locked-input" readonly>
+									   id="return-date" 
+									   value="${returnDate}" 
+									   class="locked-input" 
+									   readonly
+								>
 							</div>
 						</div>
 						<c:forEach var="contentItem" items="${item}">

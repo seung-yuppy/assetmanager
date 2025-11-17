@@ -2,7 +2,7 @@
 
 /* 정보 섹션 전체를 감싸는 컨테이너 */
 .applicant-info-section {
-    margin-bottom: 2.5rem; /* 40px, 아래 결재 정보와의 간격 */
+    margin-bottom: 2.5rem;
 }
 
 /* '신청자 정보' 제목 스타일 */
@@ -16,7 +16,14 @@
 
 .applicant-info-list {
 	display: flex;
-    gap: 250px;
+	gap: 20px;
+	    margin-left: 2.5rem;
+}
+
+.applicant-item {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 /* dt, dd 목록 스타일 */

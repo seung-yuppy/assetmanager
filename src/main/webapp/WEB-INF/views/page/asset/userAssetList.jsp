@@ -95,12 +95,12 @@
 					                       		</div>
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.activeBtn == true}">
-						                        		반납중⌛          		
+						                        		반납중       		
 					                        		</c:if>
 					                       		</div>
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.delaying == 2}">
-						                        		연장중⌛          		
+						                        		연장중       		
 					                        		</c:if>
 					                       		</div>
 					                        </td>

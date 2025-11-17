@@ -184,14 +184,6 @@
 							</div>
 						</div>
 						<div id="formInputArea" class ="inputArea">
-							<div class="form-content">
-								<div class="form-date">
-									<div class="form-application-date">
-										<label for="application-date">구매 요청일</label> 
-										<input type="date" id="application-date" value="${today}" class="form-input rent-input" disabled style="width:192px;">
-									</div>
-								</div>
-							</div>
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>

@@ -31,14 +31,6 @@
 					<form action="#" method="post">
 						<h2 class="form-section-title">요청 정보</h2>
 						<div id="formInputArea" class ="inputArea">
-							<div class="form-date">
-								<div class="form-application-date">
-									<label for="application-date">구매 요청일</label> 
-									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" 
-										   pattern="yyyy-MM-dd"/>' class="form-input rent-input locked-input" readonly
-										   style="width:285px;">
-								</div>
-							</div>
 							<c:forEach var="product" items="${products}">
 								<c:forEach var="i" begin="1" end="${product.registerCount}">
 										<div class="form-row" data-content-id ="${product.id}">

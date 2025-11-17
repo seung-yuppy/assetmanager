@@ -27,45 +27,80 @@
 						<!-- 결재라인 전체 컨테이너 -->
 						<%@ include file="/WEB-INF/views/component/approverReadonly.jsp"%>
 					</div>
+
 					<!-- 신청자 정보 섹션 전체 컨테이너 -->
 					<div class="applicant-info-section">
 						<!-- 제목 -->
 						<h2 class="applicant-section-title">요청자 정보</h2>
-						<!-- 내용 목록 -->
+
+						<!-- 내용 목록  -->
 						<div class="applicant-info-list">
-							<dl class="applicant-info-f-list">
-								<dt>사번</dt>
-								<dd>${empInfo.userInfo.empNo}</dd>
-
-								<dt>이름</dt>
-								<dd>${empInfo.userInfo.username}</dd>
-								
-								<dt>직급</dt>
-								<dd>${empInfo.userInfo.position}</dd>
-
-							</dl>
-							<dl class="applicant-info-s-list">
-								<dt>부서</dt>
-								<dd>${empInfo.userInfo.deptName}</dd>							
-
-								<dt>연락처</dt>
-								<dd>${empInfo.userInfo.phone}</dd>
-
-								<dt>주소</dt>
-								<dd>${empInfo.userInfo.deptAddress}</dd>
-							</dl>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>사번</label> 
+									<input 
+										type="text"
+								   		value="${empInfo.userInfo.empNo}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>
+								<div class="form-group">
+									<label>이름</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.username}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>
+							</div>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>부서</label> 
+									<input 
+										type="text"
+								   		value="${empInfo.userInfo.deptName}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly
+									>							
+								</div>							
+								<div class="form-group">
+									<label>직급</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.position}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>							
+							</div>
+							<div class="applicant-item">
+								<div class="form-group">
+									<label>연락처</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.phone}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>
+								<div class="form-group">
+									<label>주소</label> 
+									<input
+										type="text"
+								   		value="${empInfo.userInfo.deptAddress}" 
+								   		class="locked-input rent-input-width" 
+								   		readonly								
+									>							
+								</div>							
+							</div>
 						</div>
 					</div>
+
 					<form action="#" method="post">
 						<h2 class="form-section-title">요청 내용</h2>
 						<div id="formInputArea" class ="inputArea">
-							<div class="form-date">
-								<div class="form-application-date">
-									<label for="application-date">구매 요청일</label> 
-									<input type="date" id="application-date" value='<fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd"/>' 
-										   class="form-input rent-input locked-input" readonly style="width:192px;">
-								</div>
-							</div>
 							<c:forEach var="product" items="${products}">
 								<div class="form-row">
 									<div class="form-group category-group fixed-width-med">

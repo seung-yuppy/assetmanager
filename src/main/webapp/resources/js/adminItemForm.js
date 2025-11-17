@@ -83,7 +83,7 @@ function addProduct(){
 									<label for="price">스펙<span class="required">*</span></label>
 									<div class="last-input-group">
 										<input type="text" name="items[${currentIndex}].spec" required>
-										<img class="form-icon" src="/assetmanager/resources/image/icon_dash_circle.svg" onclick="removeProduct(this)"></img>
+										<img class="form-icon" src="/assetmanager/resources/image/icon_delete.svg" onclick="removeProduct(this)"></img>
 									</div>							
 								</div>
 							</div>

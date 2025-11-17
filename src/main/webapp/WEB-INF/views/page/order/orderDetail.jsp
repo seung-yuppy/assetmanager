@@ -127,8 +127,8 @@
 				</div>
 	        </div>
 	        <div class="modal-footer">
+	        	<button id="registerBtn" class="btn-primary">등록</button>
 	            <button id="cancelBtn" class="btn-secondary">취소</button>
-	            <button id="registerBtn" class="btn-primary">등록</button>
 	        </div>
 	    </div>
 	</div>

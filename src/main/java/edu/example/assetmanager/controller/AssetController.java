@@ -57,10 +57,11 @@ public class AssetController {
 	
 	@GetMapping("/delay/form/{id}")
 	public String requestForm(@PathVariable int id, Model model, HttpSession session) {	
-		Integer userId = (Integer)session.getAttribute("userId");	
-		AssetDTO assetDTO = service.getAsset(id);		
+		Integer userId = (Integer)session.getAttribute("userId");
 		if(userId == null) 
 			return "redirect:/login";
+		AssetDTO assetDTO = service.getAsset(id);		
+		AssetHistoryDTO assetHistoryDTO = service.getReturnDate(userId, id);
 		
 		UserInfoDTO userInfo= userService.getUser(userId);
 		List<UserInfoDTO> admin = rentService.findByAdminUser();
@@ -68,8 +69,10 @@ public class AssetController {
 		model.addAttribute("admin", admin);
 		model.addAttribute("manager", manager);	
 		model.addAttribute("asset", assetDTO);
-		session.setAttribute("user", userInfo);
+		model.addAttribute("returning", assetHistoryDTO);
 		
+		System.out.println(assetHistoryDTO.getReturnDate());
+		session.setAttribute("user", userInfo);
 		
 		return "/asset/extensionForm";
 	}

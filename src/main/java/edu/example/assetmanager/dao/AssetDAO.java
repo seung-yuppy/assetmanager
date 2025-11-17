@@ -100,4 +100,7 @@ public interface AssetDAO {
 	
 	// 연장 중간에 반려한거 찾기
 	public int isDelayReject(@Param("userId") int userId, @Param("assetId") int assetId);
+	
+	// 연장 폼에 반납 예정일 전에 반납 기한 막기 
+	public AssetHistoryDTO getReturnDateDelayForm(@Param("userId") int userId, @Param("assetId") int assetId);
 }

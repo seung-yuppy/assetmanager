@@ -20,6 +20,7 @@
 				AND user_id IS NOT NULL
 			</if>			
 		</where> 
+		ORDER BY asset_name
 	</select>
 	
 	<select id="listAll" resultType="AssetDTO">
@@ -45,7 +46,7 @@
 						AND user_id IS NOT NULL
 					</if>
 				</where> 
-		        ORDER BY a.id
+		        ORDER BY asset_name
 		    ) k
 		)
         offset #{offset} rows
@@ -238,7 +239,7 @@
 				AND a.asset_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>
-		ORDER BY a.id DESC
+		ORDER BY iua.acquisition_date DESC
 	</select>
 	
 	<select id="listMyUsing">
@@ -302,7 +303,7 @@
 				AND a.asset_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>
-		ORDER BY a.id DESC
+		ORDER BY iua.acquisition_date DESC
 		OFFSET #{offset} ROWS
 		FETCH NEXT #{size} ROWS ONLY
 	</select>
@@ -529,6 +530,56 @@
 		AND r.user_id = #{userId}
 		AND rc.asset_id = #{assetId}
 		AND ap.status IN ('FIRST_REJECT', 'FINAL_REJECT', 'CANCEL')    
+    </select>
+    
+    <select id="getReturnDateDelayForm">
+		WITH FindLastStatus AS (
+		    SELECT
+		        asset_id,
+		        user_id,
+		        create_date,
+		        status, 
+		        ROW_NUMBER() OVER(PARTITION BY asset_id, user_id ORDER BY create_date DESC, id DESC) as rn
+		    FROM
+		        Asset_History
+		    WHERE
+		        user_id = #{userId}
+		),
+		InUseAssets AS (
+		    SELECT
+		        asset_id,
+		        create_date AS acquisition_date
+		    FROM
+		        FindLastStatus
+		    WHERE
+		        rn = 1
+		        AND status = 'rent'
+		),
+		CurrentRent AS (
+		    SELECT
+		        rc.asset_id,
+		        r.return_date,
+		        ROW_NUMBER() OVER(PARTITION BY rc.asset_id ORDER BY r.rent_date DESC, r.id DESC) as rn
+		    FROM
+		        Rent_Content rc
+		    JOIN
+		        Rent r ON rc.rent_id = r.id
+		    JOIN
+		        Approval ap ON r.approval_id = ap.id
+		    WHERE
+		        ap.status = 'FINAL_APPROVAL'
+		)
+		SELECT
+		    cr.return_date
+		FROM
+		    Asset a
+		INNER JOIN
+		    Category c ON a.category_id = c.id
+		INNER JOIN
+		    InUseAssets iua ON a.id = iua.asset_id
+		LEFT JOIN
+		    CurrentRent cr ON iua.asset_id = cr.asset_id AND cr.rn = 1
+		WHERE a.user_id = #{userId} AND a.id = #{assetId}   
     </select>
     
 </mapper>

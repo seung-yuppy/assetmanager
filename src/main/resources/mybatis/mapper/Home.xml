@@ -252,6 +252,10 @@
 		        Rent_Content rc
 		    JOIN
 		        Rent r ON rc.rent_id = r.id
+		    JOIN
+		        Approval ap ON r.approval_id = ap.id
+		    WHERE
+		        ap.status = 'FINAL_APPROVAL'
 		)
 		SELECT
 		    a.id AS asset_id,
@@ -272,7 +276,7 @@
 		    a.user_id = #{userId}
         ORDER BY
             iua.acquisition_date DESC
-            FETCH FIRST 3 ROWS ONLY	
+        FETCH FIRST 3 ROWS ONLY	
 	</select>
 	
 	<select id="countItem">

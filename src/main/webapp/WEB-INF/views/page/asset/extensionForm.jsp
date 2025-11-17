@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="currentDate" />
+<fmt:formatDate value="${returning.returnDate}" pattern="yyyy-MM-dd" var="returnDate" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +39,7 @@
 							</div>
 							<div class="form-return-date">
 									<label for="return-date">반납 예정일 <span class="required">*</span></label> 
-									<input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" min="${currentDate}" required>
+									<input type="date" name="returnDate" id="return-date" placeholder="반납 예정일 선택" class="form-input rent-input" min="${returnDate}" required>
 							</div>
 						</div>
 							<div class="form-row">

@@ -95,12 +95,16 @@
 					                       		</div>
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.activeBtn == true}">
-						                        		반납중       		
+					                        			<c:if test="${asset.returnDate != null && asset.delaying != 1}">
+															<button class="delay-button not-able" disabled>연장</button>						                        		
+														</c:if>
+														<button class="return-button not-able" disabled>반납</button>		   		
 					                        		</c:if>
 					                       		</div>
 					                       		<div class="table-button-container">
 					                        		<c:if test="${asset.delaying == 2}">
-						                        		연장중       		
+														<button class="delay-button not-able" disabled>연장</button>						                        		
+														<button class="return-button not-able" disabled>반납</button>							                        		     		
 					                        		</c:if>
 					                       		</div>
 					                        </td>

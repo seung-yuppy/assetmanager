@@ -303,3 +303,8 @@ body {
 td a:hover{
 	text-decoration: underline;
 }
+
+.not-able {
+	cursor: not-allowed;
+	opacity: 0.55;
+}

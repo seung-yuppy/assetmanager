@@ -296,5 +296,9 @@ public class AssetService {
 		
 		return list;
 	}
+	
+	public AssetHistoryDTO getReturnDate(int userId, int assetId) {
+		return dao.getReturnDateDelayForm(userId, assetId);
+	}
 
 }

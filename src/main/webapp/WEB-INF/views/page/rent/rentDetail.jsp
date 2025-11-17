@@ -116,8 +116,8 @@
 
 			</div>
 			<div class="modal-footer">
-				<button id="cancelBtn" class="btn-secondary">취소</button>
 				<button class="btn-primary" id="submitBtn">등록</button>
+				<button id="cancelBtn" class="btn-secondary">취소</button>
 			</div>
 		</div>
 	</div>

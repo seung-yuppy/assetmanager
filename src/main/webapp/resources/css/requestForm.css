@@ -212,12 +212,12 @@ input:focus, select:focus, textarea:focus {
     background-color: var(--primary-hover); /* 호버 시 색상 진하게 */
 }
 
-.cancel-action:hover{
-    background-color: var(--cancel-gray-hover);
-}
 .cancel-action{
-    background-color: var(--cancel-gray);
+    background-color: var(--red-color);
     color: white;  
+}
+.cancel-action:hover{
+    background-color: var(--red-hover);
 }
 .update-action{
 	background-color: var(--primary-button-color);

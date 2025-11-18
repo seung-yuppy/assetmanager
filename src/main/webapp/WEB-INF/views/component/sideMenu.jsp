@@ -130,7 +130,7 @@
 					</div>
 					<ul class="sub-menu-list">
 						<li><a href="/assetmanager/rent/form">반출 요청</a></li>
-						<li><a href="/assetmanager/rent/list">반출 목록</a></li>
+						<li><a href="/assetmanager/rent/list">요청 목록</a></li>
 					</ul>                    
 				</li>
 			</c:if>
@@ -144,7 +144,7 @@
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/admin/rent/list">반출 목록</a></li>
+						<li><a href="/assetmanager/admin/rent/list">요청 목록</a></li>
 						<li><a href="/assetmanager/admin/delay/list">연장 목록</a></li>
 					</ul>                        
 				</li>		
@@ -160,7 +160,7 @@
 					</div>
 					<ul class="sub-menu-list">
 						<li><a href="/assetmanager/rent/form">반출 요청</a></li>
-						<li><a href="/assetmanager/manager/rent/list">반출 목록</a></li>
+						<li><a href="/assetmanager/manager/rent/list">요청 목록</a></li>
 						<li><a href="/assetmanager/manager/delay/list">연장 목록</a></li>
 					</ul>                        
 				</li>
@@ -178,7 +178,7 @@
 					</div>
 					<ul class="sub-menu-list">
 						<li><a href="/assetmanager/order/form">구입 요청</a></li>
-						<li><a href="/assetmanager/order/list">구입 목록</a></li>
+						<li><a href="/assetmanager/order/list">요청 목록</a></li>
 					</ul>                        
 				</li>			
 			</c:if>
@@ -192,7 +192,7 @@
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/admin/order/list">구입 목록</a></li>
+						<li><a href="/assetmanager/admin/order/list">요청 목록</a></li>
 						<li><a href="/assetmanager/admin/stats">구입 통계</a></li>
 					</ul>      
 	            </li>
@@ -208,7 +208,7 @@
 					</div>
 					<ul class="sub-menu-list">
 						<li><a href="/assetmanager/order/form">구입 요청</a></li>
-						<li><a href="/assetmanager/manager/order/list">구입 목록</a></li>
+						<li><a href="/assetmanager/manager/order/list">요청 목록</a></li>
 					</ul>      
 	            </li>			
 			</c:if>

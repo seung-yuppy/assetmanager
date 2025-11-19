@@ -51,9 +51,11 @@
 				<div class="approver-image-container">
 					<img class="approver-image" src="data:image/png;base64,${empInfo.userInfo.base64ProfileImage}" alt="요청자">
 					<div class="approval-badge">
-						<div class="approval-badge-icon">
-							<i class="fas fa-check"></i>
-						</div>
+						<c:if test="${approval.status != 'CANCEL'}">
+							<div class="approval-badge-icon">
+								<i class="fas fa-check"></i>
+							</div>
+						</c:if>
 					</div>
 				</div>
 	

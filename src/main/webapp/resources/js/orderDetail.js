@@ -132,7 +132,7 @@ if(cancelBtn){
 						confirmButtonColor: "#a5dc86",
 						confirmButtonText: "확인",
 					}).then(() =>{
-						location.href = "/assetmanager/order/list";
+						location.reload();
 					});
 				} else {
 					Swal.fire({

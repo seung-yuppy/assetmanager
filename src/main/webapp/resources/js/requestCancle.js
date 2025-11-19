@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						confirmButtonColor: "#a5dc86",
 						confirmButtonText: "확인",
 					}).then(() =>{
-						location.href = "/assetmanager/rent/list";
+						location.reload();
 					});
 				} else {
 					Swal.fire({

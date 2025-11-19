@@ -41,7 +41,12 @@
 					<div id="formInputArea" class="inputArea">
 						<div class="form-date"> 
 							<div class="form-application-date">
-								<label for="application-date">반출 요청일</label> 
+								<c:if test="${rentdto.isDelay == 0}">
+									<label for="application-date">반출 요청일</label> 							
+								</c:if>
+								<c:if test="${rentdto.isDelay == 1}">
+									<label for="application-date">연장 요청일</label> 									
+								</c:if>								
 								<input type="date" id="application-date" value="${rentDate}" class="form-input" readonly>
 							</div>
 							<div class="form-return-date">
@@ -59,7 +64,7 @@
 									<label for="productNameSelect">제품명</label> 
 									<input list="productOptions" name="productNameSelect" id="productNameSelect" type="text" value="${item.assetName}" class="locked-input rent-input-width" readonly>
 								</div>
-								<div class="form-group">
+								<div class="form-group fixed-width-lg">
 									<label for="spec">스펙</label>
 									<div class="last-input-group">
 										<input type="text" id="spec" value="${item.spec}" class="locked-input rent-input-width" readonly>
@@ -76,14 +81,19 @@
 
 						<div class="form-group">
 							<div class="form-reason">
-								<label for="reason">반출 요청 사유</label>
+								<c:if test="${rentdto.isDelay == 0}">
+									<label for="reason">반출 요청 사유</label>								
+								</c:if>
+								<c:if test="${rentdto.isDelay == 1}">
+									<label for="reason">연장 요청 사유</label>									
+								</c:if>
 								<textarea id="reason" name="requestMsg" rows="5" cols="81" maxlength="200" readonly>${rent.requestMsg}</textarea>
 								<div class="char-count-display text-align-right"></div>
 							</div>
 						</div>
 					</div>
 					<div class="form-actions">
-						<c:if test="${approval.status == 'PENDING'}">
+						<c:if test="${approval.status == 'PENDING' && rentdto.isDelay == 0}">
 							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
 						</c:if>
 						<c:if test="${approval.status == 'CANCEL'}">
@@ -106,16 +116,20 @@
 				<input type="hidden" id="modalAssetId"> <input type="hidden" id="modalRentId">
 
 				<div class="form-group">
-					<label for="modalProductName">제품명</label> <input type="text" id="modalProductName" class="form-input" readonly>
+					<label for="modalProductName">제품명</label> 
+					<input type="text" id="modalProductName" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="application-date">등록일</label> <input id="application-date" value="${currentDate}" class="form-input" readonly>
+					<label for="application-date">등록일</label> 
+					<input id="application-date" value="${currentDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalReturnDate">반납 예정일</label> <input id="modalReturnDate" value="${returnDate}" class="form-input" readonly>
+					<label for="modalReturnDate">반납 예정일</label> 
+					<input id="modalReturnDate" value="${returnDate}" class="form-input" readonly>
 				</div>
 				<div class="form-group">
-					<label for="modalSerialNumber">일련번호</label> <input type="text" id="modalSerialNumber" class="form-input">
+					<label for="modalSerialNumber">일련번호</label> 
+					<input type="text" id="modalSerialNumber" class="form-input">
 				</div>
 
 			</div>

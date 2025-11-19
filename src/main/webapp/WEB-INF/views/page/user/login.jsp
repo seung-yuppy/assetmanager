@@ -36,7 +36,7 @@
             <!-- 로그인 폼 -->
             <form action="/assetmanager/login" method="post" class="join-form">
                 <div class="form-group">
-                    <label for="username">사용자 ID</label>
+                    <label for="username">사번</label>
                     <input type="text" name="empNo" placeholder="사번을 입력하세요" required>
                 </div>
                 

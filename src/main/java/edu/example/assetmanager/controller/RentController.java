@@ -165,7 +165,7 @@ public class RentController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/update/form/{id}")
+	@GetMapping("/update/{id}")
 	public String rentUpdate(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Integer userId = (Integer)session.getAttribute("userId");	
 		if(userId == null) 

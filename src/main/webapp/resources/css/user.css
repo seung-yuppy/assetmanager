@@ -301,7 +301,7 @@
 .profile-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: 10px;
 }
 
 .profile-box {
@@ -317,17 +317,42 @@
 }
 
 /* 마이 페이지 수정  */
+.file-input {
+	display: none;        	
+}
+
+.edit-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-label {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: var(--primary-color) !important;
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.btn-label:hover {
+    background-color: #eef2fa;
+    transform: translateY(-1px);
+}
+
 .edit-container {
 	display: flex;
-	justify-content: center;
-	gap: 75px;
+	justify-content: space-around;
 }
 
 .edit-image-box {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 15px;
+    gap: 10px;
 }
 
 .my-profile-image {
@@ -341,23 +366,46 @@
 	flex-direction: column;
 	justify-content: center;
 	gap: 3px;
+    width: 300px;
 }
 
 .user-label {
 	font-size: 16px;
 }
 
-.user-value {
-	font-size: 18px;
-	padding: 7px 20px;
-    border-radius: 7px;
-    width: 100%;
-}
-
 .edit-total-button{
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+/* readonly 아닌거 */
+.user-value {
+    padding: 10px 12px;
+    font-size: 15px;
+    color: #2f3640;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+    background-color: var(--white-color);
+    transition: border-color 0.2s;
+}
+
+.user-value:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.1);
+}
+
+/* readonly는 흐리게  */
+.user-value[readonly] {
+    background-color: #f1f2f6;
+    color: #7f8c8d;
+    cursor: default;
+    border-color: #e5e5e5;
+}
+.user-value[readonly]:focus {
+    box-shadow: none;
+    border-color: #e5e5e5;
 }
 
 /* 5. 모바일 반응형 처리 */

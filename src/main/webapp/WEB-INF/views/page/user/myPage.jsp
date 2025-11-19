@@ -26,38 +26,38 @@
 					<!-- 사용자 상세 정보 시작 -->
 					<div class="section-card">
 						<h2>사용자 정보</h2>
-						<div class="userinfo-wrapper">
-							<div class="image-box">
+						<div class="edit-container">
+							<div class="edit-image-box">
 								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" >
 							</div>
 							<div class="profile-wrapper">
 								<div class="profile-box">
-									<div class="user-info-item">
-										<span class="info-label">사번</span> 
-										<span class="info-value">${userInfo.empNo}</span>
+									<div class="edit-user-info">
+										<span class="user-label">사번</span> 
+										<input type="text" value="${userInfo.empNo}" class="user-value" readonly>							
 									</div>
-									<div class="user-info-item">
-										<span class="info-label">부서명</span>
-										<span class="info-value">${userInfo.deptName}</span>
+									<div class="edit-user-info">
+										<span class="user-label">부서</span> 
+										<input type="text" value="${userInfo.deptName}" class="user-value" readonly>							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">직급</span> 
+										<input type="text" value="${userInfo.position}" class="user-value" readonly>							
 									</div>
-									<div class="user-info-item">
-										<span class="info-label">직급</span> 
-										<span class="info-value">${userInfo.position}</span>
-									</div>
-									<div class="user-info-item">
-										<span class="info-label">전화번호</span> 
-										<span class="info-value">${userInfo.phone}</span>
-									</div>
-									<div class="user-info-item">
-										<span class="info-label">이메일</span> 
-										<span class="info-value">${userInfo.email}</span>
-									</div>
-									<div class="info-dept-address">
-										<span class="info-label">주소</span> 
-										<span class="info-value">${userInfo.deptAddress}</span>
+									<div class="edit-user-info">
+										<span class="user-label">주소</span> 
+										<input type="email" value="${userInfo.deptAddress}" class="user-value" readonly>							
+									</div>									
+									<div class="edit-user-info">
+										<span class="user-label">이메일</span> 
+										<input type="text" value="${userInfo.email}" name="email" class="user-value" readonly>							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">전화번호</span> 
+										<input type="text" value="${userInfo.phone}" name="phone" class="user-value" readonly>							
 									</div>
 								</div>
-								<div class="edit-wrapper">
+								<div class="edit-total-button">
 									<a href="/assetmanager/mypage/edit" class="edit-button">프로필 수정</a>
 								</div>
 							</div>

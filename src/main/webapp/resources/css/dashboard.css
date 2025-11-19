@@ -114,29 +114,29 @@
         	background-color: #EF4444;;
         }
         
-        .border-green {
-        	border-top: 5px solid #10b981;
+         .border-green {
+        	border-top: 3px solid #10b981;
         }
         
         .border-yellow {
-        	border-top: 5px solid #FBBF24;
+        	border-top: 3px solid #FBBF24;
         }
         
         .border-purple {
-        	border-top: 5px solid #6366f1;
+        	border-top: 3px solid #6366f1;
         }
         
         .border-blue {
-        	border-top: 5px solid #3b82f6;
+        	border-top: 3px solid #3b82f6;
         }
         
         .border-red {
-        	border-top: 5px solid #EF4444;;
+        	border-top: 3px solid #EF4444;;
         }
         
         .border-gray {
-        	border-top: 5px solid #6B7280;
-        }
+        	border-top: 3px solid #6B7280;
+        } 
         
 
         /* 테이블 스타일 */

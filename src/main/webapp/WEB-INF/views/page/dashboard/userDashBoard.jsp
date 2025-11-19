@@ -51,12 +51,7 @@
 							<a href="/assetmanager/manager/order/list?status=FIRST_APPROVAL">
 						</c:if>
 							<div class="card-header">
-								<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-		                			<p class="card-title">구매 대기</p>
-		                		</c:if> 
-								<c:if test="${userInfo.role == 'manager'}">
-		                			<p class="card-title">구매 합의</p>
-		                		</c:if>	                		
+		                		<p class="card-title">구매 대기</p>
 		                		<div class="card-logo-box back-blue">
 		                			<img class="card-logo" src="/assetmanager/resources/image/icon_buy.svg">
 		                		</div>
@@ -93,12 +88,7 @@
 	                		<a href="/assetmanager/manager/rent/list?status=FIRST_APPROVAL">
 	                	</c:if>
 							<div class="card-header">
-								<c:if test="${userInfo.role == 'employee' || userInfo.role == 'department'}">
-		                			<p class="card-title">반출 대기</p>
-		                		</c:if> 
-								<c:if test="${userInfo.role == 'manager'}">
-		                			<p class="card-title">반출 합의</p>
-		                		</c:if>	  						
+		                		<p class="card-title">반출 대기</p> 						
 		                		<div class="card-logo-box back-purple">
 		                			<img class="card-logo" src="/assetmanager/resources/image/icon_request.svg">
 		                		</div>

@@ -8,8 +8,8 @@
 	<title>사용자 상세</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
-	<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/user.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" >	
 </head>
 <body>
 	<div class="app-layout">
@@ -28,42 +28,44 @@
 						<div class="edit-container">
 							<div class="edit-image-box">
 								<img src="data:image/png;base64,${userInfo.base64ProfileImage}" class="my-profile-image" id="profilePreview" >
-								<div class="edit-image-button">
-									<label for="fileInput" class="edit-label">
-										<span class="btn-label">파일 선택</span>
-									</label>
-									<input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input" >
-								</div>
+                                <div class="edit-image-button">
+                                    <label for="fileInput" class="edit-label">
+                                        <span class="btn-label"><i class="fa-solid fa-camera"></i> 사진 변경</span>
+                                    </label>
+                                    <input type="file" id="fileInput" name="profileImage" accept="image/*" class="file-input">
+                                </div>
 							</div>
-							<div class="profile-box">
-								<div class="edit-user-info">
-									<span class="user-label">사번</span> 
-									<input type="text" value="${userInfo.empNo}" class="user-value" readonly>							
+							<div class="profile-wrapper">
+								<div class="profile-box">
+									<div class="edit-user-info">
+										<span class="user-label">사번</span> 
+										<input type="text" value="${userInfo.empNo}" class="user-value" readonly>							
+									</div>
+									<div class="edit-user-info">
+										<span class="user-label">부서</span> 
+										<input type="text" value="${userInfo.deptName}" class="user-value" readonly>							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">직급</span> 
+										<input type="text" value="${userInfo.position}" class="user-value" readonly>							
+									</div>
+									<div class="edit-user-info">
+										<span class="user-label">주소</span> 
+										<input type="email" value="${userInfo.deptAddress}" class="user-value" readonly>							
+									</div>									
+									<div class="edit-user-info">
+										<span class="user-label">이메일</span> 
+										<input type="text" value="${userInfo.email}" name="email" class="user-value">							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">전화번호</span> 
+										<input type="text" value="${userInfo.phone}" name="phone" class="user-value">							
+									</div>	
 								</div>
-								<div class="edit-user-info">
-									<span class="user-label">부서명</span> 
-									<input type="text" value="${userInfo.deptName}" class="user-value" readonly>							
-								</div>		
-								<div class="edit-user-info">
-									<span class="user-label">직급</span> 
-									<input type="text" value="${userInfo.position}" class="user-value" readonly>							
-								</div>
-								<div class="edit-user-info">
-									<span class="user-label">이메일</span> 
-									<input type="text" value="${userInfo.email}" name="email" class="user-value">							
-								</div>		
-								<div class="edit-user-info">
-									<span class="user-label">전화번호</span> 
-									<input type="text" value="${userInfo.phone}" name="phone" class="user-value">							
-								</div>
-								<div class="edit-user-info">
-									<span class="user-label">주소</span> 
-									<input type="email" value="${userInfo.deptAddress}" class="user-value" readonly>							
-								</div>		
-							</div>			
+							</div>		
 						</div>
 						<div class="edit-total-button">
-							<button type="submit" class="profile-edit-btn">수정</button>	
+							<button type="submit" class="edit-button">수정 완료</button>	
 						</div>
 					</form>
 				</div>

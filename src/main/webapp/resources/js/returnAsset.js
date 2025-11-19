@@ -5,11 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			btn.addEventListener("click", function() {	
 				Swal.fire({
 					title:"반납하시겠습니까?",
-					imageUrl: "/assetmanager/resources/image/approval_admin.jpg",
-					imageWidth: 90,
-					imageHeight: 90, 
-					imageAlt: "경고 아이콘",
-					confirmButtonColor: "#14b3ae",
+					icon: "warning",
+					confirmButtonColor: "#1c4587",
 					confirmButtonText: "예",
 					showCancelButton: true,
 					cancelButtonText: '아니오',
@@ -20,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
 						const container = this.closest('.asset-box');
 						const assetId = container.getAttribute('data-id');
 				    	const data = { assetId : assetId}
-				    	console.log("값 들어갔어?? " + assetId)
 						const res = await fetch("/assetmanager/rent/return",{
 							method: "POST",	
 							headers: {

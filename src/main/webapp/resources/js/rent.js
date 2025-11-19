@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         title: '처리 완료',
                         text: data.msg,
                         icon: 'success',
-                        confirmButtonText: '확인' 
+                        confirmButtonText: '확인',
+            			confirmButtonColor: "#1c4587"
                     });
             	}
         })

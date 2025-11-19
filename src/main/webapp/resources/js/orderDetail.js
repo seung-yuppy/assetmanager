@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 title: '처리 완료',
                                 text: data.msg,
                                 icon: 'success',
-                                confirmButtonText: '확인' 
+                                confirmButtonText: '확인',
+                    			confirmButtonColor: "#1c4587",
                             });
                     	}
                 })
@@ -104,11 +105,8 @@ if(cancelBtn){
 			return;
 		Swal.fire({
 			title:"요청을 취소하시겠습니까?",
-			imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
-			imageWidth: 90,
-			imageHeight: 90, 
-			imageAlt: "경고 아이콘",
-			confirmButtonColor: "#14b3ae",
+			icon: "error",
+			confirmButtonColor: "#1c4587",
 			confirmButtonText: "예",
 			showCancelButton: true,
 			cancelButtonText: '아니오',
@@ -129,7 +127,7 @@ if(cancelBtn){
 						title: "성공",
 						text: data.msg,
 						icon: "success",
-						confirmButtonColor: "#a5dc86",
+						confirmButtonColor: "#1c4587",
 						confirmButtonText: "확인",
 					}).then(() =>{
 						location.reload();
@@ -139,7 +137,7 @@ if(cancelBtn){
 						title: "실패",
 						text: data.msg,
 						icon: "error",
-						confirmButtonColor: "#d33",
+						confirmButtonColor: "#1c4587",
 						confirmButtonText: "확인",
 					}).then(() =>{
 						window.location.reload();

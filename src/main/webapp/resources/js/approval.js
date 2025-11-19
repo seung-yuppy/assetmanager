@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
     const approvalInfo = document.querySelectorAll(".approver-container.select-info");
 
     // 정보 반복해서 찾기

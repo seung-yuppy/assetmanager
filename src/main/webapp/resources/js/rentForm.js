@@ -86,7 +86,7 @@ function openSubmitModal(e){
       title: "성공",
       text: "반출 요청이 완료되었습니다.",
       icon: "success",
-      confirmButtonColor: "#a5dc86",
+      confirmButtonColor: "#1c4587",
       confirmButtonText: "확인",
    }).then(() =>{
       e.target.submit();

@@ -76,12 +76,9 @@
 				                            <td>${item.maker}</td>
 				                            <td>${item.seller}</td>
 				                            <td>
-				                            	<form action="/assetmanager/admin/item/remove" method="POST">
-				                            		<input type="hidden" name="id" value="${item.id}">
-				                            		<button type="submit" class="btn-delete">
-				                            			<img src="/assetmanager/resources/image/icon_delete.svg" class="icon-delete">
-				                            		</button>
-				                            	</form>
+			                            		<button type="button" class="btn-delete" data-id="${item.id}">
+			                            			<img src="/assetmanager/resources/image/icon_delete.svg" class="form-icon">
+			                            		</button>
 				                            </td>
 										</tr>
 									</c:forEach>								
@@ -139,5 +136,6 @@
 	        });    	
     	</script>
 	</c:if>
+	<script src="/assetmanager/resources/js/deleteItem.js"></script>
 </body>
 </html>

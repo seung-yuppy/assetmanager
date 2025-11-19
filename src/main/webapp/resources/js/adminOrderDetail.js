@@ -24,7 +24,7 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
             imageWidth: 90,
             imageHeight: 90, 
             imageAlt: "경고 아이콘",
-            confirmButtonColor: "#14b3ae",
+            confirmButtonColor: "#1c4587",
             confirmButtonText: "확인",
             showCancelButton: true,
             cancelButtonText: '취소',
@@ -51,7 +51,7 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
                         title: "성공",
                         text: data.msg,
                         icon: "success",
-                        confirmButtonColor: "#a5dc86",
+                        confirmButtonColor: "#1c4587",
                         confirmButtonText: "확인",
                     }).then(() =>{
                     	location.href = "../list";
@@ -61,7 +61,7 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
                         title: "실패",
                         text: data.msg,
                         icon: "error",
-                        confirmButtonColor: "#d33",
+                        confirmButtonColor: "#1c4587",
                         confirmButtonText: "확인",
                     }).then(() =>{
                         window.location.reload();
@@ -88,7 +88,7 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 			imageWidth: 90,
 			imageHeight: 90, 
 			imageAlt: "경고 아이콘",
-			confirmButtonColor: "#14b3ae",
+			confirmButtonColor: "#1c4587",
 			confirmButtonText: "승인",
 			showCancelButton: true,
 			cancelButtonText: '취소',
@@ -116,7 +116,7 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 						title: "성공",
 						text: data.msg,
 						icon: "success",
-						confirmButtonColor: "#a5dc86",
+						confirmButtonColor: "#1c4587",
 						confirmButtonText: "확인",
 					}).then(() =>{
 						location.href = "../list";
@@ -126,7 +126,7 @@ const approveBtn = document.querySelectorAll(".approve-btn").forEach(btn => {
 						title: "실패",
 						text: data.msg,
 						icon: "error",
-						confirmButtonColor: "#d33",
+						confirmButtonColor: "#1c4587",
 						confirmButtonText: "확인",
 					}).then(() =>{
 						window.location.reload();

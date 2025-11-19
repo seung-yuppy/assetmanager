@@ -179,3 +179,11 @@
 	background-color: transparent;
 	border: none;
 }
+
+.form-icon{
+	width : 1.2rem;
+	cursor : pointer;
+}
+.form-icon:hover{
+	content: url("/assetmanager/resources/image/icon_delete_red.svg");
+}

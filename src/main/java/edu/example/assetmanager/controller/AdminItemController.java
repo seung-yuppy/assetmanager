@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.example.assetmanager.domain.ItemDTO;
 import edu.example.assetmanager.domain.ItemListDTO;
@@ -44,13 +45,28 @@ public class AdminItemController {
 			return "redirect:/admin/item/list";
 		else
 			return "redirect:/admin/item/form"; 
+	}	
+	
+	@ResponseBody
+	@PostMapping(value = "/item/delete", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> a7(@RequestBody Map<String, Integer> requestBody) {
+		Map<String, Object> response = new HashMap<>();
+		int assetId = requestBody.get("id");
+		
+		if (service.removeItem(assetId))
+			response.put("msg", "권장 제품을 삭제하였습니다.");
+		else
+			response.put("msg", "권장 제품 삭제에 실패하였습니다.");
+		
+		return ResponseEntity.ok(response);
 	}
 	
-	@PostMapping("/item/remove")
-	public String i5(int id, RedirectAttributes rattr) {
-		if (service.removeItem(id)) 
-			rattr.addFlashAttribute("success", "권장 제품이 삭제 되었습니다.");
-		
-		return "redirect:/admin/item/list";
+	@ResponseBody
+	@GetMapping(value = "/item/{id}", produces = "application/json; charset=utf-8")
+	public ResponseEntity<Map<String, Object>> a8(@PathVariable("id") int id) {
+		Map<String, Object> response = new HashMap<>();
+		ItemDTO dto = service.getItem(id);
+		response.put("item", dto);
+		return ResponseEntity.ok(response);
 	}
 }

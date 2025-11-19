@@ -24,4 +24,7 @@ public interface ItemDAO {
 	public boolean removeItem(@Param("id") int id);
 	
 	public List<ItemDTO> getItemsByCategory(int id);
+
+	// 제품 id로 제품 정보 가져오기
+	public ItemDTO getItem(int id);
 }

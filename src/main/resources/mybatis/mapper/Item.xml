@@ -54,4 +54,10 @@
 		WHERE category_id = #{id}
 	</select>
 	
+	<select id="getItem">
+		SELECT *
+		FROM Standard_Item
+		WHERE id = #{id}
+	</select>
+	
 </mapper>

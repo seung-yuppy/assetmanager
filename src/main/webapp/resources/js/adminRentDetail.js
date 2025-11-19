@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				showCancelButton: true,
 				confirmButtonText: '승인',
 				cancelButtonText: '취소',
-				confirmButtonColor: '#007bff',
+				confirmButtonColor: '#1c4587',
 				cancelButtonColor: '#6c757d'
 			}).then((result) => {
 				if (result.isConfirmed) {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 								title: "성공",
 								text: "승인되었습니다.",
 								icon: "success",
-								confirmButtonColor: "#a5dc86",
+								confirmButtonColor: "#1c4587",
 								confirmButtonText: "확인",
 							}).then(() =>{
 								location.href = "../list";
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 								title: "실패",
 								text: "승인 실패하였습니다.",
 								icon: "error",
-								confirmButtonColor: "#d33",
+								confirmButtonColor: "#1c4587",
 								confirmButtonText: "확인",
 							}).then(()=>{
 									location.reload();
@@ -82,15 +82,15 @@ const rejectBtn = document.querySelector(".reject-btn");
 	if (rejectBtn) {
 		rejectBtn.addEventListener("click", function() {
 			Swal.fire({
-				title: "거절하시겠습니까?",
-				text: "거절 사유를 입력해주세요.",
+	            title: "반려하시겠습니까?",
+	            text:"반려 사유를 입력해주세요.",
 				input: "text",
 				imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
 				imageWidth: 90,
 				imageHeight: 90,
 				imageAlt: "경고 아이콘",
 				showCancelButton: true,
-				confirmButtonColor: "#14b3ae",
+				confirmButtonColor: "#1c4587",
 				confirmButtonText: '확인',
 				cancelButtonText: '취소',
 				customClass: {
@@ -126,7 +126,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 								title: "성공",
 								text: "반려되었습니다.",
 								icon: "success",
-								confirmButtonColor: "#a5dc86",
+								confirmButtonColor: "#1c4587",
 								confirmButtonText: "확인",
 							}).then(() =>{
 								location.href = "../list";
@@ -136,7 +136,7 @@ const rejectBtn = document.querySelector(".reject-btn");
 								title: "실패",
 								text: "반려 실패하였습니다.",
 								icon: "error",
-								confirmButtonColor: "#d33",
+								confirmButtonColor: "#1c4587",
 								confirmButtonText: "확인",
 							}).then(()=>{
 									location.reload();

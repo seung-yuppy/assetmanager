@@ -70,4 +70,9 @@ public class ItemService {
 	public List<ItemDTO> getItemsByCategory(int id){
 		return dao.getItemsByCategory(id);
 	}
+	
+	// 제품 id로 제품 정보 가져오기
+	public ItemDTO getItem(int id) {
+		return dao.getItem(id);
+	}
 }

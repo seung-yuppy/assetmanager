@@ -60,7 +60,7 @@ editBtn.addEventListener("click", async () => {
         showCancelButton: true,
         confirmButtonText: '저장 및 반영',
         cancelButtonText: '취소',
-	    confirmButtonColor: "#14b3ae",
+	    confirmButtonColor: "#1c4587",
 	    confirmButtonText: "확인",
 	    customClass: {
 	    	title: 'custom-swal-title-approved'
@@ -90,7 +90,7 @@ editBtn.addEventListener("click", async () => {
 	                title: "성공",
 	                text: data.msg,
 	                icon: "success",
-	                confirmButtonColor: "#a5dc86",
+	                confirmButtonColor: "#1c4587",
 	                confirmButtonText: "확인",
 	            }).then(() =>{
 	            	window.location.reload();
@@ -100,7 +100,7 @@ editBtn.addEventListener("click", async () => {
 	                title: "실패",
 	                text: data.msg,
 	                icon: "error",
-	                confirmButtonColor: "#d33",
+	                confirmButtonColor: "#1c4587",
 	                confirmButtonText: "확인",
 	            }).then(() =>{
 	            	window.location.reload();
@@ -121,11 +121,8 @@ deleteBtn.addEventListener("click", async () => {
     Swal.fire({
 		title: "불용 사유를 입력해주세요.",
 	    html: deleteForm,
-	    imageUrl: "/assetmanager/resources/image/reject_admin.jpg",
-	    imageWidth: 90,
-	    imageHeight: 90, 
-	    imageAlt: "경고 아이콘",
-	    confirmButtonColor: "#14b3ae",
+	    icon: "error",
+	    confirmButtonColor: "#1c4587",
 	    confirmButtonText: "확인",
 	    showCancelButton: true,
         cancelButtonText: '취소',
@@ -152,7 +149,7 @@ deleteBtn.addEventListener("click", async () => {
 	                title: "성공",
 	                text: data.msg,
 	                icon: "success",
-	                confirmButtonColor: "#a5dc86",
+	                confirmButtonColor: "#1c4587",
 	                confirmButtonText: "확인",
 	            }).then(() =>{
 	            	location.href = "/assetmanager/admin/asset/disposal";
@@ -162,7 +159,7 @@ deleteBtn.addEventListener("click", async () => {
 	                title: "실패",
 	                text: data.msg,
 	                icon: "error",
-	                confirmButtonColor: "#d33",
+	                confirmButtonColor: "#1c4587",
 	                confirmButtonText: "확인",
 	            }).then(() =>{
 	            	window.location.reload();

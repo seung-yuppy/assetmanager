@@ -152,6 +152,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
 	
 	<script src="/assetmanager/resources/js/pageFilter.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

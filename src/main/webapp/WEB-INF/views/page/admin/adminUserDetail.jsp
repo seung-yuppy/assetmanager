@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>사용자 상세</title>
-<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
-<link href="/assetmanager/resources/css/adminAssetDetail.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>사용자 상세</title>
+	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
+	<link href="/assetmanager/resources/css/user.css" rel="stylesheet">
 </head>
 <body>
 	<div class="app-layout">
@@ -23,34 +23,37 @@
 					<!-- 사용자 상세 정보 -->
 					<div class="section-card">
 						<h2>사용자 정보</h2>
-						<div class="user-info-list">
-							<div class="info-f-list">
+						<div class="edit-container">
+							<div class="edit-image-box">
 								<img src="data:image/png;base64,${user.base64ProfileImage}" class="my-profile-image" >
-								<div>
-									<span class="user-name">${user.username}</span>
-								</div>
-							</div>
-							<div class="info-s-list">					
-								<div class="user-info-item">
-									<span class="info-label">사번</span> <span class="info-value">${user.empNo}</span>
-								</div>
-								<div class="user-info-item">
-									<span class="info-label">부서명</span> <span class="info-value">${user.deptName}</span>
-								</div>
-								<div class="user-info-item">
-									<span class="info-label">직급</span> <span class="info-value">${user.role}</span>
-								</div>
-							</div>
-							<div class="info-t-list">
-								<div class="user-info-item">
-									<span class="info-label">전화번호</span> <span class="info-value">${user.phone}</span>
-								</div>
-								<div class="user-info-item">
-									<span class="info-label">이메일</span> <span class="info-value">${user.email}</span>
-								</div>
-								<div class="info-dept-address">
-									<span class="info-label">주소</span> 
-									<span class="info-value">${user.deptAddress}</span>
+								<span class="user-name">${user.username}</span>
+							</div>						
+							<div class="profile-wrapper">
+								<div class="profile-box">
+									<div class="edit-user-info">
+										<span class="user-label">사번</span> 
+										<input type="text" value="${user.empNo}" class="user-value" readonly>							
+									</div>
+									<div class="edit-user-info">
+										<span class="user-label">부서</span> 
+										<input type="text" value="${user.deptName}" class="user-value" readonly>							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">직급</span> 
+										<input type="text" value="${user.position}" class="user-value" readonly>							
+									</div>
+									<div class="edit-user-info">
+										<span class="user-label">주소</span> 
+										<input type="email" value="${user.deptAddress}" class="user-value" readonly>							
+									</div>									
+									<div class="edit-user-info">
+										<span class="user-label">이메일</span> 
+										<input type="text" value="${user.email}" name="email" class="user-value" readonly>							
+									</div>		
+									<div class="edit-user-info">
+										<span class="user-label">전화번호</span> 
+										<input type="text" value="${user.phone}" name="phone" class="user-value" readonly>							
+									</div>
 								</div>
 							</div>
 						</div>

@@ -121,6 +121,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>
 	
 	<script src="/assetmanager/resources/js/pageFilter.js"></script>
 </body>

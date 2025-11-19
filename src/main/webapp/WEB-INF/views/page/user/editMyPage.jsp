@@ -73,6 +73,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>	
 	
     <script>
         // DOM 요소 가져오기

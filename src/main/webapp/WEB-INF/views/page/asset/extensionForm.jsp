@@ -76,6 +76,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>	
 	
  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 	<c:if test="${not empty delaySuccess}">

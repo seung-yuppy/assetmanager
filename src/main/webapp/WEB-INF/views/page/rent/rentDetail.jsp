@@ -139,6 +139,8 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>	
+	
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>

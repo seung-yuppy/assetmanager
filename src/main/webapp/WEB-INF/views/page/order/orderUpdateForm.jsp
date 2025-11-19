@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>직원 구매요청 목록</title>
+<title>구매 재요청</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/requestForm.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -198,7 +198,7 @@
 									</div>
 									<div class="form-group fixed-width-med">
 										<label for="price">단가(₩)</label>
-										<input type="text" id="price" name="price" value='${product.price}' data-value="${product.price}" class="locked-input" readonly>
+										<input type="text" id="price" name="products[${status.index}].price" value='${product.price}' data-value="${product.price}" class="locked-input" readonly>
 									</div>
 									<div class="form-group fixed-width-sm">
 										<label for="quantity">수량 </label>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 구매요청 목록</title>
+<title>구매 요청 목록</title>
 <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 <link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 </head>

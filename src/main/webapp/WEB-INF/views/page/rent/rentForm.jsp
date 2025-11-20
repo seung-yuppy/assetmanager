@@ -158,6 +158,9 @@
 	</div>
 	<%@ include file="/WEB-INF/views/component/chatbot.jsp"%>	
 	
+	<script>
+		let productRowIndex  = 0;
+	</script>
 	<script src="/assetmanager/resources/js/rentForm.js"></script>
 	<script src="/assetmanager/resources/js/rentExcelUpload.js"></script>
 	<script src="/assetmanager/resources/js/rent.js"></script>

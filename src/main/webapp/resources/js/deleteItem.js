@@ -7,7 +7,6 @@ deleteBtns.forEach((deleteBtn) => {
 		});
 		const itemData = await response.json();
 		const itemName = itemData.item.itemName;
-		console.log(itemData);
 		
 	    Swal.fire({
 	    	title: "제품 삭제",

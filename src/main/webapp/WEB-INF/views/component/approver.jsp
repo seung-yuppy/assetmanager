@@ -42,7 +42,7 @@
 		<fieldset class="approver-container select-info pd-30">
 			<legend class="approver-title" align="center">합의</legend>
 			<div class="approver-image-container">
-				<img class="approver-image" src="https://placehold.co/100x100/d5e4f6/31343C?text=LYH" alt="이영호">
+				<img class="approver-image" src="/assetmanager/resources/image/img_profile.png">
 				<div class="approval-badge">				
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 		<fieldset class="approver-container select-info pd-30">
 			<legend class="approver-title" align="center">결재</legend>
 			<div class="approver-image-container">
-				<img class="approver-image" src="https://placehold.co/100x100/d5f6e4/31343C?text=SAY" alt="신아영">
+				<img class="approver-image" src="/assetmanager/resources/image/img_profile.png">
 				<div class="approval-badge">					
 				</div>
 			</div>

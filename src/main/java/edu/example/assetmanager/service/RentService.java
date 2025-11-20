@@ -1,4 +1,4 @@
-package edu.example.assetmanager.service;
+	package edu.example.assetmanager.service;
 
 import java.util.Base64;
 import java.util.Date;
@@ -277,10 +277,17 @@ public class RentService {
 	// rentId로 요청 취소
 	public boolean cancelRent(int id) {
 		if (rentDAO.cancelRent(id)) {
-			if (rentDAO.cancelApproval(id))
-				return true;
-			else 
-				return false;
+			if (rentDAO.cancelApproval(id)) {
+				Long rentId = (long) id;
+				List<RentContentDTO> list = rentDAO.getRentContent(rentId);
+				for (RentContentDTO rc : list) {
+					int assetId = rc.getAssetId();
+					rentDAO.updateAssetRequest(assetId);
+				}
+				return true;				
+			} else {
+				return false;	
+			}
 		} else {
 			return false;
 		}

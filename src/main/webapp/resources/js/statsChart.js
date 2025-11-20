@@ -318,7 +318,6 @@ function renderTables() {
     }else{
     	deptTableBody.innerHTML += '<td colspan="3" style="text-align: center; padding: 20px; color: gray;">데이터가 없습니다.</td>';
     }
-    
 }
 
 //--- PDF 내보내기 ---
@@ -326,6 +325,7 @@ async function exportPDF() {
     const { jsPDF } = window.jspdf;
     const reportContent = document.getElementById('report-content');
     const loader = document.getElementById('loader');
+    const purpose = document.getElementById("report-purpose");
 
     // 마진 설정 (단위: mm)
     const MARGIN = 15; // 좌우 및 상단 마진으로 사용됩니다.
@@ -381,7 +381,10 @@ async function exportPDF() {
 
         replaced.push({ textarea, div });
     });
-
+    
+    // 보고 목적 border 숨기기
+    purpose.classList.remove("border");
+    
     // **3. 출력 안 할 요소 제외 및 grid 클래스 변경**
     const pageELs = reportContent.querySelectorAll('.no-pdf');
     pageELs.forEach(el => {
@@ -529,5 +532,8 @@ async function exportPDF() {
                 textarea.style.display = '';
             }
         });
+        
+        purpose.classList.add("border");
+
     }
 }

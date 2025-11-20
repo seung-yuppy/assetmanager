@@ -113,20 +113,20 @@
 			        <div class="flex flex-col justify-end items-center">
 			            <div class="flex items-center space-x-2 mt-4 sm:mt-0">
 			                <button id="export-pdf-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-md hover:bg-blue-700 transition duration-200"
-			                style="background-color: var(--primary-button-color);">보고서 생성</button>
+			                style="background-color: var(--primary-button-color);">보고서 저장</button>
 			            </div>
 			        </div>
 		        </div>
 		        
 		        <main id="report-content" class="section-card">
+					<select onchange="setBoardParam('year', this.value)"
+					    class="no-pdf rounded-md border-gray-300 bg-white shadow-sm px-3 py-2 text-sm
+					           focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+					    <option value="2025" ${empty param.year ? 'selected' : ''}>2025년</option>
+					    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
+					    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
+					</select>
 					<div class="border-b pb-6 mb-10 bg-gray-50 p-6 rounded-lg shadow-sm">
-						<select onchange="setBoardParam('year', this.value)"
-						    class="no-pdf rounded-md border-gray-300 bg-white shadow-sm px-3 py-2 text-sm
-						           focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-						    <option value="2025" ${empty param.year ? 'selected' : ''}>2025년</option>
-						    <option value="2024" ${param.year == '2024' ? 'selected' : ''}>2024년</option>
-						    <option value="2023" ${param.year == '2023' ? 'selected' : ''}>2023년</option>
-						</select>
 						<div class="flex justify-center items-center mb-9">
 						    <h1 class="text-8xl text-gray-900 tracking-tight">구매 리포트</h1>
 						</div>
@@ -147,7 +147,7 @@
 					        </div>
 					        <div class="bg-white p-3 rounded-md border">
 					            <strong class="block text-gray-600 text-base mb-1">보고 목적</strong>
-					            <span class="font-medium text-base">구매 통계 분석으로 예산 수립 지원</span>
+					            <input id="report-purpose" class="font-medium text-base w-full border border-gray-300 rounded-md ps-1" placeholder="보고 목적을 입력하세요">
 					        </div>
 					    </div>
 					</div>

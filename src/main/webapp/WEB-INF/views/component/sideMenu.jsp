@@ -172,12 +172,12 @@
 					<div class="menu-arrow">
 						<div class="menu-link">
 							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-							<span>구입</span>            
+							<span>구매</span>            
 						</div>
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/order/form">구입 요청</a></li>
+						<li><a href="/assetmanager/order/form">구매 요청</a></li>
 						<li><a href="/assetmanager/order/list">요청 목록</a></li>
 					</ul>                        
 				</li>			
@@ -187,13 +187,13 @@
 					<div class="menu-arrow">
 						<div class="menu-link">
 							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-			                <span>구입</span>         
+			                <span>구매</span>         
 						</div>
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
 						<li><a href="/assetmanager/admin/order/list">요청 목록</a></li>
-						<li><a href="/assetmanager/admin/stats">구입 통계</a></li>
+						<li><a href="/assetmanager/admin/stats">구매 리포트</a></li>
 					</ul>      
 	            </li>
 			</c:if>
@@ -202,12 +202,12 @@
 					<div class="menu-arrow">
 						<div class="menu-link">
 							<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_dollar.svg" />
-			                <span>구입</span>     
+			                <span>구매</span>     
 						</div>
 						<img class="sidebar-arrow-item" src="/assetmanager/resources/image/icon_arrow.svg" />              	
 					</div>
 					<ul class="sub-menu-list">
-						<li><a href="/assetmanager/order/form">구입 요청</a></li>
+						<li><a href="/assetmanager/order/form">구매 요청</a></li>
 						<li><a href="/assetmanager/manager/order/list">요청 목록</a></li>
 					</ul>      
 	            </li>			

@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	const adminReturnBtn = document.querySelector(".adminReturn-button");
 	adminReturnBtn.addEventListener("click", function() {	
 		Swal.fire({
-			title:"반납을 승인하시겠습니까?",
+			title:"승인하시겠습니까?",
+			text: "요청을 승인 처리합니다.",
 			icon: "success",
 			confirmButtonColor: "#1c4587",
 			confirmButtonText: "예",

@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		
 		Swal.fire({
-			title:"요청을 취소하시겠습니까?",
-			icon: "error",
+			title:"회수하시겠습니까?",
+			icon: "warning",
 			confirmButtonColor: "#1c4587",
 			confirmButtonText: "예",
 			showCancelButton: true,
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					}
 				});
 				const data = await res.json();
-				if (data.msg === "요청 취소가 완료되었습니다.") {
+				if (data.msg === "회수가 완료되었습니다.") {
 					Swal.fire({
 						title: "성공",
 						text: data.msg,

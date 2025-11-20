@@ -32,11 +32,19 @@ const rejectBtn = document.querySelectorAll(".reject-btn").forEach(btn => {
                 input: 'custom-swal-input'
             },
             preConfirm: async (reason) => { 
+    			const rejectReason = reason;
+				
+				if (!rejectReason || rejectReason.trim() === "") {
+					Swal.fire('오류', '반려 사유를 입력해야 합니다.', 'error');
+					return;
+				}
+            	
                 const resultObject = {
                         id: id,
                         rejectReason: reason,
                         status: status
                 };
+                
                 const res = await fetch("/assetmanager/approval/reject", {
                     method: "POST",
                     headers: {

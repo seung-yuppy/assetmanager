@@ -173,9 +173,9 @@ public class OrderController {
 			response.put("msg", "로그인 후 진행해주세요.");
 		
 		if (orderService.cancelOrder(id))
-			response.put("msg", "요청 취소가 완료되었습니다.");
+			response.put("msg", "회수가 완료되었습니다.");
 		else
-			response.put("msg", "요청 취소에 실패하였습니다.");
+			response.put("msg", "회수에 실패하였습니다.");
 		
 		return ResponseEntity.ok(response);
 	}

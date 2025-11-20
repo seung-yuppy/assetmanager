@@ -94,7 +94,7 @@
 					</div>
 					<div class="form-actions">
 						<c:if test="${approval.status == 'PENDING' && rentdto.isDelay == 0}">
-							<button id="cancel-btn" type="button" class="cancel-action">요청 취소</button>
+							<button id="cancel-btn" type="button" class="cancel-action">회수</button>
 						</c:if>
 						<c:if test="${approval.status == 'CANCEL'}">
 							<button id="update-btn" type="button" class="update-action" onclick="location.href='/assetmanager/rent/update/${rentdto.id}'">수정</button>

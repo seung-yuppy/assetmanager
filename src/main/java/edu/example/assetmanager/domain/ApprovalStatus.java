@@ -6,7 +6,7 @@ public enum ApprovalStatus {
     FINAL_APPROVAL("승인됨","approved"),
     FIRST_REJECT("반려됨","rejected"),
     FINAL_REJECT("반려됨","rejected"),
-	CANCEL("취소됨", "rejected");
+	CANCEL("회수됨", "rejected");
 
     private final String koreanName;
     private final String badgeType;

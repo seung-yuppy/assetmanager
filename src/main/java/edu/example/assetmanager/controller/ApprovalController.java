@@ -33,7 +33,6 @@ public class ApprovalController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 			response.put("msg", "로그인 후 진행해주세요.");
-		dto.setApproverId(userId);
 		
 		if (approvalService.approve(dto))
 			response.put("msg", "승인 처리가 완료되었습니다.");
@@ -51,7 +50,6 @@ public class ApprovalController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 			response.put("msg", "로그인 후 진행해주세요.");
-		dto.setApproverId(userId);
 			
 		if (approvalService.reject(dto))
 			response.put("msg", "반려 처리가 완료되었습니다.");

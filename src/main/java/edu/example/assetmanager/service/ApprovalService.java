@@ -42,6 +42,7 @@ public class ApprovalService{
 		}
 		boolean isSucceed = approvalDAO.approveApproval(approvalDTO);
 		
+		// 알림
 		if(current.name().equals("FIRST_APPROVAL") && isSucceed) { //최종 승인 후 요청자에게 알림 
 			return insertEmpNotification(approvalDTO, true);
 		

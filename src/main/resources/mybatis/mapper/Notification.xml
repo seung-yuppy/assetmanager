@@ -21,6 +21,7 @@
 		select count(*)
 		from notification
 		where user_id = #{id} and is_read = 0
+			  and create_date >= SYSDATE - 7
 	</select>
 	
 	<update id="readById">

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import edu.example.assetmanager.NotificationSseManager;
 import edu.example.assetmanager.domain.NotificationDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
 import edu.example.assetmanager.service.AssetService;
@@ -22,6 +24,18 @@ import lombok.RequiredArgsConstructor;
 public class NotificationController {
 	private final NotificationService notificationService;
 	private final AssetService assetService;
+	private final NotificationSseManager sseManager;
+	
+    @GetMapping("/sse")
+    @ResponseBody
+    public SseEmitter subscribe(HttpSession session) {	
+        UserInfoDTO user = (UserInfoDTO) session.getAttribute("userInfo");
+        if (user == null) {
+        	throw new IllegalStateException("로그인이 필요합니다.");
+        }
+        Long userId = (long) user.getId();
+        return sseManager.createEmitter(userId);
+    }
 	
 	@GetMapping("/list")
 	@ResponseBody

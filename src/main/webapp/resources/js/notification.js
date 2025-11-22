@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 	
 	// 알림 항목 클릭 -> 알림 읽기 처리
-	notificationSection.addEventListener('click', async (e) => {
+	notificationSection.addEventListener('click', (e) => {
 		const item = e.target.closest('.notification-item');
 		if (item){
 			const targetId = item.getAttribute("data-target-id");
@@ -81,39 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			if(item.classList.contains('unread-notification')){ // 안읽은 아이템 클릭 시
 				read(item);
-			} 
-			// 이미 반납된 건은 페이지 이동 대신 모달경고.
-			if (targetType == "return") {
-			    try {
-			        const res = await fetch(`/assetmanager/notification/return/check/${targetId}`);
-			        const data = await res.json();
-
-			        if (data) {
-			            await Swal.fire('오류', '이미 반납 확인이 완료됐습니다.', 'warning');
-			            return;
-			        }
-			    } catch (err) {
-			        console.error("알림 읽기 실패:", err);
-			    }
 			}
-			
-			// 하이퍼링크 설정 및 이동
-			let user_path;
-			if(!["employee", "department"].includes(loginUser.role)){ 
-				// admin, manager는 role 포함한 uri
-				user_path = "/" + loginUser.role; 
-			}else{
-				user_path="";
-			}
-			
-			// emp는 delay 경로가 없으므로 rent 경로로 변경
-			if(user_path=="" && targetType=="delay"){
-				targetType = "rent";
-			}
-			
-			let path = `/assetmanager${user_path}/${targetType}/detail/${targetId}`; 
-			
-			location.href = path;
+			openPage(targetId, targetType);
 		}
 	});
 	
@@ -133,6 +102,42 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 알림 더보기 버튼 이벤트 리스너
 	getMoreBtn.addEventListener('click', () =>  getNotifications(notificationOffset));
 });
+
+// 알림 대상 페이지로 이동
+async function openPage(targetId, targetType){
+	// 이미 반납된 건은 페이지 이동 대신 모달경고.
+	if (targetType == "return") {
+	    try {
+	        const res = await fetch(`/assetmanager/notification/return/check/${targetId}`);
+	        const data = await res.json();
+
+	        if (data) {
+	            await Swal.fire('오류', '이미 반납 확인이 완료됐습니다.', 'warning');
+	            return;
+	        }
+	    } catch (err) {
+	        console.error("알림 읽기 실패:", err);
+	    }
+	}
+	
+	// 하이퍼링크 설정 및 이동
+	let user_path;
+	if(!["employee", "department"].includes(loginUser.role)){ 
+		// admin, manager는 role 포함한 uri
+		user_path = "/" + loginUser.role; 
+	}else{
+		user_path="";
+	}
+	
+	// emp는 delay 경로가 없으므로 rent 경로로 변경
+	if(user_path=="" && targetType=="delay"){
+		targetType = "rent";
+	}
+	
+	let path = `/assetmanager${user_path}/${targetType}/detail/${targetId}`; 
+	
+	location.href = path;
+}
 
 //읽은 알림의 표시 변화
 function toReadUi(el){
@@ -225,3 +230,32 @@ function getNotifications(offset){
     .catch(err => console.error("알림 불러오기 실패:", err));
 }
 
+//SSE
+const eventSource = new EventSource("/assetmanager/notification/sse");
+
+eventSource.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    Swal.fire({
+        toast: true,
+        position: 'bottom-end',
+        icon: 'info',
+        title: data.message,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        customClass: {
+            popup: 'custom-swal-toast'
+        }
+    });
+    getUnreadCount();
+    const toastEls = document.querySelectorAll('.custom-swal-toast');
+    const latestToast = toastEls[toastEls.length - 1];
+    latestToast.addEventListener('click', () => {
+       openPage(data.targetId, data.targetType);
+    });
+};
+
+eventSource.onerror = function(e) {
+    console.log("SSE error:", e);
+    // 일반적으로 eventSource는 자동 재연결됨
+};

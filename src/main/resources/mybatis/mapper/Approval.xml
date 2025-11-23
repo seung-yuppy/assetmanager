@@ -38,4 +38,10 @@
 			status = 'pending'
 		where id = #{id}
 	</update>
+	
+   	<update id="cancelApproval">
+		UPDATE Approval
+		SET status = 'CANCEL'
+		WHERE id IN (SELECT approval_id FROM orders  WHERE id = #{id})
+	</update>
 </mapper>

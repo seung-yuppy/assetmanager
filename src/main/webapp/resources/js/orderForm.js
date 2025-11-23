@@ -227,7 +227,7 @@ function renderFormFromExcel(json, purchase_reason) {
 	    </div>
 	  `;
 	  container.insertAdjacentHTML('beforeend', reasonHtml);
-	}
+}
 
 //엑셀 템플릿 다운로드 기능 구현
 function downloadExcelTemplate() {

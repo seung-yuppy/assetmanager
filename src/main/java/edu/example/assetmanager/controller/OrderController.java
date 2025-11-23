@@ -31,6 +31,7 @@ import edu.example.assetmanager.domain.OrderFormDTO;
 import edu.example.assetmanager.domain.OrderParamDTO;
 import edu.example.assetmanager.domain.PageResponseDTO;
 import edu.example.assetmanager.domain.UserInfoDTO;
+import edu.example.assetmanager.service.ApprovalService;
 import edu.example.assetmanager.service.AssetService;
 import edu.example.assetmanager.service.CategoryService;
 import edu.example.assetmanager.service.ItemService;
@@ -47,6 +48,7 @@ public class OrderController {
 	private final CategoryService categoryService;
 	private final ItemService itemService;
 	private final UserService userService;
+	private final ApprovalService approvalService;
 	
 	@GetMapping("/form")
 	public String form(HttpSession httpSession, Model model) {
@@ -171,12 +173,12 @@ public class OrderController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null)
 			response.put("msg", "로그인 후 진행해주세요.");
-		
-		if (orderService.cancelOrder(id))
+		boolean isCanceled = approvalService.cancel(id);
+		if(isCanceled && orderService.cancelOrder(id)) {
 			response.put("msg", "회수가 완료되었습니다.");
-		else
+		}else {
 			response.put("msg", "회수에 실패하였습니다.");
-		
+		}
 		return ResponseEntity.ok(response);
 	}
 	

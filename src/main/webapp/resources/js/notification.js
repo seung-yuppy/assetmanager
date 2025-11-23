@@ -259,3 +259,7 @@ eventSource.onerror = function(e) {
     console.log("SSE error:", e);
     // 일반적으로 eventSource는 자동 재연결됨
 };
+//페이지 떠나기 전에 기존 sse 연결 종료
+window.addEventListener("beforeunload", () => {
+	eventSource.close();  
+});

@@ -11,4 +11,5 @@ public interface ApprovalDAO {
 	public boolean rejectApproval(ApprovalDTO approvalDTO);
 	public boolean approveApproval(ApprovalDTO approvalDTO);
 	public boolean updateApproval(ApprovalDTO approvalDTO);
+	public boolean cancelApproval(int id);
 }

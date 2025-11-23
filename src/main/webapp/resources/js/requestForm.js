@@ -138,8 +138,6 @@ function showExcelContent(event) {
             const reason_cell = worksheet['A13'];
             let purchase_reason = (reason_cell && reason_cell.v) ? reason_cell.v.toString() : '내용 없음';
             
-            console.log("Excel json :" + JSON.stringify(data_json));
-            console.log("Excel purchase_reason :" + purchase_reason);
             // 데이터 표시 함수 호출
             renderFormFromExcel(data_json, purchase_reason);
 

@@ -11,6 +11,10 @@ public class NotificationSseManager {
 	 private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
 
 	    public SseEmitter createEmitter(Long userId) {
+        	if (emitters.containsKey(userId)) {
+                return emitters.get(userId);
+            }
+        	
 	        SseEmitter emitter = new SseEmitter(0L);
 	        emitters.put(userId, emitter);
 

@@ -229,10 +229,4 @@
 		ORDER BY o.order_date DESC
 		FETCH FIRST 3 ROWS ONLY
     </select>
-    
-   	<update id="cancelApproval">
-		UPDATE Approval
-		SET status = 'CANCEL'
-		WHERE id IN (SELECT approval_id FROM orders  WHERE id = #{id})
-	</update>
 </mapper>

@@ -71,6 +71,11 @@ public class ApprovalService{
 		return isSucceed;
 	}
 	
+	public boolean cancel(int id) {
+		return approvalDAO.cancelApproval(id);
+	}
+
+	
 	private boolean insertEmpNotification(ApprovalDTO approvalDTO, boolean isApproved){
 		int approvalId = approvalDTO.getId().intValue();
 		OrderDTO orderDTO =  orderService.getOrderByApprovalId(approvalId);

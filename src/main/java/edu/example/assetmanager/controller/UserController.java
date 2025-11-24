@@ -106,7 +106,6 @@ public class UserController {
 	// 로그아웃
 	@PostMapping("/logout")
 	public String logOut(HttpSession session) {
-		session.removeAttribute("userId");
 		session.invalidate();
 		return "redirect:/login";
 	}

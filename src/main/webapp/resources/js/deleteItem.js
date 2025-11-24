@@ -31,7 +31,7 @@ deleteBtns.forEach((deleteBtn) => {
 		    	if (data.msg === '권장 제품을 삭제하였습니다.') {
 		            Swal.fire({
 		                title: "성공",
-		                text: data.msg,
+		                text: `${itemName}을 삭제하였습니다.`,
 		                icon: "success",
 		                confirmButtonColor: "#1c4587",
 		                confirmButtonText: "확인",

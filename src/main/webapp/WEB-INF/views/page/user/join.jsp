@@ -64,7 +64,7 @@
                 
                <div class="dept-container">
 	            	<div class="form-group">
-	                    <label for="username">사용자 정보</label>
+	                    <label for="username">사용자 이름</label>
 	                    <input type="text" name="username" placeholder="성함 " required>
 	                </div>
             	

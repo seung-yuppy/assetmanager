@@ -140,7 +140,7 @@
 		                	<c:choose>
 		                		<c:when test="${empty list}">
 				                	<tr>
-				                		<td colspan="5" style="text-align: center;">
+				                		<td colspan="4" style="text-align: center;">
 				               				<p>사용 중인 내 자산이 존재하지 않습니다.</p>
 			                			</td>
 			                		</tr>	                	

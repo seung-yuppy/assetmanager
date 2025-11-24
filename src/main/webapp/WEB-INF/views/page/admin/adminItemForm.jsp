@@ -19,7 +19,7 @@
 				<span>권장 제품 추가를 위해서 아래 양식을 작성하세요. 모든 필수 필드를 정확하게 기입해야 합니다.</span>
 				<div class="section-card">
 					<form action="/assetmanager/admin/item/add" method="post" onsubmit="reindexInputsBeforeSubmit()">
-						<div id="formInputArea" class ="inputArea">
+						<div id="formInputArea" class="inputArea">
 							<div class="form-row">
 								<div class="form-group category-group fixed-width-med">
 									<label for="category">카테고리 <span class="required">*</span></label>

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "승인됨",
                 text: data.isDup,
                 icon: "success",
-                confirmButtonColor: "#a5dc86",
+                confirmButtonColor: "#1c4587",
                 confirmButtonText: "확인",
             });
 		} else {
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "중복됨",
                 text: data.isDup,
                 icon: "error",
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "#1c4587",
                 confirmButtonText: "확인",
             });
 		}
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "오류",
                 text: "사번 중복 확인이 필요합니다.",
                 icon: "warning",
-                confirmButtonColor: "#3085d6",
+                confirmButtonColor: "#1c4587",
                 confirmButtonText: "확인",
             });
         }
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "오류",
                 text: "비밀번호와 비밀번호 확인이 일치하지 않습니다.",
                 icon: "warning",
-                confirmButtonColor: "#3085d6",
+                confirmButtonColor: "#1c4587",
                 confirmButtonText: "확인",
             });
         }

@@ -19,7 +19,6 @@ function reindexInputsBeforeSubmit() {
             input.name = newName; // 예: "items[0].categoryId"
         });
     });
-    // return true; (혹은 아무것도 반환하지 않음)를 통해 폼 전송을 계속 진행합니다.
 }
 
 let productRowIndex  = 0;

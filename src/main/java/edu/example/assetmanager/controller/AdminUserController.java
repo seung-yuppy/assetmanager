@@ -36,10 +36,6 @@ public class AdminUserController {
 		UserInfoDTO dto = service.getUser(id);
 		List<AssetHistoryUserShowDTO> assetList = assetService.getUserAssetHistory(id);
 		
-		for (AssetHistoryUserShowDTO show : assetList) {
-			System.out.println(show.getAssetName() + "는 " +show.getReturnDate());
-		}
-		
 		model.addAttribute("user", dto);
 		model.addAttribute("assetHistory", assetList);
 		

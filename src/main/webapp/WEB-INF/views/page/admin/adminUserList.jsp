@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>사용자 목록</title>
+	<title>사원 목록</title>
 	<link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/rentList.css" rel="stylesheet">
 </head>
@@ -14,8 +14,8 @@
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/component/header.jsp" %>
 			<div class="dashboard-container">
-				<h1>사용자 전체  목록</h1>
-				<span>모든 사용자의 목록을 확인하고 관리합니다.</span>
+				<h1>사원 전체  목록</h1>
+				<span>모든 사원의 목록을 확인하고 관리합니다.</span>
 				<div class="section-card">
 					<div class="search-card">
 						<div class="filter-controls">

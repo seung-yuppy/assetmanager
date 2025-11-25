@@ -121,7 +121,7 @@
 				<!-- 자산 & 사용자 상세 정보 끝 -->
 				<!-- 자산 내역 시작 -->
 				<div class="section-card">
-		            <h2>자산 내역</h2> 
+		            <h2>사용자 내역</h2> 
 		            <table class="data-table">
 		                <thead>
 		                    <tr>

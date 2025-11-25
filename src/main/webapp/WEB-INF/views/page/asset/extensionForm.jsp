@@ -35,7 +35,8 @@
 					<div id="formInputArea" class="inputArea">
 						<div class="form-date">
 							<div class="form-application-date">
-								<label for="application-date">반출 요청일</label> <input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
+								<label for="application-date">반출 요청일</label> 
+								<input type="date" id="application-date" value="${currentDate}" class="form-input rent-input" readonly>
 							</div>
 							<div class="form-return-date">
 									<label for="return-date">반납 예정일 <span class="required">*</span></label> 

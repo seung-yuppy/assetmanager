@@ -54,7 +54,7 @@
 								</div>
 								<div class="form-return-date">
 									<label for="return-date">반납 예정일 <span class="required">*</span></label> 
-									<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" min="${currentDate}" required>
+									<input type="date" name="returnDate" id="return-date" value="${returnDate}" class="form-input rent-input" min="${returnDate}" required>
 								</div>
 							</div>
 							<c:forEach var="item" items="${rentItems}" varStatus="status">

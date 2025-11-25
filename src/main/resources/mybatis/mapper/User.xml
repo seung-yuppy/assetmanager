@@ -40,7 +40,7 @@
 		SELECT COUNT(*)
 		FROM "User"
 		<where>
-				role NOT IN ('admin', 'department')
+				role NOT IN ('admin')
         	<if test="deptId != 0">
         		AND department_id = #{deptId}
         	</if>

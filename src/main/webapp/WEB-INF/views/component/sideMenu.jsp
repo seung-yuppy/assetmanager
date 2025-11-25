@@ -48,7 +48,7 @@
                 <li class="menu-item">
                     <a href="/assetmanager/admin/user/list">
 						<img class="sidebar-logo-item" src="/assetmanager/resources/image/icon_user.svg" />
-                        <span>사용자</span>
+                        <span>사원</span>
                     </a>
                 </li>			
 			</c:if>

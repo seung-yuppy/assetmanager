@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>관리자 대시보드</title>
+    <title>경영팀 대시보드</title>
     <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
 </head>

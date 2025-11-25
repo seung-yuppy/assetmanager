@@ -5,7 +5,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>사원 대시보드</title>
+	<c:if test="${userInfo.role == 'manager'}">
+	    <title>사업부장 대시보드</title>
+	</c:if>
+	<c:if test="${userInfo.role == 'employee'|| userInfo.role == 'department'}">
+		<title>사원 대시보드</title>
+	</c:if>
     <link href="/assetmanager/resources/css/common.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/dashboard.css" rel="stylesheet">
 	<link href="/assetmanager/resources/css/userChart.css" rel="stylesheet">

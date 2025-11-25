@@ -241,7 +241,7 @@ eventSource.onmessage = function(event) {
         icon: 'info',
         title: data.message,
         showConfirmButton: false,
-        timer: 3000,
+        timer: 7000,
         timerProgressBar: true,
         customClass: {
             popup: 'custom-swal-toast'

@@ -183,7 +183,7 @@ body {
 }
 
 .adminReturn-button {
-    background-color: var(--blue-color);
+    background-color: var(--primary-button-color);
     color: var(--white-color);
     border: none;
 	padding: 7px 14px;
@@ -194,12 +194,10 @@ body {
     text-align: center;
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out, transform 0.1s ease-out;
- 	 
- 	&:hover {
-    	background-color: var(--blue-dark); 
-        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
-        transform: translateY(-3px); 
- 	}
+    
+    &:hover{
+    	background-color: var(--primary-button-hover); 
+    }
 }
 
 .negative-button {

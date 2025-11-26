@@ -21,7 +21,7 @@
 				<div class="detail-header">
 					<span>반납 요청의 상세 정보를 확인하고 관리 합니다.</span>
 					<div class="button-container">
-						<button id="return-modal" class="edit-button" data-id="${returnDetail.id}" data-asset="${returnDetail.assetId}">반납</button>
+						<button id="return-modal" class="adminReturn-button" data-id="${returnDetail.id}" data-asset="${returnDetail.assetId}">반납</button>
 					</div>
 				</div>
 				<!-- 자산 & 사용자 상세 정보 시작 -->

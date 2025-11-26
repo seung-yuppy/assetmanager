@@ -18,7 +18,7 @@
 		set status = #{status}
 			,reject_date = #{rejectDate}
 			,reject_reason = #{rejectReason}
-		where id = #{id}
+		where id = #{id} and status in ('pending', 'FIRST_APPROVAL')
 	</update>
 	
 	<update id="approveApproval">
@@ -28,7 +28,7 @@
 				<if test="firstApprovalDate != null">first_approval_date = #{firstApprovalDate},</if>
 				<if test="finalApprovalDate != null">final_approval_date = #{finalApprovalDate},</if>
 			</trim>
-		where id = #{id}
+		where id = #{id} and status in ('pending', 'FIRST_APPROVAL')
 	</update>
 	
 	<update id="updateApproval">
@@ -42,6 +42,6 @@
    	<update id="cancelApproval">
 		UPDATE Approval
 		SET status = 'CANCEL'
-		WHERE id IN (SELECT approval_id FROM orders  WHERE id = #{id})
+		WHERE id IN (SELECT approval_id FROM orders  WHERE id = #{id}) and status = 'pending'
 	</update>
 </mapper>

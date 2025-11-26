@@ -379,7 +379,7 @@
 	    		AND is_Return = 1
 	    	</if>	        
 	    </where>
-	    ORDER BY AR.return_date DESC  
+	    ORDER BY AR.request_date DESC  
 	    OFFSET #{offset} ROWS
 	    FETCH NEXT #{size} ROWS ONLY
 	</select>

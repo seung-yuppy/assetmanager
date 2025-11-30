@@ -37,7 +37,6 @@ public class AdminReturnController {
 		}
 		PageResponseDTO<AssetReturnDTO> assetReturnDTO = rentService.assetReturn(rentParamDTO); 
 		
-		System.out.println("assetReturnDTO 나오니??" +assetReturnDTO);
 		model.addAttribute("response",assetReturnDTO);
 		
 		return "/admin/adminReturnList";
@@ -46,8 +45,6 @@ public class AdminReturnController {
 	@GetMapping("/detail/{id}")
 	public String adminReturnDetail(@PathVariable int id, Model model) {
 		AssetReturnDTO assetReturnDTO = rentService.getReturnAsset(id);
-		System.out.println("assetReturnDTO 여긴 컨트롤러~~ "+assetReturnDTO);
-		System.out.println("마감일 언제냐???" + assetReturnDTO.getDeadLine());
 		model.addAttribute("returnDetail",assetReturnDTO);
 		
 		return "/admin/adminReturnDetail";

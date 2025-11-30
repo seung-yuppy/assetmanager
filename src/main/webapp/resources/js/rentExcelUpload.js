@@ -1,6 +1,5 @@
 //초기화
 document.addEventListener('DOMContentLoaded', function() {
-	console.log("시작했니?????")
 	// radio 버튼 : form 입력 방식으로 초기화
 	showInputForm('form'); 
 	
@@ -83,7 +82,6 @@ function downloadExcelTemplate() {
 
 //엑셀파일 미리보기 함수
 function showExcelContent(event) {
-	console.log("showExcelContent 실행됨?");
     const file = event.target.files[0];
     const displayArea = document.getElementById('data-display-area');
     

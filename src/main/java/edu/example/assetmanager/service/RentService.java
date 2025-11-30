@@ -231,7 +231,6 @@ public class RentService {
 		UserInfoDTO userInfoDTO = userDAO.getUserInfo(rentDTO.getUserId());
 		
 		ApproverInfoDTO approverInfoDTO = new ApproverInfoDTO(userInfoDTO,adminInfoDTO,managerInfoDTO);
-		System.out.println("approverInfoDTO 뭐뭐 있음?? " + approverInfoDTO);
  
 		return approverInfoDTO;
 	}

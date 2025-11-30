@@ -32,7 +32,6 @@ public class AdminRentController {
 	
 	@GetMapping("/rent/list")
 	public String adminList(HttpSession session, RentParamDTO rentParamDTO, Model model) {
-		System.out.println("session 들어와??"+session);
 		Integer userId = (Integer) session.getAttribute("userId");
 		UserInfoDTO userInfo = (UserInfoDTO) session.getAttribute("userInfo");
         if (userId == null) { 

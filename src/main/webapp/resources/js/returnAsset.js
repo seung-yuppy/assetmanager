@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const returnBtn = document.querySelectorAll(".return-button");
 		returnBtn.forEach((btn) => {
-			console.log("두번째는 들어가??"+ btn);
 			btn.addEventListener("click", function() {	
 				Swal.fire({
 					title:"반납하시겠습니까?",

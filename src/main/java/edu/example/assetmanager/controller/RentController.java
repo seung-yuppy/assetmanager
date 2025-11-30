@@ -119,7 +119,6 @@ public class RentController {
 	public ResponseEntity<Map<String, Object>> registerItem(@RequestBody AssetHistoryDTO assetHistoryDTO,  HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
 		Integer userId = (Integer) session.getAttribute("userId");
-		System.out.println("userId???  " +  userId);
 		assetHistoryDTO.setUserId(userId);
 		
 		if(assetService.registerAssetItem(assetHistoryDTO)) {
